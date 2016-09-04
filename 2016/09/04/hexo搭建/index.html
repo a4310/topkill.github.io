@@ -20,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Mr_white"/>
+        <meta property="og:title" content="hexo搭建"/>
     
 
     <!--Open Graph Description-->
@@ -33,7 +33,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -44,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>Mr_white</title>
+    <title>hexo搭建 - Mr_white</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -127,17 +127,14 @@
     <div class="logo">
         <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
         
-            <h1 id="main-title" class="title">Mr_white</h1>
-        
     </div>
 </header>
 
         <section class="main">
             
-                
 <div class="post">
 
-    <div class="post-header index">
+    <div class="post-header">
         <h1 class="title">
             <a href="/2016/09/04/hexo搭建/">
                 hexo搭建
@@ -145,14 +142,18 @@
         </h1>
         <div class="post-info">
             <span class="date">2016-09-04</span>
-            
+            <a href="#disqus_thread" class="comments">留言</a>
             
         </div>
     </div>
 
-    
-        <div class="content">
-            <h1 id="Hexo搭建Github静态博客"><a href="#Hexo搭建Github静态博客" class="headerlink" title="Hexo搭建Github静态博客"></a>Hexo搭建Github静态博客</h1><p>应用GitHub Pages创建属于自己的个人博客，GitHub将提供免费的空间。GitHub提供的域名（用户名+github+io）,在Repository name对应处填写资源名，其需要使用自己的用户名，每个用户名下面只能建立一个，并且资源命名必须符合这样的规则username/username.github.io，之后勾选下面的”Initialize this repository with a README”</p>
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <h1 id="Hexo搭建Github静态博客"><a href="#Hexo搭建Github静态博客" class="headerlink" title="Hexo搭建Github静态博客"></a>Hexo搭建Github静态博客</h1><p>应用GitHub Pages创建属于自己的个人博客，GitHub将提供免费的空间。GitHub提供的域名（用户名+github+io）,在Repository name对应处填写资源名，其需要使用自己的用户名，每个用户名下面只能建立一个，并且资源命名必须符合这样的规则username/username.github.io，之后勾选下面的”Initialize this repository with a README”</p>
 <h2 id="1-环境"><a href="#1-环境" class="headerlink" title="1.环境"></a>1.环境</h2><h3 id="1-1安装Git"><a href="#1-1安装Git" class="headerlink" title="1.1安装Git"></a>1.1安装Git</h3><p>下载地址：<a href="https://git-scm.com/download/win" target="_blank" rel="external">https://git-scm.com/download/win</a><br>下载安装包后正常安装即可。</p>
 <h3 id="1-2安装node-js"><a href="#1-2安装node-js" class="headerlink" title="1.2安装node.js"></a>1.2安装node.js</h3><p>下载地址：<a href="http://nodejs.org/download/" target="_blank" rel="external">http://nodejs.org/download/</a><br>可以下载 node-v0.10.33-x64.msi<br>安装时直接保持默认配置即可。</p>
 <h2 id="2-配置Github"><a href="#2-配置Github" class="headerlink" title="2.配置Github"></a>2.配置Github</h2><h3 id="1-1建立Repository"><a href="#1-1建立Repository" class="headerlink" title="1.1建立Repository"></a>1.1建立Repository</h3><p>建立与你用户名对应的仓库，仓库名必须为【your_user_name.github.io】</p>
@@ -274,121 +275,26 @@
 <p>$ hexo new “My New Post”<br>[info] File created at d:\Hexo\source_posts\My-New-Post.md<br>hexo g #生成静态文件<br>hexo g -d #部署到Github</p>
 </blockquote>
 
-        </div>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2016/09/03/Google-hacking-语法/">
-                Google hacking 语法
-            </a>
-        </h1>
-        <div class="post-info">
-            <span class="date">2016-09-03</span>
-            
-            
-        </div>
     </div>
 
     
-        <div class="content">
-            <h2 id="1-单词语法"><a href="#1-单词语法" class="headerlink" title="1.单词语法"></a>1.单词语法</h2><h3 id="intext"><a href="#intext" class="headerlink" title="intext:"></a>intext:</h3><p>这个就是把网页中的正文内容中的某个字符做为搜索条件，例如在google里输入：intext：动网，将返回所有在网页正文部分包含”动网”的网页。</p>
-<h3 id="allintext"><a href="#allintext" class="headerlink" title="allintext:"></a>allintext:</h3><p>使用方法和intext类似.</p>
-<h3 id="intitle"><a href="#intitle" class="headerlink" title="intitle:"></a>intitle:</h3><p>和上面那个intext差不多，搜索网页标题中是否有我们所要找的字符，例如搜索：intitle：安全天使，将返回所有网页标题中包含“安全天使”的网页。同理allintitle也同intitle类似。</p>
-<h3 id="cache"><a href="#cache" class="headerlink" title="cache:"></a>cache:</h3><p>搜索google里关于某些内容的缓存，有时候也许能找到一些好东西哦。</p>
-<h3 id="define"><a href="#define" class="headerlink" title="define:"></a>define:</h3><p>搜索某个词语的定义。搜索：define：hacker，将返回关于hacker的定义。</p>
-<h3 id="filetype"><a href="#filetype" class="headerlink" title="filetype:"></a>filetype:</h3><p>这个我要重点推荐一下，无论是撒网式攻击还是我们后面要说的搜索指定类型的文件。例如输入：filetype：doc，将返回所有以doc结尾的文件URL。当然如果你找.bak、.mdb或.inc也是可以的，获得的信息也许会更丰富。</p>
-<h3 id="info"><a href="#info" class="headerlink" title="info:"></a>info:</h3><p>查找指定站点的一些基本信息。</p>
-<h3 id="inurl"><a href="#inurl" class="headerlink" title="inurl:"></a>inurl:</h3><p>搜索我们指定的字符是否存在于URL中。例如输入：inurl：admin，将返回N个类似于这样的连接：<a href="http://www.xxx.com/xxx/admin。用来找管理员登陆的URL不错。allinurl也同inurl类似，可指定多个字符。" target="_blank" rel="external">http://www.xxx.com/xxx/admin。用来找管理员登陆的URL不错。allinurl也同inurl类似，可指定多个字符。</a></p>
-<h2 id="符号语法"><a href="#符号语法" class="headerlink" title="符号语法"></a><strong>符号语法</strong></h2><h3 id=""><a href="#" class="headerlink" title="+"></a>+</h3><p> 把google可能忽略的字列如查询范围</p>
-<h3 id="-1"><a href="#-1" class="headerlink" title="-"></a>-</h3><p>把某个字忽略</p>
-<h3 id="-2"><a href="#-2" class="headerlink" title="~"></a>~</h3><p>同意词</p>
-<h3 id="-3"><a href="#-3" class="headerlink" title="."></a>.</h3><p>单一的通配符</p>
-<h3 id="-4"><a href="#-4" class="headerlink" title="*"></a>*</h3><p>通配符，可代表多个字母</p>
-<h3 id="“”"><a href="#“”" class="headerlink" title="“”"></a>“”</h3><p>精确查询</p>
 
-        </div>
     
 
-</div>
-            
-                
-<div class="post">
+    <!-- Comments -->
+    
+    <div class="comments">
+        
 
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2016/09/03/绕过网站访问限制的方法/">
-                绕过网站访问限制的方法
-            </a>
-        </h1>
-        <div class="post-info">
-            <span class="date">2016-09-03</span>
-            
-            
-        </div>
+
     </div>
-
-    
-        <div class="content">
-            <h2 id="1-只允许国外访问"><a href="#1-只允许国外访问" class="headerlink" title="1.只允许国外访问:"></a>1.只允许国外访问:</h2><p>将 HTTP 请求头中的 Accept-Language 为中文(cn-zh)，修改为英文(en-us)。</p>
-<h2 id="2-浏览器限制访问"><a href="#2-浏览器限制访问" class="headerlink" title="2.浏览器限制访问:"></a>2.浏览器限制访问:</h2><p>修改 HTTP 请求中的 User-Agent 信息。里面标注的有访问所用的浏览器和系统版本。也可以使用火狐的default user agent插件进行修改。</p>
-<h2 id="3-IP地址限制访问："><a href="#3-IP地址限制访问：" class="headerlink" title="3.IP地址限制访问："></a>3.IP地址限制访问：</h2><p>跟 HTTP 请求头中的 X-Forwarded-For、client-ip、remote_addr 有关系，也可以使用代理进行访问。</p>
-<h2 id="4-用户登陆限制访问："><a href="#4-用户登陆限制访问：" class="headerlink" title="4.用户登陆限制访问："></a>4.用户登陆限制访问：</h2><p>可能是 Cookie 的问题，如果 Cookie 比较简单，可以尝试构造cookie。</p>
-<h2 id="5-隐藏信息："><a href="#5-隐藏信息：" class="headerlink" title="5.隐藏信息："></a>5.隐藏信息：</h2><p>查看 robots.txt 可以获得该网站的一些信息。</p>
-<h2 id="6-其他："><a href="#6-其他：" class="headerlink" title="6.其他："></a>6.其他：</h2><p>有一些加referer加上代理ip</p>
-<p>PS：原文:(<a href="http://byd.dropsec.xyz" target="_blank" rel="external">http://byd.dropsec.xyz</a>)</p>
-
-        </div>
     
 
 </div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2016/08/05/hello-world/">
-                Hello World
-            </a>
-        </h1>
-        <div class="post-info">
-            <span class="date">2016-08-05</span>
-            
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><p>$ hexo new “My New Post”</p>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><p>$ hexo server</p>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><p>$ hexo generate</p>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><p>$ hexo deploy</p>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-        </div>
-    
-
-</div>
-            
         </section>
+
     </div>
 </div>
-
-
-
-
-
 
 </div>
 
