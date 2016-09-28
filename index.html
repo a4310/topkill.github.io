@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="Never underestimate your power to change yourself!">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Mr_white">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Mr_white"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="Never underestimate your power to change yourself!" />
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Mr_white"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="website" />
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>Mr_white</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+            <h1 id="main-title" class="title">Mr_white</h1>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/09/18/Python学习/">
+                Python学习
+            </a>
+        </h1>
+        <div class="post-info">
+            <span class="date">2016-09-18</span>
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h2 id="版本分区"><a href="#版本分区" class="headerlink" title="版本分区"></a><strong>版本分区</strong></h2><p>执行Python语法注意版本；<br>对于大多数程序语言，第一个入门编程代码便是”Hello World！”，以下代码为使用Python输出”Hello World！”：</p>
+<p>实例(Python 2.0+)</p>
+<blockquote>
+<p>!/usr/bin/python<br>print “Hello, World!”;</p>
+</blockquote>
+<p>Python 3.0+版本已经把print作为一个内置函数，正确输出”Hello World！”代码如下：</p>
+<p>实例(Python 3.0+)</p>
+<blockquote>
+<p>!/usr/bin/python3<br>print(“Hello, World!”);</p>
+</blockquote>
+<h2 id="环境安装整改"><a href="#环境安装整改" class="headerlink" title="环境安装整改"></a><strong>环境安装整改</strong></h2><p>以下为在 Window 平台上安装 Python 的简单步骤：</p>
+<ol>
+<li>打开WEB浏览器访问<a href="http://www.python.org/download/" target="_blank" rel="external">http://www.python.org/download/</a></li>
+<li>在下载列表中选择Window平台安装包，包格式为：python-XYZ.msi 文件 ， XYZ 为你要安装的版本号。</li>
+<li>要使用安装程序 python-XYZ.msi, Windows系统必须支持Microsoft Installer 2.0搭配使用。只要保存安装文件到本地计算机，然后运行它，看看你的机器支持MSI。Windows XP和更高版本已经有MSI，很多老机器也可以安装MSI。</li>
+<li>下载后，双击下载包，进入Python安装向导，安装非常简单，你只需要使用默认的设置一直点击”下一步”直到安装完成即可。</li>
+</ol>
+<p>在 Windows 设置环境变量在环境变量中添加Python目录：<br>在命令提示框中(cmd) : 输入 </p>
+<blockquote>
+<p>path=%path%;C:\Python</p>
+</blockquote>
+<p>按下”Enter”。<br>注意: C:\Python 是Python的安装目录。</p>
+<p>也可以通过以下方式设置：</p>
+<ul>
+<li>右键点击”计算机”，然后点击”属性”</li>
+<li>然后点击”高级系统设置”</li>
+<li>选择”系统变量”窗口下面的”Path”,双击即可！</li>
+<li>然后在”Path”行，添加python安装路径即可(我的D:\Python32)，所以在后面，添加该路径即可。 ps：记住，路径直接用分号”；”隔开！</li>
+<li>最后设置成功以后，在cmd命令行，输入命令”python”，就可以有相关显示。</li>
+</ul>
+<h2 id="Python中文编码"><a href="#Python中文编码" class="headerlink" title="Python中文编码"></a><strong>Python中文编码</strong></h2><p>[一]内学会输入hello world，英文没问题，但是输入中文字符“你好，世界！”就有可能碰到中文编码的问题。<br>Python 文件中如果未指定编码，在执行过程会出现报错：</p>
+<blockquote>
+<p>!/usr/bin/python<br>print “你好，世界”;</p>
+</blockquote>
+<p>以上程序执行输出结果为：</p>
+<blockquote>
+<p> File “test.py”, line 2<br>SyntaxError: Non-ASCII character ‘\xe4’ in file test.py on line 2, but no encoding declared; see <a href="http://www.python.org/peps/pep-0263.html" target="_blank" rel="external">http://www.python.org/peps/pep-0263.html</a> for details</p>
+</blockquote>
+<p>Python中默认的编码格式是 ASCII 格式，在没修改编码格式时无法正确打印汉字，所以在读取中文时会报错。<br>解决方法为只要在文件开头加入 # -<em>- coding: UTF-8 -</em>- 或者 #coding=utf-8 就行了。<br>如下</p>
+<blockquote>
+<p>!/usr/bin/python<br> -<em>- coding: UTF-8 -</em>-</p>
+<p>print “你好，世界”;</p>
+</blockquote>
+<p>输出的结果便是“你好，世界 ”；</p>
+<p>注意：Python3.X 源码文件默认使用utf-8编码，所以可以正常解析中文，无需指定 UTF-8 编码。</p>
+<h2 id="脚本式编程"><a href="#脚本式编程" class="headerlink" title="脚本式编程"></a><strong>脚本式编程</strong></h2><p>通过脚本参数调用解释器开始执行脚本，直到脚本执行完毕。当脚本执行完成后，解释器不再有效。<br>让我们写一个简单的Python脚本程序。所有Python文件将以.py为扩展名。将以下的源代码拷贝至test.py文件中。</p>
+<blockquote>
+<p>print (“Hello, Python!”);</p>
+</blockquote>
+<p>这里，假设你已经设置了Python解释器PATH变量。使用以下命令运行程序：</p>
+<blockquote>
+<p>python test.py</p>
+</blockquote>
+<p>输出结果：</p>
+<blockquote>
+<p>Hello, Python!</p>
+</blockquote>
+<p>另一种方式来执行Python脚本。修改test.py文件，如下所示：</p>
+<blockquote>
+<p>!/usr/bin/python<br>print “Hello, Python!”;</p>
+</blockquote>
+<p>这里，假定Python解释器在/usr/bin目录中，使用以下命令执行脚本：</p>
+<blockquote>
+<p>$ chmod +x test.py    # 脚本文件添加可执行权限<br>$ ./test.py</p>
+</blockquote>
+<h2 id="Python-标识符"><a href="#Python-标识符" class="headerlink" title="Python 标识符"></a><strong>Python 标识符</strong></h2><p>在python里，标识符有字母、数字、下划线组成。<br>在python中，所有标识符可以包括英文、数字以及下划线（_），但不能以数字开头。<br>python中的标识符是区分大小写的。<br>以下划线开头的标识符是有特殊意义的。以单下划线开头（_foo）的代表不能直接访问的类属性，需通过类提供的接口进行访问，不能用”from xxx import *”而导入；<br>以双下划线开头的（<strong>foo）代表类的私有成员；以双下划线开头和结尾的（</strong>foo<strong>）代表python里特殊方法专用的标识，如</strong>init__（）代表类的构造函数。</p>
+<h2 id="Python保留字符"><a href="#Python保留字符" class="headerlink" title="Python保留字符"></a><strong>Python保留字符</strong></h2><p>下面的列表显示了在Python中的保留字。这些保留字不能用作常数或变数，或任何其他标识符名称。<br>所有Python的关键字只包含小写字母。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">and</th>
+<th style="text-align:right">exec</th>
+<th style="text-align:center">not</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">assert</td>
+<td style="text-align:right">finally</td>
+<td style="text-align:center">or</td>
+</tr>
+<tr>
+<td style="text-align:left">break</td>
+<td style="text-align:right">for</td>
+<td style="text-align:center">pass</td>
+</tr>
+<tr>
+<td style="text-align:left">class</td>
+<td style="text-align:right">from</td>
+<td style="text-align:center">print</td>
+</tr>
+<tr>
+<td style="text-align:left">continue</td>
+<td style="text-align:right">global</td>
+<td style="text-align:center">raise</td>
+</tr>
+<tr>
+<td style="text-align:left">def</td>
+<td style="text-align:right">if</td>
+<td style="text-align:center">return</td>
+</tr>
+<tr>
+<td style="text-align:left">del</td>
+<td style="text-align:right">import</td>
+<td style="text-align:center">try</td>
+</tr>
+<tr>
+<td style="text-align:left">elif</td>
+<td style="text-align:right">in</td>
+<td style="text-align:center">while</td>
+</tr>
+<tr>
+<td style="text-align:left">else</td>
+<td style="text-align:right">is</td>
+<td style="text-align:center">with</td>
+</tr>
+<tr>
+<td style="text-align:left">except</td>
+<td style="text-align:right">lambda</td>
+<td style="text-align:center">yield</td>
+</tr>
+</tbody>
+</table>
+<h2 id="行和缩进"><a href="#行和缩进" class="headerlink" title="行和缩进"></a><strong>行和缩进</strong></h2><p>学习Python与其他语言最大的区别就是，Python的代码块不使用大括号（{}）来控制类，函数以及其他逻辑判断。python最具特色的就是用缩进来写模块。<br>缩进的空白数量是可变的，但是所有代码块语句必须包含相同的缩进空白数量，这个必须严格执行。如下所示：<br>以下代码将会执行错误：</p>
+<blockquote>
+<p>!/usr/bin/python<br> -<em>- coding: UTF-8 -</em>-<br>文件名：test.py</p>
+<p>if True:<br>   print “Answer”<br>   print “True”<br>else:<br>   print “Answer”<br>    没有严格缩进，在执行时保持<br> print “False”</p>
+</blockquote>
+<p>执行以上代码，会出现如下错误提醒：</p>
+<blockquote>
+<p>$ python test.py<br> File “test.py”, line 5<br>   if True:<br>   ^<br>IndentationError: unexpected indent</p>
+</blockquote>
+<p>IndentationError: unexpected indent 错误是python编译器是在告诉你”Hi，老兄，你的文件里格式不对了，可能是tab和空格没对齐的问题”，所有python对格式要求非常严格。<br>如果是 IndentationError: unindent does not match any outer indentation level错误表明，你使用的缩进方式不一致，有的是 tab 键缩进，有的是空格缩进，改为一致即可。<br>因此，在Python的代码块中必须使用相同数目的行首缩进空格数。<br>建议你在每个缩进层次使用 单个制表符 或 两个空格 或 四个空格 , 切记不能混用</p>
+<h2 id="多行语句"><a href="#多行语句" class="headerlink" title="多行语句"></a><strong>多行语句</strong></h2><pre><code>Python语句中一般以新行作为为语句的结束符。
+</code></pre><p>  但是我们可以使用斜杠（ \）将一行的语句分为多行显示，如下所示：</p>
+<blockquote>
+<p>total = item_one + \<br>       item_two + \<br>       item_three</p>
+</blockquote>
+<p>语句中包含[], {} 或 () 括号就不需要使用多行连接符。如下实例：</p>
+<blockquote>
+<p>days = [‘Monday’, ‘Tuesday’, ‘Wednesday’,<br>       ‘Thursday’, ‘Friday’]</p>
+</blockquote>
+<h2 id="Python-引号"><a href="#Python-引号" class="headerlink" title="Python 引号"></a><strong>Python 引号</strong></h2><p>Python 接收单引号(‘ )，双引号(“ )，三引号(‘’’ “””) 来表示字符串，引号的开始与结束必须的相同类型的。<br>其中三引号可以由多行组成，编写多行文本的快捷语法，常用语文档字符串，在文件的特定地点，被当做注释。</p>
+<blockquote>
+<p>word = ‘word’<br>sentence = “这是一个句子。”<br>paragraph = “””这是一个段落。<br>包含了多个语句”””</p>
+</blockquote>
+<h2 id="Python注释"><a href="#Python注释" class="headerlink" title="Python注释"></a><strong>Python注释</strong></h2><p>python中单行注释采用 # 开头（ 注释可以在语句或表达式行末：）<br>python 中多行注释使用三个单引号(‘’’)或三个双引号(“””)。</p>
+<h2 id="等待用户输入"><a href="#等待用户输入" class="headerlink" title="等待用户输入"></a><strong>等待用户输入</strong></h2><blockquote>
+<p>!/usr/bin/python</p>
+<p>raw_input(“\n\nPress the enter key to exit.”)</p>
+</blockquote>
+<p>以上代码中 ，”\n\n”在结果输出前会输出两个新的空行。一旦用户按下键时，程序将退出。</p>
+<p>Python可以在同一行中使用多条语句，语句之间使用分号(;)分割</p>
+<h2 id="多个语句构成代码组"><a href="#多个语句构成代码组" class="headerlink" title="多个语句构成代码组"></a><strong>多个语句构成代码组</strong></h2><p>缩进相同的一组语句构成一个代码块，我们称之代码组。<br>像if、while、def和class这样的复合语句，首行以关键字开始，以冒号( : )结束，该行之后的一行或多行代码构成代码组。<br>我们将首行及后面的代码组称为一个子句(clause)。<br>如下实例：</p>
+<blockquote>
+<p>if expression :<br>  suite<br>elif expression :<br>  suite<br>else :<br>  suite</p>
+</blockquote>
+<h2 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a><strong>命令行参数</strong></h2><p>很多程序可以执行一些操作来查看一些基本信，Python可以使用-h参数查看各参数帮助信息：</p>
+<blockquote>
+<p>$ python -h<br>usage: python [option] … [-c cmd | -m mod | file | -] [arg] …<br>Options and arguments (and corresponding environment variables):<br>-c cmd : program passed in as string (terminates option list)<br>-d    : debug output from parser (also PYTHONDEBUG=x)<br>-E    : ignore environment variables (such as PYTHONPATH)<br>-h    : print this help message and exit</p>
+<p>[ etc. ]</p>
+</blockquote>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/09/04/hexo搭建/">
+                hexo搭建
+            </a>
+        </h1>
+        <div class="post-info">
+            <span class="date">2016-09-04</span>
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h1 id="Hexo搭建Github静态博客"><a href="#Hexo搭建Github静态博客" class="headerlink" title="Hexo搭建Github静态博客"></a>Hexo搭建Github静态博客</h1><p>应用GitHub Pages创建属于自己的个人博客，GitHub将提供免费的空间。GitHub提供的域名（用户名+github+io）,在Repository name对应处填写资源名，其需要使用自己的用户名，每个用户名下面只能建立一个，并且资源命名必须符合这样的规则username/username.github.io，之后勾选下面的”Initialize this repository with a README”</p>
+<h2 id="1-环境"><a href="#1-环境" class="headerlink" title="1.环境"></a>1.环境</h2><h3 id="1-1安装Git"><a href="#1-1安装Git" class="headerlink" title="1.1安装Git"></a>1.1安装Git</h3><p>下载地址：<a href="https://git-scm.com/download/win" target="_blank" rel="external">https://git-scm.com/download/win</a><br>下载安装包后正常安装即可。</p>
+<h3 id="1-2安装node-js"><a href="#1-2安装node-js" class="headerlink" title="1.2安装node.js"></a>1.2安装node.js</h3><p>下载地址：<a href="http://nodejs.org/download/" target="_blank" rel="external">http://nodejs.org/download/</a><br>可以下载 node-v0.10.33-x64.msi<br>安装时直接保持默认配置即可。</p>
+<h2 id="2-配置Github"><a href="#2-配置Github" class="headerlink" title="2.配置Github"></a>2.配置Github</h2><h3 id="1-1建立Repository"><a href="#1-1建立Repository" class="headerlink" title="1.1建立Repository"></a>1.1建立Repository</h3><p>建立与你用户名对应的仓库，仓库名必须为【your_user_name.github.io】</p>
+<h3 id="1-2配置SSH-Key"><a href="#1-2配置SSH-Key" class="headerlink" title="1.2配置SSH-Key"></a>1.2配置SSH-Key</h3><p>参考：<a href="http://beiyuu.com/github-pages" target="_blank" rel="external">http://beiyuu.com/github-pages</a></p>
+<h2 id="3-安装Hexo"><a href="#3-安装Hexo" class="headerlink" title="3.安装Hexo"></a>3.安装Hexo</h2><p>关于Hexo的安装配置过程，请以官方Hexo给出的步骤为准。</p>
+<h3 id="3-1Installation"><a href="#3-1Installation" class="headerlink" title="3.1Installation"></a>3.1Installation</h3><p>打开Git命令行，执行如下命令</p>
+<blockquote>
+<p>$ npm install -g hexo</p>
+</blockquote>
+<h3 id="3-2-Quick-Start"><a href="#3-2-Quick-Start" class="headerlink" title="3.2 Quick Start"></a>3.2 Quick Start</h3><p><strong>1.Setup your blog</strong><br>在电脑中建立一个名字叫「Hexo」的文件夹（比如我建在了D:\Hexo），然后在此文件夹中右键打开Git Bash。执行下面的命令</p>
+<blockquote>
+<p>$ hexo init<br>[info] Copying data<br>[info] You are almost done! Don’t forget to run <code>npm install</code> before you start b<br>logging with Hexo!</p>
+</blockquote>
+<p>Hexo随后会自动在目标文件夹建立网站所需要的文件。然后按照提示，运行 npm install（在 /D/Hexo下）</p>
+<blockquote>
+<p>npm install</p>
+</blockquote>
+<p>会在D:\Hexo目录中安装 node_modules。</p>
+<p><strong>2.Start the server</strong><br>运行下面的命令（在 /D/Hexo下）</p>
+<blockquote>
+<p>$ hexo server<br>[info] Hexo is running at <a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a>. Press Ctrl+C to stop.</p>
+</blockquote>
+<p><strong>3. Create a new post</strong><br>新打开一个git bash命令行窗口，cd到/D/Hexo下，执行下面的命令</p>
+<blockquote>
+<p>$ hexo new “My New Post”<br>[info] File created at d:\Hexo\source_posts\My-New-Post.md</p>
+</blockquote>
+<p>刷新<a href="http://localhost:4000/，可以发现已生成了一篇新文章" target="_blank" rel="external">http://localhost:4000/，可以发现已生成了一篇新文章</a> “My New Post”。</p>
+<p><strong>NOTE:</strong><br>有一个问题，发现 “My New Post” 被发了2遍，在Hexo server所在的git bash窗口也能看到create了2次。</p>
+<blockquote>
+<p>$ herxo serve<br>[info] Hexo is running at <a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a>. Press Ctrl+C to stop.[create] d:\Hexo\source_posts\My-New-Post.md<br>[create] d:\Hexo\source_posts\My-New-Post.md</p>
+</blockquote>
+<p>经验证，在hexo new “My New Post” 时，如果按Ctrl+C将hexo server停掉，就不会出现发2次的问题了。</p>
+<p>所以，在hexo new文章时，需要stop server。</p>
+<p><strong>4. Generate static files</strong><br>执行下面的命令，将markdown文件生成静态网页</p>
+<blockquote>
+<p>$ hexo generate</p>
+</blockquote>
+<p>该命令执行完后，会在 D:\Hexo\public\ 目录下生成一系列html，css等文件。</p>
+<p><strong>5. 编辑文章</strong></p>
+<p>hexo new “My New Post”会在D:\Hexo\source_posts目录下生成一个markdown文件：My-New-Post.md<br>可以使用一个支持markdown语法的编辑器（比如 Sublime Text 2）来编辑该文件。</p>
+<p><strong>6. 部署到Github</strong></p>
+<p>部署到Github前需要配置_config.yml文件，首先找到下面的内容</p>
+<blockquote>
+<p>#Deployment</p>
+<p>##Docs: <a href="http://hexo.io/docs/deployment.htmldeploy" target="_blank" rel="external">http://hexo.io/docs/deployment.htmldeploy</a>: type:</p>
+</blockquote>
+<p>然后将它们修改为</p>
+<blockquote>
+<p>#Deployment</p>
+<p>##Docs: <a href="http://hexo.io/docs/deployment.htmldeploy" target="_blank" rel="external">http://hexo.io/docs/deployment.htmldeploy</a>: type: github<br>  repository: git@github.com:zhchnchn/zhchnchn.github.io.git branch: master</p>
+</blockquote>
+<p><strong>NOTE1:</strong><br>Repository：必须是SSH形式的url（git@github.com:zhchnchn/zhchnchn.github.io.git），而不能是HTTPS形式的url（<a href="https://github.com/zhchnchn/zhchnchn.github.io.git），否则会出现错误：" target="_blank" rel="external">https://github.com/zhchnchn/zhchnchn.github.io.git），否则会出现错误：</a></p>
+<blockquote>
+<p>$ hexo deploy<br>[info] Start deploying: github<br>[error] <a href="https://github.com/zhchnchn/zhchnchn.github.io" target="_blank" rel="external">https://github.com/zhchnchn/zhchnchn.github.io</a> is not a valid repositor URL!</p>
+</blockquote>
+<p>使用SSH url，如果电脑没有开放SSH 端口，会致部署失败。</p>
+<blockquote>
+<p>fatal: Could not read from remote repository.</p>
+<p>Please make sure you have the correct access rights and the repository exists.</p>
+</blockquote>
+<p><strong>NOTE2：</strong><br>如果你是为一个项目制作网站，那么需要把branch设置为gh-pages。<br><strong>7. 测试</strong><br>当部署完成后，在浏览器中打开<a href="http://zhchnchn.github.io/（https://zhchnchn.github.io/）" target="_blank" rel="external">http://zhchnchn.github.io/（https://zhchnchn.github.io/）</a> ，正常显示网页，表明部署成功。<br><strong>8. 总结：部署步骤</strong><br>每次部署的步骤，可按以下三步来进行。</p>
+<blockquote>
+<p>hexo clean<br>hexo generate<br>hexo deploy</p>
+</blockquote>
+<p><strong>9. 总结：本地调试</strong></p>
+<ol>
+<li>在执行下面的命令后，</li>
+</ol>
+<blockquote>
+<p>$ hexo g #生成<br>$ hexo s #启动本地服务，进行文章预览调试</p>
+</blockquote>
+<p>浏览器输入<a href="http://localhost:4000，查看搭建效果。此后的每次变更_config.yml" target="_blank" rel="external">http://localhost:4000，查看搭建效果。此后的每次变更_config.yml</a> 文件或者新建文件都可以先用此命令调试，尤其是当你想调试新添加的主题时。</p>
+<p><strong>2. 可以用简化的一条命令</strong></p>
+<blockquote>
+<p>hexo s -g</p>
+</blockquote>
+<h2 id="命令总结"><a href="#命令总结" class="headerlink" title="命令总结"></a>命令总结</h2><h3 id="3-3-1常用命令"><a href="#3-3-1常用命令" class="headerlink" title="3.3.1常用命令"></a>3.3.1常用命令</h3><blockquote>
+<p>hexo new “postName” #新建文章<br>hexo new page “pageName” #新建页面<br>hexo generate #生成静态页面至public目录<br>hexo server #开启预览访问端口（默认端口4000，’ctrl + c’关闭server）<br>hexo deploy #将.deploy目录部署到GitHub<br>hexo help # 查看帮助<br>hexo version #查看Hexo的版本</p>
+</blockquote>
+<h3 id="3-3-2"><a href="#3-3-2" class="headerlink" title="3.3.2"></a>3.3.2</h3><blockquote>
+<p>hexo deploy -g  #生成加部署<br>hexo server -g  #生成加预览</p>
+</blockquote>
+<p>命令的简写为：</p>
+<blockquote>
+<p>hexo n == hexo new<br>hexo g == hexo generate<br>hexo s == hexo server<br>hexo d == hexo deploy</p>
+</blockquote>
+<h2 id="4-配置Hexo"><a href="#4-配置Hexo" class="headerlink" title="4 配置Hexo"></a>4 配置Hexo</h2><h3 id="4-1-配置文件介绍"><a href="#4-1-配置文件介绍" class="headerlink" title="4.1 配置文件介绍"></a>4.1 配置文件介绍</h3><p>下面的各个部分的介绍，请直接参考【3】。</p>
+<p><strong>1._config.yml配置文件介绍</strong><br>NOTE：在修改_config.yml配置文件时，按照【3】的介绍进行修改后，重新 hexo clean 或者hexo deploy时，可能会出现如下错误：</p>
+<blockquote>
+<p>$ hexo clean<br>[error] { name: ‘HexoError’,<br> reason: ‘can not read a block mapping entry; a multiline key<br> may not be an imp<br> licit key’, mark:<br>    { name: null,<br>       buffer: ‘# Hexo Configuration\n## Docs:<br> <a href="http://hexo.io/docs/configuration.h" target="_blank" rel="external">http://hexo.io/docs/configuration.h</a><br> tml\n## Source: <a href="https://github.com/hexojs/hexo/\n\n#" target="_blank" rel="external">https://github.com/hexojs/hexo/\n\n#</a> Site\ntitle: Zhchnchn\nsubt<br> itle: Coding on the way\ndescription: Zhchnchn\’s blog\nauthor:<br> Zhchnchn\nemail:115063497@qq.com\nlanguage:zh-CN\n\n# URL\n## If your        site is put in a subdirect ……<br> ,<br> position: 249,<br> line: 12,<br> column: 0 },<br> message: ‘Config file load failed’,<br> domain:<br> { domain: null,<br>  _events: { error: [Function] },<br>  _maxListeners: 10,<br>  members: [ [Object] ] },<br>  domainThrown: true,<br>  stack: undefined }</p>
+</blockquote>
+<p>我的_config.yml配置文件是一个空行，所以错误肯定在前面，经过对比发现，我前面修改了一下 # Site的各项设置，在冒号:后面没留空格导致了该问题，请对比一下下面的区别：</p>
+<p>错误的设置：</p>
+<blockquote>
+<p>author:Zhchnchn<br>email:XXX@qq.com<br>language:zh-CN</p>
+</blockquote>
+<p>正确的设置：</p>
+<blockquote>
+<p>author: Zhchnchn<br>email: XXX@qq.com<br>language: zh-CN</p>
+</blockquote>
+<p>(问题在于必须要有空格)</p>
+<h2 id="4-2-安装主题"><a href="#4-2-安装主题" class="headerlink" title="4.2 安装主题"></a>4.2 安装主题</h2><p>Hexo提供了很多主题，具体可参见Hexo Themes【4】。这里我选择使用Pacman主题。具体设置方法如下【5】</p>
+<h3 id="4-2-1安装"><a href="#4-2-1安装" class="headerlink" title="4.2.1安装"></a>4.2.1安装</h3><ol>
+<li>将Git Shell 切到/D/Hexo目录下，然后执行下面的命令，将pacman下载到 themes/pacman 目录下。</li>
+</ol>
+<blockquote>
+<p>$ git clone <a href="https://github.com/A-limon/pacman.git" target="_blank" rel="external">https://github.com/A-limon/pacman.git</a> themes/pacman</p>
+</blockquote>
+<ol>
+<li><p>修改你的博客根目录/D/Hexo下的config.yml配置文件中的theme属性，将其设置为pacman。</p>
+</li>
+<li><p>更新pacman主题</p>
+</li>
+</ol>
+<blockquote>
+<p>cd themes/pacman<br>git pull</p>
+</blockquote>
+<p><strong>NOTE：</strong>先备份_config.yml 文件后再升级</p>
+<h3 id="4-4-2配置"><a href="#4-4-2配置" class="headerlink" title="4.4.2配置"></a>4.4.2配置</h3><p>如果pacman的默认设置不能满足需要的话，你可以修改 /themes/pacman/下的配置文件_config.yml来定制。</p>
+<p>详细主题跟新安装参照【<a href="http://blog.csdn.net/qq_23435721/article/details/50938038" target="_blank" rel="external">http://blog.csdn.net/qq_23435721/article/details/50938038</a>】</p>
+<h2 id="5-发布文章"><a href="#5-发布文章" class="headerlink" title="5.发布文章"></a>5.发布文章</h2><blockquote>
+<p>$ hexo new “My New Post”<br>[info] File created at d:\Hexo\source_posts\My-New-Post.md<br>hexo g #生成静态文件<br>hexo g -d #部署到Github</p>
+</blockquote>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/09/03/Google-hacking-语法/">
+                Google hacking 语法
+            </a>
+        </h1>
+        <div class="post-info">
+            <span class="date">2016-09-03</span>
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h2 id="1-单词语法"><a href="#1-单词语法" class="headerlink" title="1.单词语法"></a>1.单词语法</h2><h3 id="intext"><a href="#intext" class="headerlink" title="intext:"></a>intext:</h3><p>这个就是把网页中的正文内容中的某个字符做为搜索条件，例如在google里输入：intext：动网，将返回所有在网页正文部分包含”动网”的网页。</p>
+<h3 id="allintext"><a href="#allintext" class="headerlink" title="allintext:"></a>allintext:</h3><p>使用方法和intext类似.</p>
+<h3 id="intitle"><a href="#intitle" class="headerlink" title="intitle:"></a>intitle:</h3><p>和上面那个intext差不多，搜索网页标题中是否有我们所要找的字符，例如搜索：intitle：安全天使，将返回所有网页标题中包含“安全天使”的网页。同理allintitle也同intitle类似。</p>
+<h3 id="cache"><a href="#cache" class="headerlink" title="cache:"></a>cache:</h3><p>搜索google里关于某些内容的缓存，有时候也许能找到一些好东西哦。</p>
+<h3 id="define"><a href="#define" class="headerlink" title="define:"></a>define:</h3><p>搜索某个词语的定义。搜索：define：hacker，将返回关于hacker的定义。</p>
+<h3 id="filetype"><a href="#filetype" class="headerlink" title="filetype:"></a>filetype:</h3><p>这个我要重点推荐一下，无论是撒网式攻击还是我们后面要说的搜索指定类型的文件。例如输入：filetype：doc，将返回所有以doc结尾的文件URL。当然如果你找.bak、.mdb或.inc也是可以的，获得的信息也许会更丰富。</p>
+<h3 id="info"><a href="#info" class="headerlink" title="info:"></a>info:</h3><p>查找指定站点的一些基本信息。</p>
+<h3 id="inurl"><a href="#inurl" class="headerlink" title="inurl:"></a>inurl:</h3><p>搜索我们指定的字符是否存在于URL中。例如输入：inurl：admin，将返回N个类似于这样的连接：<a href="http://www.xxx.com/xxx/admin。用来找管理员登陆的URL不错。allinurl也同inurl类似，可指定多个字符。" target="_blank" rel="external">http://www.xxx.com/xxx/admin。用来找管理员登陆的URL不错。allinurl也同inurl类似，可指定多个字符。</a></p>
+<h2 id="符号语法"><a href="#符号语法" class="headerlink" title="符号语法"></a><strong>符号语法</strong></h2><h3 id=""><a href="#" class="headerlink" title="+"></a>+</h3><p> 把google可能忽略的字列如查询范围</p>
+<h3 id="-1"><a href="#-1" class="headerlink" title="-"></a>-</h3><p>把某个字忽略</p>
+<h3 id="-2"><a href="#-2" class="headerlink" title="~"></a>~</h3><p>同意词</p>
+<h3 id="-3"><a href="#-3" class="headerlink" title="."></a>.</h3><p>单一的通配符</p>
+<h3 id="-4"><a href="#-4" class="headerlink" title="*"></a>*</h3><p>通配符，可代表多个字母</p>
+<h3 id="“”"><a href="#“”" class="headerlink" title="“”"></a>“”</h3><p>精确查询</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/09/03/绕过网站访问限制的方法/">
+                绕过网站访问限制的方法
+            </a>
+        </h1>
+        <div class="post-info">
+            <span class="date">2016-09-03</span>
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h2 id="1-只允许国外访问"><a href="#1-只允许国外访问" class="headerlink" title="1.只允许国外访问:"></a>1.只允许国外访问:</h2><p>将 HTTP 请求头中的 Accept-Language 为中文(cn-zh)，修改为英文(en-us)。</p>
+<h2 id="2-浏览器限制访问"><a href="#2-浏览器限制访问" class="headerlink" title="2.浏览器限制访问:"></a>2.浏览器限制访问:</h2><p>修改 HTTP 请求中的 User-Agent 信息。里面标注的有访问所用的浏览器和系统版本。也可以使用火狐的default user agent插件进行修改。</p>
+<h2 id="3-IP地址限制访问："><a href="#3-IP地址限制访问：" class="headerlink" title="3.IP地址限制访问："></a>3.IP地址限制访问：</h2><p>跟 HTTP 请求头中的 X-Forwarded-For、client-ip、remote_addr 有关系，也可以使用代理进行访问。</p>
+<h2 id="4-用户登陆限制访问："><a href="#4-用户登陆限制访问：" class="headerlink" title="4.用户登陆限制访问："></a>4.用户登陆限制访问：</h2><p>可能是 Cookie 的问题，如果 Cookie 比较简单，可以尝试构造cookie。</p>
+<h2 id="5-隐藏信息："><a href="#5-隐藏信息：" class="headerlink" title="5.隐藏信息："></a>5.隐藏信息：</h2><p>查看 robots.txt 可以获得该网站的一些信息。</p>
+<h2 id="6-其他："><a href="#6-其他：" class="headerlink" title="6.其他："></a>6.其他：</h2><p>有一些加referer加上代理ip</p>
+<p>PS：原文:(<a href="http://byd.dropsec.xyz" target="_blank" rel="external">http://byd.dropsec.xyz</a>)</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/08/05/hello-world/">
+                Hello World
+            </a>
+        </h1>
+        <div class="post-info">
+            <span class="date">2016-08-05</span>
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><p>$ hexo new “My New Post”</p>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><p>$ hexo server</p>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><p>$ hexo generate</p>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><p>$ hexo deploy</p>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+        </div>
+    
+
+</div>
+            
+        </section>
+    </div>
+</div>
+
+
+
+
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2016/09/18/Python学习/">Python学习</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2016/09/04/hexo搭建/">hexo搭建</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2016/09/03/Google-hacking-语法/">Google hacking 语法</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2016/09/03/绕过网站访问限制的方法/">绕过网站访问限制的方法</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
