@@ -139,6 +139,124 @@
 
     <div class="post-header index">
         <h1 class="title">
+            <a href="/2016/10/30/gdb与peda指令学习学习笔记/">
+                gdb与peda指令学习学习笔记
+            </a>
+        </h1>
+        <div class="post-info">
+            <span class="date">2016-10-30</span>
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>下午学习的gdb指令。傻傻的对一个自己的程序输入打开指令打不开。问问才知道要先转换成可执行文件，上网有学学gcc指令收获不少啊。。</p>
+<h2 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a><strong>遇到问题</strong></h2><h3 id="1、写了一个C-语言但是用指令转换成可执行文件时候呢显示iostream不存在"><a href="#1、写了一个C-语言但是用指令转换成可执行文件时候呢显示iostream不存在" class="headerlink" title="1、写了一个C++语言但是用指令转换成可执行文件时候呢显示iostream不存在"></a>1、写了一个C++语言但是用指令转换成可执行文件时候呢显示iostream不存在</h3><p>解决：对于C语言使用的转换指令是（假设文件是doc.c）<br>将C语言的文件doc.c转换为了doc</p>
+<blockquote>
+<p>gcc doc.c -o doc</p>
+</blockquote>
+<p>还有一个默认转换，也就是后面可以不加你转换的名字，系统默认转换后的名字为a.out</p>
+<blockquote>
+<p>gcc doc.c</p>
+</blockquote>
+<p>对于C++语言使用的转换指令是</p>
+<blockquote>
+<p>g++ doc.c -o doc</p>
+</blockquote>
+<h3 id="2、显示j-strlen-s-语句出错。"><a href="#2、显示j-strlen-s-语句出错。" class="headerlink" title="2、显示j=strlen(s)语句出错。"></a>2、显示j=strlen(s)语句出错。</h3><p>解决：原来linux的习惯，strlen声明放在 string.h 中(linux系统中可以通过man strlen来查看其帮助和所在头文件)，仅仅 #include <string> 只是引入了 std::string，还需要 #include <string.h></string.h></string></p>
+<p>###3、其他指令<br>(1)、 将test.c预处理输出test.i文件。</p>
+<blockquote>
+<p>gcc -E test.c -o test.i</p>
+</blockquote>
+<p>(2)、 将预处理输出文件test.i汇编成test.s文件。</p>
+<blockquote>
+<p>gcc -E test.c -o test.i</p>
+</blockquote>
+<p>(3)、 将汇编输出文件test.s编译输出test.o文件。</p>
+<blockquote>
+<p>gcc -c test.s</p>
+</blockquote>
+<p>(4)、 将编译输出文件test.o链接成最终可执行文件test。</p>
+<blockquote>
+<p>gcc test.o -o test</p>
+</blockquote>
+<p>(5)、 使用编译优化级别1编译程序。级别为1~3，级别越大优化效果越好，但编译时间越长。</p>
+<blockquote>
+<p>gcc -O1 test.c -o test</p>
+</blockquote>
+<h3 id="4、多源文件的编译方法"><a href="#4、多源文件的编译方法" class="headerlink" title="4、多源文件的编译方法"></a>4、多源文件的编译方法</h3><p>(1)、多个文件一起编译<br>将testfun.c和test.c分别编译后链接成test可执行文件。</p>
+<blockquote>
+<p>gcc testfun.c test.c -o test</p>
+</blockquote>
+<p>(2)、分别编译各个源文件，之后对编译后输出的目标文件链接。<br>将testfun.c编译成testfun.o<br>将test.c编译成test.o<br>将testfun.o和test.o链接成test</p>
+<blockquote>
+<p>gcc -c testfun.c<br>gcc -c test.c<br>gcc -o testfun.o test.o -o test</p>
+</blockquote>
+<p>在搜索的过程中也发现了一个好玩的命令就先记录下吧，这是个gdb下的指令。</p>
+<p>如果想看看现在的默认反汇编格式是什么，可以使用如下命令</p>
+<blockquote>
+<p>(gdb) show disassembly-flavor</p>
+</blockquote>
+<p>如果看不懂，那就转换汇编格式</p>
+<blockquote>
+<p>(gdb) set disassembly-flavor intel</p>
+</blockquote>
+<p>经过以上的步骤就可以把想要的可执行文件得到，下面就是对程序进行指令分析。程序为(doc)</p>
+<p>运行程序看看</p>
+<blockquote>
+<p>./doc</p>
+</blockquote>
+<p>进入gdb指令下。（gdb + doc）<br>反编译</p>
+<blockquote>
+<p>disassemble main</p>
+</blockquote>
+<p>下面是基础的调试指令</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">介绍</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">r</td>
+<td style="text-align:center">r 是run的简写，也就是在GDB下运行程序。（如果有设置断点会运行到断点）</td>
+<td style="text-align:center">（gdb）r</td>
+</tr>
+<tr>
+<td style="text-align:center">c</td>
+<td style="text-align:center">C是continue的简写，就是继执行被调试的程序，直到下一次断点处或者结束</td>
+<td style="text-align:center">（gdb）c</td>
+</tr>
+<tr>
+<td style="text-align:center">b &lt;行号&gt;/&lt;函数名称&gt;/<em>&lt;函数名称&gt;/</em>&lt;代码地址&gt;</td>
+<td style="text-align:center">b 是breakpoint的简写，就是设置断点，可以使用行号，函数名，执行地址进行下断。而函数名前加一个*则表示将断点设置在“由编译器生成的prolog代码处”，者在了解汇编后可以理解。</td>
+<td style="text-align:center">（gdb）b 8</td>
+</tr>
+</tbody>
+</table>
+<p>（gdb）b main<br>（gdb）b <em>main<br>（gdb）b </em>0x8048534<br>|<br>|d [编号]|d 是delete breakpoint的简写，就是删除制定编号后的断点，也可以一次删去所有断点。|（gdb）d 2|<br>|p &lt;变量名称&gt;|P是print的简写，显示指定变量的值（临时变量或全局变量）。|（print）p n|<br>|q|不需要多解释了，就是退出调试|（gdb）q|<br>|S|执行一行源代码，如果此行代码有函数调用，进入该函数，也就相当于其他调试器的单步步入。|（gdb）s|<br>|n|执行一段源代码，代码中的函数调用也一并执行，也就相当于其他调试器的单步步过。|（gdb）n|<br>|Si ,ni|这两个对应着的是s和n。不同的是这两个是对汇编语言的，而前两个是对源代码的。|（gdb）si<br>（gdb）ni<br>|</p>
+<p>然后是peda的一些指令</p>
+<blockquote>
+<p>checksec –检查二进制的各种安全选项<br>dumpargs –当在调用指令时停止显示参数传递给函数<br>elfheader–调试文件的标题指令<br>elfsymbol–从一个精灵文件获得非调试符号信息<br>lookup   –搜索所有的地址/参考地址属于一个内存范围<br>readelf –从一个逆向文件获取标题信息<br>patch –内存补丁开始在字符串/ hexstring /诠释一个地址（？）<br>pattern –生成、搜索或写一个循环模式到内存<br>pshow –显示各种PEDA选项和其他设置<br>pset –设置各种peda选项和其他设置<br>procinfo –显示从/ proc / PID的各种信息<br>shellcode –生成或下载常见shellcodes<br>xormem –一个密钥异或内存区<br>vmmap –在调试过程中获得部分（S）的虚拟映射地址范围<br>ropgadget–得到的二进制或静态库共同ROP小工具<br>ropsearch –记忆中搜索rop小工具使用<br>skeleton –Python开发代码生成模板<br>dumprop –丢弃在特定的内存范围内所有ROP小工具<br>searchmem|find –在记忆中搜索模式；支持正则表达式搜索</p>
+</blockquote>
+<p>指令中提到了一个ROP，也不知道是啥，去搜一搜，原来：<br>ROP的全称为Return-oriented programming（返回导向编程），这是一种高级的内存攻击技术可以用来绕过现代操作系统的各种通用防御（比如内存不可执行和代码签名等）</p>
+<p>这个溢出攻击可参照网址：<a href="http://www.programlife.net/linux-rop-stack-overflow.html" target="_blank" rel="external">http://www.programlife.net/linux-rop-stack-overflow.html</a></p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
             <a href="/2016/09/18/Python学习/">
                 Python学习
             </a>
@@ -599,6 +717,10 @@
         <ul>
             
             <li>
+                <a class="footer-post" href="/2016/10/30/gdb与peda指令学习学习笔记/">gdb与peda指令学习学习笔记</a>
+            </li>
+            
+            <li>
                 <a class="footer-post" href="/2016/09/18/Python学习/">Python学习</a>
             </li>
             
@@ -608,10 +730,6 @@
             
             <li>
                 <a class="footer-post" href="/2016/09/03/Google-hacking-语法/">Google hacking 语法</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2016/09/03/绕过网站访问限制的方法/">绕过网站访问限制的方法</a>
             </li>
             
         </ul>
