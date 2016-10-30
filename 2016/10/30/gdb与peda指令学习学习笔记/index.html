@@ -236,11 +236,40 @@
 <tr>
 <td style="text-align:center">b &lt;行号&gt;/&lt;函数名称&gt;/<em>&lt;函数名称&gt;/</em>&lt;代码地址&gt;</td>
 <td style="text-align:center">b 是breakpoint的简写，就是设置断点，可以使用行号，函数名，执行地址进行下断。而函数名前加一个*则表示将断点设置在“由编译器生成的prolog代码处”，者在了解汇编后可以理解。</td>
-<td style="text-align:center">（gdb）b 8</td>
+<td style="text-align:center">（gdb）b 8、（gdb）b main 、(gdb)b <em>main 、（gdb）b </em>0x8048534</td>
+</tr>
+<tr>
+<td style="text-align:center">d [编号]</td>
+<td style="text-align:center">d 是delete breakpoint的简写，就是删除制定编号后的断点，也可以一次删去所有断点。</td>
+<td style="text-align:center">（gdb）d 2</td>
+</tr>
+<tr>
+<td style="text-align:center">p &lt;变量名称&gt;</td>
+<td style="text-align:center">P是print的简写，显示指定变量的值（临时变量或全局变量）。</td>
+<td style="text-align:center">（print）p n</td>
+</tr>
+<tr>
+<td style="text-align:center">q</td>
+<td style="text-align:center">不需要多解释了，就是退出调试</td>
+<td style="text-align:center">（gdb）q</td>
+</tr>
+<tr>
+<td style="text-align:center">S</td>
+<td style="text-align:center">执行一行源代码，如果此行代码有函数调用，进入该函数，也就相当于其他调试器的单步步入。</td>
+<td style="text-align:center">（gdb）s</td>
+</tr>
+<tr>
+<td style="text-align:center">n</td>
+<td style="text-align:center">执行一段源代码，代码中的函数调用也一并执行，也就相当于其他调试器的单步步过。</td>
+<td style="text-align:center">（gdb）n</td>
+</tr>
+<tr>
+<td style="text-align:center">Si ,ni</td>
+<td style="text-align:center">这两个对应着的是s和n。不同的是这两个是对汇编语言的，而前两个是对源代码的。</td>
+<td style="text-align:center">（gdb）si、（gdb）ni</td>
 </tr>
 </tbody>
 </table>
-<p>（gdb）b main<br>（gdb）b <em>main<br>（gdb）b </em>0x8048534<br>|<br>|d [编号]|d 是delete breakpoint的简写，就是删除制定编号后的断点，也可以一次删去所有断点。|（gdb）d 2|<br>|p &lt;变量名称&gt;|P是print的简写，显示指定变量的值（临时变量或全局变量）。|（print）p n|<br>|q|不需要多解释了，就是退出调试|（gdb）q|<br>|S|执行一行源代码，如果此行代码有函数调用，进入该函数，也就相当于其他调试器的单步步入。|（gdb）s|<br>|n|执行一段源代码，代码中的函数调用也一并执行，也就相当于其他调试器的单步步过。|（gdb）n|<br>|Si ,ni|这两个对应着的是s和n。不同的是这两个是对汇编语言的，而前两个是对源代码的。|（gdb）si<br>（gdb）ni<br>|</p>
 <p>然后是peda的一些指令</p>
 <blockquote>
 <p>checksec –检查二进制的各种安全选项<br>dumpargs –当在调用指令时停止显示参数传递给函数<br>elfheader–调试文件的标题指令<br>elfsymbol–从一个精灵文件获得非调试符号信息<br>lookup   –搜索所有的地址/参考地址属于一个内存范围<br>readelf –从一个逆向文件获取标题信息<br>patch –内存补丁开始在字符串/ hexstring /诠释一个地址（？）<br>pattern –生成、搜索或写一个循环模式到内存<br>pshow –显示各种PEDA选项和其他设置<br>pset –设置各种peda选项和其他设置<br>procinfo –显示从/ proc / PID的各种信息<br>shellcode –生成或下载常见shellcodes<br>xormem –一个密钥异或内存区<br>vmmap –在调试过程中获得部分（S）的虚拟映射地址范围<br>ropgadget–得到的二进制或静态库共同ROP小工具<br>ropsearch –记忆中搜索rop小工具使用<br>skeleton –Python开发代码生成模板<br>dumprop –丢弃在特定的内存范围内所有ROP小工具<br>searchmem|find –在记忆中搜索模式；支持正则表达式搜索</p>
