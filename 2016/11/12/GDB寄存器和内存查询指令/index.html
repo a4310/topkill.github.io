@@ -154,23 +154,23 @@
 
         <!-- Post Content -->
         <p>今天下午学习pwn的基础知识，遇到了两个查询容易弄扯，在这儿总结下子。<br><a id="more"></a></p>
-<h3 id="1-查看寄存器"><a href="#1-查看寄存器" class="headerlink" title="1. 查看寄存器"></a>1. 查看寄存器</h3><blockquote>
+<h3 id="1、查看寄存器"><a href="#1、查看寄存器" class="headerlink" title="1、查看寄存器"></a>1、查看寄存器</h3><blockquote>
 <p>(gdb) i r<br>(gdb) i r a                     # 查看所有寄存器（包括浮点、多媒体）<br>(gdb) i r esp<br>(gdb) i r pc</p>
 </blockquote>
-<h3 id="2-查看内存"><a href="#2-查看内存" class="headerlink" title="2. 查看内存"></a>2. 查看内存</h3><blockquote>
+<h3 id="2、查看内存"><a href="#2、查看内存" class="headerlink" title="2、查看内存"></a>2、查看内存</h3><blockquote>
 <p>(gdb) x /wx 0x80040000    # 以16进制显示指定地址处的数据<br>(gdb) x /8x $esp<br>(gdb) x /16x $esp+12<br>(gdb) x /16s 0x86468700   # 以字符串形式显示指定地址处的数据<br>(gdb) x /24i 0x8048a51      # 以指令形式显示指定地址处的数据（24条）</p>
 </blockquote>
-<h3 id="3-修改寄存器的值"><a href="#3-修改寄存器的值" class="headerlink" title="3. 修改寄存器的值"></a>3. 修改寄存器的值</h3><blockquote>
+<h3 id="3、修改寄存器的值"><a href="#3、修改寄存器的值" class="headerlink" title="3、修改寄存器的值"></a>3、修改寄存器的值</h3><blockquote>
 <p>(gdb) set $v0 = 0x004000000<br>(gdb) set $epc = 0xbfc00000</p>
 </blockquote>
-<h3 id="4-修改内存的值"><a href="#4-修改内存的值" class="headerlink" title="4. 修改内存的值"></a>4. 修改内存的值</h3><blockquote>
+<h3 id="4、修改内存的值"><a href="#4、修改内存的值" class="headerlink" title="4、修改内存的值"></a>4、修改内存的值</h3><blockquote>
 <p>(gdb) set {unsigned int}0x8048a51=0x0<br>(gdb) set <em>(unsigned int</em>)0x8048a54=0x55aa55aa</p>
 </blockquote>
-<h3 id="5-内存搜索"><a href="#5-内存搜索" class="headerlink" title="5. 内存搜索"></a>5. 内存搜索</h3><blockquote>
+<h3 id="5、内存搜索"><a href="#5、内存搜索" class="headerlink" title="5、内存搜索"></a>5、内存搜索</h3><blockquote>
 <p>Usage: find </p>
 <p>(gdb) define find<br>set $ptr = $arg0<br>set $cnt = 0<br>while ( ($ptr&lt;=$arg1) &amp;&amp; ($cnt&lt;$arg2) )<br>   if ( <em>(unsigned int </em>)$ptr == $arg3 )<br>       x /wx $ptr<br>       set $cnt = $cnt + 1<br>   end<br>   set $ptr = $ptr + 4<br>end<br>end</p>
 </blockquote>
-<h3 id="6-断点、监测点"><a href="#6-断点、监测点" class="headerlink" title="6. 断点、监测点"></a>6. 断点、监测点</h3><blockquote>
+<h3 id="6、断点、监测点"><a href="#6、断点、监测点" class="headerlink" title="6、断点、监测点"></a>6、断点、监测点</h3><blockquote>
 <p>(gdb) b <em>0x80400000<br>(gdb) watch </em>(unsigned int *)0xbffff400==0x90909090</p>
 </blockquote>
 
