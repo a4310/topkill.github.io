@@ -175,9 +175,7 @@
 <p>Usage: find </p>
 <p>(gdb) define find<br>set $ptr = $arg0<br>set $cnt = 0<br>while ( ($ptr&lt;=$arg1) &amp;&amp; ($cnt&lt;$arg2) )<br>   if ( <em>(unsigned int </em>)$ptr == $arg3 )<br>       x /wx $ptr<br>       set $cnt = $cnt + 1<br>   end<br>   set $ptr = $ptr + 4<br>end<br>end</p>
 </blockquote>
-<ol>
-<li>断点、监测点</li>
-</ol>
+<p>###6. 断点、监测点</p>
 <blockquote>
 <p>(gdb) b <em>0x80400000<br>(gdb) watch </em>(unsigned int *)0xbffff400==0x90909090</p>
 </blockquote>
@@ -223,6 +221,10 @@
         <ul>
             
             <li>
+                <a class="footer-post" href="/2017/01/16/寒假计划/">寒假计划</a>
+            </li>
+            
+            <li>
                 <a class="footer-post" href="/2016/11/12/GDB寄存器和内存查询指令/">GDB寄存器和内存查询指令</a>
             </li>
             
@@ -232,10 +234,6 @@
             
             <li>
                 <a class="footer-post" href="/2016/09/18/Python学习/">Python学习</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2016/09/04/hexo搭建/">hexo搭建</a>
             </li>
             
         </ul>
