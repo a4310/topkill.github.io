@@ -174,6 +174,7 @@
 <h3 id="三、Pwn基础练习3"><a href="#三、Pwn基础练习3" class="headerlink" title="三、Pwn基础练习3"></a>三、Pwn基础练习3</h3><p><strong>Python基础知识</strong></p>
 <p>   Python的os模块提供创建子进程以及修改环境变量的函数，其中os.system函数可以创建一个子进程，且子进程会继承父进程的环境变量参数信息；os.putenv可以修改进程的环境变量参数信息。</p>
 <p>   运行脚本就可以把这题pwn成功</p>
+<blockquote>
 <pre><code>import os
 
 defpwn():
@@ -182,7 +183,6 @@ os.system(&quot;./pwn3&quot;)
 if __name__ ==&quot;__main__&quot;:
 pwn()
 </code></pre><p>在shell输入下面指令为子进程添加一个新的环境变量（除了通过export添加环境变量以外，我们还可以通过函数getenv、putenv、setenv等对环境变量进行操作。）</p>
-<blockquote>
 <p>export testenv=”Hello_World”</p>
 </blockquote>
 <p>Linux Shell中，可以使用$()或者两个反引号（<code>）来包裹一条shell命令，并返回shell命令的执行结果。
