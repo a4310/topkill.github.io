@@ -20,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Mr_white"/>
+        <meta property="og:title" content="practice-2"/>
     
 
     <!--Open Graph Description-->
@@ -33,7 +33,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -44,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>page - Mr_white</title>
+    <title>practice-2 - Mr_white</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -127,109 +127,95 @@
     <div class="logo">
         <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
         
-            <h1 id="main-title" class="title">Mr_white</h1>
-        
     </div>
 </header>
 
         <section class="main">
             
-                
 <div class="post">
 
-    <div class="post-header index">
+    <div class="post-header">
         <h1 class="title">
-            <a href="/2016/09/03/Google-hacking-语法/">
-                Google hacking 语法
+            <a href="/2017/02/10/practice-2/">
+                practice-2
             </a>
         </h1>
         <div class="post-info">
-            <span class="date">2016-09-03</span>
-            
+            <span class="date">2017-02-10</span>
+            <a href="#disqus_thread" class="comments">留言</a>
             
         </div>
     </div>
 
-    
-        <div class="content">
-            <h2 id="1-单词语法"><a href="#1-单词语法" class="headerlink" title="1.单词语法"></a>1.单词语法</h2>
-        </div>
-        <a href="/2016/09/03/Google-hacking-语法/" class="read-more">Read More</a>
-    
+    <div class="content">
 
-</div>
-            
-                
-<div class="post">
+        <!-- Gallery -->
+        
 
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2016/09/03/绕过网站访问限制的方法/">
-                绕过网站访问限制的方法
-            </a>
-        </h1>
-        <div class="post-info">
-            <span class="date">2016-09-03</span>
-            
-            
-        </div>
+        <!-- Post Content -->
+        <p>一道ELFx64的题目，只能用IDA载入，找到main函数，F5得到代码</p>
+<a id="more"></a>
+<p><img src="http://p1.bpimg.com/567571/a2e89c3e87adaa1c.png" alt=""><br><img src="http://i1.piimg.com/567571/c0cb05d8dcdb8af5.png" alt=""></p>
+<p>看上面两个图，代码可读性果然不太好。前面print的一大堆应该是文件的提示字符串输入重点是后面的while循环以及那个if语句，直接看到if可以发现flag的最后几个变量必须是0，8，2，3这个不难看出来，</p>
+<p>试着看汇编把，看总览图，也不知道是不是这个技巧，看看剪头分布能推断出哪一段是循环语句所在之处，if判断之处啥的</p>
+<p><img src="http://p1.bqimg.com/567571/0d7431885146e522.png" alt=""><br>跟着C语言看看汇编语言吧</p>
+<p><img src="http://p1.bpimg.com/567571/b75fa1867dfcce75.png" alt=""></p>
+<p>进过上述分析可以知道var_40应该使我们输入的结果，所以必须必须知道var_C0的数据跳到相应位置</p>
+<p><img src="http://p1.bqimg.com/567571/ee0a905c88d36e04.png" alt=""></p>
+<p>是空的，再回到代码找找，会发现这样子一串操作</p>
+<p><img src="http://p1.bpimg.com/567571/be188fea8aca2fa0.png" alt=""></p>
+<p>刚好17个数字，所以说var_i[i] = ((var_C0[i]-1)+(var_C0[i]-1)&gt;&gt;0x1f)&gt;&gt;1</p>
+<p>好的，python写脚本：</p>
+<pre><code>#!usr/bin/python
+#-*- coding:utf-8 -*-
+
+key = [0x0EF,
+0x0C7,
+0x0E9,
+0x0CD,
+0x0F7,
+0x08B,
+0x0D9,
+0x08D,
+0x0BF,
+0x0D9,
+0x0DD,
+0x0B1,
+0x0BF,
+0x087,
+0x0D7,
+0x0DB,
+0x0BF
+]
+flag = []
+for i in range(0,17):
+       ch = ((key[i]-1)+((key[i]-1)&gt;&gt;0x1f))&gt;&gt;1;
+       flag.append(chr(ch))
+print(flag)
+print(&apos;0823}&apos;)
+</code></pre><p>最后结果：</p>
+<p><img src="http://p1.bqimg.com/567571/467aece24b3b0cf4.png" alt=""></p>
+
     </div>
 
     
-        <div class="content">
-            <h2 id="1-只允许国外访问"><a href="#1-只允许国外访问" class="headerlink" title="1.只允许国外访问:"></a>1.只允许国外访问:</h2>
-        </div>
-        <a href="/2016/09/03/绕过网站访问限制的方法/" class="read-more">Read More</a>
+
     
 
-</div>
-            
-                
-<div class="post">
+    <!-- Comments -->
+    
+    <div class="comments">
+        
 
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2016/08/05/hello-world/">
-                Hello World
-            </a>
-        </h1>
-        <div class="post-info">
-            <span class="date">2016-08-05</span>
-            
-            
-        </div>
+
     </div>
-
-    
-        <div class="content">
-            <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.<br>
-        </div>
-        <a href="/2016/08/05/hello-world/" class="read-more">Read More</a>
     
 
 </div>
-            
         </section>
+
     </div>
 </div>
-
-
-
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="wrap-pagination">
-                <a class="" href="/">
-                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                </a>
-                <a class="disabled" href="/">
-                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-
-
-
 
 </div>
 
