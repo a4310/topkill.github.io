@@ -20,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Mr_white"/>
+        <meta property="og:title" content="practice 5之万能断点"/>
     
 
     <!--Open Graph Description-->
@@ -33,7 +33,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -44,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>归档：2016/10 - Mr_white</title>
+    <title>practice 5之万能断点 - Mr_white</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -119,9 +119,7 @@
 <div class="container">
 
     <!-- Main Content -->
-    
-
-<div class="row">
+    <div class="row">
     <div class="col-sm-12">
 
         <!--Title and Logo-->
@@ -129,149 +127,61 @@
     <div class="logo">
         <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
         
-            <h1 id="main-title" class="title">2016/10</h1>
-        
     </div>
 </header>
 
-        <section class="main archive-container">
+        <section class="main">
             
-                <div class="archive-post">
-    <a href="/2017/02/09/8道Pwn基础练习所得/">
-        <span class="archive-date">
-            Feb 2017
-        </span>
-        8道Pwn基础练习所得
-    </a>
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2017/02/12/practice-5之万能断点/">
+                practice 5之万能断点
+            </a>
+        </h1>
+        <div class="post-info">
+            <span class="date">2017-02-12</span>
+            <a href="#disqus_thread" class="comments">留言</a>
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <p>第五个只能算得上是学习一个新技能–万能断点之前没听过。</p>
+<a id="more"></a>
+<p>给的是一个未注册版本的软件，题目要求将其注册<br><img src="http://i1.piimg.com/567571/c605a20b50eab2fa.png" alt=""></p>
+<p>乱填只能是出错误<br><img src="http://p1.bqimg.com/567571/adffda9e620b625e.png" alt=""></p>
+<p>放入IDA用运行，然后点击输入注册码，报错之后暂停OD调试<br><img src="http://p1.bpimg.com/567571/ea8a4f1bc14d49a0.png" alt=""></p>
+<p>如下图查看user3模块<br><img src="http://i1.piimg.com/567571/6cfadb9ca492a981.png" alt=""></p>
+<p>转到这个模块下之后便开始下万能断点；查找二进制字符串（crtl+B）,然后在弹出的框内输入万能断点并将跳转处设为断点<br><img src="http://i1.piimg.com/567571/aed4c1c824baa65f.png" alt=""><br><img src="http://p1.bpimg.com/567571/783b981f42680e28.png" alt=""></p>
+<p>重新载入程序，依旧输入错误注册码（由于万能断点，在运行到弹出输入界面时，中途会多次暂停）输入结束之后便可以按F8单步步过。直到堆栈窗口出现正确的注册码<br><img src="http://p1.bqimg.com/567571/f04d8f4dfdc4c4a9.png" alt=""></p>
+<p>输入检验注册成功：<br><img src="http://i1.piimg.com/567571/ed5ca99ef2505eec.png" alt=""></p>
+<p>万能断点：“F3 A5 8B C8 83 E1 03 F3 A4 E8”</p>
+
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+    <div class="comments">
+        
+
+
+    </div>
+    
+
 </div>
-            
-                <div class="archive-post">
-    <a href="/2016/11/12/GDB寄存器和内存查询指令/">
-        <span class="archive-date">
-            Nov 2016
-        </span>
-        GDB寄存器和内存查询指令
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2016/09/03/Google-hacking-语法/">
-        <span class="archive-date">
-            Sep 2016
-        </span>
-        Google hacking 语法
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2016/09/18/Python学习/">
-        <span class="archive-date">
-            Sep 2016
-        </span>
-        Python学习
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2016/10/30/gdb与peda指令学习学习笔记/">
-        <span class="archive-date">
-            Oct 2016
-        </span>
-        gdb与peda指令学习学习笔记
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2016/08/05/hello-world/">
-        <span class="archive-date">
-            Aug 2016
-        </span>
-        Hello World
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2016/09/04/hexo搭建/">
-        <span class="archive-date">
-            Sep 2016
-        </span>
-        hexo搭建
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2017/01/30/practice-1之图片reverse/">
-        <span class="archive-date">
-            Jan 2017
-        </span>
-        practice 1
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2017/02/10/practice-2之汇编/">
-        <span class="archive-date">
-            Feb 2017
-        </span>
-        practice-2
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2017/02/10/practice-3之pyo学习/">
-        <span class="archive-date">
-            Feb 2017
-        </span>
-        practice-3
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2017/02/12/practice-4之IDA用法/">
-        <span class="archive-date">
-            Feb 2017
-        </span>
-        practice 4
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2017/02/08/一步一步学ROP之x86篇/">
-        <span class="archive-date">
-            Feb 2017
-        </span>
-        一步一步学ROP之x86篇
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2017/02/12/practice-5之万能断点/">
-        <span class="archive-date">
-            Feb 2017
-        </span>
-        practice 5之万能断点
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2017/01/16/寒假计划/">
-        <span class="archive-date">
-            Jan 2017
-        </span>
-        寒假计划
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2016/09/03/绕过网站访问限制的方法/">
-        <span class="archive-date">
-            Sep 2016
-        </span>
-        绕过网站访问限制的方法
-    </a>
-</div>
-            
         </section>
+
     </div>
 </div>
 

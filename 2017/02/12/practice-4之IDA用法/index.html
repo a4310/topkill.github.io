@@ -20,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Mr_white"/>
+        <meta property="og:title" content="practice 4"/>
     
 
     <!--Open Graph Description-->
@@ -33,7 +33,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -44,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>归档：2016/10 - Mr_white</title>
+    <title>practice 4 - Mr_white</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -119,9 +119,7 @@
 <div class="container">
 
     <!-- Main Content -->
-    
-
-<div class="row">
+    <div class="row">
     <div class="col-sm-12">
 
         <!--Title and Logo-->
@@ -129,149 +127,96 @@
     <div class="logo">
         <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
         
-            <h1 id="main-title" class="title">2016/10</h1>
-        
     </div>
 </header>
 
-        <section class="main archive-container">
+        <section class="main">
             
-                <div class="archive-post">
-    <a href="/2017/02/09/8道Pwn基础练习所得/">
-        <span class="archive-date">
-            Feb 2017
-        </span>
-        8道Pwn基础练习所得
-    </a>
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2017/02/12/practice-4之IDA用法/">
+                practice 4
+            </a>
+        </h1>
+        <div class="post-info">
+            <span class="date">2017-02-12</span>
+            <a href="#disqus_thread" class="comments">留言</a>
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <p>第四题</p>
+<a id="more"></a>
+<p>打开是这样的，看English了解掷骰子，输入任意数字（3），我发现第一次输入三进行到下一步，但是退出重启之后在输入3则为错的，所以想要在9^5种可能中猜出随机变化的数字几率，除非脸白。，还是分析源程序得到答案吧</p>
+<p><img src="http://i1.piimg.com/567571/ad1edc303428e742.png" alt=""></p>
+<p>用IDA打开程序。进入之后shift+f12查找关键字符串。<br><img src="http://i1.piimg.com/567571/4b5e89a9e732ebd5.png" alt=""></p>
+<p>找到“Nice job.here is the flag”,双击跳转过去。会看到WinMain函数（常见的C++程序函数）直接反汇编<br><img src="http://p1.bqimg.com/567571/859b2719e122dee0.png" alt=""></p>
+<p>然后就是分析代码过程了</p>
+<blockquote>
+<p>v56 = std::operator&lt;&lt;<std::char_traits<char>&gt;((int)&amp;std::cout, “[*] Nice job, here is the flag: “);<br>v57 = std::operator&lt;&lt;<char,std::char_traits<char>,std::allocator<char>&gt;(v56, &amp;v88);</char></char,std::char_traits<char></std::char_traits<char></p>
+</blockquote>
+<p>std::operator&lt;&lt;其实就是C++中的cout&lt;&lt;,所以这边就是输出那句话之后输出v88里的字符串，所以v88就变成了解题的关键了。</p>
+<p>(新学到，之前没用过)在IDA里按art+T，搜索v88，在ctrl+T 继续查找下一个</p>
+<p>第一个找到的：</p>
+<blockquote>
+<p>std::string::operator=((std::string *)&amp;v88, &amp;byte_444240);</p>
+</blockquote>
+<p>这是一个赋值语句，鼠标双击byte_444240即可看到字符串的内容，选择字符串开头到00之前的所有字符，(新知识)按下shift+E导出数据，得到：<br><img src="http://i1.piimg.com/567571/1f5d25c4a7e3afc3.png" alt=""></p>
+<p>在回到伪代码查看v88<br><img src="http://p1.bqimg.com/567571/b7eaf8df4240ff31.png" alt=""></p>
+<p>最后一句很明确就是find/查找v88开头是不是ebCTF字样，然后代码里唯一对v88操作的只有跟v91去异或。<br>如果不想用暴力破解得到flag的话（因为v88知道了，也就是经过异或运算就可以得到flag，所以完全可以暴破），就再查找看v91的相关语句。</p>
+<p>找到<br>std::string::operator=((std::string *)&amp;v91, &amp;byte_444309);<br>同样双击byte_444309查看字符串：<br>02370F350F3C15073C302A30551237151E350151</p>
+<p>与v91相关的：<br><img src="http://p1.bpimg.com/567571/e093e59b0b072b8a.png" alt=""><br><img src="http://i1.piimg.com/567571/13e63d0fc4f41e2d.png" alt=""></p>
+<p>第一个是跟v90异或，第二个是跟v89异或<br>所以目标再盯住v89、v90即可<br><img src="http://p1.bpimg.com/567571/5133d1217db4c3eb.png" alt=""></p>
+<p>除了上面的截图，前面每次掷骰子正确之后也对v89进行了操作，容易遗漏最后v89计算出来是100</p>
+<p><img src="http://i1.piimg.com/567571/f07548cdb49c2fc8.png" alt=""></p>
+<p>v90有关见上图，看看程序，不难看出v90取16<br>综上，把v91这个字符串异或v89后，再异或v90，再跟v88异或就得到flag。用python来计算：</p>
+<pre><code># -*- coding:utf-8 -*-
+
+def flag():
+  v89,v90=100,16
+  v91=&quot;02370F350F3C15073C302A30551237151E350151&quot;
+  v88=&quot;132138153D3357472D276A73440526595C79174445771A75497D054A78746A70420271050F2208&quot;
+
+  v91=[ord(i) for i in v91.decode(&apos;hex&apos;)]
+  for i in xrange(len(v91)):
+v91[i]^=v89^v90
+
+  v88=[ord(i) for i in v88.decode(&apos;hex&apos;)]
+  res=&quot;&quot;
+  for i in xrange(len(v88)):
+res+=chr(v88[i]^v91[i%len(v91)])
+  print res
+  pass
+
+if __name__ == &apos;__main__&apos;:
+  flag()
+</code></pre>
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+    <div class="comments">
+        
+
+
+    </div>
+    
+
 </div>
-            
-                <div class="archive-post">
-    <a href="/2016/11/12/GDB寄存器和内存查询指令/">
-        <span class="archive-date">
-            Nov 2016
-        </span>
-        GDB寄存器和内存查询指令
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2016/09/03/Google-hacking-语法/">
-        <span class="archive-date">
-            Sep 2016
-        </span>
-        Google hacking 语法
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2016/09/18/Python学习/">
-        <span class="archive-date">
-            Sep 2016
-        </span>
-        Python学习
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2016/10/30/gdb与peda指令学习学习笔记/">
-        <span class="archive-date">
-            Oct 2016
-        </span>
-        gdb与peda指令学习学习笔记
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2016/08/05/hello-world/">
-        <span class="archive-date">
-            Aug 2016
-        </span>
-        Hello World
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2016/09/04/hexo搭建/">
-        <span class="archive-date">
-            Sep 2016
-        </span>
-        hexo搭建
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2017/01/30/practice-1之图片reverse/">
-        <span class="archive-date">
-            Jan 2017
-        </span>
-        practice 1
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2017/02/10/practice-2之汇编/">
-        <span class="archive-date">
-            Feb 2017
-        </span>
-        practice-2
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2017/02/10/practice-3之pyo学习/">
-        <span class="archive-date">
-            Feb 2017
-        </span>
-        practice-3
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2017/02/12/practice-4之IDA用法/">
-        <span class="archive-date">
-            Feb 2017
-        </span>
-        practice 4
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2017/02/08/一步一步学ROP之x86篇/">
-        <span class="archive-date">
-            Feb 2017
-        </span>
-        一步一步学ROP之x86篇
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2017/02/12/practice-5之万能断点/">
-        <span class="archive-date">
-            Feb 2017
-        </span>
-        practice 5之万能断点
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2017/01/16/寒假计划/">
-        <span class="archive-date">
-            Jan 2017
-        </span>
-        寒假计划
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2016/09/03/绕过网站访问限制的方法/">
-        <span class="archive-date">
-            Sep 2016
-        </span>
-        绕过网站访问限制的方法
-    </a>
-</div>
-            
         </section>
+
     </div>
 </div>
 

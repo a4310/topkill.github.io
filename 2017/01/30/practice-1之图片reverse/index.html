@@ -20,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Mr_white"/>
+        <meta property="og:title" content="practice 1"/>
     
 
     <!--Open Graph Description-->
@@ -33,7 +33,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -44,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>归档：2016/10 - Mr_white</title>
+    <title>practice 1 - Mr_white</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -119,9 +119,7 @@
 <div class="container">
 
     <!-- Main Content -->
-    
-
-<div class="row">
+    <div class="row">
     <div class="col-sm-12">
 
         <!--Title and Logo-->
@@ -129,149 +127,71 @@
     <div class="logo">
         <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
         
-            <h1 id="main-title" class="title">2016/10</h1>
-        
     </div>
 </header>
 
-        <section class="main archive-container">
+        <section class="main">
             
-                <div class="archive-post">
-    <a href="/2017/02/09/8道Pwn基础练习所得/">
-        <span class="archive-date">
-            Feb 2017
-        </span>
-        8道Pwn基础练习所得
-    </a>
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2017/01/30/practice-1之图片reverse/">
+                practice 1
+            </a>
+        </h1>
+        <div class="post-info">
+            <span class="date">2017-01-30</span>
+            <a href="#disqus_thread" class="comments">留言</a>
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <p>嗯，找了好久在我能找的范围内都是算法大大相关的题目。<br><a id="more"></a></p>
+<p>今儿无意发现reverse下有一道跟图片有关的题目，做了一下。了解了一个工具：C32Asm的用法以及隐藏flag的一种方法。就当开头长个见识了（至少我没见过！）</p>
+<h3 id="工具了解"><a href="#工具了解" class="headerlink" title="工具了解"></a>工具了解</h3><p>C32Asm: 静态反编译工具，C32Asm现具有如下功能：快速静态反编译PE格式文件(Exe、Dll等)，提供Hex文件编辑功能，功能强大，提供内存Dump、内存编辑、PE文件Dump、PE内存ImageSize修正等多种实用功能。</p>
+<h3 id="图片分析相关知识"><a href="#图片分析相关知识" class="headerlink" title="图片分析相关知识"></a>图片分析相关知识</h3><p>Exif： Exif是一种图像文件格式，储存个是与JPGE格式是完全相同的。Exif格式是在JPGE格式头部插入了数码照片的信息。（这个知识点里面还是可能隐藏flag的，以前遇到过）<br>简单来说：Exif=JPGE+拍摄参数。</p>
+<h4 id="看题"><a href="#看题" class="headerlink" title="看题"></a>看题</h4><p><img src="http://i1.piimg.com/567571/af1bc42fa28391ef.png" alt=""></p>
+<p>一只可爱的小狗<br>看看这个图片的信息。除了一些基本信息并没有隐藏着Exif的提示信息</p>
+<p><img src="http://i1.piimg.com/567571/bdf522f3226b235c.png" alt=""></p>
+<p>OK，那么现在就用工具进行解析。<br>下面就用C32Asm打开这个图片进行分析（其实Hex工具也可以）<br>开头看到BM字符说明这个图片是BMP位图。</p>
+<p><img src="http://p1.bpimg.com/567571/5d9e1992e2dad4dd.png" alt=""></p>
+<p>根据图片文字提示“奇怪的狗尾巴”（不用这个提示也习惯看完开头看结尾）。拉到结尾。发现IHDR 和 IEND这两个老搭配（当一个图片文件里有前者的时候必须找到后者这个图片才是合法的。加载两者中间的就是IDAT块儿，即图像数据信息。）</p>
+<p><img src="http://p1.bpimg.com/567571/0a8ec5b61fa892ef.png" alt=""><br><img src="http://p1.bpimg.com/567571/a9ec495a61309544.png" alt=""></p>
+<p>猜想：那么前面一定也有PNG标志。往前找，对的。下面要做的就是把这个PNG图片单独提取出来了</p>
+<p><img src="http://i1.piimg.com/567571/4657daa80b5e4b9d.png" alt=""></p>
+<p>在该工具下再打开16进制文件保存又会得到一个二维码图片</p>
+<p><img src="http://p1.bpimg.com/567571/4f7525c46b60c4ba.png" alt=""></p>
+<p>扫描出现的是一个URL:<a href="http://blog.sina.com.cn/s/blog_703d65470102v6tf.html。" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_703d65470102v6tf.html。</a></p>
+<p>还是直接贴图片了。又是它， 不过提示换了。一个异或算法。</p>
+<p><img src="http://p1.bpimg.com/567571/366131412899d74d.png" alt=""></p>
+<p>不知道异或个啥，全选数据，新知识，修改数据可以自动全部进行数据的异或。flag出来了</p>
+<p><img src="http://p1.bpimg.com/567571/d850ed3c112ac2fb.png" alt=""><br><img src="http://i1.piimg.com/567571/0ceab57f893662b8.png" alt=""></p>
+
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+    <div class="comments">
+        
+
+
+    </div>
+    
+
 </div>
-            
-                <div class="archive-post">
-    <a href="/2016/11/12/GDB寄存器和内存查询指令/">
-        <span class="archive-date">
-            Nov 2016
-        </span>
-        GDB寄存器和内存查询指令
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2016/09/03/Google-hacking-语法/">
-        <span class="archive-date">
-            Sep 2016
-        </span>
-        Google hacking 语法
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2016/09/18/Python学习/">
-        <span class="archive-date">
-            Sep 2016
-        </span>
-        Python学习
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2016/10/30/gdb与peda指令学习学习笔记/">
-        <span class="archive-date">
-            Oct 2016
-        </span>
-        gdb与peda指令学习学习笔记
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2016/08/05/hello-world/">
-        <span class="archive-date">
-            Aug 2016
-        </span>
-        Hello World
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2016/09/04/hexo搭建/">
-        <span class="archive-date">
-            Sep 2016
-        </span>
-        hexo搭建
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2017/01/30/practice-1之图片reverse/">
-        <span class="archive-date">
-            Jan 2017
-        </span>
-        practice 1
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2017/02/10/practice-2之汇编/">
-        <span class="archive-date">
-            Feb 2017
-        </span>
-        practice-2
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2017/02/10/practice-3之pyo学习/">
-        <span class="archive-date">
-            Feb 2017
-        </span>
-        practice-3
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2017/02/12/practice-4之IDA用法/">
-        <span class="archive-date">
-            Feb 2017
-        </span>
-        practice 4
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2017/02/08/一步一步学ROP之x86篇/">
-        <span class="archive-date">
-            Feb 2017
-        </span>
-        一步一步学ROP之x86篇
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2017/02/12/practice-5之万能断点/">
-        <span class="archive-date">
-            Feb 2017
-        </span>
-        practice 5之万能断点
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2017/01/16/寒假计划/">
-        <span class="archive-date">
-            Jan 2017
-        </span>
-        寒假计划
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2016/09/03/绕过网站访问限制的方法/">
-        <span class="archive-date">
-            Sep 2016
-        </span>
-        绕过网站访问限制的方法
-    </a>
-</div>
-            
         </section>
+
     </div>
 </div>
 
