@@ -20,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="practice 5之万能断点"/>
+        <meta property="og:title" content="practice 6"/>
     
 
     <!--Open Graph Description-->
@@ -44,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>practice 5之万能断点 - Mr_white</title>
+    <title>practice 6 - Mr_white</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -136,12 +136,12 @@
 
     <div class="post-header">
         <h1 class="title">
-            <a href="/2017/02/12/practice-5之万能断点/">
-                practice 5之万能断点
+            <a href="/2017/02/13/practice-6/">
+                practice 6
             </a>
         </h1>
         <div class="post-info">
-            <span class="date">2017-02-12</span>
+            <span class="date">2017-02-13</span>
             <a href="#disqus_thread" class="comments">留言</a>
             
         </div>
@@ -153,16 +153,37 @@
         
 
         <!-- Post Content -->
-        <p>第五个只能算得上是学习一个新技能–万能断点之前没听过。</p>
+        <p>第六题</p>
 <a id="more"></a>
-<p>给的是一个未注册版本的软件，题目要求将其注册<br><img src="http://i1.piimg.com/567571/c605a20b50eab2fa.png" alt=""></p>
-<p>乱填只能是出错误<br><img src="http://p1.bqimg.com/567571/adffda9e620b625e.png" alt=""></p>
-<p>放入IDA用运行，然后点击输入注册码，报错之后暂停OD调试<br><img src="http://p1.bpimg.com/567571/ea8a4f1bc14d49a0.png" alt=""></p>
-<p>如下图查看user3模块<br><img src="http://i1.piimg.com/567571/6cfadb9ca492a981.png" alt=""></p>
-<p>转到这个模块下之后便开始下万能断点；查找二进制字符串（crtl+B）,然后在弹出的框内输入万能断点并将跳转处设为断点<br><img src="http://i1.piimg.com/567571/aed4c1c824baa65f.png" alt=""><br><img src="http://p1.bpimg.com/567571/783b981f42680e28.png" alt=""></p>
-<p>重新载入程序，依旧输入错误注册码（由于万能断点，在运行到弹出输入界面时，中途会多次暂停）输入结束之后便可以按F8单步步过。直到堆栈窗口出现正确的注册码<br><img src="http://p1.bqimg.com/567571/f04d8f4dfdc4c4a9.png" alt=""></p>
-<p>输入检验注册成功：<br><img src="http://i1.piimg.com/567571/ed5ca99ef2505eec.png" alt=""></p>
-<p>万能断点：“F3 A5 8B C8 83 E1 03 F3 A4 E8”</p>
+<p>之前没做出来的一道题目，各种密码学的夹杂，看到很多.so库估计当时也没啥想法了<br><img src="http://p1.bpimg.com/567571/d4e47457eda5dab9.png" alt=""><br>很明了，对输入进行检验，过了就输出right，错了就输出wrong，分析一下check_401510这个函数。先是判断字符范围，ASCII码不能超过90。</p>
+<p><img src="http://p1.bqimg.com/567571/7c461f4bddbabf79.png" alt=""><br>然后取输入的前5个字符，作md5加密，如下三个函数就是实现了md5算法</p>
+<p><img src="http://p1.bpimg.com/567571/ce68c67077d534db.png" alt=""><br>接下来就是用前五个字符的md5值的前8字节作为DES算法的key，并且采用ECB模式分组加密。</p>
+<p><img src="http://p1.bpimg.com/567571/376e813074677116.png" alt=""><br>然后就是对DES加密后的结果作base64变换，v9是DES加密结果，v21保存base64结果。</p>
+<p><img src="http://i1.piimg.com/567571/c10b9ac205db0fc6.png" alt=""><br>最后就是和check数组比较，check数组内容即是：<br>‘OSHzTJ4pwFgRG6eS6y3xVOOEGcbE5rzwqTs7VCK6ACQLuiTamZpXcQ==’</p>
+<p><img src="http://i1.piimg.com/567571/4130ddacfe72cdf1.png" alt=""><br>所以采用爆破的方式去得到flag，设flag前五位为temp，并且用其md5值前8字节作为DES算法的key，当解密出来的flag前五位和temp相等时，即为flag。<br>脚本如下：（参考的大神writeup）</p>
+<pre><code>import pyDes
+import base64
+import hashlib
+import string
+check = &quot;OSHzTJ4pwFgRG6eS6y3xVOOEGcbE5rzwqTs7VCK6ACQLuiTamZpXcQ==&quot;
+miwen = base64.b64decode(check)
+count = 0
+for i in string.uppercase + string.digits:
+    for j in string.uppercase + string.digits:
+         for k in string.uppercase + string.digits:
+              for m in string.uppercase + string.digits:
+                   for n in string.uppercase + string.digits:
+                count = count + 1
+                tmp = i+j+k+m+n
+                md5_tmp = hashlib.md5(tmp).hexdigest()
+                key = md5_tmp[0:16].decode(&quot;hex&quot;)
+                result = pyDes.des(key)
+                y = result.decrypt(miwen[:8])
+                if y[0:5] == tmp:
+                   print y
+                if count % 10000 == 0:
+                    print count
+</code></pre><p>这道题目主要就是各种密码算法的交杂，在代码的分析上比较困难，即使参照writeup也很难掌握，后面还得好好在琢磨琢磨</p>
 
     </div>
 
