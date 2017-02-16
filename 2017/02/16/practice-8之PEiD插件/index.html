@@ -20,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="寒假计划"/>
+        <meta property="og:title" content="practice 8之PEiD插件"/>
     
 
     <!--Open Graph Description-->
@@ -44,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>寒假计划 - Mr_white</title>
+    <title>practice 8之PEiD插件 - Mr_white</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -136,12 +136,12 @@
 
     <div class="post-header">
         <h1 class="title">
-            <a href="/2017/01/16/寒假计划/">
-                寒假计划
+            <a href="/2017/02/16/practice-8之PEiD插件/">
+                practice 8之PEiD插件
             </a>
         </h1>
         <div class="post-info">
-            <span class="date">2017-01-16</span>
+            <span class="date">2017-02-16</span>
             <a href="#disqus_thread" class="comments">留言</a>
             
         </div>
@@ -153,12 +153,27 @@
         
 
         <!-- Post Content -->
-        <p>寒假到了，一个关键的时间。定下一个学习计划来提升。<br><a id="more"></a></p>
-<h3 id="1、自主练习学习python"><a href="#1、自主练习学习python" class="headerlink" title="1、自主练习学习python"></a>1、自主练习学习python</h3><p>参考书籍以及网上的知识自己进行python程序的练习，把网盘资料里的80个程序进行编辑练习。</p>
-<h3 id="2、逆向破解练习"><a href="#2、逆向破解练习" class="headerlink" title="2、逆向破解练习"></a>2、逆向破解练习</h3><p>自己找10道对于算法无关的逆向题目进行破解，每题搞懂，将所得写到writeup上传博客。</p>
-<h3 id="3、一步一步学rop-x86篇"><a href="#3、一步一步学rop-x86篇" class="headerlink" title="3、一步一步学rop x86篇"></a>3、一步一步学rop x86篇</h3><p>对于这篇文章自己进行学习，并写总结上传博客。</p>
-<h3 id="4、linux系统"><a href="#4、linux系统" class="headerlink" title="4、linux系统"></a>4、linux系统</h3><p>了解linux下的保护机制，一些常见漏洞的了解。</p>
-
+        <p>第八题</p>
+<a id="more"></a>
+<p>PEiD有一个叫做Krypto ANALyzer的插件，使用这个插件可以对程序进行扫描，通过特征匹配来识别程序内部可能用到的一些标准算法。</p>
+<p>先看题目，随便输入就会报错。<br><img src="http://i1.piimg.com/567571/c642907456446fbf.png" alt=""><br><img src="http://p1.bqimg.com/567571/b43926ec4b85a522.png" alt=""></p>
+<p>利用IDA找到关键点这些烂熟于心的步骤就不再提了，对下面这段关键算法分析完了之后发现关键函数是sub_401510,但是点开这个函数，真的是好长的一大串，</p>
+<p><img src="http://i1.piimg.com/567571/ff6c02d3779819ea.png" alt=""></p>
+<p>用PEid的插件进行分析，提示这个程序用了 MD5算法。<br><img src="http://i1.piimg.com/567571/46fc552dd3e5a390.png" alt=""><br><img src="http://p1.bqimg.com/567571/47c4bd1bc68a9386.png" alt=""></p>
+<p>根据提示地址，在IDA反汇编指示图按下G，输入00401E5C,就会自动跳转到函数代码中<br><img src="http://p1.bpimg.com/567571/2f6f6ca29be65524.png" alt=""></p>
+<p> 可以从sub_401D10回溯到sub_4026F0，继续通过交叉引用往上回溯，依次为sub_4027B0、sub_401C00、sub_401BB0、sub_401510，而sub_401510就是我们在实验步骤一种为一个暂时不理解的函数。那么我们可以猜测sub_401510这个函数就是用来计算用户名的MD5值的，我们可以通过OD动态调试来验证我们的想法。</p>
+<p>通过阅读IDA中的反汇编代码，我们知道在00401752处调用了sub_401510这个函数，<br><img src="http://p1.bqimg.com/567571/4c7d41a3249b3995.png" alt=""></p>
+<p>OK使用OD载入在00401752设置断点，输入test，直接跳转到执行sub_401510，看到eax寄存器值正好是test的MD5值<br><img src="http://p1.bqimg.com/567571/b35f765b38776431.png" alt=""></p>
+<p>这里说明插件判别是正确的正好使用python写一个MD5的注册机</p>
+<pre><code>#!usr/bin/python
+#-*- coding:utf-8 -*-
+import hashlib
+while True:     
+username = raw_input(&quot;input username:&quot;)     
+md5 = hashlib.md5(username).hexdigest().upper()     
+serial = md5[::-1]  # 翻转字符串     
+print &quot;serial: %s&quot; % serial
+</code></pre>
     </div>
 
     
