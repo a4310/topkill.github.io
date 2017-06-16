@@ -15,22 +15,15 @@
 
 
 
-<meta name="description" content="第三题：">
-<meta property="og:type" content="article">
-<meta property="og:title" content="practice-3之pyo学习">
-<meta property="og:url" content="http://xq.dropsec.xyz/2017/02/10/practice-3之pyo学习/index.html">
+<meta name="description" content="No Pain No Gain!">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mr_white">
+<meta property="og:url" content="http://xq.dropsec.xyz/tags/web/index.html">
 <meta property="og:site_name" content="Mr_white">
-<meta property="og:description" content="第三题：">
-<meta property="og:image" content="http://p1.bpimg.com/567571/f6f07b1c6c6b6110.png">
-<meta property="og:image" content="http://p1.bqimg.com/567571/dea3c80b61ac1829.png">
-<meta property="og:image" content="http://i1.piimg.com/567571/9dcef39919cb8fc9.png">
-<meta property="og:image" content="http://p1.bpimg.com/567571/b24c84a5e14b7b05.png">
-<meta property="og:image" content="http://p1.bpimg.com/567571/04f12b12d829bae6.png">
-<meta property="og:updated_time" content="2017-06-16T04:36:12.538Z">
+<meta property="og:description" content="No Pain No Gain!">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="practice-3之pyo学习">
-<meta name="twitter:description" content="第三题：">
-<meta name="twitter:image" content="http://p1.bpimg.com/567571/f6f07b1c6c6b6110.png">
+<meta name="twitter:title" content="Mr_white">
+<meta name="twitter:description" content="No Pain No Gain!">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -62,7 +55,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>practice-3之pyo学习 | Mr_white</title>
+<title>Tag: web | Mr_white</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -72,9 +65,9 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: true,
+        isPost: false,
         isArchive: false,
-        isTag: false,
+        isTag: true,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
@@ -289,471 +282,56 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-practice-3之pyo学习" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/2017/02/10/practice-3之pyo学习/" class="article-date">
-      <time datetime="2017-02-10T02:50:39.000Z" itemprop="datePublished">2017-02-10</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2016/09/03/绕过网站访问限制的方法/" class="archive-article-date">
+      <time datetime="2016-09-03T06:24:51.000Z" itemprop="datePublished">09-03</time>
 </a>
 
 
-    </div>
+        </div>
+         
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      practice-3之pyo学习
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/09/03/绕过网站访问限制的方法/">绕过网站访问限制的方法</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-
-        
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/practice-writeup/">practice writeup</a></li></ul>
-    </div>
-
-        <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
+        <div class="article-info info-on-archive">
           
-        <p>第三题：</p>
-<a id="more"></a>
-<p><img src="http://p1.bpimg.com/567571/f6f07b1c6c6b6110.png" alt=""></p>
-<p>下载下来是个这个名字的题目，也不像之前遇到的后缀里虽然杂乱也存在正确后缀的，于是想到一个格式分析工具，拖进去看看是一个pyo格式文件，回想一下以前也没见过这种格式的题目，百度一下知道这种格式其实与pyc一样，都是将py程序编译成可执行程序。</p>
-<p><img src="http://p1.bqimg.com/567571/dea3c80b61ac1829.png" alt=""></p>
-<p>知道格式之后先改后缀，然后转换格式<br>再用python2.7下的反编译工具unompyle把这个题目的源代码弄出来</p>
-<p><img src="http://i1.piimg.com/567571/9dcef39919cb8fc9.png" alt=""></p>
-<pre><code>#!usr/bin/python
-#-*- coding:utf-8 -*-
-import sys
-lookup = [196,
- 153,
- 149,
- 206,
- 17,
- 221,
- 10,
- 217,
- 167,
- 18,
- 36,
- 135,
- 103,
- 61,
- 111,
- 31,
- 92,
- 152,
- 21,
- 228,
- 105,
- 191,
- 173,
- 41,
- 2,
- 245,
- 23,
- 144,
- 1,
- 246,
- 89,
- 178,
- 182,
- 119,
- 38,
- 85,
- 48,
- 226,
- 165,
- 241,
- 166,
- 214,
- 71,
- 90,
- 151,
- 3,
- 109,
- 169,
- 150,
- 224,
- 69,
- 156,
- 158,
- 57,
- 181,
- 29,
- 200,
- 37,
- 51,
- 252,
- 227,
- 93,
- 65,
- 82,
- 66,
- 80,
- 170,
- 77,
- 49,
- 177,
- 81,
- 94,
- 202,
- 107,
- 25,
- 73,
- 148,
- 98,
- 129,
- 231,
- 212,
- 14,
- 84,
- 121,
- 174,
- 171,
- 64,
- 180,
- 233,
- 74,
- 140,
- 242,
- 75,
- 104,
- 253,
- 44,
- 39,
- 87,
- 86,
- 27,
- 68,
- 22,
- 55,
- 76,
- 35,
- 248,
- 96,
- 5,
- 56,
- 20,
- 161,
- 213,
- 238,
- 220,
- 72,
- 100,
- 247,
- 8,
- 63,
- 249,
- 145,
- 243,
- 155,
- 222,
- 122,
- 32,
- 43,
- 186,
- 0,
- 102,
- 216,
- 126,
- 15,
- 42,
- 115,
- 138,
- 240,
- 147,
- 229,
- 204,
- 117,
- 223,
- 141,
- 159,
- 131,
- 232,
- 124,
- 254,
- 60,
- 116,
- 46,
- 113,
- 79,
- 16,
- 128,
- 6,
- 251,
- 40,
- 205,
- 137,
- 199,
- 83,
- 54,
- 188,
- 19,
- 184,
- 201,
- 110,
- 255,
- 26,
- 91,
- 211,
- 132,
- 160,
- 168,
- 154,
- 185,
- 183,
- 244,
- 78,
- 33,
- 123,
- 28,
- 59,
- 12,
- 210,
- 218,
- 47,
- 163,
- 215,
- 209,
- 108,
- 235,
- 237,
- 118,
- 101,
- 24,
- 234,
- 106,
- 143,
- 88,
- 9,
- 136,
- 95,
- 30,
- 193,
- 176,
- 225,
- 198,
- 197,
- 194,
- 239,
- 134,
- 162,
- 192,
- 11,
- 70,
- 58,
- 187,
- 50,
- 67,
- 236,
- 230,
- 13,
- 99,
- 190,
- 208,
- 207,
- 7,
- 53,
- 219,
- 203,
- 62,
- 114,
- 127,
- 125,
- 164,
- 179,
- 175,
- 112,
- 172,
- 250,
- 133,
- 130,
- 52,
- 189,
- 97,
- 146,
- 34,
- 157,
- 120,
- 195,
- 45,
- 4,
- 142,
- 139]
-pwda = [188,
- 155,
- 11,
- 58,
- 251,
- 208,
- 204,
- 202,
- 150,
- 120,
- 206,
- 237,
- 114,
- 92,
- 126,
- 6,
- 42]
-pwdb = [53,
- 222,
- 230,
- 35,
- 67,
- 248,
- 226,
- 216,
- 17,
- 209,
- 32,
- 2,
- 181,
- 200,
- 171,
- 60,
- 108]
-flag = raw_input(&apos;Input your Key:&apos;).strip()
-if len(flag) != 17:
-print &apos;Wrong Key!!&apos;
-sys.exit(1)
-flag = flag[::-1]
-for i in range(0, len(flag)):
-if ord(flag[i]) + pwda[i] &amp; 255 != lookup[i + pwdb[i]]:
-print &apos;Wrong Key!!&apos;
-sys.exit(1)
 
-print &apos;Congratulations!!&apos;
-</code></pre><p>虽然长关键是最后哪儿的处理，在最后做一个修改就可以了，第一次想的方法是根据以前做题的经验进行爆破的，有碰巧的嫌疑：<br>前面关键数据不变把最后的数据进行改变如下图<br><img src="http://p1.bpimg.com/567571/b24c84a5e14b7b05.png" alt=""></p>
-<p>最后跑出来的结果：<br><img src="http://p1.bpimg.com/567571/04f12b12d829bae6.png" alt=""></p>
-<p>其实这样子添加abcde等字符的方法有凑巧之嫌。万一有#之类的问题该如何，第一次改就漏掉了‘<em>’不是猜测真的得不出17位把‘</em>’给落掉了，随意中途也突然想了一个方法，直接一个<br>for循环在0到128之间进行爆破并用组进行保存，最后直接通过ord()函数进行转换就能得到最后的flag</p>
-
-      
+          
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/">web</a></li></ul>
     </div>
-    
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
-  
-    
-    <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/02/10/practice-3之pyo学习/">practice-3之pyo学习</a></p>
-        <p><span>文章作者:</span><a href="/" title="回到主页">Mr_white</a></p>
-        <p><span>发布时间:</span>2017-02-10, 10:50:39</p>
-        <p><span>最后更新:</span>2017-06-16, 12:36:12</p>
-        <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/02/10/practice-3之pyo学习/" title="practice-3之pyo学习">http://xq.dropsec.xyz/2017/02/10/practice-3之pyo学习/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2017/02/10/practice-3之pyo学习/　　作者: Mr_white" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
-        </p>
-        <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
-        </p>
-    </div>
-
-
-
-    <nav id="article-nav">
-        
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/02/12/practice-4之IDA用法/">
-                    practice-4之IDA用法
-                </a>
-            </div>
-        
-        
-            <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/02/10/practice-2之汇编/">
-                    practice-2之汇编
-                </a>
-            </div>
-        
-    </nav>
-
-  
 </article>
-
-    <div id="toc" class="toc-article">
-        <strong class="toc-title">文章目录</strong>
-        
-            
-        
-    </div>
-    <style>
-        .left-col .switch-btn,
-        .left-col .switch-area {
-            display: none;
-        }
-        .toc-level-3 i,
-        .toc-level-3 ol {
-            display: none !important;
-        }
-    </style>
-
-    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
-
-    <script>
-        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
-    </script>
-
-
-
-    
-<div class="share">
-    
-
-    
-</div>
-
-
-
-
-
-
+  
+  
+    </div></section>
+  
 
     
 
-
-
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/2017/02/12/practice-4之IDA用法/" title="上一篇: practice-4之IDA用法">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
-
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-
-        
-            <a href="/2017/02/10/practice-2之汇编/" title="下一篇: practice-2之汇编">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
-    </div>
-
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/06/16/定一个小目标/">定一个小目标</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/17/NJCTF-writeup总结/">NJCTF writeup总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/16/ZCTF-writeup总结/">ZCTF writeup总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/practice-8之PEiD插件/">practice 8之PEiD插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/14/practice-7之行为分析/">practice 7之行为分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/practice-6之算法夹杂/">practice 6之算法夹杂</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/practice-5之万能断点/">practice 5之万能断点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/practice-4之IDA用法/">practice-4之IDA用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/practice-3之pyo学习/">practice-3之pyo学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/practice-2之汇编/">practice-2之汇编</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/09/8道Pwn基础练习所得/">8道Pwn基础练习所得</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/08/一步一步学ROP之x86篇/">一步一步学ROP之x86篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/30/practice-1之图片reverse/">practice-1之图片reverse</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/16/寒假计划/">寒假计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/12/GDB寄存器和内存查询指令/">GDB寄存器和内存查询指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/30/gdb与peda指令学习学习笔记/">gdb与peda指令学习学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/04/hexo搭建/">hexo搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/03/Google-hacking-语法/">Google hacking 语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/03/绕过网站访问限制的方法/">绕过网站访问限制的方法</a></li></ul>
-
-
-
-
-    <script>
-        
-    </script>
 </div>
       <footer id="footer">
     <div class="outer">
