@@ -16,33 +16,30 @@
 
 
 <meta name="description" content="暑假生活开始，学习的好时间，今天就先重温一下堆栈的基础，好好巩固一下。
-##内存区域
-  不同的操作系统，一个进程被分配进入的内存区域都会不同，但是无论是哪个系统，进程使用的内存按照功都同样大致分为四种：
+内存区域  不同的操作系统，一个进程被分配进入的内存区域都会不同，但是无论是哪个系统，进程使用的内存按照功都同样大致分为四种：
 
 代码区:这个区域储存装入的要被执行的二进制机器代码，处理器会到这个区域获取指令并进行执行。
 数据区:这个区域储存程序运行过程中出现的全局变量，局部变量等。
-堆区:进程需要运行的时候，可以向这">
+堆区:进程需要运行的时候，可以向这个区域">
 <meta property="og:type" content="article">
 <meta property="og:title" content="堆栈基础">
 <meta property="og:url" content="http://xq.dropsec.xyz/2017/07/04/堆栈基础/index.html">
 <meta property="og:site_name" content="Mr_white">
 <meta property="og:description" content="暑假生活开始，学习的好时间，今天就先重温一下堆栈的基础，好好巩固一下。
-##内存区域
-  不同的操作系统，一个进程被分配进入的内存区域都会不同，但是无论是哪个系统，进程使用的内存按照功都同样大致分为四种：
+内存区域  不同的操作系统，一个进程被分配进入的内存区域都会不同，但是无论是哪个系统，进程使用的内存按照功都同样大致分为四种：
 
 代码区:这个区域储存装入的要被执行的二进制机器代码，处理器会到这个区域获取指令并进行执行。
 数据区:这个区域储存程序运行过程中出现的全局变量，局部变量等。
-堆区:进程需要运行的时候，可以向这">
-<meta property="og:updated_time" content="2017-07-04T03:56:33.098Z">
+堆区:进程需要运行的时候，可以向这个区域">
+<meta property="og:updated_time" content="2017-07-04T03:59:34.157Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="堆栈基础">
 <meta name="twitter:description" content="暑假生活开始，学习的好时间，今天就先重温一下堆栈的基础，好好巩固一下。
-##内存区域
-  不同的操作系统，一个进程被分配进入的内存区域都会不同，但是无论是哪个系统，进程使用的内存按照功都同样大致分为四种：
+内存区域  不同的操作系统，一个进程被分配进入的内存区域都会不同，但是无论是哪个系统，进程使用的内存按照功都同样大致分为四种：
 
 代码区:这个区域储存装入的要被执行的二进制机器代码，处理器会到这个区域获取指令并进行执行。
 数据区:这个区域储存程序运行过程中出现的全局变量，局部变量等。
-堆区:进程需要运行的时候，可以向这">
+堆区:进程需要运行的时候，可以向这个区域">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -347,8 +344,7 @@
           
         <a id="more"></a>
 <p>暑假生活开始，学习的好时间，今天就先重温一下堆栈的基础，好好巩固一下。</p>
-<p>##内存区域</p>
-<p>  不同的操作系统，一个进程被分配进入的内存区域都会不同，但是无论是哪个系统，进程使用的内存按照功都同样大致分为四种：</p>
+<h2 id="内存区域"><a href="#内存区域" class="headerlink" title="内存区域"></a>内存区域</h2><p>  不同的操作系统，一个进程被分配进入的内存区域都会不同，但是无论是哪个系统，进程使用的内存按照功都同样大致分为四种：</p>
 <ol>
 <li>代码区:这个区域储存装入的要被执行的二进制机器代码，处理器会到这个区域获取指令并进行执行。</li>
 <li>数据区:这个区域储存程序运行过程中出现的全局变量，局部变量等。</li>
@@ -359,8 +355,7 @@
 <p>栈帧:C语言中，栈中的栈帧对应着未运行完成的函数，并且是一一对应，栈帧从逻辑上理解就是一个函数执行的环境:函数的参数，函数的变量，函数的返回地址等。</p>
 </li>
 </ol>
-<p>##函数调用</p>
-<p>  假设一个如下的简单函数：</p>
+<h2 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h2><p>  假设一个如下的简单函数：</p>
 <pre><code>int func_B(int a,int b)
 {
   int i,j;
@@ -385,11 +380,10 @@ int main()
 <li>在main函数调用func_A的时候，首先在自己的栈帧中压入函数返回地址，然后为func_A创建新的栈帧并压入栈</li>
 <li>在func_A调用func_B的时候，同样先在自己的栈帧中压入函数返回地址，然后为func_B创建新的栈帧并压入栈</li>
 <li>在func_B返回时候，func_B专属的栈帧呗弹出统栈，这样就露出func_A的返回地址，这样就直接执行这个地址返回func_A中继续执行</li>
-<li><p>在func_A返回时候，func_A专属的栈帧呗弹出统栈，这样就露出main的返回地址，这样就直接执行这个地址返回main中继续执行。</p>
-<p><a href="http://ww2.sinaimg.cn/large/006HJ39wgy1fh7povczmjj30mr0cs74f.jpg" target="_blank" rel="external">http://ww2.sinaimg.cn/large/006HJ39wgy1fh7povczmjj30mr0cs74f.jpg</a></p>
-<p>注意：在实际运行中，main函数并不是第一个被调用的函数，程序被装入内存前还有一些其他的操作。</p>
-</li>
+<li>在func_A返回时候，func_A专属的栈帧呗弹出统栈，这样就露出main的返回地址，这样就直接执行这个地址返回main中继续执行。</li>
 </ol>
+<p><a href="http://ww2.sinaimg.cn/large/006HJ39wgy1fh7povczmjj30mr0cs74f.jpg" target="_blank" rel="external">http://ww2.sinaimg.cn/large/006HJ39wgy1fh7povczmjj30mr0cs74f.jpg</a></p>
+<p>  注意：在实际运行中，main函数并不是第一个被调用的函数，程序被装入内存前还有一些其他的操作。</p>
 
       
     </div>
@@ -401,7 +395,7 @@ int main()
         <p><span>本文标题:</span><a href="/2017/07/04/堆栈基础/">堆栈基础</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Mr_white</a></p>
         <p><span>发布时间:</span>2017-07-04, 10:39:35</p>
-        <p><span>最后更新:</span>2017-07-04, 11:56:33</p>
+        <p><span>最后更新:</span>2017-07-04, 11:59:34</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/07/04/堆栈基础/" title="堆栈基础">http://xq.dropsec.xyz/2017/07/04/堆栈基础/</a>
             <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2017/07/04/堆栈基础/　　作者: Mr_white" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -431,7 +425,7 @@ int main()
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#内存区域"><span class="toc-number">1.</span> <span class="toc-text">内存区域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数调用"><span class="toc-number">2.</span> <span class="toc-text">函数调用</span></a></li></ol>
         
     </div>
     <style>
