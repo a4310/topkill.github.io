@@ -194,7 +194,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pwn/">pwn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/writeup/">writeup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/寄存器-debug/">寄存器 debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pwn/">pwn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/writeup/">writeup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆栈基础/">堆栈基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/寄存器-debug/">寄存器 debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
                     </div>
                 </section>
                 
@@ -289,11 +289,11 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-定一个小目标" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-堆栈基础" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/06/16/定一个小目标/" class="article-date">
-      <time datetime="2017-06-16T04:24:59.000Z" itemprop="datePublished">2017-06-16</time>
+      <a href="/2017/07/04/堆栈基础/" class="article-date">
+      <time datetime="2017-07-04T02:39:35.000Z" itemprop="datePublished">2017-07-04</time>
 </a>
 
 
@@ -308,7 +308,115 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/16/定一个小目标/">定一个小目标</a>
+      <a class="article-title" href="/2017/07/04/堆栈基础/">堆栈基础</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <a id="more"></a>
+<p>暑假生活开始，学习的好时间，今天就先重温一下堆栈的基础，好好巩固一下。</p>
+<p>##内存区域</p>
+<p>  不同的操作系统，一个进程被分配进入的内存区域都会不同，但是无论是哪个系统，进程使用的内存按照功都同样大致分为四种：</p>
+<ol>
+<li>代码区:这个区域储存装入的要被执行的二进制机器代码，处理器会到这个区域获取指令并进行执行。</li>
+<li>数据区:这个区域储存程序运行过程中出现的全局变量，局部变量等。</li>
+<li>堆区:进程需要运行的时候，可以向这个区域申请空间，当运行结束之后空间将归还堆区，这就是堆的特点，动态分配和回收空间。</li>
+<li><p>栈区:用于动态存储函数之间的调用关系，从而保证调用函数后能回到主函数中继续执行程序。</p>
+<p>Windows下高级语言写出一个程序经过编译链接之后便可以生成一个可执行文件，这个可执行文件被装载运行之后便成为了所谓的进程。</p>
+<p>每一个可执行程序中都包含着二进制级别的机器代码，这些代码将会被装载入代码区，处理器会一条一条的读取并运行。如果代码中有开辟动态内存的请求，则会在内存堆区中分配一个大小适合的区域给代码使用；当函数调用发生之后，栈中便会有栈帧自动保存函数的调用关系信息，以便于函数调用结束能回到主函数继续执行程序。</p>
+<p>栈帧:C语言中，栈中的栈帧对应着未运行完成的函数，并且是一一对应，栈帧从逻辑上理解就是一个函数执行的环境:函数的参数，函数的变量，函数的返回地址等。</p>
+</li>
+</ol>
+<p>##函数调用</p>
+<p>  假设一个如下的简单函数：</p>
+<pre><code>int func_B(int a,int b)
+{
+  int i,j;
+  i = a + b;
+  j = a - b;
+  return i * j;
+}
+int func_A(int c,int d)
+{
+  int t;
+  t = func_B(c,d)+c;
+  return t;
+}
+int main()
+{
+  int main;
+  main=func_A(4,3);
+  return main;
+}
+</code></pre><p>  函数在进行函数调用在栈中的操作如下：</p>
+<ol>
+<li>在main函数调用func_A的时候，首先在自己的栈帧中压入函数返回地址，然后为func_A创建新的栈帧并压入栈</li>
+<li>在func_A调用func_B的时候，同样先在自己的栈帧中压入函数返回地址，然后为func_B创建新的栈帧并压入栈</li>
+<li>在func_B返回时候，func_B专属的栈帧呗弹出统栈，这样就露出func_A的返回地址，这样就直接执行这个地址返回func_A中继续执行</li>
+<li><p>在func_A返回时候，func_A专属的栈帧呗弹出统栈，这样就露出main的返回地址，这样就直接执行这个地址返回main中继续执行。</p>
+<p><a href="http://ww2.sinaimg.cn/large/006HJ39wgy1fh7povczmjj30mr0cs74f.jpg" target="_blank" rel="external">http://ww2.sinaimg.cn/large/006HJ39wgy1fh7povczmjj30mr0cs74f.jpg</a></p>
+<p>注意：在实际运行中，main函数并不是第一个被调用的函数，程序被装入内存前还有一些其他的操作。</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/reverse/">reverse</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/堆栈基础/">堆栈基础</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-定一个小目标" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/06/26/定一个小目标/" class="article-date">
+      <time datetime="2017-06-26T04:24:59.000Z" itemprop="datePublished">2017-06-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/26/定一个小目标/">定一个小目标</a>
     </h1>
   
 
@@ -338,7 +446,7 @@
 
       
         <p class="article-more-link">
-          <a href="/2017/06/16/定一个小目标/#more">more >></a>
+          <a href="/2017/06/26/定一个小目标/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -406,7 +514,7 @@
 
       
         <p class="article-more-link">
-          <a href="/2017/03/17/NJCTF-writeup总结/#more">more >></a>
+          <a href="/2017/03/17/NJCTF-writeup总结/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -474,7 +582,7 @@
 
       
         <p class="article-more-link">
-          <a href="/2017/03/16/ZCTF-writeup总结/#more">more >></a>
+          <a href="/2017/03/16/ZCTF-writeup总结/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -542,7 +650,7 @@
 
       
         <p class="article-more-link">
-          <a href="/2017/02/16/practice-8之PEiD插件/#more">more >></a>
+          <a href="/2017/02/16/practice-8之PEiD插件/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -610,7 +718,7 @@
 
       
         <p class="article-more-link">
-          <a href="/2017/02/14/practice-7之行为分析/#more">more >></a>
+          <a href="/2017/02/14/practice-7之行为分析/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -678,7 +786,7 @@
 
       
         <p class="article-more-link">
-          <a href="/2017/02/13/practice-6之算法夹杂/#more">more >></a>
+          <a href="/2017/02/13/practice-6之算法夹杂/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -746,7 +854,7 @@
 
       
         <p class="article-more-link">
-          <a href="/2017/02/12/practice-5之万能断点/#more">more >></a>
+          <a href="/2017/02/12/practice-5之万能断点/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -814,7 +922,7 @@
 
       
         <p class="article-more-link">
-          <a href="/2017/02/12/practice-4之IDA用法/#more">more >></a>
+          <a href="/2017/02/12/practice-4之IDA用法/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -882,75 +990,7 @@
 
       
         <p class="article-more-link">
-          <a href="/2017/02/10/practice-3之pyo学习/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-practice-2之汇编" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/02/10/practice-2之汇编/" class="article-date">
-      <time datetime="2017-02-10T02:39:06.000Z" itemprop="datePublished">2017-02-10</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/10/practice-2之汇编/">practice-2之汇编</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>一道ELFx64的题目，只能用IDA载入，找到main函数，F5得到代码</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/reverse-practice/">reverse practice</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/writeup/">writeup</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2017/02/10/practice-2之汇编/#more">more >></a>
+          <a href="/2017/02/10/practice-3之pyo学习/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
