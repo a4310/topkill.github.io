@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="Mr_white">
 <meta property="og:description" content="暑假生活开始，学习的好时间，今天就先重温一下堆栈的基础，好好巩固一下。">
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/006HJ39wgy1fh7povczmjj30mr0cs74f.jpg">
-<meta property="og:updated_time" content="2017-07-04T08:47:25.734Z">
+<meta property="og:updated_time" content="2017-07-12T03:57:51.386Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="堆栈基础">
 <meta name="twitter:description" content="暑假生活开始，学习的好时间，今天就先重温一下堆栈的基础，好好巩固一下。">
@@ -147,13 +147,13 @@
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
+                        <li>Menu</li>
+                        <li>Tags</li>
                         
-                        <li>友情链接</li>
+                        <li>Friends</li>
                         
                         
-                        <li>关于我</li>
+                        <li>About Me</li>
                         
                     </ul>
                 </div>
@@ -283,7 +283,7 @@
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
       <div class="body-wrap"><article id="post-堆栈基础" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -341,10 +341,12 @@
 <p>每一个可执行程序中都包含着二进制级别的机器代码，这些代码将会被装载入代码区，处理器会一条一条的读取并运行。如果代码中有开辟动态内存的请求，则会在内存堆区中分配一个大小适合的区域给代码使用；当函数调用发生之后，栈中便会有栈帧自动保存函数的调用关系信息，以便于函数调用结束能回到主函数继续执行程序。</p>
 <p>栈帧:C语言中，栈中的栈帧对应着未运行完成的函数，并且是一一对应，栈帧从逻辑上理解就是一个函数执行的环境:函数的参数，函数的变量，函数的返回地址等。<br>在函数栈帧中，一般包含如下几类重要信息。</p>
 </li>
+</ol>
+<ul>
 <li>局部变量:为函数局部变量开辟内存空间。</li>
 <li>栈帧状态值:保存前栈帧的顶部和底部，用于在本栈弹出后可以恢复上一个栈帧。</li>
 <li>函数返回地址:保存当前函数调用前的“断点”信息，也就是函数调用前的指令的位置，以便在函数返回时能回到调用的代码区中继续执行命令。</li>
-</ol>
+</ul>
 <h2 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h2><p>  假设一个如下的简单函数：</p>
 <pre><code>int func_B(int a,int b)
 {
@@ -374,6 +376,13 @@ int main()
 </ol>
 <p><img src="http://ww2.sinaimg.cn/large/006HJ39wgy1fh7povczmjj30mr0cs74f.jpg" alt=""></p>
 <p>  注意：在实际运行中，main函数并不是第一个被调用的函数，程序被装入内存前还有一些其他的操作。</p>
+<p>函数调用本身的大体步骤如下：(这个对于后面pwn的学习中payload的构造有关键作用)</p>
+<ol>
+<li>参数入栈：将参数从右向左依次压入系统栈中。</li>
+<li>返回地址入栈：将当前代码去调用指令的下一条指令地址压入栈中，供函数返回时继续执行。</li>
+<li>代码区跳转：处理器从当前代码区跳转到被调用的入口处。</li>
+<li>栈帧调整：(1)保存当前栈帧的状态值，以备后面恢复本栈帧时使用（EBP入栈）。<br>(2)将当前栈帧切换到新栈帧(将ESP值装入EBP，更新栈帧底部。)  </li>
+</ol>
 <h2 id="汇编语言"><a href="#汇编语言" class="headerlink" title="汇编语言"></a>汇编语言</h2><p> 在汇编语言当中，主要是四类寄存器。</p>
 <ol>
 <li>4个数据寄存器（EAX，EBX，ECX，EDX）。</li>
@@ -419,17 +428,17 @@ int main()
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/07/04/堆栈基础/">堆栈基础</a></p>
-        <p><span>文章作者:</span><a href="/" title="回到主页">Mr_white</a></p>
-        <p><span>发布时间:</span>2017-07-04, 10:39:35</p>
-        <p><span>最后更新:</span>2017-07-04, 16:47:25</p>
+        <p><span>Title:</span><a href="/2017/07/04/堆栈基础/">堆栈基础</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">Mr_white</a></p>
+        <p><span>Created:</span>2017-07-04, 10:39:35</p>
+        <p><span>Updated:</span>2017-07-12, 11:57:51</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/07/04/堆栈基础/" title="堆栈基础">http://xq.dropsec.xyz/2017/07/04/堆栈基础/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2017/07/04/堆栈基础/　　作者: Mr_white" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/2017/07/04/堆栈基础/" title="堆栈基础">http://xq.dropsec.xyz/2017/07/04/堆栈基础/</a>
+            <span class="copy-path" data-clipboard-text="From http://xq.dropsec.xyz/2017/07/04/堆栈基础/　　By Mr_white" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
         </p>
     </div>
 
@@ -456,7 +465,7 @@ int main()
 </article>
 
     <div id="toc" class="toc-article">
-        <strong class="toc-title">文章目录</strong>
+        <strong class="toc-title">Contents</strong>
         
             <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#内存区域"><span class="toc-number">1.</span> <span class="toc-text">内存区域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数调用"><span class="toc-number">2.</span> <span class="toc-text">函数调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#汇编语言"><span class="toc-number">3.</span> <span class="toc-text">汇编语言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-寄存器"><span class="toc-number">3.1.</span> <span class="toc-text">1.寄存器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-数据寄存器"><span class="toc-number">3.1.1.</span> <span class="toc-text">(1). 数据寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-变址寄存器"><span class="toc-number">3.1.2.</span> <span class="toc-text">(2). 变址寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-指针寄存器"><span class="toc-number">3.1.3.</span> <span class="toc-text">(3). 指针寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-端寄存器"><span class="toc-number">3.1.4.</span> <span class="toc-text">(4). 端寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-指令指针寄存器"><span class="toc-number">3.1.5.</span> <span class="toc-text">(5). 指令指针寄存器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-主要指令"><span class="toc-number">3.2.</span> <span class="toc-text">2. 主要指令</span></a></li></ol></li></ol>
         
@@ -472,10 +481,10 @@ int main()
         }
     </style>
 
-    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
 
     <script>
-        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
     </script>
 
 
@@ -500,15 +509,15 @@ int main()
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/07/07/二进制文件基础/" title="上一篇: 二进制文件基础">
+            <a href="/2017/07/07/二进制文件基础/" title="Pre: 二进制文件基础">
                 <i class="fa fa-angle-left"></i>
             </a>
         
 
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/06/26/定一个小目标/" title="下一篇: 定一个小目标">
+            <a href="/2017/06/26/定一个小目标/" title="Next: 定一个小目标">
                 <i class="fa fa-angle-right"></i>
             </a>
         
@@ -531,14 +540,14 @@ int main()
                 2016-2017 Mr_white
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
                 
@@ -547,7 +556,7 @@ int main()
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        <span id="page-visit"  title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
                 
@@ -580,9 +589,9 @@ int main()
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script>
     // Open in New Window

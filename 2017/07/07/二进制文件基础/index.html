@@ -21,18 +21,18 @@
 <meta property="og:url" content="http://xq.dropsec.xyz/2017/07/07/二进制文件基础/index.html">
 <meta property="og:site_name" content="Mr_white">
 <meta property="og:description" content="堆栈大致了解之后，了解一下windows下的二进制文件。">
-<meta property="og:image" content="http://e.hiphotos.baidu.com/image/pic/item/a1ec08fa513d2697658bd1f75ffbb2fb4216d8c4.jpg">
-<meta property="og:image" content="http://oa5504rxk.bkt.clouddn.com/week13_linker/20.png">
-<meta property="og:image" content="http://d.hiphotos.baidu.com/image/pic/item/71cf3bc79f3df8dc02da5f3bc711728b461028b1.jpg">
-<meta property="og:image" content="http://c.hiphotos.baidu.com/image/pic/item/aec379310a55b319e9e758df49a98226cffc1779.jpg">
-<meta property="og:image" content="http://e.hiphotos.baidu.com/image/pic/item/dc54564e9258d1091f247318db58ccbf6d814d51.jpg">
-<meta property="og:image" content="http://a.hiphotos.baidu.com/image/pic/item/2cf5e0fe9925bc31fc29c43254df8db1cb137020.jpg">
-<meta property="og:image" content="http://d.hiphotos.baidu.com/image/pic/item/95eef01f3a292df57ba16bbfb6315c6034a8733e.jpg">
-<meta property="og:updated_time" content="2017-07-07T08:53:55.210Z">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006HJ39wgy1fhgydpknj3j30gk06st97.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006HJ39wgy1fhgye363iij30hl07swf6.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006HJ39wgy1fhgyde3hyuj30fm09dq48.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006HJ39wgy1fhgyd04k5zj30h4085t9b.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006HJ39wgy1fhgycmb7ajj30eq065jrb.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006HJ39wgy1fhgyca2g36j30dd04nmx0.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006HJ39wgy1fhgybvrdxjj30a905sa9x.jpg">
+<meta property="og:updated_time" content="2017-07-12T03:45:32.639Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二进制文件基础">
 <meta name="twitter:description" content="堆栈大致了解之后，了解一下windows下的二进制文件。">
-<meta name="twitter:image" content="http://e.hiphotos.baidu.com/image/pic/item/a1ec08fa513d2697658bd1f75ffbb2fb4216d8c4.jpg">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/006HJ39wgy1fhgydpknj3j30gk06st97.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -153,13 +153,13 @@
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
+                        <li>Menu</li>
+                        <li>Tags</li>
                         
-                        <li>友情链接</li>
+                        <li>Friends</li>
                         
                         
-                        <li>关于我</li>
+                        <li>About Me</li>
                         
                     </ul>
                 </div>
@@ -289,7 +289,7 @@
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
       <div class="body-wrap"><article id="post-二进制文件基础" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -346,10 +346,10 @@
 <li>.idata：可执行文件链接的其他动态库中的有关外来函数以及信息。</li>
 <li>.rsrc:  存放程序图标资源等。</li>
 </ol>
-<p><img src="http://e.hiphotos.baidu.com/image/pic/item/a1ec08fa513d2697658bd1f75ffbb2fb4216d8c4.jpg" alt=""></p>
+<p><img src="http://ww4.sinaimg.cn/large/006HJ39wgy1fhgydpknj3j30gk06st97.jpg" alt=""></p>
 <p>  如上图所示，那四类是比较常见的节，除此之外还可能出现的有“.reloc”,“.edata”,“.tls”,“.rdata”等。</p>
 <h2 id="加壳概念"><a href="#加壳概念" class="headerlink" title="加壳概念"></a>加壳概念</h2><p>  加壳其实应该叫做可执行程序资源压缩，是保护文件不被随意修改的一种技术。但并不是表示被加壳的程序就不能进行运行，只是无法查询和修改源代码而已，只有脱完壳之后才可以查看源代码。</p>
-<p><img src="http://oa5504rxk.bkt.clouddn.com/week13_linker/20.png" alt=""></p>
+<p><img src="http://ww2.sinaimg.cn/large/006HJ39wgy1fhgye363iij30hl07swf6.jpg" alt=""></p>
 <p>  加壳其实就是利用特殊的算法对程序的代码和资源进行压缩，就好像我们用WINZIP对重要文件进行加密压缩一样，他只是在程序内部进行这样的操作而已。打一个比方，如果说程序是外套，源代码等资源是人的身体的话，那壳就是位于两者之间的一件衬衫。</p>
 <p>  现在也有许多的加壳工具，这些工具在文件头中会加入一段指令，告诉CPU如何才能解压自己，只是现在CPU处理速度都是秒秒钟的那种，所以加壳与不加壳的程序运行根本看不出什么不一样，除非你想了解源代码，你就会发现你被壳拒之门外。</p>
 <p>  加壳工具分为两种:</p>
@@ -373,7 +373,7 @@
 <li>(3) 虚拟内存地址（Virtual Address）<br> PE文件中的指令被装入内存后的地址。</li>
 <li><p>(4) 相对虚拟地址（Relative Virtual Address  RVA）<br> 相对虚拟地址是内存地址相对于映射基址的偏移量。<br>虚拟内存地址、映射基址和相对虚拟内存地址三者之间有如下关系：<br>VA = Image Base + RVA</p>
 <p>在默认情况下，一般PE文件的0字节将映射到虚拟内存的0x00400000位置，这个地址就是所谓的装载基地址（Image Base）。如下图所示，</p>
-<p><img src="http://d.hiphotos.baidu.com/image/pic/item/71cf3bc79f3df8dc02da5f3bc711728b461028b1.jpg" alt=""></p>
+<p><img src="http://ww4.sinaimg.cn/large/006HJ39wgy1fhgyde3hyuj30fm09dq48.jpg" alt=""></p>
 <p>文件偏移是相对于文件开始处0字节的偏移，RVA则是相对于装载基地址0x00400000处的偏移。由于操作系统在进行装载时基本保持PE排列结果，所以文件偏移地址和RVA很大可能一致。</p>
 <p><em>（如果有细微的差异的话，那就是由于文件数据的存放单位与内存数据存放单位不同造成的。)</em></p>
 </li>
@@ -382,11 +382,11 @@
 <li><em>代码装入内存是按照内存数据存放，以0x1000字节为基本单位进行组织，不足全部补全，超过则分配下一个0x1000继续使用。</em></li>
 </ul>
 <h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p>  Lord PE是一个查看PE文件并对之进行分析、修改的脱壳辅助软件。<br>  如图就是这个工具的标准界面:</p>
-<p>  <img src="http://c.hiphotos.baidu.com/image/pic/item/aec379310a55b319e9e758df49a98226cffc1779.jpg" alt=""></p>
-<p>  点击PE编辑器，随意加载如一个程序便可以查看相对信息：<br>  <img src="http://e.hiphotos.baidu.com/image/pic/item/dc54564e9258d1091f247318db58ccbf6d814d51.jpg" alt=""></p>
-<p>  点击区段进行节信息的查询：VOffset就是相对虚拟地址（RVA），ROffset是文件偏移地址。<br>  <img src="http://a.hiphotos.baidu.com/image/pic/item/2cf5e0fe9925bc31fc29c43254df8db1cb137020.jpg" alt=""></p>
+<p>  <img src="http://ww4.sinaimg.cn/large/006HJ39wgy1fhgyd04k5zj30h4085t9b.jpg" alt=""></p>
+<p>  点击PE编辑器，随意加载如一个程序便可以查看相对信息：<br>  <img src="http://ww4.sinaimg.cn/large/006HJ39wgy1fhgycmb7ajj30eq065jrb.jpg" alt=""></p>
+<p>  点击区段进行节信息的查询：VOffset就是相对虚拟地址（RVA），ROffset是文件偏移地址。<br>  <img src="http://ww2.sinaimg.cn/large/006HJ39wgy1fhgyca2g36j30dd04nmx0.jpg" alt=""></p>
 <p>  在系统进程中，代码（.text节）将被加载到0x400000+0x11000=0x411000的虚拟地址中（装载基地址地址+RVA）。而在文件中，可以用二进制文件打开，看到对应的代码在0x10400位置。</p>
-<p>  <img src="http://d.hiphotos.baidu.com/image/pic/item/95eef01f3a292df57ba16bbfb6315c6034a8733e.jpg" alt=""></p>
+<p>  <img src="http://ww1.sinaimg.cn/large/006HJ39wgy1fhgybvrdxjj30a905sa9x.jpg" alt=""></p>
 <p>  通过这个工具可以很清楚了解我们所需要的信息（RVA，VA，文件偏移，装载基地址），对于漏洞的分析是一个很好的辅助。</p>
 
       
@@ -396,17 +396,17 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/07/07/二进制文件基础/">二进制文件基础</a></p>
-        <p><span>文章作者:</span><a href="/" title="回到主页">Mr_white</a></p>
-        <p><span>发布时间:</span>2017-07-07, 13:48:50</p>
-        <p><span>最后更新:</span>2017-07-07, 16:53:55</p>
+        <p><span>Title:</span><a href="/2017/07/07/二进制文件基础/">二进制文件基础</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">Mr_white</a></p>
+        <p><span>Created:</span>2017-07-07, 13:48:50</p>
+        <p><span>Updated:</span>2017-07-12, 11:45:32</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/07/07/二进制文件基础/" title="二进制文件基础">http://xq.dropsec.xyz/2017/07/07/二进制文件基础/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2017/07/07/二进制文件基础/　　作者: Mr_white" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/2017/07/07/二进制文件基础/" title="二进制文件基础">http://xq.dropsec.xyz/2017/07/07/二进制文件基础/</a>
+            <span class="copy-path" data-clipboard-text="From http://xq.dropsec.xyz/2017/07/07/二进制文件基础/　　By Mr_white" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
         </p>
     </div>
 
@@ -427,7 +427,7 @@
 </article>
 
     <div id="toc" class="toc-article">
-        <strong class="toc-title">文章目录</strong>
+        <strong class="toc-title">Contents</strong>
         
             <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PE文件格式"><span class="toc-number">1.</span> <span class="toc-text">PE文件格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加壳概念"><span class="toc-number">2.</span> <span class="toc-text">加壳概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#虚拟内存"><span class="toc-number">3.</span> <span class="toc-text">虚拟内存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PE文件与虚拟内存的映射"><span class="toc-number">4.</span> <span class="toc-text">PE文件与虚拟内存的映射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工具"><span class="toc-number">5.</span> <span class="toc-text">工具</span></a></li></ol>
         
@@ -443,10 +443,10 @@
         }
     </style>
 
-    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
 
     <script>
-        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
     </script>
 
 
@@ -471,13 +471,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
         
 
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/07/04/堆栈基础/" title="下一篇: 堆栈基础">
+            <a href="/2017/07/04/堆栈基础/" title="Next: 堆栈基础">
                 <i class="fa fa-angle-right"></i>
             </a>
         
@@ -500,14 +500,14 @@
                 2016-2017 Mr_white
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
                 
@@ -516,7 +516,7 @@
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        <span id="page-visit"  title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
                 
@@ -549,9 +549,9 @@
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script>
     // Open in New Window
