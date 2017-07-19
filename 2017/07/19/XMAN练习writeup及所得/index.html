@@ -15,23 +15,22 @@
 
 
 
-<meta name="description" content="第六题">
+<meta name="description" content="XMAN夏令营虽然没参加，但是选拔赛的题目还是乘着闲暇时间做了几道，并且也学习到了一些。在这里做个总结。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="practice 6之算法夹杂">
-<meta property="og:url" content="http://xq.dropsec.xyz/2017/02/13/practice-6之算法夹杂/index.html">
+<meta property="og:title" content="XMAN练习 writeup及所得">
+<meta property="og:url" content="http://xq.dropsec.xyz/2017/07/19/XMAN练习writeup及所得/index.html">
 <meta property="og:site_name" content="Mr_white">
-<meta property="og:description" content="第六题">
-<meta property="og:image" content="http://p1.bpimg.com/567571/d4e47457eda5dab9.png">
-<meta property="og:image" content="http://p1.bqimg.com/567571/7c461f4bddbabf79.png">
-<meta property="og:image" content="http://p1.bpimg.com/567571/ce68c67077d534db.png">
-<meta property="og:image" content="http://p1.bpimg.com/567571/376e813074677116.png">
-<meta property="og:image" content="http://i1.piimg.com/567571/c10b9ac205db0fc6.png">
-<meta property="og:image" content="http://i1.piimg.com/567571/4130ddacfe72cdf1.png">
-<meta property="og:updated_time" content="2017-06-16T04:47:25.300Z">
+<meta property="og:description" content="XMAN夏令营虽然没参加，但是选拔赛的题目还是乘着闲暇时间做了几道，并且也学习到了一些。在这里做个总结。">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/TIM%E6%88%AA%E5%9B%BE20170719195222.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/TIM%E6%88%AA%E5%9B%BE20170719195110.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/9.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/401.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/10.png">
+<meta property="og:updated_time" content="2017-07-19T12:52:24.489Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="practice 6之算法夹杂">
-<meta name="twitter:description" content="第六题">
-<meta name="twitter:image" content="http://p1.bpimg.com/567571/d4e47457eda5dab9.png">
+<meta name="twitter:title" content="XMAN练习 writeup及所得">
+<meta name="twitter:description" content="XMAN夏令营虽然没参加，但是选拔赛的题目还是乘着闲暇时间做了几道，并且也学习到了一些。在这里做个总结。">
+<meta name="twitter:image" content="http://otc7tld02.bkt.clouddn.com/TIM%E6%88%AA%E5%9B%BE20170719195222.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -63,7 +62,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>practice 6之算法夹杂 | Mr_white</title>
+<title>XMAN练习 writeup及所得 | Mr_white</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -290,11 +289,11 @@
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
-      <div class="body-wrap"><article id="post-practice-6之算法夹杂" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-XMAN练习writeup及所得" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/02/13/practice-6之算法夹杂/" class="article-date">
-      <time datetime="2017-02-13T03:35:02.000Z" itemprop="datePublished">2017-02-13</time>
+      <a href="/2017/07/19/XMAN练习writeup及所得/" class="article-date">
+      <time datetime="2017-07-19T11:40:41.000Z" itemprop="datePublished">2017-07-19</time>
 </a>
 
 
@@ -309,7 +308,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      practice 6之算法夹杂
+      XMAN练习 writeup及所得
     </h1>
   
 
@@ -318,7 +317,7 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/reverse-practice/">reverse practice</a>
+    <a class="article-category-link" href="/categories/reverse/">reverse</a>
     </div>
 
 
@@ -334,38 +333,93 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>第六题</p>
-<a id="more"></a>
-<p>之前没做出来的一道题目，各种密码学的夹杂，看到很多.so库估计当时也没啥想法了<br><img src="http://p1.bpimg.com/567571/d4e47457eda5dab9.png" alt=""><br>很明了，对输入进行检验，过了就输出right，错了就输出wrong，分析一下check_401510这个函数。先是判断字符范围，ASCII码不能超过90。</p>
-<p><img src="http://p1.bqimg.com/567571/7c461f4bddbabf79.png" alt=""><br>然后取输入的前5个字符，作md5加密，如下三个函数就是实现了md5算法</p>
-<p><img src="http://p1.bpimg.com/567571/ce68c67077d534db.png" alt=""><br>接下来就是用前五个字符的md5值的前8字节作为DES算法的key，并且采用ECB模式分组加密。</p>
-<p><img src="http://p1.bpimg.com/567571/376e813074677116.png" alt=""><br>然后就是对DES加密后的结果作base64变换，v9是DES加密结果，v21保存base64结果。</p>
-<p><img src="http://i1.piimg.com/567571/c10b9ac205db0fc6.png" alt=""><br>最后就是和check数组比较，check数组内容即是：<br>‘OSHzTJ4pwFgRG6eS6y3xVOOEGcbE5rzwqTs7VCK6ACQLuiTamZpXcQ==’</p>
-<p><img src="http://i1.piimg.com/567571/4130ddacfe72cdf1.png" alt=""><br>所以采用爆破的方式去得到flag，设flag前五位为temp，并且用其md5值前8字节作为DES算法的key，当解密出来的flag前五位和temp相等时，即为flag。<br>脚本如下：（参考的大神writeup）</p>
-<pre><code>import pyDes
-import base64
-import hashlib
-import string
-check = &quot;OSHzTJ4pwFgRG6eS6y3xVOOEGcbE5rzwqTs7VCK6ACQLuiTamZpXcQ==&quot;
-miwen = base64.b64decode(check)
-count = 0
-for i in string.uppercase + string.digits:
-    for j in string.uppercase + string.digits:
-         for k in string.uppercase + string.digits:
-              for m in string.uppercase + string.digits:
-                   for n in string.uppercase + string.digits:
-                count = count + 1
-                tmp = i+j+k+m+n
-                md5_tmp = hashlib.md5(tmp).hexdigest()
-                key = md5_tmp[0:16].decode(&quot;hex&quot;)
-                result = pyDes.des(key)
-                y = result.decrypt(miwen[:8])
-                if y[0:5] == tmp:
-                   print y
-                if count % 10000 == 0:
-                    print count
-</code></pre><p>这道题目主要就是各种密码算法的交杂，在代码的分析上比较困难，即使参照writeup也很难掌握，后面还得好好在琢磨琢磨</p>
+        <p>XMAN夏令营虽然没参加，但是选拔赛的题目还是乘着闲暇时间做了几道，并且也学习到了一些。<br>在这里做个总结。<br><a id="more"></a></p>
+<h4 id="第一道reverse"><a href="#第一道reverse" class="headerlink" title="第一道reverse"></a>第一道reverse</h4><p>老规矩就IDA看一波</p>
+<p>找关键字符，跟踪过去F5大法。下图很明显关键处，而if判断便是重要所在。<br><img src="http://otc7tld02.bkt.clouddn.com/TIM%E6%88%AA%E5%9B%BE20170719195222.png" alt=""></p>
+<p>这个题目逻辑还是很清晰的，里面自带的乍一看以为是Base64，然而编译出来的不知道什么鬼，在往下看，将我们输入的19位异或操作然后sub_4996DD函数又是一通操作，其实就是做了Base64转换，为什么看出来，应为上面的Base64解码就是19位，根据特性所以猜测如此</p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/TIM%E6%88%AA%E5%9B%BE20170719195110.png" alt=""></p>
+<p>那就很明了了，逆运算即可，附上代码：</p>
+<pre><code>from base64 import *
+w=&apos;WEw2TX82amFXOFlUXz1RSUVfbw==&apos;
+t=b64decode(w)
+print(t)
+q=&apos;&apos;
+for j in range(len(t)):
+    q+=chr(ord(t[j])^j)
+print(q)
+</code></pre><h4 id="第二道安卓"><a href="#第二道安卓" class="headerlink" title="第二道安卓"></a>第二道安卓</h4><p>直接反编译一波</p>
+<p>明显的correct和failed提示，关键就是encode.check了</p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/9.png" alt=""></p>
+<p>跟过去，可以看到算法，也很简单<br>输入的字符与b进行加法运算与61取模然后乘2再减去循环次要和输入的一样，那就爆破吧。<br><img src="http://otc7tld02.bkt.clouddn.com/401.png" alt=""></p>
+<p>附上代码：</p>
+<pre><code>b = [23, 22, 26, 26, 25, 25, 25, 26, 27, 28, 30, 30, 29, 30, 32, 32]
+w=&apos;&apos;
+for i in range(len(b)):
+    for j in range(127):
+        if ((j+b[i])%61)*2-i==j:
+            w+=chr(j)
+print(w)
+</code></pre><h4 id="第三道-安卓（有所得）"><a href="#第三道-安卓（有所得）" class="headerlink" title="第三道 安卓（有所得）"></a>第三道 安卓（有所得）</h4><p>给的是一个smali文件，直接用smali2java编译成java语言看好了。</p>
+<p>看看代码，大致流程和Base64没差，除了最后的对应转换表，将输入的以8位二进制转换，然后以6的倍数为条件补‘0’，最后6位为单位切片，在对应标志选择相应位置替代。<br><img src="http://otc7tld02.bkt.clouddn.com/10.png" alt=""></p>
+<p>这样一来就可以逆向算法，一步一步已经写出了代码：</p>
+<pre><code>end=&apos;xsZDluYYreJDyrpDpucZCo&apos;
+temp=&apos;+/abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&apos;
+aa=[]
+bb=[]
+cc=[]
+str1=&apos;&apos;
+cnt=0
+s=&apos;&apos;
+flag=&apos;&apos;
+for i in end:
+    aa.append(temp.find(i))
+for i in aa:
+    bb.append(bin(i)[2:])
+for i in range(len(bb)):
+    while (len(bb[i]) != 6):
+        bb[i] = &apos;0&apos; + bb[i]
+for i in bb:
+    str1 += i
+for i in str1:
+    s += i
+    cnt += 1
+    if not cnt % 8:
+        cc.append(s)
+        s = &apos;&apos;
+for i in cc:
+    flag+=chr(int(i,2))
+print(&apos;flag= %s&apos; % (flag))
+</code></pre><p>上面都是一些简单的操作，所得何在，在于python的认知</p>
+<ul>
+<li>int(str,’2/8/10/16’):这个可以将字符串转换为整型十进制，在这题的应用就在于将‘100101’转换为对应的十进制整形。</li>
+</ul>
+<ul>
+<li><p>‘’.split(‘’):可以将string按照相应的代表性质字符转换为列表<br>例如：’10010101 11110000’.split(‘ ‘)==&gt;[‘10010101’,’11110000’]</p>
+</li>
+<li><p>bin()转换之后得到的是一个str类型数据。</p>
+</li>
+</ul>
+<p>以上三点也许大牛看来很low，但毕竟是自己的积累。最后附上最终代码：</p>
+<pre><code>w=[]
+mt=&apos;&apos;
+end=&apos;xsZDluYYreJDyrpDpucZCo&apos;
+temp=&apos;+/abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&apos;
+for i in range(len(end)):
+w.append(temp.find(end[i]))
 
+m=&quot; &quot;.join([format(i,&apos;b&apos;) for i in w])
+
+for j in m.split(&apos; &apos;):
+    if len(j) != 6:
+        mt+= &apos;0&apos; * (6 - len(j)) + j
+    else:
+        mt+=j
+
+m_change=mt[:-(len(mt)%8)]
+
+flag=&quot; &quot;.join(bin(int(x,2)) for x in [m_change[i:i+8] for i in range(0,len(m_change),8)])
+print(&apos;&apos;.join([chr(i) for i in [int(b, 2) for b in flag.split(&apos; &apos;)]]))
+</code></pre>
       
     </div>
     
@@ -373,13 +427,13 @@ for i in string.uppercase + string.digits:
   
     
     <div class="copyright">
-        <p><span>Title:</span><a href="/2017/02/13/practice-6之算法夹杂/">practice 6之算法夹杂</a></p>
+        <p><span>Title:</span><a href="/2017/07/19/XMAN练习writeup及所得/">XMAN练习 writeup及所得</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">Mr_white</a></p>
-        <p><span>Created:</span>2017-02-13, 11:35:02</p>
-        <p><span>Updated:</span>2017-06-16, 12:47:25</p>
+        <p><span>Created:</span>2017-07-19, 19:40:41</p>
+        <p><span>Updated:</span>2017-07-19, 20:52:24</p>
         <p>
-            <span>Full URL:</span><a class="post-url" href="/2017/02/13/practice-6之算法夹杂/" title="practice 6之算法夹杂">http://xq.dropsec.xyz/2017/02/13/practice-6之算法夹杂/</a>
-            <span class="copy-path" data-clipboard-text="From http://xq.dropsec.xyz/2017/02/13/practice-6之算法夹杂/　　By Mr_white" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/2017/07/19/XMAN练习writeup及所得/" title="XMAN练习 writeup及所得">http://xq.dropsec.xyz/2017/07/19/XMAN练习writeup及所得/</a>
+            <span class="copy-path" data-clipboard-text="From http://xq.dropsec.xyz/2017/07/19/XMAN练习writeup及所得/　　By Mr_white" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -391,16 +445,10 @@ for i in string.uppercase + string.digits:
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/02/14/practice-7之行为分析/">
-                    practice 7之行为分析
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/02/12/practice-5之万能断点/">
-                    practice 5之万能断点
+                <a href="/2017/07/07/二进制文件基础/">
+                    二进制文件基础
                 </a>
             </div>
         
@@ -412,7 +460,7 @@ for i in string.uppercase + string.digits:
     <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#第一道reverse"><span class="toc-number">1.</span> <span class="toc-text">第一道reverse</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第二道安卓"><span class="toc-number">2.</span> <span class="toc-text">第二道安卓</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第三道-安卓（有所得）"><span class="toc-number">3.</span> <span class="toc-text">第三道 安卓（有所得）</span></a></li></ol>
         
     </div>
     <style>
@@ -454,15 +502,13 @@ for i in string.uppercase + string.digits:
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/02/14/practice-7之行为分析/" title="Pre: practice 7之行为分析">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
         
 
         <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/02/12/practice-5之万能断点/" title="Next: practice 5之万能断点">
+            <a href="/2017/07/07/二进制文件基础/" title="Next: 二进制文件基础">
                 <i class="fa fa-angle-right"></i>
             </a>
         
