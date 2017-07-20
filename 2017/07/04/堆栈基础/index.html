@@ -24,9 +24,11 @@
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/006HJ39wgy1fh7povczmjj30mr0cs74f.jpg">
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/Image.png">
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%871.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/10616.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/1%E7%89%871.png">
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE21.png">
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%872.png">
-<meta property="og:updated_time" content="2017-07-20T06:39:58.543Z">
+<meta property="og:updated_time" content="2017-07-20T09:34:22.668Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="堆栈基础">
 <meta name="twitter:description" content="暑假生活开始，学习的好时间，今天就先重温一下堆栈的基础，好好巩固一下。">
@@ -425,11 +427,24 @@ int main()
 <li>FS（Flag）:  标志段寄存器，其值为附加数据段的段值</li>
 <li>GS（Global）:全局段寄存器，其值为附加数据段的段值</li>
 </ul>
+<p>8086 CPU依赖其内部的四个段寄存器实现寻址1M字节物理地址空间。8086把1M字节地址空间划分为若干逻辑段，当前使用段的段值存放在段寄存器中。由段寄存器和段内偏移形成20位地址。</p>
+<p>汇编中表示：</p>
+<conter><font color="red"><strong>段值：偏移</strong></font></conter>
+
+<p>计算方法：</p>
+<conter><font color="red"><strong>物理地址 = 段值×16 + 偏移</strong></font></conter>
+
+<p>举个<img src="http://otc7tld02.bkt.clouddn.com/10616.png" width="30" hight="30" alt=""></p>
+<p>用16进制表示的逻辑地址1234：3456H所对应的存储单元的物理地址为15796H。</p>
+<conter><img src="http://otc7tld02.bkt.clouddn.com/1%E7%89%871.png" width="300" hight="300" alt=""></conter>
+
+
+
 <h4 id="5-指令指针寄存器"><a href="#5-指令指针寄存器" class="headerlink" title="(5). 指令指针寄存器"></a>(5). 指令指针寄存器</h4><ul>
 <li>EIP：存放个下一次将要执行的指令在代码段中的偏移量。</li>
 </ul>
-<h4 id="6-标志寄存器"><a href="#6-标志寄存器" class="headerlink" title="(6). 标志寄存器"></a>(6). 标志寄存器</h4><p> 8086 CPU中有一个16位的标志寄存器，包含了9个标志，主要用于反映处理器的状态和运算结果的某些特征。</p>
-<p> 9个标志寄存器可以分为两组，第一组6个标志寄存器主要受加减运算和逻辑运算结果的影响，称为运算结果标志，第二组标志不受运算结果的影响，称为状态控制标志。</p>
+<h4 id="6-标志寄存器"><a href="#6-标志寄存器" class="headerlink" title="(6). 标志寄存器"></a>(6). 标志寄存器</h4><p>8086 CPU中有一个16位的标志寄存器，包含了9个标志，主要用于反映处理器的状态和运算结果的某些特征。</p>
+<p>9个标志寄存器可以分为两组，第一组6个标志寄存器主要受加减运算和逻辑运算结果的影响，称为运算结果标志，第二组标志不受运算结果的影响，称为状态控制标志。</p>
 <center><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE21.png" alt=""></center>
 
 
@@ -447,7 +462,7 @@ int main()
         <p><span>本文标题:</span><a href="/2017/07/04/堆栈基础/">堆栈基础</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Mr_white</a></p>
         <p><span>发布时间:</span>2017-07-04, 10:39:35</p>
-        <p><span>最后更新:</span>2017-07-20, 14:39:58</p>
+        <p><span>最后更新:</span>2017-07-20, 17:34:22</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/07/04/堆栈基础/" title="堆栈基础">http://xq.dropsec.xyz/2017/07/04/堆栈基础/</a>
             <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2017/07/04/堆栈基础/　　作者: Mr_white" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
