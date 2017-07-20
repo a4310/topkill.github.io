@@ -22,7 +22,11 @@
 <meta property="og:site_name" content="Mr_white">
 <meta property="og:description" content="暑假生活开始，学习的好时间，今天就先重温一下堆栈的基础，好好巩固一下。">
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/006HJ39wgy1fh7povczmjj30mr0cs74f.jpg">
-<meta property="og:updated_time" content="2017-07-12T03:57:51.386Z">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/Image.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%871.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE21.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%872.png">
+<meta property="og:updated_time" content="2017-07-20T06:12:31.994Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="堆栈基础">
 <meta name="twitter:description" content="暑假生活开始，学习的好时间，今天就先重温一下堆栈的基础，好好巩固一下。">
@@ -390,7 +394,8 @@ int main()
 <li>6个端寄存器（ES、CS、SS、DS、FS、GS）</li>
 <li>1个指令指针寄存器（EIP）、一个标志寄存器（EFlags）</li>
 </ol>
-<h3 id="1-寄存器"><a href="#1-寄存器" class="headerlink" title="1.寄存器"></a>1.寄存器</h3><h4 id="1-数据寄存器"><a href="#1-数据寄存器" class="headerlink" title="(1). 数据寄存器"></a>(1). 数据寄存器</h4><p>  数据寄存器主要用来保存操作数以及运算结果，这样就便于节省读取操作数的时间。<br>  32位CPU4个32位通用的寄存器EAX，EBX，ECX，EDX。他们只会对低16为数据进行存储，不会影响高16位的数据。这低16位的寄存器又被称为AX、BX、DC、CX。与先前的CPU寄存器相一致。</p>
+<h3 id="1-寄存器"><a href="#1-寄存器" class="headerlink" title="1.寄存器"></a>1.寄存器</h3><p><img src="http://otc7tld02.bkt.clouddn.com/Image.png" alt=""></p>
+<h4 id="1-数据寄存器"><a href="#1-数据寄存器" class="headerlink" title="(1). 数据寄存器"></a>(1). 数据寄存器</h4><p>  数据寄存器主要用来保存操作数以及运算结果，这样就便于节省读取操作数的时间。<br>  32位CPU4个32位通用的寄存器EAX，EBX，ECX，EDX。他们只会对低16为数据进行存储，不会影响高16位的数据。这低16位的寄存器又被称为AX、BX、DC、CX。与先前的CPU寄存器相一致。</p>
 <ul>
 <li>EAX：累加寄存器，用于加减乘除的操作，也用于存储函数的返回值。使用频率非常高。</li>
 <li>EBX：基址寄存器，作为存储器指针来用。</li>
@@ -407,7 +412,8 @@ int main()
 <li>EBP: 基地址寄存器，内存放一个指针永远指向系统栈的最上面一个栈帧的底部。通过它减去一定偏移量对栈中元素进行访问。</li>
 <li>ESP：栈指针寄存器，内存放一个指针永远指向系统栈的最上面一个栈帧的顶部。</li>
 </ul>
-<h4 id="4-端寄存器"><a href="#4-端寄存器" class="headerlink" title="(4). 端寄存器"></a>(4). 端寄存器</h4><p>段寄存器是根据内存分段的模式而设置的。内存单元的物理地址由段寄存器的值和一个偏移量组合而成的，这样可用两个较少位数的值组合成一个可访问的较大物理空间的内存地址。</p>
+<h4 id="4-段寄存器"><a href="#4-段寄存器" class="headerlink" title="(4). 段寄存器"></a>(4). 段寄存器</h4><p>段寄存器是根据内存分段的模式而设置的。内存单元的物理地址由段寄存器的值和一个偏移量组合而成的，这样可用两个较少位数的值组合成一个可访问的较大物理空间的内存地址。</p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%871.png" alt=""></p>
 <ul>
 <li>CS（Code）:  代码段寄存器，其值为代码段的段值</li>
 <li>DS（Date）:  数据段寄存器，其值为数据段的段值</li>
@@ -419,6 +425,10 @@ int main()
 <h4 id="5-指令指针寄存器"><a href="#5-指令指针寄存器" class="headerlink" title="(5). 指令指针寄存器"></a>(5). 指令指针寄存器</h4><ul>
 <li>EIP：存放个下一次将要执行的指令在代码段中的偏移量。</li>
 </ul>
+<h4 id="6-标志寄存器"><a href="#6-标志寄存器" class="headerlink" title="(6). 标志寄存器"></a>(6). 标志寄存器</h4><p> 8086 CPU中有一个16位的标志寄存器，包含了9个标志，主要用于反映处理器的状态和运算结果的某些特征。</p>
+<p> 9个标志寄存器可以分为两组，第一组6个标志寄存器主要受加减运算和逻辑运算结果的影响，称为运算结果标志，第二组标志不受运算结果的影响，称为状态控制标志。</p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE21.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%872.png" alt=""></p>
 <h3 id="2-主要指令"><a href="#2-主要指令" class="headerlink" title="2. 主要指令"></a>2. 主要指令</h3><p> 汇编中的指令可以参照这个网址进行学习（也涉及了上面的寄存器知识点）：<br>  <a href="http://www.freebuf.com/news/others/86147.html" target="_blank" rel="external">http://www.freebuf.com/news/others/86147.html</a></p>
 
       
@@ -431,7 +441,7 @@ int main()
         <p><span>本文标题:</span><a href="/2017/07/04/堆栈基础/">堆栈基础</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Mr_white</a></p>
         <p><span>发布时间:</span>2017-07-04, 10:39:35</p>
-        <p><span>最后更新:</span>2017-07-12, 11:57:51</p>
+        <p><span>最后更新:</span>2017-07-20, 14:12:31</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/07/04/堆栈基础/" title="堆栈基础">http://xq.dropsec.xyz/2017/07/04/堆栈基础/</a>
             <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2017/07/04/堆栈基础/　　作者: Mr_white" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -467,7 +477,7 @@ int main()
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#内存区域"><span class="toc-number">1.</span> <span class="toc-text">内存区域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数调用"><span class="toc-number">2.</span> <span class="toc-text">函数调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#汇编语言"><span class="toc-number">3.</span> <span class="toc-text">汇编语言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-寄存器"><span class="toc-number">3.1.</span> <span class="toc-text">1.寄存器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-数据寄存器"><span class="toc-number">3.1.1.</span> <span class="toc-text">(1). 数据寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-变址寄存器"><span class="toc-number">3.1.2.</span> <span class="toc-text">(2). 变址寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-指针寄存器"><span class="toc-number">3.1.3.</span> <span class="toc-text">(3). 指针寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-端寄存器"><span class="toc-number">3.1.4.</span> <span class="toc-text">(4). 端寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-指令指针寄存器"><span class="toc-number">3.1.5.</span> <span class="toc-text">(5). 指令指针寄存器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-主要指令"><span class="toc-number">3.2.</span> <span class="toc-text">2. 主要指令</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#内存区域"><span class="toc-number">1.</span> <span class="toc-text">内存区域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数调用"><span class="toc-number">2.</span> <span class="toc-text">函数调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#汇编语言"><span class="toc-number">3.</span> <span class="toc-text">汇编语言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-寄存器"><span class="toc-number">3.1.</span> <span class="toc-text">1.寄存器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-数据寄存器"><span class="toc-number">3.1.1.</span> <span class="toc-text">(1). 数据寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-变址寄存器"><span class="toc-number">3.1.2.</span> <span class="toc-text">(2). 变址寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-指针寄存器"><span class="toc-number">3.1.3.</span> <span class="toc-text">(3). 指针寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-段寄存器"><span class="toc-number">3.1.4.</span> <span class="toc-text">(4). 段寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-指令指针寄存器"><span class="toc-number">3.1.5.</span> <span class="toc-text">(5). 指令指针寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-标志寄存器"><span class="toc-number">3.1.6.</span> <span class="toc-text">(6). 标志寄存器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-主要指令"><span class="toc-number">3.2.</span> <span class="toc-text">2. 主要指令</span></a></li></ol></li></ol>
         
     </div>
     <style>
