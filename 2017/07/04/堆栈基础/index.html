@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%871.png">
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE21.png">
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%872.png">
-<meta property="og:updated_time" content="2017-07-20T06:29:55.274Z">
+<meta property="og:updated_time" content="2017-07-20T06:39:58.543Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="堆栈基础">
 <meta name="twitter:description" content="暑假生活开始，学习的好时间，今天就先重温一下堆栈的基础，好好巩固一下。">
@@ -151,13 +151,13 @@
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>Menu</li>
-                        <li>Tags</li>
+                        <li>菜单</li>
+                        <li>标签</li>
                         
-                        <li>Friends</li>
+                        <li>友情链接</li>
                         
                         
-                        <li>About Me</li>
+                        <li>关于我</li>
                         
                     </ul>
                 </div>
@@ -287,7 +287,7 @@
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap"><article id="post-堆栈基础" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -395,7 +395,8 @@ int main()
 <li>6个端寄存器（ES、CS、SS、DS、FS、GS）</li>
 <li>1个指令指针寄存器（EIP）、一个标志寄存器（EFlags）</li>
 </ol>
-<h3 id="1-寄存器"><a href="#1-寄存器" class="headerlink" title="1.寄存器"></a>1.寄存器</h3><p><img src="http://otc7tld02.bkt.clouddn.com/Image.png" width="300" hight="300" alt="" align="center"></p>
+<h3 id="1-寄存器"><a href="#1-寄存器" class="headerlink" title="1.寄存器"></a>1.寄存器</h3><center><img src="http://otc7tld02.bkt.clouddn.com/Image.png" width="500" hight="500" alt=""></center>
+
 <h4 id="1-数据寄存器"><a href="#1-数据寄存器" class="headerlink" title="(1). 数据寄存器"></a>(1). 数据寄存器</h4><p>  数据寄存器主要用来保存操作数以及运算结果，这样就便于节省读取操作数的时间。<br>  32位CPU4个32位通用的寄存器EAX，EBX，ECX，EDX。他们只会对低16为数据进行存储，不会影响高16位的数据。这低16位的寄存器又被称为AX、BX、DC、CX。与先前的CPU寄存器相一致。</p>
 <ul>
 <li>EAX：累加寄存器，用于加减乘除的操作，也用于存储函数的返回值。使用频率非常高。</li>
@@ -414,7 +415,8 @@ int main()
 <li>ESP：栈指针寄存器，内存放一个指针永远指向系统栈的最上面一个栈帧的顶部。</li>
 </ul>
 <h4 id="4-段寄存器"><a href="#4-段寄存器" class="headerlink" title="(4). 段寄存器"></a>(4). 段寄存器</h4><p>段寄存器是根据内存分段的模式而设置的。内存单元的物理地址由段寄存器的值和一个偏移量组合而成的，这样可用两个较少位数的值组合成一个可访问的较大物理空间的内存地址。</p>
-<p><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%871.png" width="300" hight="300" alt="" align="center"></p>
+<center><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%871.png" width="400" hight="400" alt=""></center>
+
 <ul>
 <li>CS（Code）:  代码段寄存器，其值为代码段的段值</li>
 <li>DS（Date）:  数据段寄存器，其值为数据段的段值</li>
@@ -428,8 +430,11 @@ int main()
 </ul>
 <h4 id="6-标志寄存器"><a href="#6-标志寄存器" class="headerlink" title="(6). 标志寄存器"></a>(6). 标志寄存器</h4><p> 8086 CPU中有一个16位的标志寄存器，包含了9个标志，主要用于反映处理器的状态和运算结果的某些特征。</p>
 <p> 9个标志寄存器可以分为两组，第一组6个标志寄存器主要受加减运算和逻辑运算结果的影响，称为运算结果标志，第二组标志不受运算结果的影响，称为状态控制标志。</p>
-<p><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE21.png" alt=""></p>
-<p><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%872.png" width="400" hight="300" alt="" align="center"></p>
+<center><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE21.png" alt=""></center>
+
+
+<center><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%872.png" width="400" hight="300" alt=""></center>
+
 <h3 id="2-主要指令"><a href="#2-主要指令" class="headerlink" title="2. 主要指令"></a>2. 主要指令</h3><p> 汇编中的指令可以参照这个网址进行学习（也涉及了上面的寄存器知识点）：<br>  <a href="http://www.freebuf.com/news/others/86147.html" target="_blank" rel="external">http://www.freebuf.com/news/others/86147.html</a></p>
 
       
@@ -439,17 +444,17 @@ int main()
   
     
     <div class="copyright">
-        <p><span>Title:</span><a href="/2017/07/04/堆栈基础/">堆栈基础</a></p>
-        <p><span>Author:</span><a href="/" title="Back to Homepage">Mr_white</a></p>
-        <p><span>Created:</span>2017-07-04, 10:39:35</p>
-        <p><span>Updated:</span>2017-07-20, 14:29:55</p>
+        <p><span>本文标题:</span><a href="/2017/07/04/堆栈基础/">堆栈基础</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Mr_white</a></p>
+        <p><span>发布时间:</span>2017-07-04, 10:39:35</p>
+        <p><span>最后更新:</span>2017-07-20, 14:39:58</p>
         <p>
-            <span>Full URL:</span><a class="post-url" href="/2017/07/04/堆栈基础/" title="堆栈基础">http://xq.dropsec.xyz/2017/07/04/堆栈基础/</a>
-            <span class="copy-path" data-clipboard-text="From http://xq.dropsec.xyz/2017/07/04/堆栈基础/　　By Mr_white" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/07/04/堆栈基础/" title="堆栈基础">http://xq.dropsec.xyz/2017/07/04/堆栈基础/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2017/07/04/堆栈基础/　　作者: Mr_white" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
-            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
         </p>
     </div>
 
@@ -476,7 +481,7 @@ int main()
 </article>
 
     <div id="toc" class="toc-article">
-        <strong class="toc-title">Contents</strong>
+        <strong class="toc-title">文章目录</strong>
         
             <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#内存区域"><span class="toc-number">1.</span> <span class="toc-text">内存区域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数调用"><span class="toc-number">2.</span> <span class="toc-text">函数调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#汇编语言"><span class="toc-number">3.</span> <span class="toc-text">汇编语言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-寄存器"><span class="toc-number">3.1.</span> <span class="toc-text">1.寄存器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-数据寄存器"><span class="toc-number">3.1.1.</span> <span class="toc-text">(1). 数据寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-变址寄存器"><span class="toc-number">3.1.2.</span> <span class="toc-text">(2). 变址寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-指针寄存器"><span class="toc-number">3.1.3.</span> <span class="toc-text">(3). 指针寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-段寄存器"><span class="toc-number">3.1.4.</span> <span class="toc-text">(4). 段寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-指令指针寄存器"><span class="toc-number">3.1.5.</span> <span class="toc-text">(5). 指令指针寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-标志寄存器"><span class="toc-number">3.1.6.</span> <span class="toc-text">(6). 标志寄存器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-主要指令"><span class="toc-number">3.2.</span> <span class="toc-text">2. 主要指令</span></a></li></ol></li></ol>
         
@@ -492,10 +497,10 @@ int main()
         }
     </style>
 
-    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
     <script>
-        yiliaConfig.toc = ["Hide", "Show", !!"false"];
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
     </script>
 
 
@@ -520,15 +525,15 @@ int main()
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/07/07/二进制文件基础/" title="Pre: 二进制文件基础">
+            <a href="/2017/07/07/二进制文件基础/" title="上一篇: 二进制文件基础">
                 <i class="fa fa-angle-left"></i>
             </a>
         
 
-        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/06/26/定一个小目标/" title="Next: 定一个小目标">
+            <a href="/2017/06/26/定一个小目标/" title="下一篇: 定一个小目标">
                 <i class="fa fa-angle-right"></i>
             </a>
         
@@ -551,14 +556,14 @@ int main()
                 2016-2017 Mr_white
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
                 
@@ -567,7 +572,7 @@ int main()
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit"  title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
                 
@@ -600,9 +605,9 @@ int main()
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script>
     // Open in New Window
