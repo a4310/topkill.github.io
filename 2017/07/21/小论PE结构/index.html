@@ -35,7 +35,7 @@
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/gg21182420.png">
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/rr0721182212.png">
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/1rr1182221.png">
-<meta property="og:updated_time" content="2017-07-21T10:33:49.743Z">
+<meta property="og:updated_time" content="2017-07-21T10:37:27.581Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小论PE结构">
 <meta name="twitter:description" content="前面在二进制文件中小提了一下PE结构，只是皮毛，这里在做一些添加。">
@@ -160,13 +160,13 @@
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
+                        <li>Menu</li>
+                        <li>Tags</li>
                         
-                        <li>友情链接</li>
+                        <li>Friends</li>
                         
                         
-                        <li>关于我</li>
+                        <li>About Me</li>
                         
                     </ul>
                 </div>
@@ -296,7 +296,7 @@
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
       <div class="body-wrap"><article id="post-小论PE结构" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -348,13 +348,13 @@
 <center><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%871111.png" width="500" hight="500" alt=""></center>
 
 <h4 id="PE结构之DOS头"><a href="#PE结构之DOS头" class="headerlink" title="PE结构之DOS头"></a>PE结构之DOS头</h4><p>所有的PE文件都是以一个64字节的DOS头开始。这个DOS头只是为了兼容早期的DOS操作系统。</p>
-<center><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%87112.png" width="350" hight="350" alt=""></center>
+<center><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%87112.png" width="400" hight="400" alt=""></center>
 
 
 <h4 id="PE结构之PE文件头"><a href="#PE结构之PE文件头" class="headerlink" title="PE结构之PE文件头"></a>PE结构之PE文件头</h4><p>PE文件头是PE文件格式各部分中信息以及结构较为复杂的一个部分，主要包含三部分：</p>
 <center><em> PE文件标志</em></center><br><center> 映像文件头</center><br><center>* 可选文件头</center>
 
-<center><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%871113.png" width="350" hight="350" alt=""></center>
+<center><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%871113.png" width="400" hight="400" alt=""></center>
 
 <ul>
 <li>PE文件标志是一个常量，即“PE00”，它标志着PE文件头的开始，同时它也是PE文件的一个主要标识。可以通过DOS头中e_lfanew找出该标志的位置。</li>
@@ -362,17 +362,17 @@
 <ul>
 <li>映像文件头，它紧跟在PE文件标识的后面，映像文件头是一个结构体。</li>
 </ul>
-<center><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%871114.png" width="350" hight="350" alt=""></center>
+<center><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%871114.png" width="400" hight="400" alt=""></center>
 
 <p>Machine代表着改程序要执行在的计算机的类型；NumberOfSections表明了该PE文件的节数，该值与表的数量以及节表的数量应保持一致；SizeOfOptionalHeader表明了可选映像头的大小。</p>
 <ul>
 <li>可选映像头，尽管名字是可选映像头，但是事实上它并不是可选而是必须存在的，是“必选”的。</li>
 </ul>
-<center><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%8711115.png" width="350" hight="350" alt=""></center>
+<center><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%8711115.png" width="400" hight="400" alt=""></center>
 
 
 <h4 id="PE结构之节表"><a href="#PE结构之节表" class="headerlink" title="PE结构之节表"></a>PE结构之节表</h4><p>节表是紧挨着NT映像头的一结构数组，它的数量与节的数量是一致的，也与映像头文件中NumberOFSections是一致的。</p>
-<center><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%871116.png" width="350" hight="350" alt=""></center>
+<center><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%871116.png" width="400" hight="400" alt=""></center>
 
 
 <h4 id="PE结构之节信息"><a href="#PE结构之节信息" class="headerlink" title="PE结构之节信息"></a>PE结构之节信息</h4><p>这里在前面也提及到了，PE文件格式把可执行文件分成若干个数据节(section)，不同的资源被存放在不同的节中，PE文件中的节类型包括：</p>
@@ -386,27 +386,27 @@
 <h3 id="PE文件的查看"><a href="#PE文件的查看" class="headerlink" title="PE文件的查看"></a>PE文件的查看</h3><p>注意，分析一波，在此之前贴一个PE图，参照这个进行分析：</p>
 <p><img src="http://otc7tld02.bkt.clouddn.com/PE.jpg" alt=""></p>
 <p>OK,随机打开一个PE可执行文件。</p>
-<center><img src="http://otc7tld02.bkt.clouddn.com/TIM%E5%9B%BE1170721172931.png" width="350" hight="350" alt=""></center>
+<center><img src="http://otc7tld02.bkt.clouddn.com/TIM%E5%9B%BE1170721172931.png" width="400" hight="400" alt=""></center>
 
 <p>上图的1标记处看出MZ长度虽然不定，但是E-lfanew的位置却是定的，在3ch处，这个很关键，因为PE文件头部就是有e_lfanew定位的.</p>
-<center><img src="http://otc7tld02.bkt.clouddn.com/T121173210.png" width="350" hight="350" alt=""></center>
+<center><img src="http://otc7tld02.bkt.clouddn.com/T121173210.png" width="400" hight="400" alt=""></center>
 
 <p>那从上面的3ch处发现了PE文件头的位置就在00E8，是不是呢？继续往下看。图的2标记处看出DOS处长度不定。</p>
-<center><img src="http://otc7tld02.bkt.clouddn.com/1173234.png" width="350" hight="350" alt=""></center>
+<center><img src="http://otc7tld02.bkt.clouddn.com/1173234.png" width="400" hight="400" alt=""></center>
 
 <p>上图可以看出DOS的所占很长，基于E-lfanew偏移大小为ACH，后面就是PE文件头所在位置，也的确就在00E8处。</p>
 <p>最后看图的3标记处，也就是说PE文件后缀所在位置，那标准位置就是基于PE头偏移04h+14h-2h=16h处<br>也就是下图选中的位置。</p>
-<center><img src="http://otc7tld02.bkt.clouddn.com/1721174559.png" width="350" hight="350" alt=""></center>
+<center><img src="http://otc7tld02.bkt.clouddn.com/1721174559.png" width="400" hight="400" alt=""></center>
 
 
 <p>下面再看看节的信息，就以.text为准吧。看看PE结构表。</p>
-<center><img src="http://otc7tld02.bkt.clouddn.com/gg21182420.png" width="350" hight="350" alt=""></center>
+<center><img src="http://otc7tld02.bkt.clouddn.com/gg21182420.png" width="400" hight="400" alt=""></center>
 
 <p>如上图所示，偏移量在字节表头地址偏移14h后面。那就在右边找到.text字节位置处。向后找14h处偏移，得到.text节基于PE文件的偏移为0400<br>，如下图所示。</p>
-<center><img src="http://otc7tld02.bkt.clouddn.com/rr0721182212.png" width="350" hight="350" alt=""></center>
+<center><img src="http://otc7tld02.bkt.clouddn.com/rr0721182212.png" width="400" hight="400" alt=""></center>
 
 <p>验证一下，转到0400地址处，的确是.text节的存储数据。如下图所示：</p>
-<center><img src="http://otc7tld02.bkt.clouddn.com/1rr1182221.png" width="350" hight="350" alt=""></center>
+<center><img src="http://otc7tld02.bkt.clouddn.com/1rr1182221.png" width="400" hight="400" alt=""></center>
 
 
 <p>最后贴上整理比较详细的一些PE结构讲解：</p>
@@ -422,17 +422,17 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/07/21/小论PE结构/">小论PE结构</a></p>
-        <p><span>文章作者:</span><a href="/" title="回到主页">Mr_white</a></p>
-        <p><span>发布时间:</span>2017-07-21, 16:40:29</p>
-        <p><span>最后更新:</span>2017-07-21, 18:33:49</p>
+        <p><span>Title:</span><a href="/2017/07/21/小论PE结构/">小论PE结构</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">Mr_white</a></p>
+        <p><span>Created:</span>2017-07-21, 16:40:29</p>
+        <p><span>Updated:</span>2017-07-21, 18:37:27</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/07/21/小论PE结构/" title="小论PE结构">http://xq.dropsec.xyz/2017/07/21/小论PE结构/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2017/07/21/小论PE结构/　　作者: Mr_white" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/2017/07/21/小论PE结构/" title="小论PE结构">http://xq.dropsec.xyz/2017/07/21/小论PE结构/</a>
+            <span class="copy-path" data-clipboard-text="From http://xq.dropsec.xyz/2017/07/21/小论PE结构/　　By Mr_white" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
         </p>
     </div>
 
@@ -453,7 +453,7 @@
 </article>
 
     <div id="toc" class="toc-article">
-        <strong class="toc-title">文章目录</strong>
+        <strong class="toc-title">Contents</strong>
         
             <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#PE文件的概念"><span class="toc-number">1.</span> <span class="toc-text">PE文件的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PE文件的结构"><span class="toc-number">2.</span> <span class="toc-text">PE文件的结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#PE结构之DOS头"><span class="toc-number">2.1.</span> <span class="toc-text">PE结构之DOS头</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PE结构之PE文件头"><span class="toc-number">2.2.</span> <span class="toc-text">PE结构之PE文件头</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PE结构之节表"><span class="toc-number">2.3.</span> <span class="toc-text">PE结构之节表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PE结构之节信息"><span class="toc-number">2.4.</span> <span class="toc-text">PE结构之节信息</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PE文件的查看"><span class="toc-number">3.</span> <span class="toc-text">PE文件的查看</span></a></li></ol>
         
@@ -469,10 +469,10 @@
         }
     </style>
 
-    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
 
     <script>
-        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
     </script>
 
 
@@ -497,13 +497,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
         
 
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/07/21/汇编子程序/" title="下一篇: 汇编子程序">
+            <a href="/2017/07/21/汇编子程序/" title="Next: 汇编子程序">
                 <i class="fa fa-angle-right"></i>
             </a>
         
@@ -526,14 +526,14 @@
                 2016-2017 Mr_white
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
                 
@@ -542,7 +542,7 @@
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        <span id="page-visit"  title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
                 
@@ -575,9 +575,9 @@
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script>
     // Open in New Window
