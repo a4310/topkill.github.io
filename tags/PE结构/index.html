@@ -15,16 +15,15 @@
 
 
 
-<meta name="description" content="1.单词语法">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Google hacking 语法">
-<meta property="og:url" content="http://xq.dropsec.xyz/2016/09/03/Google-hacking-语法/index.html">
+<meta name="description" content="No Pain No Gain!">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mr_white">
+<meta property="og:url" content="http://xq.dropsec.xyz/tags/PE结构/index.html">
 <meta property="og:site_name" content="Mr_white">
-<meta property="og:description" content="1.单词语法">
-<meta property="og:updated_time" content="2017-06-16T04:49:12.823Z">
+<meta property="og:description" content="No Pain No Gain!">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Google hacking 语法">
-<meta name="twitter:description" content="1.单词语法">
+<meta name="twitter:title" content="Mr_white">
+<meta name="twitter:description" content="No Pain No Gain!">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +55,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Google hacking 语法 | Mr_white</title>
+<title>Tag: PE结构 | Mr_white</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -66,9 +65,9 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: true,
+        isPost: false,
         isArchive: false,
-        isTag: false,
+        isTag: true,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
@@ -283,176 +282,60 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-Google-hacking-语法" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/2016/09/03/Google-hacking-语法/" class="article-date">
-      <time datetime="2016-09-03T07:40:15.000Z" itemprop="datePublished">2016-09-03</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2017/07/21/小论PE结构/" class="archive-article-date">
+      <time datetime="2017-07-21T08:40:29.000Z" itemprop="datePublished">07-21</time>
 </a>
 
 
-    </div>
+        </div>
+         
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Google hacking 语法
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/07/21/小论PE结构/">小论PE结构</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/others/">others</a>
-    </div>
-
-
-        
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/search/">search</a></li></ul>
-    </div>
-
-        <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
+        <div class="article-info info-on-archive">
           
-        <h2 id="1-单词语法"><a href="#1-单词语法" class="headerlink" title="1.单词语法"></a>1.单词语法</h2><a id="more"></a>
-<h3 id="intext"><a href="#intext" class="headerlink" title="intext:"></a>intext:</h3><p>这个就是把网页中的正文内容中的某个字符做为搜索条件，例如在google里输入：intext：动网，将返回所有在网页正文部分包含”动网”的网页。</p>
-<h3 id="allintext"><a href="#allintext" class="headerlink" title="allintext:"></a>allintext:</h3><p>使用方法和intext类似.</p>
-<h3 id="intitle"><a href="#intitle" class="headerlink" title="intitle:"></a>intitle:</h3><p>和上面那个intext差不多，搜索网页标题中是否有我们所要找的字符，例如搜索：intitle：安全天使，将返回所有网页标题中包含“安全天使”的网页。同理allintitle也同intitle类似。</p>
-<h3 id="cache"><a href="#cache" class="headerlink" title="cache:"></a>cache:</h3><p>搜索google里关于某些内容的缓存，有时候也许能找到一些好东西哦。</p>
-<h3 id="define"><a href="#define" class="headerlink" title="define:"></a>define:</h3><p>搜索某个词语的定义。搜索：define：hacker，将返回关于hacker的定义。</p>
-<h3 id="filetype"><a href="#filetype" class="headerlink" title="filetype:"></a>filetype:</h3><p>这个我要重点推荐一下，无论是撒网式攻击还是我们后面要说的搜索指定类型的文件。例如输入：filetype：doc，将返回所有以doc结尾的文件URL。当然如果你找.bak、.mdb或.inc也是可以的，获得的信息也许会更丰富。</p>
-<h3 id="info"><a href="#info" class="headerlink" title="info:"></a>info:</h3><p>查找指定站点的一些基本信息。</p>
-<h3 id="inurl"><a href="#inurl" class="headerlink" title="inurl:"></a>inurl:</h3><p>搜索我们指定的字符是否存在于URL中。例如输入：inurl：admin，将返回N个类似于这样的连接：<a href="http://www.xxx.com/xxx/admin。用来找管理员登陆的URL不错。allinurl也同inurl类似，可指定多个字符。" target="_blank" rel="external">http://www.xxx.com/xxx/admin。用来找管理员登陆的URL不错。allinurl也同inurl类似，可指定多个字符。</a></p>
-<h2 id="符号语法"><a href="#符号语法" class="headerlink" title="符号语法"></a><strong>符号语法</strong></h2><h3 id=""><a href="#" class="headerlink" title="+"></a>+</h3><p> 把google可能忽略的字列如查询范围</p>
-<h3 id="-1"><a href="#-1" class="headerlink" title="-"></a>-</h3><p>把某个字忽略</p>
-<h3 id="-2"><a href="#-2" class="headerlink" title="~"></a>~</h3><p>同意词</p>
-<h3 id="-3"><a href="#-3" class="headerlink" title="."></a>.</h3><p>单一的通配符</p>
-<h3 id="-4"><a href="#-4" class="headerlink" title="*"></a>*</h3><p>通配符，可代表多个字母</p>
-<h3 id="“”"><a href="#“”" class="headerlink" title="“”"></a>“”</h3><p>精确查询</p>
-
-      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/reverse/">reverse</a>
     </div>
-    
+
+
+          
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PE结构/">PE结构</a></li></ul>
+    </div>
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
-  
-    
-    <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/09/03/Google-hacking-语法/">Google hacking 语法</a></p>
-        <p><span>文章作者:</span><a href="/" title="回到主页">Mr_white</a></p>
-        <p><span>发布时间:</span>2016-09-03, 15:40:15</p>
-        <p><span>最后更新:</span>2017-06-16, 12:49:12</p>
-        <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/09/03/Google-hacking-语法/" title="Google hacking 语法">http://xq.dropsec.xyz/2016/09/03/Google-hacking-语法/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2016/09/03/Google-hacking-语法/　　作者: Mr_white" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
-        </p>
-        <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
-        </p>
-    </div>
-
-
-
-    <nav id="article-nav">
-        
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/09/04/hexo搭建/">
-                    hexo搭建
-                </a>
-            </div>
-        
-        
-            <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/09/03/绕过网站访问限制的方法/">
-                    绕过网站访问限制的方法
-                </a>
-            </div>
-        
-    </nav>
-
-  
 </article>
-
-    <div id="toc" class="toc-article">
-        <strong class="toc-title">文章目录</strong>
-        
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-单词语法"><span class="toc-number">1.</span> <span class="toc-text">1.单词语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#intext"><span class="toc-number">1.1.</span> <span class="toc-text">intext:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#allintext"><span class="toc-number">1.2.</span> <span class="toc-text">allintext:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#intitle"><span class="toc-number">1.3.</span> <span class="toc-text">intitle:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cache"><span class="toc-number">1.4.</span> <span class="toc-text">cache:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#define"><span class="toc-number">1.5.</span> <span class="toc-text">define:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#filetype"><span class="toc-number">1.6.</span> <span class="toc-text">filetype:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#info"><span class="toc-number">1.7.</span> <span class="toc-text">info:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#inurl"><span class="toc-number">1.8.</span> <span class="toc-text">inurl:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#符号语法"><span class="toc-number">2.</span> <span class="toc-text">符号语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.1.</span> <span class="toc-text">+</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#-1"><span class="toc-number">2.2.</span> <span class="toc-text">-</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#-2"><span class="toc-number">2.3.</span> <span class="toc-text">~</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#-3"><span class="toc-number">2.4.</span> <span class="toc-text">.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#-4"><span class="toc-number">2.5.</span> <span class="toc-text">*</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#“”"><span class="toc-number">2.6.</span> <span class="toc-text">“”</span></a></li></ol></li></ol>
-        
-    </div>
-    <style>
-        .left-col .switch-btn,
-        .left-col .switch-area {
-            display: none;
-        }
-        .toc-level-3 i,
-        .toc-level-3 ol {
-            display: none !important;
-        }
-    </style>
-
-    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
-
-    <script>
-        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
-    </script>
-
-
-
-    
-<div class="share">
-    
-
-    
-</div>
-
-
-
-
-
-
+  
+  
+    </div></section>
+  
 
     
 
-
-
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/2016/09/04/hexo搭建/" title="上一篇: hexo搭建">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
-
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-
-        
-            <a href="/2016/09/03/绕过网站访问限制的方法/" title="下一篇: 绕过网站访问限制的方法">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
-    </div>
-
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/小论PE结构/">小论PE结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/汇编子程序/">汇编子程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/19/XMAN练习writeup及所得/">XMAN练习 writeup及所得</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/07/二进制文件基础/">二进制文件基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/04/堆栈及汇编基础/">堆栈及汇编基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/定一个小目标/">定一个小目标</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/17/NJCTF-writeup总结/">NJCTF writeup总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/16/ZCTF-writeup总结/">ZCTF writeup总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/practice-8之PEiD插件/">practice 8之PEiD插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/14/practice-7之行为分析/">practice 7之行为分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/practice-6之算法夹杂/">practice 6之算法夹杂</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/practice-5之万能断点/">practice 5之万能断点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/practice-4之IDA用法/">practice-4之IDA用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/practice-3之pyo学习/">practice-3之pyo学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/practice-2之汇编/">practice-2之汇编</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/09/8道Pwn基础练习所得/">8道Pwn基础练习所得</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/08/一步一步学ROP之x86篇/">一步一步学ROP之x86篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/30/practice-1之图片reverse/">practice-1之图片reverse</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/16/寒假计划/">寒假计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/12/GDB寄存器和内存查询指令/">GDB寄存器和内存查询指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/30/gdb与peda指令学习学习笔记/">gdb与peda指令学习学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/04/hexo搭建/">hexo搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/03/Google-hacking-语法/">Google hacking 语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/03/绕过网站访问限制的方法/">绕过网站访问限制的方法</a></li></ul>
-
-
-
-
-    <script>
-        
-    </script>
 </div>
       <footer id="footer">
     <div class="outer">

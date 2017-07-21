@@ -3,6 +3,98 @@
   
     
     <entry>
+      <title><![CDATA[小论PE结构]]></title>
+      <url>/2017/07/21/%E5%B0%8F%E8%AE%BAPE%E7%BB%93%E6%9E%84/</url>
+      <content type="html"><![CDATA[<p>前面在二进制文件中小提了一下PE结构，只是皮毛，这里在做一些添加。<br><a id="more"></a></p>
+<h3 id="PE文件的概念"><a href="#PE文件的概念" class="headerlink" title="PE文件的概念"></a>PE文件的概念</h3><p>弱弱的解释一下：PE(Portable Executable)文件称为可移植的可执行的文件，是微软Windows操作系统上的程序文件，包括EXE、DLL、SYS等。</p>
+<h3 id="PE文件的结构"><a href="#PE文件的结构" class="headerlink" title="PE文件的结构"></a>PE文件的结构</h3><p>主要就是下图所示的三大块儿</p>
+<center><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%871111.png" width="500" hight="500" alt=""></center>
+
+<h4 id="PE结构之DOS头"><a href="#PE结构之DOS头" class="headerlink" title="PE结构之DOS头"></a>PE结构之DOS头</h4><p>所有的PE文件都是以一个64字节的DOS头开始。这个DOS头只是为了兼容早期的DOS操作系统。</p>
+<center><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%87112.png" width="350" hight="350" alt=""></center>
+
+
+<h4 id="PE结构之PE文件头"><a href="#PE结构之PE文件头" class="headerlink" title="PE结构之PE文件头"></a>PE结构之PE文件头</h4><p>PE文件头是PE文件格式各部分中信息以及结构较为复杂的一个部分，主要包含三部分：</p>
+<center><em> PE文件标志</em></center><br><center> 映像文件头</center><br><center>* 可选文件头</center>
+
+<center><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%871113.png" width="350" hight="350" alt=""></center>
+
+<ul>
+<li>PE文件标志是一个常量，即“PE00”，它标志着PE文件头的开始，同时它也是PE文件的一个主要标识。可以通过DOS头中e_lfanew找出该标志的位置。</li>
+</ul>
+<ul>
+<li>映像文件头，它紧跟在PE文件标识的后面，映像文件头是一个结构体。</li>
+</ul>
+<center><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%871114.png" width="350" hight="350" alt=""></center>
+
+<p>Machine代表着改程序要执行在的计算机的类型；NumberOfSections表明了该PE文件的节数，该值与表的数量以及节表的数量应保持一致；SizeOfOptionalHeader表明了可选映像头的大小。</p>
+<ul>
+<li>可选映像头，尽管名字是可选映像头，但是事实上它并不是可选而是必须存在的，是“必选”的。</li>
+</ul>
+<center><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%8711115.png" width="350" hight="350" alt=""></center>
+
+
+<h4 id="PE结构之节表"><a href="#PE结构之节表" class="headerlink" title="PE结构之节表"></a>PE结构之节表</h4><p>节表是紧挨着NT映像头的一结构数组，它的数量与节的数量是一致的，也与映像头文件中NumberOFSections是一致的。</p>
+<center><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%BE%E7%89%871116.png" width="350" hight="350" alt=""></center>
+
+
+<h4 id="PE结构之节信息"><a href="#PE结构之节信息" class="headerlink" title="PE结构之节信息"></a>PE结构之节信息</h4><p>这里在前面也提及到了，PE文件格式把可执行文件分成若干个数据节(section)，不同的资源被存放在不同的节中，PE文件中的节类型包括：</p>
+<ul>
+<li>.text     由编译器产生，存放着二进制的机器代码，也是反汇编和调试的对象</li>
+<li>.data    初始化的数据块，如宏定义、全局变量等</li>
+<li>.idata    可执行文件所使用的动态链接库等外来函数与文件的信息</li>
+<li>.rsrc    存放程序的资源，如图标、菜单等</li>
+<li>.reloc、edata、.rdata等</li>
+</ul>
+<h3 id="PE文件的查看"><a href="#PE文件的查看" class="headerlink" title="PE文件的查看"></a>PE文件的查看</h3><p>注意，分析一波，在此之前贴一个PE图，参照这个进行分析：</p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/PE.jpg" alt=""></p>
+<p>OK,随机打开一个PE可执行文件。</p>
+<center><img src="http://otc7tld02.bkt.clouddn.com/TIM%E5%9B%BE1170721172931.png" width="350" hight="350" alt=""></center>
+
+<p>上图的1标记处看出MZ长度虽然不定，但是E-lfanew的位置却是定的，在3ch处，这个很关键，因为PE文件头部就是有e_lfanew定位的.</p>
+<center><img src="http://otc7tld02.bkt.clouddn.com/T121173210.png" width="350" hight="350" alt=""></center>
+
+<p>那从上面的3ch处发现了PE文件头的位置就在00E8，是不是呢？继续往下看。图的2标记处看出DOS处长度不定。</p>
+<center><img src="http://otc7tld02.bkt.clouddn.com/1173234.png" width="350" hight="350" alt=""></center>
+
+<p>上图可以看出DOS的所占很长，基于E-lfanew偏移大小为ACH，后面就是PE文件头所在位置，也的确就在00E8处。</p>
+<p>最后看图的3标记处，也就是说PE文件后缀所在位置，那标准位置就是基于PE头偏移04h+14h-2h=16h处<br>也就是下图选中的位置。</p>
+<center><img src="http://otc7tld02.bkt.clouddn.com/1721174559.png" width="350" hight="350" alt=""></center>
+
+
+<p>下面再看看节的信息，就以.text为准吧。看看PE结构表。</p>
+<center><img src="http://otc7tld02.bkt.clouddn.com/gg21182420.png" width="350" hight="350" alt=""></center>
+
+<p>如上图所示，偏移量在字节表头地址偏移14h后面。那就在右边找到.text字节位置处。向后找14h处偏移，得到.text节基于PE文件的偏移为0400<br>，如下图所示。</p>
+<center><img src="http://otc7tld02.bkt.clouddn.com/rr0721182212.png" width="350" hight="350" alt=""></center>
+
+<p>验证一下，转到0400地址处，的确是.text节的存储数据。如下图所示：</p>
+<center><img src="http://otc7tld02.bkt.clouddn.com/1rr1182221.png" width="350" hight="350" alt=""></center>
+
+
+<p>最后贴上整理比较详细的一些PE结构讲解：</p>
+<ul>
+<li><a href="http://blog.csdn.net/evileagle/article/details/11693499" target="_blank" rel="external">http://blog.csdn.net/evileagle/article/details/11693499</a></li>
+<li><a href="http://www.cnblogs.com/guanlaiy/archive/2012/04/28/2474504.html" target="_blank" rel="external">http://www.cnblogs.com/guanlaiy/archive/2012/04/28/2474504.html</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> reverse </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> PE结构 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[汇编子程序]]></title>
       <url>/2017/07/21/%E6%B1%87%E7%BC%96%E5%AD%90%E7%A8%8B%E5%BA%8F/</url>
       <content type="html"><![CDATA[<p>前面总结了汇编的寄存器及相关知识，这里了解一下汇编代码的编写并做一个读代码小练习。</p>
