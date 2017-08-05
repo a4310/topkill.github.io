@@ -21,16 +21,16 @@
 <meta property="og:url" content="http://xq.dropsec.xyz/2017/07/19/XMAN练习writeup及所得/index.html">
 <meta property="og:site_name" content="Mr_white">
 <meta property="og:description" content="XMAN夏令营虽然没参加，但是选拔赛的题目还是乘着闲暇时间做了几道，并且也学习到了一些。在这里做个总结。">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/TIM%E6%88%AA%E5%9B%BE20170719195222.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/TIM%E6%88%AA%E5%9B%BE20170719195110.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/9.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/401.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/10.png">
-<meta property="og:updated_time" content="2017-07-19T12:52:24.489Z">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E9%80%86%E5%90%91%E7%AE%97%E6%B3%951.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/19%E4%BD%8DBase.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/correct.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/encode.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/smali.png">
+<meta property="og:updated_time" content="2017-08-05T12:57:46.936Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="XMAN练习 writeup及所得">
 <meta name="twitter:description" content="XMAN夏令营虽然没参加，但是选拔赛的题目还是乘着闲暇时间做了几道，并且也学习到了一些。在这里做个总结。">
-<meta name="twitter:image" content="http://otc7tld02.bkt.clouddn.com/TIM%E6%88%AA%E5%9B%BE20170719195222.png">
+<meta name="twitter:image" content="http://otc7tld02.bkt.clouddn.com/%E9%80%86%E5%90%91%E7%AE%97%E6%B3%951.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -151,13 +151,13 @@
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>菜單</li>
-                        <li>標籤</li>
+                        <li>菜单</li>
+                        <li>标签</li>
                         
-                        <li>友情鏈接</li>
+                        <li>友情链接</li>
                         
                         
-                        <li>關於我</li>
+                        <li>关于我</li>
                         
                     </ul>
                 </div>
@@ -287,7 +287,7 @@
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="標籤" friends="友情鏈接" about="關於我"/>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap"><article id="post-XMAN练习writeup及所得" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -335,9 +335,9 @@
           
         <p>XMAN夏令营虽然没参加，但是选拔赛的题目还是乘着闲暇时间做了几道，并且也学习到了一些。<br>在这里做个总结。<br><a id="more"></a></p>
 <h4 id="第一道reverse"><a href="#第一道reverse" class="headerlink" title="第一道reverse"></a>第一道reverse</h4><p>老规矩就IDA看一波</p>
-<p>找关键字符，跟踪过去F5大法。下图很明显关键处，而if判断便是重要所在。<br><img src="http://otc7tld02.bkt.clouddn.com/TIM%E6%88%AA%E5%9B%BE20170719195222.png" alt=""></p>
+<p>找关键字符，跟踪过去F5大法。下图很明显关键处，而if判断便是重要所在。<br><img src="http://otc7tld02.bkt.clouddn.com/%E9%80%86%E5%90%91%E7%AE%97%E6%B3%951.png" alt=""></p>
 <p>这个题目逻辑还是很清晰的，里面自带的乍一看以为是Base64，然而编译出来的不知道什么鬼，在往下看，将我们输入的19位异或操作然后sub_4996DD函数又是一通操作，其实就是做了Base64转换，为什么看出来，应为上面的Base64解码就是19位，根据特性所以猜测如此</p>
-<p><img src="http://otc7tld02.bkt.clouddn.com/TIM%E6%88%AA%E5%9B%BE20170719195110.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/19%E4%BD%8DBase.png" alt=""></p>
 <p>那就很明了了，逆运算即可，附上代码：</p>
 <pre><code>from base64 import *
 w=&apos;WEw2TX82amFXOFlUXz1RSUVfbw==&apos;
@@ -349,8 +349,8 @@ for j in range(len(t)):
 print(q)
 </code></pre><h4 id="第二道安卓"><a href="#第二道安卓" class="headerlink" title="第二道安卓"></a>第二道安卓</h4><p>直接反编译一波</p>
 <p>明显的correct和failed提示，关键就是encode.check了</p>
-<p><img src="http://otc7tld02.bkt.clouddn.com/9.png" alt=""></p>
-<p>跟过去，可以看到算法，也很简单<br>输入的字符与b进行加法运算与61取模然后乘2再减去循环次要和输入的一样，那就爆破吧。<br><img src="http://otc7tld02.bkt.clouddn.com/401.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/correct.png" alt=""></p>
+<p>跟过去，可以看到算法，也很简单<br>输入的字符与b进行加法运算与61取模然后乘2再减去循环次要和输入的一样，那就爆破吧。<br><img src="http://otc7tld02.bkt.clouddn.com/encode.png" alt=""></p>
 <p>附上代码：</p>
 <pre><code>b = [23, 22, 26, 26, 25, 25, 25, 26, 27, 28, 30, 30, 29, 30, 32, 32]
 w=&apos;&apos;
@@ -360,7 +360,7 @@ for i in range(len(b)):
             w+=chr(j)
 print(w)
 </code></pre><h4 id="第三道-安卓（有所得）"><a href="#第三道-安卓（有所得）" class="headerlink" title="第三道 安卓（有所得）"></a>第三道 安卓（有所得）</h4><p>给的是一个smali文件，直接用smali2java编译成java语言看好了。</p>
-<p>看看代码，大致流程和Base64没差，除了最后的对应转换表，将输入的以8位二进制转换，然后以6的倍数为条件补‘0’，最后6位为单位切片，在对应标志选择相应位置替代。<br><img src="http://otc7tld02.bkt.clouddn.com/10.png" alt=""></p>
+<p>看看代码，大致流程和Base64没差，除了最后的对应转换表，将输入的以8位二进制转换，然后以6的倍数为条件补‘0’，最后6位为单位切片，在对应标志选择相应位置替代。<br><img src="http://otc7tld02.bkt.clouddn.com/smali.png" alt=""></p>
 <p>这样一来就可以逆向算法，一步一步已经写出了代码：</p>
 <pre><code>end=&apos;xsZDluYYreJDyrpDpucZCo&apos;
 temp=&apos;+/abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&apos;
@@ -427,17 +427,17 @@ print(&apos;&apos;.join([chr(i) for i in [int(b, 2) for b in flag.split(&apos; &
   
     
     <div class="copyright">
-        <p><span>本文標題:</span><a href="/2017/07/19/XMAN练习writeup及所得/">XMAN练习 writeup及所得</a></p>
-        <p><span>文章作者:</span><a href="/" title="回到主頁">Mr_white</a></p>
-        <p><span>發布時間:</span>2017-07-19, 19:40:41</p>
-        <p><span>最後更新:</span>2017-07-19, 20:52:24</p>
+        <p><span>本文标题:</span><a href="/2017/07/19/XMAN练习writeup及所得/">XMAN练习 writeup及所得</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Mr_white</a></p>
+        <p><span>发布时间:</span>2017-07-19, 19:40:41</p>
+        <p><span>最后更新:</span>2017-08-05, 20:57:46</p>
         <p>
-            <span>原始鏈接:</span><a class="post-url" href="/2017/07/19/XMAN练习writeup及所得/" title="XMAN练习 writeup及所得">http://xq.dropsec.xyz/2017/07/19/XMAN练习writeup及所得/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2017/07/19/XMAN练习writeup及所得/　　作者: Mr_white" title="點擊複製文章鏈接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/07/19/XMAN练习writeup及所得/" title="XMAN练习 writeup及所得">http://xq.dropsec.xyz/2017/07/19/XMAN练习writeup及所得/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2017/07/19/XMAN练习writeup及所得/　　作者: Mr_white" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
-            <span>許可協議:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"姓名標示-非商業性-相同方式分享 4.0 國際"</a> 轉載請保留原文鏈接及作者。
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
         </p>
     </div>
 
@@ -464,7 +464,7 @@ print(&apos;&apos;.join([chr(i) for i in [int(b, 2) for b in flag.split(&apos; &
 </article>
 
     <div id="toc" class="toc-article">
-        <strong class="toc-title">文章目錄</strong>
+        <strong class="toc-title">文章目录</strong>
         
             <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#第一道reverse"><span class="toc-number">1.</span> <span class="toc-text">第一道reverse</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第二道安卓"><span class="toc-number">2.</span> <span class="toc-text">第二道安卓</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第三道-安卓（有所得）"><span class="toc-number">3.</span> <span class="toc-text">第三道 安卓（有所得）</span></a></li></ol>
         
@@ -480,10 +480,10 @@ print(&apos;&apos;.join([chr(i) for i in [int(b, 2) for b in flag.split(&apos; &
         }
     </style>
 
-    <input type="button" id="tocButton" value="隱藏目錄"  title="點擊按鈕隱藏或者顯示文章目錄">
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
     <script>
-        yiliaConfig.toc = ["隱藏目錄", "顯示目錄", !!"false"];
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
     </script>
 
 
@@ -539,14 +539,14 @@ print(&apos;&apos;.join([chr(i) for i in [int(b, 2) for b in flag.split(&apos; &
                 2016-2017 Mr_white
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、簡潔且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="簡而不減 Hexo 雙欄博客主題  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" title="本站到訪數"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
                 
@@ -555,7 +555,7 @@ print(&apos;&apos;.join([chr(i) for i in [int(b, 2) for b in flag.split(&apos; &
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit"  title="本頁閱讀量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
                 
@@ -588,9 +588,9 @@ print(&apos;&apos;.join([chr(i) for i in [int(b, 2) for b in flag.split(&apos; &
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="返回頂部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="查看評論"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="轉到底部"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script>
     // Open in New Window
