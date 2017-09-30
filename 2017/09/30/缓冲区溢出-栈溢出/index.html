@@ -28,7 +28,7 @@
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/sys.jpg">
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/sh.jpg">
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/64l.jpg">
-<meta property="og:updated_time" content="2017-09-30T01:53:37.370Z">
+<meta property="og:updated_time" content="2017-09-30T01:56:34.510Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="缓冲区溢出--栈溢出">
 <meta name="twitter:description" content="隔了好久不更，今儿就把搞懂的32位下和64位下的栈溢出漏洞分享一下咯，太菜，求大佬放过。">
@@ -351,7 +351,7 @@
 <p>如果大于 6 , 那么多出来的参数按照从右至左的顺序依次压栈<br>x64的栈帧在返回地址额下面</p>
 <p><a href="http://eli.thegreenplace.net/2011/09/06/stack-frame-layout-on-x86-64" target="_blank" rel="external">给一个看到的链接，关于64bit的传参问题</a></p>
 <h2 id="Ⅲ-乘热打铁。"><a href="#Ⅲ-乘热打铁。" class="headerlink" title="Ⅲ.乘热打铁。"></a>Ⅲ.乘热打铁。</h2><p>来两道例题练练好了。<a href="https://www.jarvisoj.com/about" target="_blank" rel="external">这里是出处</a></p>
-<h4 id="①-32bit："><a href="#①-32bit：" class="headerlink" title="①.32bit："></a>①.32bit：</h4><p>主函数，里面有一个函数调用。</p>
+<h3 id="①-32bit："><a href="#①-32bit：" class="headerlink" title="①.32bit："></a>①.32bit：</h3><p>主函数，里面有一个函数调用。</p>
 <center><img src="http://otc7tld02.bkt.clouddn.com/le2_main.jpg" alt=""></center>
 
 
@@ -377,7 +377,7 @@ ebp=&apos;aaaa&apos;
 payload=junk+ebp+p32(systemaddr)+p32(4)+p32(shelladdr)
 p.send(payload)
 p.interactive()
-</code></pre><h4 id="②-64bit："><a href="#②-64bit：" class="headerlink" title="②.64bit："></a>②.64bit：</h4><p>和上面一题是孪生兄弟，只是一个32bit，一个64bit下的。程序一模一样，所以思路也就类似，如图。</p>
+</code></pre><h3 id="②-64bit："><a href="#②-64bit：" class="headerlink" title="②.64bit："></a>②.64bit：</h3><p>和上面一题是孪生兄弟，只是一个32bit，一个64bit下的。程序一模一样，所以思路也就类似，如图。</p>
 <center><img src="http://otc7tld02.bkt.clouddn.com/64l.jpg" alt=""></center>
 
 
@@ -408,7 +408,7 @@ p.interactive()
         <p><span>本文标题:</span><a href="/2017/09/30/缓冲区溢出-栈溢出/">缓冲区溢出--栈溢出</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Mr_white</a></p>
         <p><span>发布时间:</span>2017-09-30, 08:51:36</p>
-        <p><span>最后更新:</span>2017-09-30, 09:53:37</p>
+        <p><span>最后更新:</span>2017-09-30, 09:56:34</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/09/30/缓冲区溢出-栈溢出/" title="缓冲区溢出--栈溢出">http://xq.dropsec.xyz/2017/09/30/缓冲区溢出-栈溢出/</a>
             <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2017/09/30/缓冲区溢出-栈溢出/　　作者: Mr_white" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -438,7 +438,7 @@ p.interactive()
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ⅰ-预热"><span class="toc-number">1.</span> <span class="toc-text">Ⅰ.预热</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ⅱ-原理"><span class="toc-number">2.</span> <span class="toc-text">Ⅱ.原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#①-简介"><span class="toc-number">2.1.</span> <span class="toc-text">①.简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#②-细说"><span class="toc-number">2.2.</span> <span class="toc-text">②.细说</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#③-传参"><span class="toc-number">2.3.</span> <span class="toc-text">③.传参</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ⅲ-乘热打铁。"><span class="toc-number">3.</span> <span class="toc-text">Ⅲ.乘热打铁。</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#①-32bit："><span class="toc-number">3.0.1.</span> <span class="toc-text">①.32bit：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#②-64bit："><span class="toc-number">3.0.2.</span> <span class="toc-text">②.64bit：</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ⅰ-预热"><span class="toc-number">1.</span> <span class="toc-text">Ⅰ.预热</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ⅱ-原理"><span class="toc-number">2.</span> <span class="toc-text">Ⅱ.原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#①-简介"><span class="toc-number">2.1.</span> <span class="toc-text">①.简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#②-细说"><span class="toc-number">2.2.</span> <span class="toc-text">②.细说</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#③-传参"><span class="toc-number">2.3.</span> <span class="toc-text">③.传参</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ⅲ-乘热打铁。"><span class="toc-number">3.</span> <span class="toc-text">Ⅲ.乘热打铁。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#①-32bit："><span class="toc-number">3.1.</span> <span class="toc-text">①.32bit：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#②-64bit："><span class="toc-number">3.2.</span> <span class="toc-text">②.64bit：</span></a></li></ol></li></ol>
         
     </div>
     <style>
