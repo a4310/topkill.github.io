@@ -39,7 +39,9 @@
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/Mz1.jpg">
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/Maze2.jpg">
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/MAZE3.jpg">
-<meta property="og:updated_time" content="2017-12-03T09:47:17.008Z">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/rsa1.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/rsa2.png">
+<meta property="og:updated_time" content="2017-12-04T08:21:34.281Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="校赛Reverse&Crypto writeup">
 <meta name="twitter:description" content="2017.12.2日举办的校赛圆满结束，整理一下我们小组出的逆向和密码学的writeup">
@@ -164,13 +166,13 @@
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
+                        <li>Menu</li>
+                        <li>Tags</li>
                         
-                        <li>友情链接</li>
+                        <li>Friends</li>
                         
                         
-                        <li>关于我</li>
+                        <li>About Me</li>
                         
                     </ul>
                 </div>
@@ -300,7 +302,7 @@
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
       <div class="body-wrap"><article id="post-校赛Reverse-Crypto-writeup" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -443,7 +445,35 @@ for i in range(36):
    flag=base64.b64decode(flag)
 
 print(flag)
-</code></pre>
+</code></pre><p>###RSA</p>
+<ol>
+<li>分析流量包提取有用信息：</li>
+</ol>
+<p><img src="http://otc7tld02.bkt.clouddn.com/rsa1.png" alt=""><br>看到有三个key的压缩包，压缩包可以通过foremost或者binwalk提取出来。</p>
+<p>key1：<br>—–BEGIN PUBLIC KEY—–<br>MIGAMA0GCSqGSIb3DQEBAQUAA28AMGwCZQCnZIbrdaPobT4Ia+0c3yj+tR7l6prJ<br>byoeOrDRK5mXyasdn8HSExKeruRFMELsOupuF0Dw15zKzv8+9J+SQjE+7eZ/svRD<br>C6aPXQZGXKtcMiIqlHa4Q3hI6cw3WFgbYdIlC1OZAgMBAAE=<br>—–END PUBLIC KEY—–</p>
+<p>key2：<br>—–BEGIN PUBLIC KEY—–<br>MIGAMA0GCSqGSIb3DQEBAQUAA28AMGwCZQCnZIbrdaPobT4Ia+0c3yj+tR7l6prJ<br>byoeOrDRK5mXyasdn8HSExKeruRFMELsOupuF0Dw15zKzv8+9J+SQjE+7eZ/svRD<br>C6aPXQZGXKtcMiIqlHa4Q3hI6cw3WFgbYdIlC1OZAgMBAAM=<br>—–END PUBLIC KEY—–</p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/rsa2.png" alt=""></p>
+<p>还有两个cry的txt需要扣取出来就好。</p>
+<ol>
+<li>分解两个公钥得到不同的两个不同的e和一个相同的n，会玩rsa的就可以知道是共膜攻击。</li>
+<li><p>写代码，解题再转码转字符得到flag。<br>脚本：<br>#!/usr/bin/env python3<br># coding:utf-8<br>import binascii<br>def modinv(a, m):<br>  g, x, y = egcd(a, m)<br>  if g != 1:</p>
+<pre><code>raise Exception(&apos;modular inverse does not exist&apos;)
+</code></pre><p>  else:</p>
+<pre><code>return x % m
+</code></pre><p>def egcd(a,b):<br>  if a==0:</p>
+<pre><code>return (b,0,1)
+</code></pre><p>  else:</p>
+<pre><code>g,y,x=egcd(b%a,a)
+return (g,x-(b//a)*y,y)
+</code></pre><p>def main():</p>
+<p>#c1为密文1     c1=2030811156522080479534380585679540224811392358471221121903500951020792730252365410965194272526859671449231195224643995533159581726005071102332599685927429796174012361879498368574822467464773239467267683166997996469735733139730718951657093072<br>#c2为密文2    </p>
+<p>c2=432349880784956087467730931619622010551468577048036338892145633949921703163476344960761289142596504797262111871151379630491409846619636163453069518097091623785238077044180062258181941690990234123420861146760076308983603961910238392785031770<br>#n为模</p>
+<p>n=0xa76486eb75a3e86d3e086bed1cdf28feb51ee5ea9ac96f2a1e3ab0d12b9997c9ab1d9fc1d213129eaee4453042ec3aea6e1740f0d79ccaceff3ef49f9242313eede67fb2f4430ba68f5d06465cab5c32222a9476b8437848e9cc3758581b61d2250b5399</p>
+<p>#egcd()两个参数分别为e1和e2<br>s = egcd(65537, 65539)<br>s1 = s[1]<br>s2 = s[2]<br>if s1&lt;0:<br>  s1 = - s1<br>  c1 = modinv(c1, n)<br>elif s2&lt;0:<br>  s2 = - s2<br>  c2 = modinv(c2, n)<br>m = (pow(c1,s1,n)*pow(c2,s2,n)) % n<br>h = hex(m)[2:-1]<br>print binascii.a2b_hex(h)<br>if <strong>name</strong> == ‘<strong>main</strong>‘:<br>  main()</p>
+</li>
+</ol>
+<p>4.得到flag：flag{deciphering_is_very_interesting}</p>
+
       
     </div>
     
@@ -451,17 +481,17 @@ print(flag)
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/12/02/校赛Reverse-Crypto-writeup/">校赛Reverse&amp;Crypto writeup</a></p>
-        <p><span>文章作者:</span><a href="/" title="回到主页">Mr_white</a></p>
-        <p><span>发布时间:</span>2017-12-02, 21:35:31</p>
-        <p><span>最后更新:</span>2017-12-03, 17:47:17</p>
+        <p><span>Title:</span><a href="/2017/12/02/校赛Reverse-Crypto-writeup/">校赛Reverse&amp;Crypto writeup</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">Mr_white</a></p>
+        <p><span>Created:</span>2017-12-02, 21:35:31</p>
+        <p><span>Updated:</span>2017-12-04, 16:21:34</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/12/02/校赛Reverse-Crypto-writeup/" title="校赛Reverse&amp;Crypto writeup">http://xq.dropsec.xyz/2017/12/02/校赛Reverse-Crypto-writeup/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2017/12/02/校赛Reverse-Crypto-writeup/　　作者: Mr_white" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/2017/12/02/校赛Reverse-Crypto-writeup/" title="校赛Reverse&amp;Crypto writeup">http://xq.dropsec.xyz/2017/12/02/校赛Reverse-Crypto-writeup/</a>
+            <span class="copy-path" data-clipboard-text="From http://xq.dropsec.xyz/2017/12/02/校赛Reverse-Crypto-writeup/　　By Mr_white" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
         </p>
     </div>
 
@@ -482,7 +512,7 @@ print(flag)
 </article>
 
     <div id="toc" class="toc-article">
-        <strong class="toc-title">文章目录</strong>
+        <strong class="toc-title">Contents</strong>
         
             <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Reverse"><span class="toc-number">1.</span> <span class="toc-text">Reverse</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单的Re"><span class="toc-number">1.1.</span> <span class="toc-text">简单的Re</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#来自计算机七号的挑（song）战（fen）"><span class="toc-number">1.2.</span> <span class="toc-text">来自计算机七号的挑（song）战（fen）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-B"><span class="toc-number">1.3.</span> <span class="toc-text">Android_B</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#破解快乐"><span class="toc-number">1.4.</span> <span class="toc-text">破解快乐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android2"><span class="toc-number">1.5.</span> <span class="toc-text">Android2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Maze"><span class="toc-number">1.6.</span> <span class="toc-text">Maze</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一起来“胖”啊"><span class="toc-number">1.7.</span> <span class="toc-text">一起来“胖”啊</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Crypto"><span class="toc-number">2.</span> <span class="toc-text">Crypto</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#密码学100"><span class="toc-number">2.1.</span> <span class="toc-text">密码学100</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#贝斯家族"><span class="toc-number">2.2.</span> <span class="toc-text">贝斯家族</span></a></li></ol></li></ol>
         
@@ -498,10 +528,10 @@ print(flag)
         }
     </style>
 
-    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
 
     <script>
-        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
     </script>
 
 
@@ -526,13 +556,13 @@ print(flag)
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
         
 
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/09/30/缓冲区溢出-栈溢出/" title="下一篇: 缓冲区溢出--栈溢出">
+            <a href="/2017/09/30/缓冲区溢出-栈溢出/" title="Next: 缓冲区溢出--栈溢出">
                 <i class="fa fa-angle-right"></i>
             </a>
         
@@ -555,14 +585,14 @@ print(flag)
                 2016-2017 Mr_white
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
                 
@@ -571,7 +601,7 @@ print(flag)
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        <span id="page-visit"  title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
                 
@@ -604,9 +634,9 @@ print(flag)
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script>
     // Open in New Window
