@@ -21,23 +21,23 @@
 <meta property="og:url" content="http://xq.dropsec.xyz/2017/02/08/一步一步学ROP之x86篇/index.html">
 <meta property="og:site_name" content="Mr_white">
 <meta property="og:description" content="根据寒假计划的第三计划，是该学习rop了。下面是学习rop之linux_x86篇的学习笔记以及总结。">
-<meta property="og:image" content="http://p1.bpimg.com/567571/d93bd9e76a1bfa28.png">
-<meta property="og:image" content="http://i1.piimg.com/567571/c6ca73531e7e0eab.png">
-<meta property="og:image" content="http://p1.bpimg.com/567571/a5a6c0264328d2ea.png">
-<meta property="og:image" content="http://p1.bpimg.com/567571/047c86bde3e83140.png">
-<meta property="og:image" content="http://p1.bpimg.com/567571/7a6347780a47edf9.png">
-<meta property="og:image" content="http://p1.bpimg.com/567571/36a85efa38efce36.png">
-<meta property="og:image" content="http://p1.bpimg.com/567571/6632c5b0af41ef13.png">
-<meta property="og:image" content="http://p1.bpimg.com/567571/5f09a62aba81a7a9.png">
-<meta property="og:image" content="http://p1.bpimg.com/567571/773db76a654aaa29.png">
-<meta property="og:image" content="http://p1.bpimg.com/567571/356ec28ac9e2d64e.png">
-<meta property="og:image" content="http://i1.piimg.com/567571/94ddb130646489c9.png">
-<meta property="og:image" content="http://i1.piimg.com/567571/eb73f9b80519ade1.png">
-<meta property="og:updated_time" content="2017-06-16T04:52:15.385Z">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/R1.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/R2.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/R3.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/R4.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/R5.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/R6.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/R7.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/R8.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/R9.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/R10.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/R11.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/R112.png">
+<meta property="og:updated_time" content="2017-12-13T04:39:09.798Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一步一步学ROP之x86篇">
 <meta name="twitter:description" content="根据寒假计划的第三计划，是该学习rop了。下面是学习rop之linux_x86篇的学习笔记以及总结。">
-<meta name="twitter:image" content="http://p1.bpimg.com/567571/d93bd9e76a1bfa28.png">
+<meta name="twitter:image" content="http://otc7tld02.bkt.clouddn.com/R1.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -348,23 +348,23 @@
 <p>   1、DEP(堆栈不可执行)：这也就是gcc编译器gs验证码机制，这是专门防止缓冲区溢出而采取的保护措施，<br>具体方法是gcc首先在缓冲区被写入之前在buf的结束地址之后返回地址之前放入随机的gs验证码，并在缓冲区写入操作结束时检验该值。通常缓冲区溢出会从低地址到高地址覆写内存，所以如果要覆写返回地址，则需要覆写该gs验证码。这样就可以通过比较写入前和写入后gs验证码的数据，判断是否产生溢出。<br>   此机制的关闭方法是：在gcc编译时采用-fno-stack-protector选项。     </p>
 <p>   2、ASLR(内存地址随机化)：在Ubuntu个其他Linux内核的系统中，目前都采用的内存地址随机话机制，这将会使得猜测具体的内存地址变得十分困难。<br>   此机制的关闭方法是：sysctl -w kernel.randomize_va_space=0</p>
 <p>   3、Stack Protector(栈保护)：对于Federal系统，默认会执行可执行程序的屏蔽保护机制，该机制不允许执行存储在栈中的代码，这会使得缓冲区溢出攻击变得无效。而Ubuntu系统中默认没有采用这种机制。<br>   此机制的关闭方法是：sysctl –w kernel.exec-shield=0 gcc下：-z execstack</p>
-<p>机制了解了下面来一个实际的操作，初学练习就要把保护机制全部关闭。就用书上所用到的这个例子好了。<br><img src="http://p1.bpimg.com/567571/d93bd9e76a1bfa28.png" alt=""><br><img src="http://i1.piimg.com/567571/c6ca73531e7e0eab.png" alt=""></p>
+<p>机制了解了下面来一个实际的操作，初学练习就要把保护机制全部关闭。就用书上所用到的这个例子好了。<br><img src="http://otc7tld02.bkt.clouddn.com/R1.png" alt=""><br><img src="http://otc7tld02.bkt.clouddn.com/R2.png" alt=""></p>
 <p>根据大神的指引，初学先把Linux下的保护机制全部关闭，指令如下：<br>这个命令编译程序。-fno-stack-protector和-z execstack这两个参数会分别关掉DEP和Stack Protector。<br>下面的指令就是关闭Linux系统的ASpapLR保护</p>
-<p><img src="http://p1.bpimg.com/567571/a5a6c0264328d2ea.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/R3.png" alt=""></p>
 <p>关闭之后就先开始对这个程序进行分析。先在python下创建150个测试数据<br>gdb的插件peda自带pattern脚本直接生成</p>
-<p><img src="http://p1.bpimg.com/567571/047c86bde3e83140.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/R4.png" alt=""></p>
 <p>然后开始run进行调试</p>
-<p><img src="http://p1.bpimg.com/567571/7a6347780a47edf9.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/R5.png" alt=""></p>
 <p>可以看出来错误地址是0x41416d41 然后使用指令可以计算PC返回值覆盖点为140个字节，所以只要构造一个“A”*140+ret字符串就可以让PC执行我们所需要的指令</p>
-<p><img src="http://p1.bpimg.com/567571/36a85efa38efce36.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/R6.png" alt=""></p>
 <p>之后就是需要一段shellcod，获取方法很多，网上找现成的，msf自动生成，作为初学者，shellcode不好找，因为gdb调试的时候会影响buf在内存的地址<br>根据大神指示，有一个好的方法:开启core dump这个功能</p>
 <blockquote>
 <p>ulimit -c unlimited<br> sudo sh -c ‘echo “/tmp/core.%t” /proc/sys/kernel/core_pattern’</p>
 </blockquote>
 <p>开启之后，当出现内存错误的时候，系统会生成一个core dump文件在tmp目录下。然后我们再用gdb查看这个core文件就可以获取到buf真正的地址了。</p>
-<p><img src="http://p1.bpimg.com/567571/6632c5b0af41ef13.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/R7.png" alt=""></p>
 <p>因为溢出点是140个字节，再加上4个字节的ret地址，我们可以计算出buffer的地址为$esp-144。通过gdb的命令 “x/10s $esp-144”，我们可以得到buf的地址为0xbffff029。</p>
-<p><img src="http://p1.bpimg.com/567571/5f09a62aba81a7a9.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/R8.png" alt=""></p>
 <p>现在溢出点，shellcode和返回值地址都有。可以写exp了，最终测试代码如下:</p>
 <pre><code>#!python
 #!/usr/bin/env python
@@ -394,7 +394,7 @@ p.interactive()  #开启交互shell
 <p> gcc -fno-stack-protector -o test test.c</p>
 </blockquote>
 <p>此时打开了DEP防护，那么如果还是提交上面那个脚本的话，系统会拒绝我们执行shellcode，<br>现在的测试程序为rw，而上面确实rwx </p>
-<p><img src="http://p1.bpimg.com/567571/773db76a654aaa29.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/R9.png" alt=""></p>
 <p>我们知道test2调用了libc.so，并且libc.so里保存了大量可利用的函数，我们如果可以让程序执行system(“/bin/sh”)的话，也可以获取到shell。既然思路有了，那么接下来的问题就是如何得到system()这个函数的地址以及”/bin/sh”这个字符串的地址。</p>
 <pre><code>   $ gdb ./test2
 GNU gdb (Ubuntu/Linaro 7.4-2012.04-0ubuntu2.1) 7.4-2012.04
@@ -437,10 +437,10 @@ p.interactive()
 <p>   sudo -s<br>   echo 2 /proc/sys/kernel/randomize_va_space</p>
 </blockquote>
 <p>从现在开始会发现test的libc.so的地址每次都会变化。<br>我们需要先泄漏出libc.so某些函数在内存中的地址，然后再利用泄漏出的函数地址根据偏移量计算出system()函数和/bin/sh字符串在内存中的地址，然后再执行我们的ret2libc的shellcode。<br>所以我们只要把返回值设置到程序本身就可执行我们期望的指令了。<br>首先我们利用objdump来查看可以利用的plt函数和函数对应的got表：</p>
-<p><img src="http://p1.bpimg.com/567571/356ec28ac9e2d64e.png" alt=""></p>
-<p><img src="http://i1.piimg.com/567571/94ddb130646489c9.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/R10.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/R11.png" alt=""></p>
 <p>我们发现除了程序本身的实现的函数之外，我们还可以使用read@plt()和write@plt()函数。但因为程序本身并没有调用system()函数，所以我们并不能直接调用system()来获取shell。但其实我们有write@plt()[此函数用于确定动态库中函数地址]函数就够了，因为我们可以通过write@plt ()函数把write()函数在内存中的地址也就是write.got给打印出来。既然write()函数实现是在libc.so当中，那我们调用的write@plt()函数为什么也能实现write()功能呢? 这是因为linux采用了延时绑定技术，当我们调用write@plit()的时候，系统会将真正的write()函数地址link到got表的write.got中，然后write@plit()会根据write.got 跳转到真正的write()函数上去。<br>因为system()函数和write()在libc.so中的offset(相对地址)是不变的，所以如果我们得到了write()的地址并且拥有目标服务器上的libc.so就可以计算出system()在内存中的地址了。然后我们再将pc指针return回vulnerable_function()函数，就可以进行ret2libc溢出攻击，并且这一次我们知道了system()在内存中的地址，就可以调用system()函数来获取我们的shell了。<br>使用ldd【 ldd命令用于判断某个可执行的 binary 档案含有什么动态函式库】命令可以查看目标程序调用的so库。随后我们把libc.so拷贝到当前目录，因为我们的exp需要这个so文件来计算相对地址：</p>
-<p><img src="http://i1.piimg.com/567571/eb73f9b80519ade1.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/R112.png" alt=""></p>
 <p>最后写exp：</p>
 <pre><code>#!python
 #!/usr/bin/env python
@@ -492,7 +492,7 @@ p.interactive()
         <p><span>Title:</span><a href="/2017/02/08/一步一步学ROP之x86篇/">一步一步学ROP之x86篇</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">Mr_white</a></p>
         <p><span>Created:</span>2017-02-08, 10:02:50</p>
-        <p><span>Updated:</span>2017-06-16, 12:52:15</p>
+        <p><span>Updated:</span>2017-12-13, 12:39:09</p>
         <p>
             <span>Full URL:</span><a class="post-url" href="/2017/02/08/一步一步学ROP之x86篇/" title="一步一步学ROP之x86篇">http://xq.dropsec.xyz/2017/02/08/一步一步学ROP之x86篇/</a>
             <span class="copy-path" data-clipboard-text="From http://xq.dropsec.xyz/2017/02/08/一步一步学ROP之x86篇/　　By Mr_white" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>

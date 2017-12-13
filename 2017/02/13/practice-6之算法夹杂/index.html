@@ -21,17 +21,17 @@
 <meta property="og:url" content="http://xq.dropsec.xyz/2017/02/13/practice-6之算法夹杂/index.html">
 <meta property="og:site_name" content="Mr_white">
 <meta property="og:description" content="第六题">
-<meta property="og:image" content="http://p1.bpimg.com/567571/d4e47457eda5dab9.png">
-<meta property="og:image" content="http://p1.bqimg.com/567571/7c461f4bddbabf79.png">
-<meta property="og:image" content="http://p1.bpimg.com/567571/ce68c67077d534db.png">
-<meta property="og:image" content="http://p1.bpimg.com/567571/376e813074677116.png">
-<meta property="og:image" content="http://i1.piimg.com/567571/c10b9ac205db0fc6.png">
-<meta property="og:image" content="http://i1.piimg.com/567571/4130ddacfe72cdf1.png">
-<meta property="og:updated_time" content="2017-06-16T04:47:25.300Z">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h61.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h62.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h63.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h64.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h65.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h66.png">
+<meta property="og:updated_time" content="2017-12-13T04:29:56.486Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="practice 6之算法夹杂">
 <meta name="twitter:description" content="第六题">
-<meta name="twitter:image" content="http://p1.bpimg.com/567571/d4e47457eda5dab9.png">
+<meta name="twitter:image" content="http://otc7tld02.bkt.clouddn.com/h61.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -336,12 +336,12 @@
           
         <p>第六题</p>
 <a id="more"></a>
-<p>之前没做出来的一道题目，各种密码学的夹杂，看到很多.so库估计当时也没啥想法了<br><img src="http://p1.bpimg.com/567571/d4e47457eda5dab9.png" alt=""><br>很明了，对输入进行检验，过了就输出right，错了就输出wrong，分析一下check_401510这个函数。先是判断字符范围，ASCII码不能超过90。</p>
-<p><img src="http://p1.bqimg.com/567571/7c461f4bddbabf79.png" alt=""><br>然后取输入的前5个字符，作md5加密，如下三个函数就是实现了md5算法</p>
-<p><img src="http://p1.bpimg.com/567571/ce68c67077d534db.png" alt=""><br>接下来就是用前五个字符的md5值的前8字节作为DES算法的key，并且采用ECB模式分组加密。</p>
-<p><img src="http://p1.bpimg.com/567571/376e813074677116.png" alt=""><br>然后就是对DES加密后的结果作base64变换，v9是DES加密结果，v21保存base64结果。</p>
-<p><img src="http://i1.piimg.com/567571/c10b9ac205db0fc6.png" alt=""><br>最后就是和check数组比较，check数组内容即是：<br>‘OSHzTJ4pwFgRG6eS6y3xVOOEGcbE5rzwqTs7VCK6ACQLuiTamZpXcQ==’</p>
-<p><img src="http://i1.piimg.com/567571/4130ddacfe72cdf1.png" alt=""><br>所以采用爆破的方式去得到flag，设flag前五位为temp，并且用其md5值前8字节作为DES算法的key，当解密出来的flag前五位和temp相等时，即为flag。<br>脚本如下：（参考的大神writeup）</p>
+<p>之前没做出来的一道题目，各种密码学的夹杂，看到很多.so库估计当时也没啥想法了<br><img src="http://otc7tld02.bkt.clouddn.com/h61.png" alt=""><br>很明了，对输入进行检验，过了就输出right，错了就输出wrong，分析一下check_401510这个函数。先是判断字符范围，ASCII码不能超过90。</p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/h62.png" alt=""><br>然后取输入的前5个字符，作md5加密，如下三个函数就是实现了md5算法</p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/h63.png" alt=""><br>接下来就是用前五个字符的md5值的前8字节作为DES算法的key，并且采用ECB模式分组加密。</p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/h64.png" alt=""><br>然后就是对DES加密后的结果作base64变换，v9是DES加密结果，v21保存base64结果。</p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/h65.png" alt=""><br>最后就是和check数组比较，check数组内容即是：<br>‘OSHzTJ4pwFgRG6eS6y3xVOOEGcbE5rzwqTs7VCK6ACQLuiTamZpXcQ==’</p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/h66.png" alt=""><br>所以采用爆破的方式去得到flag，设flag前五位为temp，并且用其md5值前8字节作为DES算法的key，当解密出来的flag前五位和temp相等时，即为flag。<br>脚本如下：（参考的大神writeup）</p>
 <pre><code>import pyDes
 import base64
 import hashlib
@@ -376,7 +376,7 @@ for i in string.uppercase + string.digits:
         <p><span>Title:</span><a href="/2017/02/13/practice-6之算法夹杂/">practice 6之算法夹杂</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">Mr_white</a></p>
         <p><span>Created:</span>2017-02-13, 11:35:02</p>
-        <p><span>Updated:</span>2017-06-16, 12:47:25</p>
+        <p><span>Updated:</span>2017-12-13, 12:29:56</p>
         <p>
             <span>Full URL:</span><a class="post-url" href="/2017/02/13/practice-6之算法夹杂/" title="practice 6之算法夹杂">http://xq.dropsec.xyz/2017/02/13/practice-6之算法夹杂/</a>
             <span class="copy-path" data-clipboard-text="From http://xq.dropsec.xyz/2017/02/13/practice-6之算法夹杂/　　By Mr_white" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>

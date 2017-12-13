@@ -21,16 +21,16 @@
 <meta property="og:url" content="http://xq.dropsec.xyz/2017/02/10/practice-3之pyo学习/index.html">
 <meta property="og:site_name" content="Mr_white">
 <meta property="og:description" content="第三题：">
-<meta property="og:image" content="http://p1.bpimg.com/567571/f6f07b1c6c6b6110.png">
-<meta property="og:image" content="http://p1.bqimg.com/567571/dea3c80b61ac1829.png">
-<meta property="og:image" content="http://i1.piimg.com/567571/9dcef39919cb8fc9.png">
-<meta property="og:image" content="http://p1.bpimg.com/567571/b24c84a5e14b7b05.png">
-<meta property="og:image" content="http://p1.bpimg.com/567571/04f12b12d829bae6.png">
-<meta property="og:updated_time" content="2017-06-16T04:47:51.585Z">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/han21.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/han22.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/han23.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/han25.jpg">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/han24.png">
+<meta property="og:updated_time" content="2017-12-13T02:21:27.031Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="practice-3之pyo学习">
 <meta name="twitter:description" content="第三题：">
-<meta name="twitter:image" content="http://p1.bpimg.com/567571/f6f07b1c6c6b6110.png">
+<meta name="twitter:image" content="http://otc7tld02.bkt.clouddn.com/han21.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -335,11 +335,11 @@
           
         <p>第三题：</p>
 <a id="more"></a>
-<p><img src="http://p1.bpimg.com/567571/f6f07b1c6c6b6110.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/han21.png" alt=""></p>
 <p>下载下来是个这个名字的题目，也不像之前遇到的后缀里虽然杂乱也存在正确后缀的，于是想到一个格式分析工具，拖进去看看是一个pyo格式文件，回想一下以前也没见过这种格式的题目，百度一下知道这种格式其实与pyc一样，都是将py程序编译成可执行程序。</p>
-<p><img src="http://p1.bqimg.com/567571/dea3c80b61ac1829.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/han22.png" alt=""></p>
 <p>知道格式之后先改后缀，然后转换格式<br>再用python2.7下的反编译工具unompyle把这个题目的源代码弄出来</p>
-<p><img src="http://i1.piimg.com/567571/9dcef39919cb8fc9.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/han23.png" alt=""></p>
 <pre><code>#!usr/bin/python
 #-*- coding:utf-8 -*-
 import sys
@@ -644,8 +644,8 @@ print &apos;Wrong Key!!&apos;
 sys.exit(1)
 
 print &apos;Congratulations!!&apos;
-</code></pre><p>虽然长关键是最后哪儿的处理，在最后做一个修改就可以了，第一次想的方法是根据以前做题的经验进行爆破的，有碰巧的嫌疑：<br>前面关键数据不变把最后的数据进行改变如下图<br><img src="http://p1.bpimg.com/567571/b24c84a5e14b7b05.png" alt=""></p>
-<p>最后跑出来的结果：<br><img src="http://p1.bpimg.com/567571/04f12b12d829bae6.png" alt=""></p>
+</code></pre><p>虽然长关键是最后哪儿的处理，在最后做一个修改就可以了，第一次想的方法是根据以前做题的经验进行爆破的，有碰巧的嫌疑：<br>前面关键数据不变把最后的数据进行改变如下图<br><img src="http://otc7tld02.bkt.clouddn.com/han25.jpg" alt=""></p>
+<p>最后跑出来的结果：<br><img src="http://otc7tld02.bkt.clouddn.com/han24.png" alt=""></p>
 <p>其实这样子添加abcde等字符的方法有凑巧之嫌。万一有#之类的问题该如何，第一次改就漏掉了‘<em>’不是猜测真的得不出17位把‘</em>’给落掉了，随意中途也突然想了一个方法，直接一个<br>for循环在0到128之间进行爆破并用组进行保存，最后直接通过ord()函数进行转换就能得到最后的flag</p>
 
       
@@ -658,7 +658,7 @@ print &apos;Congratulations!!&apos;
         <p><span>Title:</span><a href="/2017/02/10/practice-3之pyo学习/">practice-3之pyo学习</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">Mr_white</a></p>
         <p><span>Created:</span>2017-02-10, 10:50:39</p>
-        <p><span>Updated:</span>2017-06-16, 12:47:51</p>
+        <p><span>Updated:</span>2017-12-13, 10:21:27</p>
         <p>
             <span>Full URL:</span><a class="post-url" href="/2017/02/10/practice-3之pyo学习/" title="practice-3之pyo学习">http://xq.dropsec.xyz/2017/02/10/practice-3之pyo学习/</a>
             <span class="copy-path" data-clipboard-text="From http://xq.dropsec.xyz/2017/02/10/practice-3之pyo学习/　　By Mr_white" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>

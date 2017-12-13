@@ -21,19 +21,19 @@
 <meta property="og:url" content="http://xq.dropsec.xyz/2017/02/14/practice-7之行为分析/index.html">
 <meta property="og:site_name" content="Mr_white">
 <meta property="og:description" content="第七题">
-<meta property="og:image" content="http://p1.bqimg.com/567571/6712dc0a1e0419f1.png">
-<meta property="og:image" content="http://p1.bpimg.com/567571/2cc071a0d0ff25e1.png">
-<meta property="og:image" content="http://p1.bqimg.com/567571/f91384e4608dd9c1.png">
-<meta property="og:image" content="http://i1.piimg.com/567571/c954c283b5a711cb.png">
-<meta property="og:image" content="http://p1.bpimg.com/567571/25d8549665adaae9.png">
-<meta property="og:image" content="http://p1.bqimg.com/567571/99648fbd3c5363af.png">
-<meta property="og:image" content="http://p1.bqimg.com/567571/5f16873a51991aa1.png">
-<meta property="og:image" content="http://p1.bpimg.com/567571/7d6b829f33ff0726.png">
-<meta property="og:updated_time" content="2017-06-16T04:47:15.527Z">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h71.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h72.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h73.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h74.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h75.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h76.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h77.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h78.png">
+<meta property="og:updated_time" content="2017-12-13T04:32:22.520Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="practice 7之行为分析">
 <meta name="twitter:description" content="第七题">
-<meta name="twitter:image" content="http://p1.bqimg.com/567571/6712dc0a1e0419f1.png">
+<meta name="twitter:image" content="http://otc7tld02.bkt.clouddn.com/h71.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -339,13 +339,13 @@
         <p>第七题</p>
 <a id="more"></a>
 <p>看完教程发现这题写起来很简单，但是我们以前是没有接触过（病毒分析）<br>而且通过这题我知道了一个在线的行为分析工具，人称，<br>在线沙箱： 网上有许多公开的在线沙箱，使用这些沙箱提供的服务，我们可以方便的观察一个程序的详细行为报告，进而判断一个程序大致的内部逻辑。</p>
-<p>病毒是个img文件，无法执行的文件，可以使用7zip打开如图，看看文件内部隐藏了些什么。<br><img src="http://p1.bqimg.com/567571/6712dc0a1e0419f1.png" alt=""></p>
-<p>打开会发现如图文件：一个游戏这时便出现误区，难道是玩游戏过关吗？<br>看下面的文件，用记事本打开，是提示，游戏有后门<br><img src="http://p1.bpimg.com/567571/2cc071a0d0ff25e1.png" alt=""><br><img src="http://p1.bqimg.com/567571/f91384e4608dd9c1.png" alt=""></p>
-<p>打开游戏最上面一行亮了，我去。<br><img src="http://i1.piimg.com/567571/c954c283b5a711cb.png" alt=""></p>
-<p>继续用7zip试着打开，果然里面还有东西，<br>我们发现里面有三个文件，分别为1.vbs、1.exe、2.exe，如下图所示：<br>第二个是游戏第一个打开知识闪过了指令框，猜测这可能就是所谓的“病毒文件”<br><img src="http://p1.bpimg.com/567571/25d8549665adaae9.png" alt=""></p>
-<p>用在线沙箱分析来加快我们的分析流程，看看1.exe都有哪些行为特征。 打开金山火眼<a href="https://fireeye.ijinshan.com/" target="_blank" rel="external">https://fireeye.ijinshan.com/</a>，注册一个账号并激活，点击“分析文件”上传1.exe进行分析，等待一段时间就可以看到分析报告了。<br><img src="http://p1.bqimg.com/567571/99648fbd3c5363af.png" alt=""></p>
-<p>从分析报告中我们可以看出，1.exe释放了一个test.txt文件到当前目录，而且把test.txt的文件属性设置为系统和隐藏，因此我们看不到文件夹里面多了一个txt文件。现在使用记事本打开这个test.txt文件，文件内容为（WdubQ4IGEzAG54NfATJTNhI4TLIvPvENyTLLWb3YCNBeK5wad5XCgrSQNOih1F），如图所示：<br><img src="http://p1.bqimg.com/567571/5f16873a51991aa1.png" alt=""></p>
-<p>最够根据提示信息把所得到的字符串   使用MD5计算工具，算出这个字符串的16位MD5值，为ba3c34ec7cd9c086，这就是我们要找的flag了，如图所示：<br><img src="http://p1.bpimg.com/567571/7d6b829f33ff0726.png" alt=""></p>
+<p>病毒是个img文件，无法执行的文件，可以使用7zip打开如图，看看文件内部隐藏了些什么。<br><img src="http://otc7tld02.bkt.clouddn.com/h71.png" alt=""></p>
+<p>打开会发现如图文件：一个游戏这时便出现误区，难道是玩游戏过关吗？<br>看下面的文件，用记事本打开，是提示，游戏有后门<br><img src="http://otc7tld02.bkt.clouddn.com/h72.png" alt=""><br><img src="http://otc7tld02.bkt.clouddn.com/h73.png" alt=""></p>
+<p>打开游戏最上面一行亮了，我去。<br><img src="http://otc7tld02.bkt.clouddn.com/h74.png" alt=""></p>
+<p>继续用7zip试着打开，果然里面还有东西，<br>我们发现里面有三个文件，分别为1.vbs、1.exe、2.exe，如下图所示：<br>第二个是游戏第一个打开知识闪过了指令框，猜测这可能就是所谓的“病毒文件”<br><img src="http://otc7tld02.bkt.clouddn.com/h75.png" alt=""></p>
+<p>用在线沙箱分析来加快我们的分析流程，看看1.exe都有哪些行为特征。 打开金山火眼<a href="https://fireeye.ijinshan.com/" target="_blank" rel="external">https://fireeye.ijinshan.com/</a>，注册一个账号并激活，点击“分析文件”上传1.exe进行分析，等待一段时间就可以看到分析报告了。<br><img src="http://otc7tld02.bkt.clouddn.com/h76.png" alt=""></p>
+<p>从分析报告中我们可以看出，1.exe释放了一个test.txt文件到当前目录，而且把test.txt的文件属性设置为系统和隐藏，因此我们看不到文件夹里面多了一个txt文件。现在使用记事本打开这个test.txt文件，文件内容为（WdubQ4IGEzAG54NfATJTNhI4TLIvPvENyTLLWb3YCNBeK5wad5XCgrSQNOih1F），如图所示：<br><img src="http://otc7tld02.bkt.clouddn.com/h77.png" alt=""></p>
+<p>最够根据提示信息把所得到的字符串   使用MD5计算工具，算出这个字符串的16位MD5值，为ba3c34ec7cd9c086，这就是我们要找的flag了，如图所示：<br><img src="http://otc7tld02.bkt.clouddn.com/h78.png" alt=""></p>
 
       
     </div>
@@ -357,7 +357,7 @@
         <p><span>Title:</span><a href="/2017/02/14/practice-7之行为分析/">practice 7之行为分析</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">Mr_white</a></p>
         <p><span>Created:</span>2017-02-14, 12:37:37</p>
-        <p><span>Updated:</span>2017-06-16, 12:47:15</p>
+        <p><span>Updated:</span>2017-12-13, 12:32:22</p>
         <p>
             <span>Full URL:</span><a class="post-url" href="/2017/02/14/practice-7之行为分析/" title="practice 7之行为分析">http://xq.dropsec.xyz/2017/02/14/practice-7之行为分析/</a>
             <span class="copy-path" data-clipboard-text="From http://xq.dropsec.xyz/2017/02/14/practice-7之行为分析/　　By Mr_white" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>

@@ -21,18 +21,18 @@
 <meta property="og:url" content="http://xq.dropsec.xyz/2017/02/10/practice-2之汇编/index.html">
 <meta property="og:site_name" content="Mr_white">
 <meta property="og:description" content="一道ELFx64的题目，只能用IDA载入，找到main函数，F5得到代码">
-<meta property="og:image" content="http://p1.bpimg.com/567571/a2e89c3e87adaa1c.png">
-<meta property="og:image" content="http://i1.piimg.com/567571/c0cb05d8dcdb8af5.png">
-<meta property="og:image" content="http://p1.bqimg.com/567571/0d7431885146e522.png">
-<meta property="og:image" content="http://p1.bpimg.com/567571/b75fa1867dfcce75.png">
-<meta property="og:image" content="http://p1.bqimg.com/567571/ee0a905c88d36e04.png">
-<meta property="og:image" content="http://p1.bpimg.com/567571/be188fea8aca2fa0.png">
-<meta property="og:image" content="http://p1.bqimg.com/567571/467aece24b3b0cf4.png">
-<meta property="og:updated_time" content="2017-06-16T04:47:59.751Z">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/han31.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/han32.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/han33.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/han34.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/han35.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/han36.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/han37.png">
+<meta property="og:updated_time" content="2017-12-13T04:18:15.398Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="practice-2之汇编">
 <meta name="twitter:description" content="一道ELFx64的题目，只能用IDA载入，找到main函数，F5得到代码">
-<meta name="twitter:image" content="http://p1.bpimg.com/567571/a2e89c3e87adaa1c.png">
+<meta name="twitter:image" content="http://otc7tld02.bkt.clouddn.com/han31.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -337,15 +337,15 @@
           
         <p>一道ELFx64的题目，只能用IDA载入，找到main函数，F5得到代码</p>
 <a id="more"></a>
-<p><img src="http://p1.bpimg.com/567571/a2e89c3e87adaa1c.png" alt=""><br><img src="http://i1.piimg.com/567571/c0cb05d8dcdb8af5.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/han31.png" alt=""><br><img src="http://otc7tld02.bkt.clouddn.com/han32.png" alt=""></p>
 <p>看上面两个图，代码可读性果然不太好。前面print的一大堆应该是文件的提示字符串输入重点是后面的while循环以及那个if语句，直接看到if可以发现flag的最后几个变量必须是0，8，2，3这个不难看出来，</p>
 <p>试着看汇编把，看总览图，也不知道是不是这个技巧，看看剪头分布能推断出哪一段是循环语句所在之处，if判断之处啥的</p>
-<p><img src="http://p1.bqimg.com/567571/0d7431885146e522.png" alt=""><br>跟着C语言看看汇编语言吧</p>
-<p><img src="http://p1.bpimg.com/567571/b75fa1867dfcce75.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/han33.png" alt=""><br>跟着C语言看看汇编语言吧</p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/han34.png" alt=""></p>
 <p>进过上述分析可以知道var_40应该使我们输入的结果，所以必须必须知道var_C0的数据跳到相应位置</p>
-<p><img src="http://p1.bqimg.com/567571/ee0a905c88d36e04.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/han35.png" alt=""></p>
 <p>是空的，再回到代码找找，会发现这样子一串操作</p>
-<p><img src="http://p1.bpimg.com/567571/be188fea8aca2fa0.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/han36.png" alt=""></p>
 <p>刚好17个数字，所以说var_i[i] = ((var_C0[i]-1)+(var_C0[i]-1)&gt;&gt;0x1f)&gt;&gt;1</p>
 <p>好的，python写脚本：</p>
 <pre><code>#!usr/bin/python
@@ -376,7 +376,7 @@ for i in range(0,17):
 print(flag)
 print(&apos;0823}&apos;)
 </code></pre><p>最后结果：</p>
-<p><img src="http://p1.bqimg.com/567571/467aece24b3b0cf4.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/han37.png" alt=""></p>
 
       
     </div>
@@ -388,7 +388,7 @@ print(&apos;0823}&apos;)
         <p><span>Title:</span><a href="/2017/02/10/practice-2之汇编/">practice-2之汇编</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">Mr_white</a></p>
         <p><span>Created:</span>2017-02-10, 10:39:06</p>
-        <p><span>Updated:</span>2017-06-16, 12:47:59</p>
+        <p><span>Updated:</span>2017-12-13, 12:18:15</p>
         <p>
             <span>Full URL:</span><a class="post-url" href="/2017/02/10/practice-2之汇编/" title="practice-2之汇编">http://xq.dropsec.xyz/2017/02/10/practice-2之汇编/</a>
             <span class="copy-path" data-clipboard-text="From http://xq.dropsec.xyz/2017/02/10/practice-2之汇编/　　By Mr_white" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
