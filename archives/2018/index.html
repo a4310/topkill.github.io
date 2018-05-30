@@ -15,24 +15,15 @@
 
 
 
-<meta name="description" content="第五个只能算得上是学习一个新技能–万能断点之前没听过。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="practice 5之万能断点">
-<meta property="og:url" content="http://xq.dropsec.xyz/2017/02/12/practice-5之万能断点/index.html">
+<meta name="description" content="No Pain No Gain!">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mr_white">
+<meta property="og:url" content="http://xq.dropsec.xyz/archives/2018/index.html">
 <meta property="og:site_name" content="Mr_white">
-<meta property="og:description" content="第五个只能算得上是学习一个新技能–万能断点之前没听过。">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h51.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h52.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h53.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h54.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h55.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h56.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h57.png">
-<meta property="og:updated_time" content="2017-12-13T04:27:51.480Z">
+<meta property="og:description" content="No Pain No Gain!">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="practice 5之万能断点">
-<meta name="twitter:description" content="第五个只能算得上是学习一个新技能–万能断点之前没听过。">
-<meta name="twitter:image" content="http://otc7tld02.bkt.clouddn.com/h51.png">
+<meta name="twitter:title" content="Mr_white">
+<meta name="twitter:description" content="No Pain No Gain!">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -64,7 +55,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>practice 5之万能断点 | Mr_white</title>
+<title>Archives: 2018 | Mr_white</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -74,8 +65,8 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: true,
-        isArchive: false,
+        isPost: false,
+        isArchive: true,
         isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
@@ -291,172 +282,60 @@
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
-      <div class="body-wrap"><article id="post-practice-5之万能断点" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/2017/02/12/practice-5之万能断点/" class="article-date">
-      <time datetime="2017-02-12T03:16:06.000Z" itemprop="datePublished">2017-02-12</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2018/05/30/gdb-attach跟exp/" class="archive-article-date">
+      <time datetime="2018-05-30T01:59:24.000Z" itemprop="datePublished">05-30</time>
 </a>
 
 
-    </div>
+        </div>
+         
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      practice 5之万能断点
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/05/30/gdb-attach跟exp/">gdb.attach跟exp</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/reverse-practice/">reverse practice</a>
-    </div>
-
-
-        
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/writeup/">writeup</a></li></ul>
-    </div>
-
-        <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
+        <div class="article-info info-on-archive">
           
-        <p>第五个只能算得上是学习一个新技能–万能断点之前没听过。</p>
-<a id="more"></a>
-<p>给的是一个未注册版本的软件，题目要求将其注册<br><img src="http://otc7tld02.bkt.clouddn.com/h51.png" alt=""></p>
-<p>乱填只能是出错误<br><img src="http://otc7tld02.bkt.clouddn.com/h52.png" alt=""></p>
-<p>放入IDA用运行，然后点击输入注册码，报错之后暂停OD调试<br><img src="http://otc7tld02.bkt.clouddn.com/h53.png" alt=""></p>
-<p>如下图查看user3模块<br><img src="http://otc7tld02.bkt.clouddn.com/h54.png" alt=""></p>
-<p>转到这个模块下之后便开始下万能断点；查找二进制字符串（crtl+B）,然后在弹出的框内输入万能断点并将跳转处设为断点</p>
-<p><img src="http://otc7tld02.bkt.clouddn.com/h55.png" alt=""></p>
-<p>重新载入程序，依旧输入错误注册码（由于万能断点，在运行到弹出输入界面时，中途会多次暂停）输入结束之后便可以按F8单步步过。直到堆栈窗口出现正确的注册码<br><img src="http://otc7tld02.bkt.clouddn.com/h56.png" alt=""></p>
-<p>输入检验注册成功：<br><img src="http://otc7tld02.bkt.clouddn.com/h57.png" alt=""></p>
-<p>万能断点：“F3 A5 8B C8 83 E1 03 F3 A4 E8”</p>
-
-      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/pwn/">pwn</a>
     </div>
-    
+
+
+          
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/">debug</a></li></ul>
+    </div>
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
-  
-    
-    <div class="copyright">
-        <p><span>Title:</span><a href="/2017/02/12/practice-5之万能断点/">practice 5之万能断点</a></p>
-        <p><span>Author:</span><a href="/" title="Back to Homepage">Mr_white</a></p>
-        <p><span>Created:</span>2017-02-12, 11:16:06</p>
-        <p><span>Updated:</span>2017-12-13, 12:27:51</p>
-        <p>
-            <span>Full URL:</span><a class="post-url" href="/2017/02/12/practice-5之万能断点/" title="practice 5之万能断点">http://xq.dropsec.xyz/2017/02/12/practice-5之万能断点/</a>
-            <span class="copy-path" data-clipboard-text="From http://xq.dropsec.xyz/2017/02/12/practice-5之万能断点/　　By Mr_white" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
-        </p>
-        <p>
-            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
-        </p>
-    </div>
-
-
-
-    <nav id="article-nav">
-        
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/02/13/practice-6之算法夹杂/">
-                    practice 6之算法夹杂
-                </a>
-            </div>
-        
-        
-            <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/02/12/practice-4之IDA用法/">
-                    practice-4之IDA用法
-                </a>
-            </div>
-        
-    </nav>
-
-  
 </article>
-
-    <div id="toc" class="toc-article">
-        <strong class="toc-title">Contents</strong>
-        
-            
-        
-    </div>
-    <style>
-        .left-col .switch-btn,
-        .left-col .switch-area {
-            display: none;
-        }
-        .toc-level-3 i,
-        .toc-level-3 ol {
-            display: none !important;
-        }
-    </style>
-
-    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
-
-    <script>
-        yiliaConfig.toc = ["Hide", "Show", !!"false"];
-    </script>
-
-
-
-    
-<div class="share">
-    
-
-    
-</div>
-
-
-
-
-
-
+  
+  
+    </div></section>
+  
 
     
 
-
-
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/2017/02/13/practice-6之算法夹杂/" title="Pre: practice 6之算法夹杂">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
-
-        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-
-        
-            <a href="/2017/02/12/practice-4之IDA用法/" title="Next: practice-4之IDA用法">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
-    </div>
-
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/05/30/gdb-attach跟exp/">gdb.attach跟exp</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/02/校赛Reverse-Crypto-writeup/">校赛Reverse&Crypto writeup</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/30/缓冲区溢出-栈溢出/">缓冲区溢出--栈溢出</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/10/XMAN排位赛-babymaze/">XMAN排位赛-babymaze</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/小论PE结构/">小论PE结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/20/汇编子程序/">汇编子程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/19/XMAN练习writeup及所得/">XMAN练习 writeup及所得</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/07/二进制文件基础/">二进制文件基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/04/堆栈及汇编基础/">堆栈及汇编基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/定一个小目标/">定一个小目标</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/practice-8之PEiD插件/">practice 8之PEiD插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/14/practice-7之行为分析/">practice 7之行为分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/practice-6之算法夹杂/">practice 6之算法夹杂</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/practice-5之万能断点/">practice 5之万能断点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/practice-4之IDA用法/">practice-4之IDA用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/practice-3之pyo学习/">practice-3之pyo学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/practice-2之汇编/">practice-2之汇编</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/09/8道Pwn基础练习所得/">8道Pwn基础练习所得</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/08/一步一步学ROP之x86篇/">一步一步学ROP之x86篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/30/practice-1之图片reverse/">practice-1之图片reverse</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/16/寒假计划/">寒假计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/12/GDB寄存器和内存查询指令/">GDB寄存器和内存查询指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/30/gdb与peda指令学习学习笔记/">gdb与peda指令学习学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/04/hexo搭建/">hexo搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/03/Google-hacking-语法/">Google hacking 语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/03/绕过网站访问限制的方法/">绕过网站访问限制的方法</a></li></ul>
-
-
-
-
-    <script>
-        
-    </script>
 </div>
       <footer id="footer">
     <div class="outer">

