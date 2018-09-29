@@ -15,16 +15,16 @@
 
 
 
-<meta name="description" content="￥&amp;amp;@+Angr符号执行+@&amp;amp;￥">
+<meta name="description" content="Angr符号执行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Angr学习记录">
 <meta property="og:url" content="http://xq.dropsec.xyz/2018/09/29/Angr学习记录/index.html">
 <meta property="og:site_name" content="M1s5p">
-<meta property="og:description" content="￥&amp;amp;@+Angr符号执行+@&amp;amp;￥">
-<meta property="og:updated_time" content="2018-09-29T08:54:47.403Z">
+<meta property="og:description" content="Angr符号执行">
+<meta property="og:updated_time" content="2018-09-29T09:31:25.593Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Angr学习记录">
-<meta name="twitter:description" content="￥&amp;amp;@+Angr符号执行+@&amp;amp;￥">
+<meta name="twitter:description" content="Angr符号执行">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -327,23 +327,21 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>￥&amp;@+Angr符号执行+@&amp;￥</p>
+        <p>Angr符号执行</p>
 <a id="more"></a>
 <p>参考：<a href="http://www.freebuf.com/sectool/143056.html" target="_blank" rel="external">http://www.freebuf.com/sectool/143056.html</a><br><a href="https://github.com/a7vinx/angr-doc-zh_CN/" target="_blank" rel="external">https://github.com/a7vinx/angr-doc-zh_CN/</a></p>
-<h1 id="Angr简介"><a href="#Angr简介" class="headerlink" title="Angr简介"></a>Angr简介</h1><h2 id="What-is-Angr"><a href="#What-is-Angr" class="headerlink" title="What is Angr?"></a>What is Angr?</h2><p>Angr是一个二进制代码分析工具，能够自动化完成二进制文件的分析,执行动态的符号执行(如Mayhem,KIEE等)。众所周知的是，在二进制代码中寻找并且利用漏洞是一项非常具有挑战性的工作，它的挑战性主要在于人工很难直观的看出二进制代码中的数据结构、控制流信息等。Angr的出现便使得这个问题变得易于解决。Angr是一个基于python的二进制漏洞分析框架,对二进制文件分析，并找到漏洞。使得漏洞挖掘的效率进一步得到提高。基于符号执行的fuzz工具driller就结合了Angr和AFL。</p>
-<p>##Angr的执行！</p>
-<ol>
+<h1 id="Angr简介"><a href="#Angr简介" class="headerlink" title="Angr简介"></a>Angr简介</h1><h2 id="Angr的含义"><a href="#Angr的含义" class="headerlink" title="Angr的含义"></a>Angr的含义</h2><p>Angr是一个二进制代码分析工具，能够自动化完成二进制文件的分析,执行动态的符号执行(如Mayhem,KIEE等)。众所周知的是，在二进制代码中寻找并且利用漏洞是一项非常具有挑战性的工作，它的挑战性主要在于人工很难直观的看出二进制代码中的数据结构、控制流信息等。Angr的出现便使得这个问题变得易于解决。Angr是一个基于python的二进制漏洞分析框架,对二进制文件分析，并找到漏洞。使得漏洞挖掘的效率进一步得到提高。基于符号执行的fuzz工具driller就结合了Angr和AFL。</p>
+<h2 id="Angr的执行"><a href="#Angr的执行" class="headerlink" title="Angr的执行"></a>Angr的执行</h2><ol>
 <li>将二进制程序利用CLE装载入Angr的分析系统中</li>
 <li>将二进制程序转换为中间语言(Intermediate representation,IR)</li>
 <li>将IR转换为语义较强的表达形式，形如这个程序做了什么，并非它是什么。</li>
 <li>执行进一步的分析，比如，完整的或者部分静态分析(依赖关系分析，程序块分析)、程序空间的符号执行探索(挖掘漏洞)、一些对于上面方式的结合</li>
 </ol>
-<h2 id="Angr的安装"><a href="#Angr的安装" class="headerlink" title="Angr的安装~"></a>Angr的安装~</h2><p>Angr是Python下的一个库，目前只在python2下受到支持，相信python3以后也会支持。所以利用python的方法就可以进行安装了，但是关键在于Angr的依赖需要解决：</p>
+<h2 id="Angr的安装"><a href="#Angr的安装" class="headerlink" title="Angr的安装"></a>Angr的安装</h2><p>Angr是Python下的一个库，目前只在python2下受到支持，相信python3以后也会支持。所以利用python的方法就可以进行安装了，但是关键在于Angr的依赖需要解决：</p>
 <pre><code>sudo apt-get install python-dev libffi-dev build-essential virtualenvwrapper
 </code></pre><p>依赖结束后执行如下指令即可完成安装：</p>
 <pre><code>mkvirtualenv angr &amp;&amp; pip install angr
-</code></pre><p>#Angr学习*</p>
-<p>嗯，幻想一个场景，一场ctf比赛，我门是选手，点开赛题，一道reverse题提供了一个二进制附件名为r100,ok,开始做题。</p>
+</code></pre><h1 id="Angr学习"><a href="#Angr学习" class="headerlink" title="Angr学习"></a>Angr学习</h1><p>嗯，幻想一个场景，一场ctf比赛，我门是选手，点开赛题，一道reverse题提供了一个二进制附件名为r100,ok,开始做题。</p>
 <h2 id="Angr-Project"><a href="#Angr-Project" class="headerlink" title="Angr Project"></a>Angr Project</h2><h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><p>Project意为项目，这里angr的而金子装载组件是CLE，负责将二进制对象及其依赖的库以及易于对其进行操作的方式交给angr的其他组件。Project就是加载二进制文件的方法。就像做pwn题时候我们使用ELF加载题目一样，道理都是一样的。</p>
 <pre><code>import angr
 p = angr.Project(&apos;./r100&apos;)
@@ -454,7 +452,7 @@ p = angr.Project(&apos;./r100&apos;)
         <p><span>本文标题:</span><a href="/2018/09/29/Angr学习记录/">Angr学习记录</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">M1s5p</a></p>
         <p><span>发布时间:</span>2018-09-29, 10:30:37</p>
-        <p><span>最后更新:</span>2018-09-29, 16:54:47</p>
+        <p><span>最后更新:</span>2018-09-29, 17:31:25</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/09/29/Angr学习记录/" title="Angr学习记录">http://xq.dropsec.xyz/2018/09/29/Angr学习记录/</a>
             <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2018/09/29/Angr学习记录/　　作者: M1s5p" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -484,7 +482,7 @@ p = angr.Project(&apos;./r100&apos;)
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Angr简介"><span class="toc-number">1.</span> <span class="toc-text">Angr简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-Angr"><span class="toc-number">1.1.</span> <span class="toc-text">What is Angr?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Angr的安装"><span class="toc-number">1.2.</span> <span class="toc-text">Angr的安装~</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Angr-Project"><span class="toc-number">1.3.</span> <span class="toc-text">Angr Project</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建对象"><span class="toc-number">1.3.1.</span> <span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#信息查询"><span class="toc-number">1.3.2.</span> <span class="toc-text">信息查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#程序交互"><span class="toc-number">1.3.3.</span> <span class="toc-text">程序交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#装载选项"><span class="toc-number">1.3.4.</span> <span class="toc-text">装载选项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#后端装载器选项"><span class="toc-number">1.3.5.</span> <span class="toc-text">后端装载器选项</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Angr简介"><span class="toc-number">1.</span> <span class="toc-text">Angr简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Angr的含义"><span class="toc-number">1.1.</span> <span class="toc-text">Angr的含义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Angr的执行"><span class="toc-number">1.2.</span> <span class="toc-text">Angr的执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Angr的安装"><span class="toc-number">1.3.</span> <span class="toc-text">Angr的安装</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Angr学习"><span class="toc-number">2.</span> <span class="toc-text">Angr学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Angr-Project"><span class="toc-number">2.1.</span> <span class="toc-text">Angr Project</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建对象"><span class="toc-number">2.1.1.</span> <span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#信息查询"><span class="toc-number">2.1.2.</span> <span class="toc-text">信息查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#程序交互"><span class="toc-number">2.1.3.</span> <span class="toc-text">程序交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#装载选项"><span class="toc-number">2.1.4.</span> <span class="toc-text">装载选项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#后端装载器选项"><span class="toc-number">2.1.5.</span> <span class="toc-text">后端装载器选项</span></a></li></ol></li></ol></li></ol>
         
     </div>
     <style>
