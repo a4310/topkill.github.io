@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="M1s5p" />
+
+
+
+<meta name="description" content="AFL(American Fuzzy Lop)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Studying-Afl-fuzz之内部实现介绍">
+<meta property="og:url" content="http://xq.dropsec.xyz/2018/09/10/Studying-Afl-fuzz之内部实现介绍/index.html">
+<meta property="og:site_name" content="M1s5p">
+<meta property="og:description" content="AFL(American Fuzzy Lop)">
+<meta property="og:updated_time" content="2018-09-12T08:44:16.577Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Studying-Afl-fuzz之内部实现介绍">
+<meta name="twitter:description" content="AFL(American Fuzzy Lop)">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="M1s5p" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/img/111.jpg">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Studying-Afl-fuzz之内部实现介绍 | M1s5p</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/111.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">M1s5p</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">No Pain No Gain!</p>
+        
+		
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=282324364@qq.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" href="http://weibo.com/p/1005055747318462/home?from=page_100505&mod=TAB#place" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/wl1510009" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angr/">Angr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PE结构/">PE结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fuzz/">fuzz</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pwn/">pwn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reverse/">reverse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stack/">stack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/writeup/">writeup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆栈及汇编基础/">堆栈及汇编基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/寄存器-debug/">寄存器 debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编基础/">汇编基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://spd.dropsec.xyz/">All Right</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://yunnigu.dropsec.xyz/">YunGong</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.dropsec.xyz/">Drops</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://isron.cn/">Isron</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://whc.dropsec.xyz/">Haigo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://yaocl.cn/">Mr_Yao</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">没有可不可以，只有敢不敢做！</div>
+                </section>
+                
+            </div>
+        </div>
+		<object type="application/x-shockwave-flash" 
+		style="outline:none;" 
+		data="http://cdn.abowman.com/widgets/hamster/hamster.swf?" 
+		width="250" height="150">
+		<param name="movie" 
+		value="http://cdn.abowman.com/widgets/hamster/hamster.swf?">
+		</param><param name="AllowScriptAccess" value="always">
+		</param><param name="wmode" value="opaque">
+		</param>
+		</object>
+    </header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">M1s5p</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/111.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">M1s5p</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">No Pain No Gain!</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=282324364@qq.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" target="_blank" href="http://weibo.com/p/1005055747318462/home?from=page_100505&mod=TAB#place" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/wl1510009" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Studying-Afl-fuzz之内部实现介绍" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/09/10/Studying-Afl-fuzz之内部实现介绍/" class="article-date">
+      <time datetime="2018-09-10T08:07:56.000Z" itemprop="datePublished">2018-09-10</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Studying-Afl-fuzz之内部实现介绍
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/binary/">binary</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fuzz/">fuzz</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>AFL(American Fuzzy Lop)<br><a id="more"></a></p>
+<p>AFL的基本使用以及模式都在前面介绍了大概，通过了前面的学习应当能够了解到了AFL对一个对象的fuzz该如何操作，通俗的说，这只是表面工作，追根溯源才是硬道理，在afl-2.52的工具文件中包含了所有工具的源代码，通过对afl-fuzz.c的源码进行简单阅读之后，总结了AFL的实现细节。</p>
+<p>参考：<a href="http://lcamtuf.coredump.cx/afl/technical_details.txt" target="_blank" rel="external">http://lcamtuf.coredump.cx/afl/technical_details.txt</a><br><a href="http://rk700.github.io/2017/12/28/afl-internals/" target="_blank" rel="external">http://rk700.github.io/2017/12/28/afl-internals/</a></p>
+<h2 id="Fork-Server"><a href="#Fork-Server" class="headerlink" title="Fork Server"></a>Fork Server</h2><p>使用afl-fuzz对目标程序进行fuzzing，过程精简和如下步骤：</p>
+<ol>
+<li>获得队列中的一个用例。</li>
+<li>对用例进行N多阶段的变化。</li>
+<li>在变化过程中以及变化结束都会将得到的变异文件作为输入给目标程序进行测试。</li>
+<li>测试得到大量数据写入对应文件，主要关注输入目标程序后是否会引发崩溃。</li>
+</ol>
+<p>如上诸多步骤的运行，涉及到多进程运行，在伪代码中也可以找到实现fork的相关代码。</p>
+<pre><code>EXP_ST void init_forkserver(char** argv) {
+
+  static struct itimerval it;
+  int st_pipe[2], ctl_pipe[2];//通信管道state and command
+  int status;
+  s32 rlen;
+
+  ACTF(&quot;Spinning up the fork server...&quot;);
+  if (pipe(st_pipe) || pipe(ctl_pipe)) PFATAL(&quot;pipe() failed&quot;);
+  forksrv_pid = fork();  //fork()获取父子进程
+  if (forksrv_pid &lt; 0) PFATAL(&quot;fork() failed&quot;);
+  if (!forksrv_pid) {
+struct rlimit r;
+
+if (!getrlimit(RLIMIT_NOFILE, &amp;r) &amp;&amp; r.rlim_cur &lt; FORKSRV_FD + 2) {
+
+  r.rlim_cur = FORKSRV_FD + 2;
+  setrlimit(RLIMIT_NOFILE, &amp;r); /* Ignore errors */
+}
+......
+（此处省略约260行代码）
+......
+  }
+  FATAL(&quot;Fork server handshake failed&quot;); 
+}
+</code></pre><p><strong>解析：</strong></p>
+<ol>
+<li><p>通过函数的命名就可以初步了解到，这是fork_server的初始化部分，从上面附有的代码可以看到，fuzzer启动，执行fork()得到父子进程，父进程为fuzzer，子进程就是fuzz目标程序。</p>
+</li>
+<li><p>同时在初始化中我们可以看到定义了两个整型：st_pipe以及ctl_pipe,父子之间的通信就是通过这两个管道进行，前者用于传递状态，后者用于传递命令。</p>
+</li>
+<li><p>在调用完fork()之后，可以看到，对于错误也有严谨的排查，是否成功获取进程，使用到的getrlimit以及setrlimit是用于获取和设定资源使用的限制，根据参数的选择对指定的资源进行检查并进行限制设定。上述例子中的RLIMIT_NOFILE是指比指定进程可打开的最大文件数量多1的值，若超过此值则会报错。在省略部分还有对于进程数据段、虚拟内存和core文件等进行限制设定。</p>
+<pre><code>dup2(dev_null_fd, 1);
+dup2(dev_null_fd, 2);
+
+if (out_file) {
+
+  dup2(dev_null_fd, 0);
+
+} else {
+
+  dup2(out_fd, 0);
+  close(out_fd);
+    }
+if (dup2(ctl_pipe[0], FORKSRV_FD) &lt; 0) PFATAL(&quot;dup2() failed&quot;);
+   if (dup2(st_pipe[1], FORKSRV_FD + 1) &lt; 0) PFATAL(&quot;dup2() failed&quot;);
+  ......    
+(此处省略30行左右)
+......
+
+execv(target_path, argv);
+</code></pre></li>
+</ol>
+<p><strong>解析：</strong></p>
+<ol>
+<li><p>dup2函数是用于复制文件描述符。文件描述符在linux下的存在就是0、1、2,分别表示标准输入，标准输出以及标准错误，在某些情况下也用STDIN、STDOUT、STDERR代表。</p>
+</li>
+<li><p>这里连续两个if条件中的dup2使用将两个通信管道分配到了预先指定的fd中，同时也排查了分配失败的错误，省略部分对已经没有必要的fd进行了关闭操作，节省资源，同时对ASAN、MSAN进行了设置。</p>
+</li>
+<li><p>一切设置就绪后，就开始执行fuzz目标程序。</p>
+</li>
+</ol>
+<pre><code> it.it_value.tv_sec = ((exec_tmout * FORK_WAIT_MULT) / 1000);
+  it.it_value.tv_usec = ((exec_tmout * FORK_WAIT_MULT) % 1000) * 1000;
+
+  setitimer(ITIMER_REAL, &amp;it, NULL);
+
+rlen = read(fsrv_st_fd, &amp;status, 4);
+
+it.it_value.tv_sec = 0;
+it.it_value.tv_usec = 0;
+
+setitimer(ITIMER_REAL, &amp;it, NULL);
+
+if (rlen == 4) {
+  OKF(&quot;All right - fork server is up.&quot;);
+  return;
+}
+</code></pre><p><strong>解析：</strong></p>
+<p>上附代码，等待fork server启动，等待启动的时间有所限制，ITIMER_REAL设置以系统实时时间进行计算，超时则会发出SIGALRM信号，限制时间内若父进程(fuzzer)成功读取状态管道信息，则返回信息提示fork server创建成功。</p>
+<p><strong>小结：</strong></p>
+<p>fork server 与fuzzer之间的通信，就fork server而言，可归纳为下面几步：</p>
+<ul>
+<li><p>fork server创建成功，已经将状态写入管道，fuzzer接收到信息，知道可以fork。</p>
+</li>
+<li><p>fork server开始等待(有时限)，接受来自fuzzer的命令(通过命令通道)，便开始fork,获取父子进程。</p>
+</li>
+<li><p>fork server开始实时监控，fuzz目标子进程运行时候，fork server通过状态管道将子进程pid发送给fuzzer，当子进程结束，同样将结束状态发送给fuzzer。然后再次回归等待，静候fuzzer的下一次指令。</p>
+</li>
+</ul>
+<pre><code>static u8 run_target(char** argv, u32 timeout) {
+
+  static struct itimerval it;
+  static u32 prev_timed_out = 0;
+
+  int status = 0;
+  u32 tb4;
+
+  child_timed_out = 0;
+......
+（省略开头）
+ if ((res = write(fsrv_ctl_fd, &amp;prev_timed_out, 4)) != 4) 
+......
+if ((res = read(fsrv_st_fd, &amp;child_pid, 4)) != 4) {
+......
+if (child_pid &lt;= 0) FATAL(&quot;Fork server is misbehaving (OOM?)&quot;);
+  }
+
+  setitimer(ITIMER_REAL, &amp;it, NULL);
+......
+
+    if ((res = read(fsrv_st_fd, &amp;status, 4)) !=     4) {
+    }
+......
+
+  if (WIFSIGNALED(status) &amp;&amp; !stop_soon) {
+
+kill_signal = WTERMSIG(status);
+
+if (child_timed_out &amp;&amp; kill_signal == SIGKILL) return FAULT_TMOUT;
+
+return FAULT_CRASH;
+  }
+</code></pre><p><strong>解析：</strong></p>
+<p>  首先看到函数命名就可以知道，这一处有关于执行fuzz目标程序的，开头一大段的代码对相关信息的设置，与fork server初始化中的代码相似功能，这里就不在赘述。</p>
+<p>  每当fuzzer从队列中获取到测试用例，都会调用这个方法，图中连续的if便是通过状态管道获取子进程的pid，if后省略的都是再获取失败情况下的报错提示。</p>
+<p>  同样的，在fuzzer最后读取到子进程退出状态时，会对子进程结束的原因进行判断，并对其进行记录，如果是崩溃，则将用例记入crashes中，如果是超时则将用例记入hangs中。</p>
+<p><strong>小结：</strong></p>
+<p>fork server 与fuzzer之间的通信，就fuzzer而言，可归纳为下面几步：</p>
+<ul>
+<li><p>fuzzer从状态管道获得fork server准备完毕可以fork的信息，从队列中获取到测试用例，调用run_target方法的同时，从命令通道通知fork server开始fork。</p>
+</li>
+<li><p>fuzzer 从状态管道接收fork server发送来的子进程的pid以及结束状态，对结束状态进行判断原因并进行记录。</p>
+</li>
+<li><p>再次从queue中获取测试用例进行通信。</p>
+</li>
+</ul>
+<h2 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h2><pre><code>EXP_ST void setup_shm(void) {
+
+  u8* shm_str;
+
+  if (!in_bitmap) memset(virgin_bits, 255, MAP_SIZE);
+
+  memset(virgin_tmout, 255, MAP_SIZE);
+  memset(virgin_crash, 255, MAP_SIZE);
+
+  shm_id = shmget(IPC_PRIVATE, MAP_SIZE, IPC_CREAT | IPC_EXCL | 0600);
+
+  if (shm_id &lt; 0) PFATAL(&quot;shmget() failed&quot;);
+  atexit(remove_shm);
+  shm_str = alloc_printf(&quot;%d&quot;, shm_id);
+
+  if (!dumb_mode) setenv(SHM_ENV_VAR, shm_str, 1);
+  ck_free(shm_str);
+  trace_bits = shmat(shm_id, NULL, 0);
+
+  if (!trace_bits) PFATAL(&quot;shmat() failed&quot;);
+
+}
+</code></pre><p><strong>解析：</strong></p>
+<ol>
+<li><p>如果我们进行fuzz时候选择的是dumb mode，那么就不会使用共享内存，因为，在dumb mode下，所有的测试都是随机进行的。</p>
+</li>
+<li><p>在非dumb mode的时候，AFL需使用功能共享内存来传递执行过程中的分支信息，从而判断执行流程以及代码覆盖状况。</p>
+<p> 首先调用shemget()分配一块共享内存，shemget原型及介绍如下：</p>
+</li>
+</ol>
+<blockquote>
+<p>shmget(key_t key, size_t size, int shmflg)</p>
+<p>key：   0(IPC_PRIVATE)：会建立新共享内存对象<br>        大于0的32位整数：视参数shmflg来确定操作。通常要求此值来源于ftok返回的IPC键值</p>
+<p>size：  大于0的整数：新建的共享内存大小，以字节为单位<br>        0：只获取共享内存时指定为0</p>
+<p>shmflg：0：取共享内存标识符，若不存在则函数会报错<br>        IPC_CREAT：当shmflg&amp;IPC_CREAT为真时，如果内核中不存在键值与key相等的共享内存，则新建一个共享内存；如果存在这样的共享内存，返回此共享内存的标识符</p>
+<p>IPC_CREAT|IPC_EXCL：如果内核中不存在键值 与key相等的共享内存，则新建一个共享内存；如果存在这样的共享内存则报错</p>
+</blockquote>
+<ol>
+<li>分配成功后，fuzzer会将该共享内存的标识符设置到环境变量中，这样一来，后面fork得到的子进程可以通过该环境变量得到这块共享内存。同时，fuzzer会使用变量trace_bits保存共享内存的地址。<br>在每次获取测试用例调用fuzz目标程序时候，都得将共享内存的数据情况，避免影响测试结果。</li>
+</ol>
+<p><strong>注：</strong>如果使用了fork server模式，那么上述获取共享内存的操作，是在fork server中进行；随后fork出来的子进程，只需直接使用这个共享内存即可。</p>
+<h2 id="分支信息记录"><a href="#分支信息记录" class="headerlink" title="分支信息记录"></a>分支信息记录</h2><p>上面提到了分支信息，那么什么是分支信息呢，举个例子，我们想要去某个地方，但是不知道如何前往，那么我们可以借助搜索引擎，不出意外的话，搜索引擎会为你规划出很多中前往的方法，同样的，如果我们使用ffmpeg去对视频文件进行解析的时候，肯定也会在途中经历不少的路径分支。</p>
+<p>参考官方文档可以知道，AFL是根据二元tuple(跳转的源地址和目的地址)来记录这些分支信息，从而从中得到执行流程以及代码覆盖情况：</p>
+<pre><code>cur_location = &lt;COMPILE_TIME_RANDOM&gt;;
+shared_mem[cur_location ^ prev_location]++; 
+prev_location = cur_location &gt;&gt; 1;
+</code></pre><p><strong>解析:</strong></p>
+<ol>
+<li><p>为简化连接复杂对象的过程和保持xor输出的平均分布，当前位置是随机产生的，我们再到在fuzz前的编译中，afl-as在进行插桩时会添加相应指令，同时会随机生成一个0到MAP_SIZE之前的数，从而实现伪代码中的第一句。</p>
+</li>
+<li><p>share_mem数组是一个调用者传给被instrument程序的64KB的共享内存区域。AFL为每个代码块生成一个随机数，作为其“位置”的记录；随后，对分支处的”源位置“和”目标位置“进行异或，并将异或的结果作为该分支的key。然后map中的每一byte都保存被插桩程序中的(branch_src,brance_dst)命中信息。</p>
+</li>
+</ol>
+<p>因为保存执行次数的实际是一张哈希表所以会存在碰撞问题。我们选择MAP_SIZE=64K,这其中可以保存大约 2k 到 10k程序分支点。对于不是很复杂的程序程序的碰撞还是可以接受的：</p>
+<blockquote>
+<pre><code> Branch cnt | Colliding tuples | Example targets
+------------+------------------+-----------------
+      1,000 | 0.75%            | giflib, lzo
+      2,000 | 1.5%             | zlib, tar, xz
+      5,000 | 3.5%             | libpng, libwebp
+     10,000 | 7%               | libxml
+     20,000 | 14%              | sqlite
+     50,000 | 30%              | -
+</code></pre></blockquote>
+<p>之前已经介绍了在fuzz过程中展现的状态表单，其中map coverage这一模块就告知了分支路径覆盖的相关信息。</p>
+<ol>
+<li>最后，为什么要讲cur_location进行右移呢？原因在于避免错误判断，举个通用例子，这里存在有A-&gt;A与B-&gt;B或者是A-&gt;B与B-&gt;A的路径跳转，不进行右移的话，A^A与B^B的结果相同，B^A与A^B的结果相同。那么就无法区分这几种路径。</li>
+</ol>
+<p><strong>小结：</strong></p>
+<p>共享内存实际被用于保存一张hash表，目标程序在表中记录每个分支的执行次数，当fuzz结束之后，fuzzer便会对表进行分析，从而判断代码的执行情况。</p>
+<h2 id="分支信息分析"><a href="#分支信息分析" class="headerlink" title="分支信息分析"></a>分支信息分析</h2><p>那么fuzzer是如何对分支信息进行分析的呢，见如下代码(类似部分已省略)：</p>
+<pre><code>static const u8 count_class_lookup8[256] = {
+
+  [0]           = 0,
+  [1]           = 1,
+  [2]           = 2,
+  [3]           = 4,
+  [4 ... 7]     = 8,
+  [8 ... 15]    = 16,
+  [16 ... 31]   = 32,
+  [32 ... 127]  = 64,
+  [128 ... 255] = 128
+
+};
+
+static u16 count_class_lookup16[65536];
+
+EXP_ST void init_count_class16(void) {
+  u32 b1, b2;
+  for (b1 = 0; b1 &lt; 256; b1++) 
+    for (b2 = 0; b2 &lt; 256; b2++)
+      count_class_lookup16[(b1 &lt;&lt; 8) + b2] = 
+        (count_class_lookup8[b1] &lt;&lt; 8) |
+        count_class_lookup8[b2];
+}
+#ifdef __x86_64__
+
+static inline void classify_counts(u64* mem) {
+  u32 i = MAP_SIZE &gt;&gt; 3;
+  while (i--) {
+    if (unlikely(*mem)) {
+      u16* mem16 = (u16*)mem;
+      mem16[0] = count_class_lookup16[mem16[0]];
+      mem16[1] = count_class_lookup16[mem16[1]];
+      mem16[2] = count_class_lookup16[mem16[2]];
+      mem16[3] = count_class_lookup16[mem16[3]];
+    }
+    mem++;
+  }
+}
+#else
+static inline void classify_counts(u32* mem) {
+......
+}
+</code></pre><p>解析:</p>
+<p>这里fuzzer对trace_bits(共享内存)进行预处理，以64位目标程序为例，<br>这里target是将每个分支的执行次数用1个byte来存储，fuzzer通过上述代码将其进行归类。</p>
+<p>举个例子，如果某个分支执行了1次，那么就赋值为1，归为第二类，如果分支执行了4次，那么赋值为8，归为第五类，等等。</p>
+<p>这样处理之后，就可以对分支执行次数进行一个简单的分类。如果不同测试用例在同一个分支下执行次数处于同一个类中，那么AFL就会认为这两次代码覆盖是相同的。当然，这样的简单分类肯定不能区分所有的情况，不过在某种程度上，处理了一些因为循环次数的微小区别，而误判为不同执行结果的情况。</p>
+<p>分类之后，fuzzer还会对未出现崩溃等异常输出的执行检查是否新增了执行路径，最有效的方法就是通过hash比较。</p>
+<pre><code>u32 cksum = hash32(trace_bits, MAP_SIZE, HASH_CONST);
+</code></pre><p>对tarce_bits进行哈是计算然后比较，就可以判断其是否发生变化，从而判断是否存在新的执行路径，为之后的fuzz提供参考信息。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本篇介绍了AFL运行是的几个细节实现，当然，在afl-fuzz的源码之中远不止这些，里面还包含时间获取、文件变异处理、文件比较，状态表单构造、cpu状态监测、fuzz输出文件生成、相关数据写入等信息，有兴趣的可以自行阅读，如果只是想使用AFL，那么只需要学会它的基础操作以及了解它的输出信息即可，但是想要对这个AFL进行DIY的话，还是比较有必要精读它的源码了解相关的操作。</p>
+<p>阅读代码时候大可不必行行精读，可以根据main函数中的调用，来找到对应的方法进行阅读，理解其中的操作。在afl-fuzz中作者也有许多的注释来帮助读者进行理解。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/09/10/Studying-Afl-fuzz之内部实现介绍/">Studying-Afl-fuzz之内部实现介绍</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">M1s5p</a></p>
+        <p><span>发布时间:</span>2018-09-10, 16:07:56</p>
+        <p><span>最后更新:</span>2018-09-12, 16:44:16</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/09/10/Studying-Afl-fuzz之内部实现介绍/" title="Studying-Afl-fuzz之内部实现介绍">http://xq.dropsec.xyz/2018/09/10/Studying-Afl-fuzz之内部实现介绍/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2018/09/10/Studying-Afl-fuzz之内部实现介绍/　　作者: M1s5p" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2018/09/29/Angr学习记录/">
+                    Angr学习记录
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/08/31/Studying-Afl-fuzz之文件处理介绍/">
+                    Studying-Afl-fuzz之文件处理介绍
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Fork-Server"><span class="toc-number">1.</span> <span class="toc-text">Fork Server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#共享内存"><span class="toc-number">2.</span> <span class="toc-text">共享内存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分支信息记录"><span class="toc-number">3.</span> <span class="toc-text">分支信息记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分支信息分析"><span class="toc-number">4.</span> <span class="toc-text">分支信息分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/09/29/Angr学习记录/" title="上一篇: Angr学习记录">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2018/08/31/Studying-Afl-fuzz之文件处理介绍/" title="下一篇: Studying-Afl-fuzz之文件处理介绍">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/09/29/Angr学习记录/">Angr学习记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/Studying-Afl-fuzz之内部实现介绍/">Studying-Afl-fuzz之内部实现介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/Studying-Afl-fuzz之文件处理介绍/">Studying-Afl-fuzz之文件处理介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/Using-Afl-fuzz之二/">Using-Afl-fuzz之一</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/Using-Afl-fuzz之一/">Using-Afl-fuzz之一</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/Studying-Afl-fuzz之原理环境介绍/">Studying-Afl-fuzz之原理环境介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/30/gdb-attach跟exp/">gdb.attach跟exp</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/02/校赛Reverse-Crypto-writeup/">校赛Reverse&Crypto writeup</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/30/缓冲区溢出-栈溢出/">缓冲区溢出--栈溢出</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/10/XMAN排位赛-babymaze/">XMAN排位赛-babymaze</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/小论PE结构/">小论PE结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/20/汇编子程序/">汇编子程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/19/XMAN练习writeup及所得/">XMAN练习 writeup及所得</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/07/二进制文件基础/">二进制文件基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/04/堆栈及汇编基础/">堆栈及汇编基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/定一个小目标/">定一个小目标</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/practice-8之PEiD插件/">practice 8之PEiD插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/14/practice-7之行为分析/">practice 7之行为分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/practice-6之算法夹杂/">practice 6之算法夹杂</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/practice-5之万能断点/">practice 5之万能断点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/practice-4之IDA用法/">practice-4之IDA用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/practice-3之pyo学习/">practice-3之pyo学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/practice-2之汇编/">practice-2之汇编</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/09/8道Pwn基础练习所得/">8道Pwn基础练习所得</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/08/一步一步学ROP之x86篇/">一步一步学ROP之x86篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/30/practice-1之图片reverse/">practice-1之图片reverse</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/16/寒假计划/">寒假计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/12/GDB寄存器和内存查询指令/">GDB寄存器和内存查询指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/30/gdb与peda指令学习学习笔记/">gdb与peda指令学习学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/04/hexo搭建/">hexo搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/03/Google-hacking-语法/">Google hacking 语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/03/绕过网站访问限制的方法/">绕过网站访问限制的方法</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2018 M1s5p
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+             title: "a.article-title, .article-more-link a", 
+             post: ".article-entry a[href], .copyright a[href]", 
+             tags: ".article-tag a", 
+             categories: ".article-category a, a.tag-list-link", 
+             articleNav: "#article-nav a, #post-nav-button a", 
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "(つェ⊂) M1s5p " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) M1s5p " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

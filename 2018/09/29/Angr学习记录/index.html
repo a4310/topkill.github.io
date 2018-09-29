@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="M1s5p" />
+
+
+
+<meta name="description" content="￥&amp;amp;@+Angr符号执行+@&amp;amp;￥">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angr学习记录">
+<meta property="og:url" content="http://xq.dropsec.xyz/2018/09/29/Angr学习记录/index.html">
+<meta property="og:site_name" content="M1s5p">
+<meta property="og:description" content="￥&amp;amp;@+Angr符号执行+@&amp;amp;￥">
+<meta property="og:updated_time" content="2018-09-29T08:54:47.403Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angr学习记录">
+<meta name="twitter:description" content="￥&amp;amp;@+Angr符号执行+@&amp;amp;￥">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="M1s5p" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/img/111.jpg">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Angr学习记录 | M1s5p</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/111.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">M1s5p</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">No Pain No Gain!</p>
+        
+		
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=282324364@qq.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" href="http://weibo.com/p/1005055747318462/home?from=page_100505&mod=TAB#place" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/wl1510009" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angr/">Angr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PE结构/">PE结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fuzz/">fuzz</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pwn/">pwn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reverse/">reverse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stack/">stack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/writeup/">writeup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆栈及汇编基础/">堆栈及汇编基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/寄存器-debug/">寄存器 debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编基础/">汇编基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://spd.dropsec.xyz/">All Right</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://yunnigu.dropsec.xyz/">YunGong</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.dropsec.xyz/">Drops</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://isron.cn/">Isron</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://whc.dropsec.xyz/">Haigo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://yaocl.cn/">Mr_Yao</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">没有可不可以，只有敢不敢做！</div>
+                </section>
+                
+            </div>
+        </div>
+		<object type="application/x-shockwave-flash" 
+		style="outline:none;" 
+		data="http://cdn.abowman.com/widgets/hamster/hamster.swf?" 
+		width="250" height="150">
+		<param name="movie" 
+		value="http://cdn.abowman.com/widgets/hamster/hamster.swf?">
+		</param><param name="AllowScriptAccess" value="always">
+		</param><param name="wmode" value="opaque">
+		</param>
+		</object>
+    </header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">M1s5p</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/111.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">M1s5p</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">No Pain No Gain!</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=282324364@qq.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" target="_blank" href="http://weibo.com/p/1005055747318462/home?from=page_100505&mod=TAB#place" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/wl1510009" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Angr学习记录" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/09/29/Angr学习记录/" class="article-date">
+      <time datetime="2018-09-29T02:30:37.000Z" itemprop="datePublished">2018-09-29</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Angr学习记录
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/binary/">binary</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angr/">Angr</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>￥&amp;@+Angr符号执行+@&amp;￥</p>
+<a id="more"></a>
+<p>参考：<a href="http://www.freebuf.com/sectool/143056.html" target="_blank" rel="external">http://www.freebuf.com/sectool/143056.html</a><br><a href="https://github.com/a7vinx/angr-doc-zh_CN/" target="_blank" rel="external">https://github.com/a7vinx/angr-doc-zh_CN/</a></p>
+<h1 id="Angr简介"><a href="#Angr简介" class="headerlink" title="Angr简介"></a>Angr简介</h1><h2 id="What-is-Angr"><a href="#What-is-Angr" class="headerlink" title="What is Angr?"></a>What is Angr?</h2><p>Angr是一个二进制代码分析工具，能够自动化完成二进制文件的分析,执行动态的符号执行(如Mayhem,KIEE等)。众所周知的是，在二进制代码中寻找并且利用漏洞是一项非常具有挑战性的工作，它的挑战性主要在于人工很难直观的看出二进制代码中的数据结构、控制流信息等。Angr的出现便使得这个问题变得易于解决。Angr是一个基于python的二进制漏洞分析框架,对二进制文件分析，并找到漏洞。使得漏洞挖掘的效率进一步得到提高。基于符号执行的fuzz工具driller就结合了Angr和AFL。</p>
+<p>##Angr的执行！</p>
+<ol>
+<li>将二进制程序利用CLE装载入Angr的分析系统中</li>
+<li>将二进制程序转换为中间语言(Intermediate representation,IR)</li>
+<li>将IR转换为语义较强的表达形式，形如这个程序做了什么，并非它是什么。</li>
+<li>执行进一步的分析，比如，完整的或者部分静态分析(依赖关系分析，程序块分析)、程序空间的符号执行探索(挖掘漏洞)、一些对于上面方式的结合</li>
+</ol>
+<h2 id="Angr的安装"><a href="#Angr的安装" class="headerlink" title="Angr的安装~"></a>Angr的安装~</h2><p>Angr是Python下的一个库，目前只在python2下受到支持，相信python3以后也会支持。所以利用python的方法就可以进行安装了，但是关键在于Angr的依赖需要解决：</p>
+<pre><code>sudo apt-get install python-dev libffi-dev build-essential virtualenvwrapper
+</code></pre><p>依赖结束后执行如下指令即可完成安装：</p>
+<pre><code>mkvirtualenv angr &amp;&amp; pip install angr
+</code></pre><p>#Angr学习*</p>
+<p>嗯，幻想一个场景，一场ctf比赛，我门是选手，点开赛题，一道reverse题提供了一个二进制附件名为r100,ok,开始做题。</p>
+<h2 id="Angr-Project"><a href="#Angr-Project" class="headerlink" title="Angr Project"></a>Angr Project</h2><h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><p>Project意为项目，这里angr的而金子装载组件是CLE，负责将二进制对象及其依赖的库以及易于对其进行操作的方式交给angr的其他组件。Project就是加载二进制文件的方法。就像做pwn题时候我们使用ELF加载题目一样，道理都是一样的。</p>
+<pre><code>import angr
+p = angr.Project(&apos;./r100&apos;)
+</code></pre><h3 id="信息查询"><a href="#信息查询" class="headerlink" title="信息查询"></a>信息查询</h3><p>使用上述方法之后就已经把r100这个二进制文件进行了加载。这时候我们便可以得到很多关于这个二进制文件的信息了。</p>
+<blockquote>
+<p>p.entry                                   //二进制文件的入口点</p>
+<p>p.loader.min_addr()/p.loader.max_addr()    //二进制文件内存空间中的最小地址和最大地址</p>
+<p>p.filename                                 //二进制文件的名称，即r100</p>
+</blockquote>
+<h3 id="程序交互"><a href="#程序交互" class="headerlink" title="程序交互"></a>程序交互</h3><p>loader方法代表了已经装载了的和映射到内存空间中的CLE二进制对象。每一种二进制对象都是由一种可以处理这种文件类型的后端装载器装载，比如ELF就是用以装载ELF文件。</p>
+<p>CLE的交互指令如下：</p>
+<blockquote>
+<p>p.loader                              //一个CLE装载器对象</p>
+<p>p.loader.shared_objects               //这是一个字典，包含已经作为二进制文件的一部分而装载的对象(种类取决于后端装载器)</p>
+<p>p.loader.memory[b.loader.min_addr()]  //这是装载后的进程的内存空间，它包含具体的地址与对应的值</p>
+<p>p.loader.addr_belongs_to_object(b.loader.max_addr()) //返回映射在指定地址的二进制对象。</p>
+<p>p.loader.find_symbol_got_entry(‘__libc_start_main’)   //获取二进制文件的got表地址</p>
+</blockquote>
+<p>与独立的二进制对象交互：</p>
+<blockquote>
+<p>p.loader.main_bin.deps   //这里获取程序依赖的库名列表，通过读取ELF文件的dynamic section的DT_NEEDED域获取。   <strong>注：dynamic sections下的NEEDED元素保存了以NULL结尾的字符串表的偏移量，这些字符串都是所依赖库的名字。</strong></p>
+<p>p.loader.main_bin.memory //这是关于主二进制对象的内存内容的dict</p>
+<p>p.loader.shared_objects[‘libc.so.6’].imports //这是一个装载的libc所需的导入条目的dict(name–&gt;ELFRelocation)</p>
+<p>p.loader.main_bin.imports 这一个是主二进制对象所需的导入条目的dict(name–&gt;ELFRelocation),地址通常为0.</p>
+</blockquote>
+<h3 id="装载选项"><a href="#装载选项" class="headerlink" title="装载选项"></a>装载选项</h3><p>CLE工作时会默认地尝试装载二进制文件所需的依赖（比如libc.so.6等），除非装载选项中进行设置auto_load_libs为False。当装载库文件的时候，如果无法找到，装载器会默认忽略产生的错误并且标记所有关于那个库的依赖为已解决的状态。</p>
+<p>装载选项传递是以dict形式进行传递。传递给Project后会转传给CLE。如上所示，如果我们想要设置选项为不装载依赖库，则可以使用如下指令：</p>
+<pre><code>p=angr.Project(&apos;./r100&apos;,load_options={&quot;auto_load_libs&quot;:Flase})
+</code></pre><p>除此以外，其他的装载选项列举如下：</p>
+<blockquote>
+<p>load_options[‘force_load_libs’] = [‘libleet.so’] //无论是否是目标二进制文件所需要的，强制装载的库的list</p>
+<p>load_options[‘skip_libs’] = [‘libc.so.6’] //需要跳过的库的list</p>
+<p>load_options[‘main_opts’] = {‘backend’: ‘elf’} //装载主二进制文件时的选项</p>
+<p>load_options[‘lib_opts’] = {‘libc.so.6’: {‘custom_base_addr’: 0x13370000}} //映射库名到其装载时需要使用的选项dict的dict</p>
+<p>load_options[‘custom_ld_path’] = [‘/etc/libs’] //可以进行额外搜索的路径list</p>
+<p>load_options[‘ignore_import_version_numbers’] = False //是否将文件名中版本号不同的库视作相同的，比如libc.so.6和libc.so.0</p>
+<p>load_options[‘rebase_granularity’] = 0x1000 //在重定位共享对象的基址的时候需要使用的对齐值</p>
+<p>load_options[‘except_missing_libs’] = True //如果找不到一个库，抛出一个异常（默认行为是忽略未找到的库）</p>
+</blockquote>
+<p>下面两个选项被应用于每一个对象并且覆盖CLE的自动检测。它们可以通过main_opts或者lib_opts来应用。</p>
+<blockquote>
+<p>load_options[‘main_opts’]={‘custom_base_addr’:0x4000} //装载二进制文件的基址为0x4000</p>
+<p>load_options[‘main_opts’]={‘backend’:’elf’} //指定对象的后端装载器(这里指定为elf)</p>
+</blockquote>
+<p>上面两者可同时设置，如下所示：</p>
+<blockquote>
+<p>load_options[‘main_opts’]={‘backend’:’elf’,’custom_base_addr’:0x40000}</p>
+</blockquote>
+<h3 id="后端装载器选项"><a href="#后端装载器选项" class="headerlink" title="后端装载器选项"></a>后端装载器选项</h3><p>CLE集成了ELF,PE，CGC及ELF核心转储文件的后端支持，像IDA一样可以将文件装载。在CLE运作时，会自动检测需要使用的后端，当然如果已经知晓文件的结构信息，也可进行手动指定。关键字backend指定后端，custom_arch关键字指定架构。</p>
+<blockquote>
+<p>load_options[‘main_opts’] = {‘backend’:’elf’,’custom_arch’:’i386’}</p>
+<p>load_options[‘lib_opts’] = {‘libc.so.6’:{‘backend’：’elf’}}</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>后端关键字</th>
+<th style="text-align:center">描述</th>
+<th style="text-align:right">是否需要custom_arch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>elf</td>
+<td style="text-align:center">基于PyELFTools的ELF装载器</td>
+<td style="text-align:right">no</td>
+</tr>
+<tr>
+<td>pe</td>
+<td style="text-align:center">基于PEFile的PE装载器</td>
+<td style="text-align:right">no</td>
+</tr>
+<tr>
+<td>cgc</td>
+<td style="text-align:center">Cyber Grand Challenge文件的装载器</td>
+<td style="text-align:right">no</td>
+</tr>
+<tr>
+<td>backedcgc</td>
+<td style="text-align:center">支持指定内存和寄存器支持CGC文件装载器</td>
+<td style="text-align:right">no</td>
+</tr>
+<tr>
+<td>elfcore</td>
+<td style="text-align:center">ELF核心转储文件的装载器</td>
+<td style="text-align:right">no</td>
+</tr>
+<tr>
+<td>ida</td>
+<td style="text-align:center">启动IDA来解析文件</td>
+<td style="text-align:right">yes</td>
+</tr>
+<tr>
+<td>blob</td>
+<td style="text-align:center">装载文件到内存中作为一个平坦的镜像</td>
+<td style="text-align:right">yes</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/09/29/Angr学习记录/">Angr学习记录</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">M1s5p</a></p>
+        <p><span>发布时间:</span>2018-09-29, 10:30:37</p>
+        <p><span>最后更新:</span>2018-09-29, 16:54:47</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/09/29/Angr学习记录/" title="Angr学习记录">http://xq.dropsec.xyz/2018/09/29/Angr学习记录/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2018/09/29/Angr学习记录/　　作者: M1s5p" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/09/10/Studying-Afl-fuzz之内部实现介绍/">
+                    Studying-Afl-fuzz之内部实现介绍
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Angr简介"><span class="toc-number">1.</span> <span class="toc-text">Angr简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-Angr"><span class="toc-number">1.1.</span> <span class="toc-text">What is Angr?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Angr的安装"><span class="toc-number">1.2.</span> <span class="toc-text">Angr的安装~</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Angr-Project"><span class="toc-number">1.3.</span> <span class="toc-text">Angr Project</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建对象"><span class="toc-number">1.3.1.</span> <span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#信息查询"><span class="toc-number">1.3.2.</span> <span class="toc-text">信息查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#程序交互"><span class="toc-number">1.3.3.</span> <span class="toc-text">程序交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#装载选项"><span class="toc-number">1.3.4.</span> <span class="toc-text">装载选项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#后端装载器选项"><span class="toc-number">1.3.5.</span> <span class="toc-text">后端装载器选项</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2018/09/10/Studying-Afl-fuzz之内部实现介绍/" title="下一篇: Studying-Afl-fuzz之内部实现介绍">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/09/29/Angr学习记录/">Angr学习记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/Studying-Afl-fuzz之内部实现介绍/">Studying-Afl-fuzz之内部实现介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/Studying-Afl-fuzz之文件处理介绍/">Studying-Afl-fuzz之文件处理介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/Using-Afl-fuzz之二/">Using-Afl-fuzz之一</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/Using-Afl-fuzz之一/">Using-Afl-fuzz之一</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/Studying-Afl-fuzz之原理环境介绍/">Studying-Afl-fuzz之原理环境介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/30/gdb-attach跟exp/">gdb.attach跟exp</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/02/校赛Reverse-Crypto-writeup/">校赛Reverse&Crypto writeup</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/30/缓冲区溢出-栈溢出/">缓冲区溢出--栈溢出</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/10/XMAN排位赛-babymaze/">XMAN排位赛-babymaze</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/小论PE结构/">小论PE结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/20/汇编子程序/">汇编子程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/19/XMAN练习writeup及所得/">XMAN练习 writeup及所得</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/07/二进制文件基础/">二进制文件基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/04/堆栈及汇编基础/">堆栈及汇编基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/定一个小目标/">定一个小目标</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/practice-8之PEiD插件/">practice 8之PEiD插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/14/practice-7之行为分析/">practice 7之行为分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/practice-6之算法夹杂/">practice 6之算法夹杂</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/practice-5之万能断点/">practice 5之万能断点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/practice-4之IDA用法/">practice-4之IDA用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/practice-3之pyo学习/">practice-3之pyo学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/practice-2之汇编/">practice-2之汇编</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/09/8道Pwn基础练习所得/">8道Pwn基础练习所得</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/08/一步一步学ROP之x86篇/">一步一步学ROP之x86篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/30/practice-1之图片reverse/">practice-1之图片reverse</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/16/寒假计划/">寒假计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/12/GDB寄存器和内存查询指令/">GDB寄存器和内存查询指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/30/gdb与peda指令学习学习笔记/">gdb与peda指令学习学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/04/hexo搭建/">hexo搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/03/Google-hacking-语法/">Google hacking 语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/03/绕过网站访问限制的方法/">绕过网站访问限制的方法</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2018 M1s5p
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+             title: "a.article-title, .article-more-link a", 
+             post: ".article-entry a[href], .copyright a[href]", 
+             tags: ".article-tag a", 
+             categories: ".article-category a, a.tag-list-link", 
+             articleNav: "#article-nav a, #post-nav-button a", 
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "(つェ⊂) M1s5p " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) M1s5p " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
