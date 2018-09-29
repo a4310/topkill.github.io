@@ -15,19 +15,16 @@
 
 
 
-<meta name="description" content="前篇已经对AFL的环境搭建、使用做了介绍，并且使用FFmpeg对fuzz之前要做的准备做了介绍，除此以外，AFL自带的几个辅助工具也一一进行了演示介绍。
-AFL对于目标的fuzz主要就是利用fuzzer提供的testcase或者是自主随机生成的一系列testcase。但并非直接喂给目标程序进行测试，而是通过好几个阶段进行了处理之后才执行的。这儿就按我理解的介绍一下AFL是如何对输入文件进行处理的。">
+<meta name="description" content="AFL(American Fuzzy Lop)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Studying-Afl-fuzz之文件处理介绍">
 <meta property="og:url" content="http://xq.dropsec.xyz/2018/08/31/Studying-Afl-fuzz之文件处理介绍/index.html">
 <meta property="og:site_name" content="M1s5p">
-<meta property="og:description" content="前篇已经对AFL的环境搭建、使用做了介绍，并且使用FFmpeg对fuzz之前要做的准备做了介绍，除此以外，AFL自带的几个辅助工具也一一进行了演示介绍。
-AFL对于目标的fuzz主要就是利用fuzzer提供的testcase或者是自主随机生成的一系列testcase。但并非直接喂给目标程序进行测试，而是通过好几个阶段进行了处理之后才执行的。这儿就按我理解的介绍一下AFL是如何对输入文件进行处理的。">
-<meta property="og:updated_time" content="2018-09-05T06:25:03.024Z">
+<meta property="og:description" content="AFL(American Fuzzy Lop)">
+<meta property="og:updated_time" content="2018-09-29T09:18:49.984Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Studying-Afl-fuzz之文件处理介绍">
-<meta name="twitter:description" content="前篇已经对AFL的环境搭建、使用做了介绍，并且使用FFmpeg对fuzz之前要做的准备做了介绍，除此以外，AFL自带的几个辅助工具也一一进行了演示介绍。
-AFL对于目标的fuzz主要就是利用fuzzer提供的testcase或者是自主随机生成的一系列testcase。但并非直接喂给目标程序进行测试，而是通过好几个阶段进行了处理之后才执行的。这儿就按我理解的介绍一下AFL是如何对输入文件进行处理的。">
+<meta name="twitter:description" content="AFL(American Fuzzy Lop)">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -330,7 +327,8 @@ AFL对于目标的fuzz主要就是利用fuzzer提供的testcase或者是自主�
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>前篇已经对AFL的环境搭建、使用做了介绍，并且使用FFmpeg对fuzz之前要做的准备做了介绍，除此以外，AFL自带的几个辅助工具也一一进行了演示介绍。</p>
+        <p>AFL(American Fuzzy Lop)<br><a id="more"></a></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前篇已经对AFL的环境搭建、使用做了介绍，并且使用FFmpeg对fuzz之前要做的准备做了介绍，除此以外，AFL自带的几个辅助工具也一一进行了演示介绍。</p>
 <p>AFL对于目标的fuzz主要就是利用fuzzer提供的testcase或者是自主随机生成的一系列testcase。但并非直接喂给目标程序进行测试，而是通过好几个阶段进行了处理之后才执行的。这儿就按我理解的介绍一下AFL是如何对输入文件进行处理的。</p>
 <p>参考：<br><a href="http://lcamtuf.coredump.cx/afl/status_screen.txt" target="_blank" rel="external">http://lcamtuf.coredump.cx/afl/status_screen.txt</a><br><a href="http://rk700.github.io/2018/01/04/afl-mutations/" target="_blank" rel="external">http://rk700.github.io/2018/01/04/afl-mutations/</a></p>
 <p>AFL的fuzz过程大体概述就是fuzzer将提供case进行排列，按序选取文件后按照几个阶段的顺序对其进行确定性变异或者是随机混乱的变异，然后将所有处理过后的case喂给目标程序，并且检查运行后是否会触发目标的崩溃，或是发现新路径等结果。</p>
@@ -477,7 +475,7 @@ static s32 interesting_32[] = { INTERESTING_8, INTERESTING_16, INTERESTING_32 };
         <p><span>本文标题:</span><a href="/2018/08/31/Studying-Afl-fuzz之文件处理介绍/">Studying-Afl-fuzz之文件处理介绍</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">M1s5p</a></p>
         <p><span>发布时间:</span>2018-08-31, 10:56:06</p>
-        <p><span>最后更新:</span>2018-09-05, 14:25:03</p>
+        <p><span>最后更新:</span>2018-09-29, 17:18:49</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/08/31/Studying-Afl-fuzz之文件处理介绍/" title="Studying-Afl-fuzz之文件处理介绍">http://xq.dropsec.xyz/2018/08/31/Studying-Afl-fuzz之文件处理介绍/</a>
             <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2018/08/31/Studying-Afl-fuzz之文件处理介绍/　　作者: M1s5p" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -513,7 +511,7 @@ static s32 interesting_32[] = { INTERESTING_8, INTERESTING_16, INTERESTING_32 };
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#阶段总括"><span class="toc-number">1.</span> <span class="toc-text">阶段总括</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#准备阶段"><span class="toc-number">1.1.</span> <span class="toc-text">准备阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#确定性阶段"><span class="toc-number">1.2.</span> <span class="toc-text">确定性阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#随机性阶段"><span class="toc-number">1.3.</span> <span class="toc-text">随机性阶段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#阶段介绍"><span class="toc-number">2.</span> <span class="toc-text">阶段介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bitflip"><span class="toc-number">2.1.</span> <span class="toc-text">Bitflip</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#检测token"><span class="toc-number">2.1.1.</span> <span class="toc-text">检测token</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生成effector-map"><span class="toc-number">2.1.2.</span> <span class="toc-text">生成effector map</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Arithmetic"><span class="toc-number">2.2.</span> <span class="toc-text">Arithmetic</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Interest"><span class="toc-number">2.3.</span> <span class="toc-text">Interest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dictionary"><span class="toc-number">2.4.</span> <span class="toc-text">dictionary</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#user-extras（over）"><span class="toc-number">2.4.1.</span> <span class="toc-text">user extras（over）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#user-extras-insert"><span class="toc-number">2.4.2.</span> <span class="toc-text">user extras(insert)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#auto-extras-over"><span class="toc-number">2.4.3.</span> <span class="toc-text">auto extras(over)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#havoc"><span class="toc-number">2.5.</span> <span class="toc-text">havoc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#splice"><span class="toc-number">2.6.</span> <span class="toc-text">splice</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cycle"><span class="toc-number">2.7.</span> <span class="toc-text">cycle</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#阶段总括"><span class="toc-number">2.</span> <span class="toc-text">阶段总括</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#准备阶段"><span class="toc-number">2.1.</span> <span class="toc-text">准备阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#确定性阶段"><span class="toc-number">2.2.</span> <span class="toc-text">确定性阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#随机性阶段"><span class="toc-number">2.3.</span> <span class="toc-text">随机性阶段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#阶段介绍"><span class="toc-number">3.</span> <span class="toc-text">阶段介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bitflip"><span class="toc-number">3.1.</span> <span class="toc-text">Bitflip</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#检测token"><span class="toc-number">3.1.1.</span> <span class="toc-text">检测token</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生成effector-map"><span class="toc-number">3.1.2.</span> <span class="toc-text">生成effector map</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Arithmetic"><span class="toc-number">3.2.</span> <span class="toc-text">Arithmetic</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Interest"><span class="toc-number">3.3.</span> <span class="toc-text">Interest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dictionary"><span class="toc-number">3.4.</span> <span class="toc-text">dictionary</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#user-extras（over）"><span class="toc-number">3.4.1.</span> <span class="toc-text">user extras（over）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#user-extras-insert"><span class="toc-number">3.4.2.</span> <span class="toc-text">user extras(insert)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#auto-extras-over"><span class="toc-number">3.4.3.</span> <span class="toc-text">auto extras(over)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#havoc"><span class="toc-number">3.5.</span> <span class="toc-text">havoc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#splice"><span class="toc-number">3.6.</span> <span class="toc-text">splice</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cycle"><span class="toc-number">3.7.</span> <span class="toc-text">cycle</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
         
     </div>
     <style>
