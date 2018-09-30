@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://xq.dropsec.xyz/2018/09/29/Angr学习记录/index.html">
 <meta property="og:site_name" content="M1s5p">
 <meta property="og:description" content="Angr符号执行">
-<meta property="og:updated_time" content="2018-09-30T09:08:32.728Z">
+<meta property="og:updated_time" content="2018-09-30T09:14:31.171Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Angr学习记录">
 <meta name="twitter:description" content="Angr符号执行">
@@ -578,7 +578,7 @@ simgr          //output:&lt;SimulationManager with 2 authenticated, 1 deadended&
 
 simgr.one_deadended    //output: &lt;SimState @ 0x1000030&gt;
 simgr.mp_authenticated //output: MP([&lt;SimState @ 0x1000078&gt;, &lt;SimState @ 0x1000078&gt;])
-</code></pre><p>除了deadended，还有其他的几种存储类型如下所示：<br>|    类型          |                           描述                                   |<br>|:———–:|:—————————————————–:|<br>|   active    |除非指定了备用存储，否则默认执行步进状态                      |<br>|  deadended  |程序遇到错误停止，正常结束或者是指令指针无效等。状态转到退出的存储|<br>|   pruned    |使用时LAZY_SOLVES，除非绝对必要，否则不会检查状态是否满足。当存在状态时发现状态不满LAZY_SOLVES时，遍历状态层次结构以识别其历史上最初变得不饱和的状态。|<br>|unconstrained|标志为不受约束的状态，由用户数据或某些其他符号数据源控制的指令指针放置在此处|<br>|    unsat    |标志为不可满足的状态，即具有矛盾的约束|</p>
+</code></pre><p>除了deadended，还有其他的几种存储类型如下所示：<br>类型    |描述<br>-|-<br>active|除非指定了备用存储，否则默认执行步进状态<br>deadended|程序遇到错误停止，正常结束或者是指令指针无效等。状态转到退出的存储<br>pruned|使用时LAZY_SOLVES，除非绝对必要，否则不会检查状态是否满足。当存在状态时发现状态不满LAZY_SOLVES时，遍历状态层次结构以识别其历史上最初变得不饱和的状态。<br>unconstrained|标志为不受约束的状态，由用户数据或某些其他符号数据源控制的指令指针放置在此处<br>unsat|标志为不可满足的状态，即具有矛盾的约束</p>
 <p>上述方法的利用可以在<a href="https://docs.angr.io/docs/examples.html#reverseme-modern-binary-exploitation---csci-4968" target="_blank" rel="external">这里这里这里</a>看到使用方式。</p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>工欲善其事必先利其器，这里把Angr常用常见的方法都进行了学习总结，下面就要结合实例进行熟练了。</p>
 
@@ -592,7 +592,7 @@ simgr.mp_authenticated //output: MP([&lt;SimState @ 0x1000078&gt;, &lt;SimState 
         <p><span>本文标题:</span><a href="/2018/09/29/Angr学习记录/">Angr学习记录</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">M1s5p</a></p>
         <p><span>发布时间:</span>2018-09-29, 10:30:37</p>
-        <p><span>最后更新:</span>2018-09-30, 17:08:32</p>
+        <p><span>最后更新:</span>2018-09-30, 17:14:31</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/09/29/Angr学习记录/" title="Angr学习记录">http://xq.dropsec.xyz/2018/09/29/Angr学习记录/</a>
             <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2018/09/29/Angr学习记录/　　作者: M1s5p" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
