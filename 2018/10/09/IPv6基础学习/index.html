@@ -21,10 +21,20 @@
 <meta property="og:url" content="http://xq.dropsec.xyz/2018/10/09/IPv6基础学习/index.html">
 <meta property="og:site_name" content="M1s5p">
 <meta property="og:description" content="IPv6(Internet Protocol Version 6)">
-<meta property="og:updated_time" content="2018-10-09T08:31:31.137Z">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E5%8D%95%E6%92%AD.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E4%BB%BB%E6%92%AD%E5%9C%B0%E5%9D%80.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E9%93%BE%E8%B7%AF.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E7%AB%99%E7%82%B9.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E5%85%A8%E5%B1%80.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E6%A0%87%E8%AF%86.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E8%BD%AC%E6%8D%A2.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E5%A4%9A%E6%92%AD%E5%9C%B0%E5%9D%80.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E6%A0%87%E5%BF%97.png">
+<meta property="og:updated_time" content="2018-10-10T09:17:57.298Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IPv6基础学习">
 <meta name="twitter:description" content="IPv6(Internet Protocol Version 6)">
+<meta name="twitter:image" content="http://otc7tld02.bkt.clouddn.com/%E5%8D%95%E6%92%AD.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -328,14 +338,104 @@
       
           
         <p>IPv6(Internet Protocol Version 6)<br><a id="more"></a></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>IPv6全称是Internet Protocol Version 6，互联网协议，是IETF(Internet Engineering Task Force)设计用以替换现行IPv4的下一代IP协议。<br>IPv6引入的最知名也是最重要的增强就是由IPv6地址比特数的增加带来的地址空间扩展，也就是从IPv4的32位增加到了128位。IPv4之所以设置为32位是因为当前的互联网上的主机CPU字长为32位。从处理效率以及未来网络扩展性角度考虑，128位是一个不错的选择。伴随着IPv6地址体系结构还引入了集中引入注目的特性，这些特性主要是基于IPv4的操作经验：</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>IPv6全称是Internet Protocol Version 6，互联网协议，是IETF(Internet Engineering Task Force)设计用以替换现行IPv4的下一代IP协议。<br>IPv6引入的最知名也是最重要的增强就是由IPv6地址比特数的增加带来的地址空间扩展，也就是从IPv4的32位增加到了128位。IPv4之所以设置为32位是因为当前的互联网上的主机CPU字长为32位。从处理效率以及未来网络扩展性角度考虑，128位是一个不错的选择。伴随着IPv6地址体系结构还引入了集中引入注目的特性，这些特性主要是基于IPv4的操作经验：</p>
 <ol>
 <li>IPv6有明确的地址范围概念</li>
 <li>IPv6地址的结构性强</li>
 <li>Ipv6中多播得到广泛的应用</li>
 </ol>
 <p>这些在后面都会想学习涉及。</p>
-<h1 id="IPv6地址"><a href="#IPv6地址" class="headerlink" title="IPv6地址"></a>IPv6地址</h1><p>IPv6地址是一个128bit的无符号整数，用来标识一个或多个网络接口。IPv6地址有3种类型：</p>
+<h2 id="IPv6地址"><a href="#IPv6地址" class="headerlink" title="IPv6地址"></a>IPv6地址</h2><p>IPv6地址是一个128bit的无符号整数，用来标识一个或多个网络接口。IPv6地址有3种类型：</p>
+<ol>
+<li>单播：一个单播IPv6地址表示一个网络接口。目标为一个单播地址的分组会被传送到一个网络接口上去。</li>
+<li>任播：任播IPv6地址标识一组网络接口。但目标为一个任播地址的分组只会被送到那个组中的一个接口中去。根据路由选择协议，接收分组的接口是离源最近的接口。</li>
+<li>多播：IPv6多播地址标识一组网络接口。这些接口可能属于不同的节点。目标为多播地址的分组会被传送给那个组中所有的成员。</li>
+</ol>
+<p><strong>注</strong>：在IPv6下不存在广播地址，网络层的广播地址通常会造成链路级的广播，这回影响到附属链路中的所有设备，甚至包括哪些根本不支持特定协议的设备，在IPv6下，网络层的“广播”是通过多播来实现的。</p>
+<h2 id="IPv6地址的文本表达"><a href="#IPv6地址的文本表达" class="headerlink" title="IPv6地址的文本表达"></a>IPv6地址的文本表达</h2><ol>
+<li>IPv6是128bit，以十六进制表示：2001:0DB8:0123:4567:89AB:CDEF:0123:4567</li>
+<li>IPv6的表示并不拘泥于大小写，上述等价于：2001:0db8:0123:4567:89ab:cdef:0123:4567</li>
+<li>IPv6的八个字段至少有一个十六进制数字。字段中不需要写出前导的0，但会出现连续的0字段：<br>2001:db8:123:1:0:0:0:1</li>
+<li>当出现连续的0字段时采取缩写格式，压缩为::,但是一个IPv6中至多只能出现一次::。所以上一个IPv6地址表示为：2001:db8:123:1::1</li>
+<li>IPv6网络前缀的文本表示为IPv6地址/前缀长度，其中前缀长度为一个十进制值，用以表示前缀的前导比特长度。表示上述地址和前缀长度64的形式如下：2001:db8:123:1::1/64</li>
+<li>IPv6地址中前缀长度后面的部分无关紧要，可以将上一个地址表示为：2001:db8:123:1::/64</li>
+<li>IPv6不允许不连续的掩码来表示一个网络。因此，用一个数字来指定前导有效比特就足够了，在IPv6地址结构中不存在掩码的概念。</li>
+<li>IPv的单播地址有两个特殊例子：<ol>
+<li><strong>环回地址</strong>：0:0:0:0:0:0:0:1或::1，很多系统中都存在特殊伪接口称为环回接口，环回地址就是分配给这个环回接口的地址。发送到环回地址的分组不回离开这个节点，也不会传送到物理网络中区。相反，分组会被作为输入分组重定向到传输节点自身中去。</li>
+<li><strong>不确定地址</strong>：0:0:0:0:0:0:0:0或::,不确定地址是一个标记值，用来说明一个接口地址的缺失。不能将不确定地址设置为任何一个分组的目的地址。路由器也不会转发以不确定地址作为源或目的地址的分组。</li>
+</ol>
+</li>
+<li>在从IPv4向IPv6的转换过程中，为了使得两个结点可以在一个混合网络环境中共存。定义了一些特殊的IPv6地址。这种特殊的IPv6地址是以IPv4地址作为IPv6地址的低32位比特来构建的，其余的96比特用一个预分配的IPv6前缀进行填充:0:0:0:0:0:ffff:192.0.2.1或::ffff:192.0.2.1。这样一来，某种类型的转换地址会将0:0:0:0:0:ffff::/96附加到IPv4地址前面。这种地址被称为<strong>IPv4映射IPv6地址</strong>。IPv4映射的IPv6地址以IPv6的地址形式表示了一个IPv4节点。IPv4映射的IPv6地址最引人注目的应用就是一个允许在IPv6套接字上进行IPv4通信的套接字API扩展。</li>
+<li>另一种转换地址：0:0:0:0:0:0:192.0.2.2或压缩形式::192.0.2.2,这样在IPv4底之前附加96个0bit(::/96)。这类地址被称为<strong>IPv4兼容的IPv6地址</strong>。</li>
+</ol>
+<h2 id="地址范围"><a href="#地址范围" class="headerlink" title="地址范围"></a>地址范围</h2><p>地址范围的概念是IPv6地址设计中一个显著的特征。地址范围规定了地址“有效的范围”，就是可以将其作为一个接口或一组接口的唯一标识符使用范围。</p>
+<p>对于单播地址来说，定义了三种类型的范围：</p>
+<ol>
+<li>链路本地：fe80::/10。只在分配地址的接口所附接的网络链路上有效。要求每个支持IPv6的接口都至少要一个链路本地地址。</li>
+<li>站点本地：fec0::/10。只在分配地址的接口所属的站点概念范围内有效，与链路不同的是站点的范围不是由网络的物理特性决定的。站点边界只能通过人工配置决定。</li>
+<li>全局范围：所有其他单播地址的地址范围都被定义为全局的。在整个因特网范围内都有效。</li>
+</ol>
+<p>对于多播地址来说，有四个比特的“范围”字段，用来标识地址范围：</p>
+<p>0：保留<br>1：接口本地<br>2：链路本地<br>3：保留<br>4：管理本地<br>5：站点本地<br>6：未分配<br>7：未分配<br>8：组织本地<br>9：未分配<br>A:未分配<br>B:未分配<br>C:未分配<br>D:未分配<br>E:全局<br>F:保留</p>
+<ol>
+<li>接口本地多播范围局限于接口，并且用于接口所属的节点内部多播分组的环回传输1.接口本地多播地址的典型应用是进行一对多的进程间通信。通信中，一个进程可以将分组多播到同一节点的其他进程中去。</li>
+<li>链路本地、站点本地和全局多播地址与相应范围的单播地址具有相同的寓意。</li>
+<li>管理本地范围定义了包含非自动管理配置的最小范围。</li>
+<li>组织本地范围涵盖了属于同一个组织的多个站点。</li>
+<li>未分配范围是未定义的，管理员可以用来定义其他拓扑形式的多播区域。</li>
+<li>所有大于链路本地且小于全局范围都是逻辑范围，其特定的拓扑范围由管理员决定</li>
+</ol>
+<p><strong>注</strong>：环回地址(::1)归为1一个特殊的链路本地地址，而不确定地址（::）没有任何范围。<br> 对站点和组织进行解释，一个公司网络中，整个公司就是一个组织，公司中的单个网络就是一个独立的站点。</p>
+<h2 id="IPv6地址格式"><a href="#IPv6地址格式" class="headerlink" title="IPv6地址格式"></a>IPv6地址格式</h2><ol>
+<li>单播地址结构</li>
+</ol>
+<p><img src="http://otc7tld02.bkt.clouddn.com/%E5%8D%95%E6%92%AD.png" alt=""></p>
+<p>子网前缀部分标识一条特定的网络链路。子网前缀中通常会有层次结构。</p>
+<p>接口标识符标识子网前缀确定的那条链路上的一个特定接口。单纯从体系结构的角度来看，类似于IPv4地址中主机标识符。它是一个可以在一条链路上唯一确定一个特定接口的标识符。但是，在某些网络类型中，通过自动地址配置机制，IPv6地址的接口标识符通常都与节点的物理接口有关。</p>
+<p>有一种特殊的称为子网路由器任播地址的预定义地址与这个格式有关，发送这个地址的分组会被传送到由子网标识的链路上的一台路由器中去。接受路由器是根据某种标准，例如路由选择协议，判断出最近的一台路由器。所有路由器都要支持子网路由器的任播地址。</p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/%E4%BB%BB%E6%92%AD%E5%9C%B0%E5%9D%80.png" alt=""></p>
+<p>另外，除了以二进制比特000开头的地址之外，所有单播地址的接口标识符长度都是64比特。</p>
+<p>链路本地：fe80::/10<br><img src="http://otc7tld02.bkt.clouddn.com/%E9%93%BE%E8%B7%AF.png" alt=""></p>
+<p>站点本地：fec0::/10<br><img src="http://otc7tld02.bkt.clouddn.com/%E7%AB%99%E7%82%B9.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/%E5%85%A8%E5%B1%80.png" alt=""></p>
+<p>全局路由前缀标识一个站点或组织，而子网ID则表示了该站点或组织内的一个特定子网。</p>
+<h3 id="接口标识符的产生"><a href="#接口标识符的产生" class="headerlink" title="接口标识符的产生"></a>接口标识符的产生</h3><p><img src="http://otc7tld02.bkt.clouddn.com/%E6%A0%87%E8%AF%86.png" alt=""></p>
+<p>由IEEE EUI-64规范生成，标识符有24比特的组织唯一标识符（c）和40比特的扩展标识符（m）组成，在组织标识符中，图中的u标识这64比特的标识符是全局管理还是本地管理(如果是本地的，就要将这个比特置位)。g标识这个标识符是单个硬件实例还是一组硬件实例.</p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/%E8%BD%AC%E6%8D%A2.png" alt=""></p>
+<p>上图是IEEE MAC-48地址转换为64比特的标识符。转换方法是将前面的本地标识0转换为全局标识1，<br>然后在MAC-48地址中插入0xFFFE,将其扩展到64比特。即00-60-97-8F-6A-4E转换为了02-60-97-FF-FE-8F-6A-4E。</p>
+<p><strong>注</strong>:在标准的IEEE扩展中。插入的16bit应当使用0xFFFF。</p>
+<h3 id="多播地址格式"><a href="#多播地址格式" class="headerlink" title="多播地址格式"></a>多播地址格式</h3><p><img src="http://otc7tld02.bkt.clouddn.com/%E5%A4%9A%E6%92%AD%E5%9C%B0%E5%9D%80.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/%E6%A0%87%E5%BF%97.png" alt=""></p>
+<p>上图表示的是多播地址格式，具体分解如下：</p>
+<ol>
+<li>多播地址以ff开头。所以前8个比特为11111111</li>
+<li>下面四个bit是标志位:<ol>
+<li>最高标志位保留，必须为0.</li>
+<li>T:0：表示永久的多播组地址，由IANA(Internet Assigned Number Authority)分配。1：表示动态分配的多播组地址。</li>
+<li>P:说明多播地址是否基于某个网络前缀分配。当P为1时，多播地址就是基于网络前缀分配，此时T也必须为1，说明这是动态分配的多播地址。这样就确保了在每个域的基础上都很容易定义唯一的多播地址。</li>
+<li>R:进一步拓展了基于网络前缀的多播地址。如果R为1，说明多播地址中嵌套了网络所用多播路由选择协议的汇聚点地址。此时P与T都要为1，所以此类多播地址公用前缀为FF70::/12标识。</li>
+</ol>
+</li>
+<li>下面4个比特右移表示作用范围，这个取值对应的范围意义已经在前面列出。</li>
+<li>最后32比特的组ID被划分为了3个区间：<ol>
+<li>0x00000001~0x3FFFFFFF:永久IPv6多播地址的组ID</li>
+<li>0x40000000~0x7FFFFFFF:永久组ID</li>
+<li>0x80000000~0xFFFFFFFF:动态IPv6多播地址的组ID，此时标志T必须为1</li>
+</ol>
+</li>
+</ol>
+<p><strong>注</strong>:永久多播地址的组ID或永久组ID都是独立于多播地址的整体范围的。例如将ff0X::101永久分配给NTP服务器组。那么:</p>
+<ol>
+<li>ff02:0:0:0:0:0:0:101 ：标识了一条特定链路上的所有NTP服务器</li>
+<li>ff05:0:0:0:0:0:0:101 ：标识了一条特定站点上的所有NTP服务器</li>
+<li>ff08:0:0:0:0:0:0:101 ：标识了一条特定组织上的所有NTP服务器</li>
+</ol>
+<p>在IPv6地址体系结构中还定义了一些特殊的多播地址：</p>
+<ol>
+<li>所有节点多播地址为：ff01:0:0:0:0:0:0:1、ff02:0:0:0:0:0:0:1</li>
+<li>所有路由器多播地址：ff01:0:0:0:0:0:0:2、ff02:0:0:0:0:0:0:2、ff05:0:0:0:0:0:0:2</li>
+<li>请求节点多播地址：前缀为ff02:0:0:0:0:1:ff00::/104。然后获取单播或任播地址的低24bit，并附加在请求节点多播地址前缀后面而构建的。一个单播地址2001:db8:7654:3210:fedc:ba98:7654:3210的请求节点多播地址为ff02:0:0:0:0:1:ff54：3210</li>
+</ol>
 
       
     </div>
@@ -347,7 +447,7 @@
         <p><span>本文标题:</span><a href="/2018/10/09/IPv6基础学习/">IPv6基础学习</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">M1s5p</a></p>
         <p><span>发布时间:</span>2018-10-09, 17:36:50</p>
-        <p><span>最后更新:</span>2018-10-09, 16:31:31</p>
+        <p><span>最后更新:</span>2018-10-10, 17:17:57</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/10/09/IPv6基础学习/" title="IPv6基础学习">http://xq.dropsec.xyz/2018/10/09/IPv6基础学习/</a>
             <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2018/10/09/IPv6基础学习/　　作者: M1s5p" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -377,7 +477,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IPv6地址"><span class="toc-number">2.</span> <span class="toc-text">IPv6地址</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv6地址"><span class="toc-number">2.</span> <span class="toc-text">IPv6地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv6地址的文本表达"><span class="toc-number">3.</span> <span class="toc-text">IPv6地址的文本表达</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#地址范围"><span class="toc-number">4.</span> <span class="toc-text">地址范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv6地址格式"><span class="toc-number">5.</span> <span class="toc-text">IPv6地址格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#接口标识符的产生"><span class="toc-number">5.1.</span> <span class="toc-text">接口标识符的产生</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多播地址格式"><span class="toc-number">5.2.</span> <span class="toc-text">多播地址格式</span></a></li></ol></li></ol>
         
     </div>
     <style>
