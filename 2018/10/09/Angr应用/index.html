@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/IDA_%E5%88%86%E6%9E%902.png">
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/find_avoid.png">
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/result.png">
-<meta property="og:updated_time" content="2018-10-09T08:24:27.827Z">
+<meta property="og:updated_time" content="2018-10-10T09:38:01.349Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Angr应用">
 <meta name="twitter:description" content="Angr符号执行">
@@ -344,8 +344,20 @@
 <p>第一眼看来很简单，只要if中的条件能够达成就可以了，那么重点就在verify。</p>
 <p><img src="http://otc7tld02.bkt.clouddn.com/IDA_%E5%88%86%E6%9E%901.png" alt=""></p>
 <p>程序自带的数据：<br><img src="http://otc7tld02.bkt.clouddn.com/IDA_%E5%88%86%E6%9E%902.png" alt=""><br>就是程序自带的数据与指令行的输入进行处理后的结果进行比较，满足条件即可。</p>
-<p>如果没有angr我们可以选择爆破，构造对应条件爆破对位字符即可。</p>
-<p>这里可以选择Angr进行解题。<br>想要使用Angr，基本的操作就是先要将程序进行加载：</p>
+<p>如果没有angr我们可以选择爆破，构造对应条件爆破对位字符即可。脚本如下：</p>
+<pre><code>import string
+key=[ 0xCA, 0x70, 0x93, 0xC8, 0x06, 0x54, 0xD2, 0xD5, 0xDA, 0x6A,
+  0xD1, 0x59, 0xDE, 0x45, 0xF9, 0xB5, 0xA6, 0x87, 0x19, 0xA5,
+  0x56, 0x6E, 0x63]
+
+
+flag=&quot;&quot;
+for i in range(len(key)):
+    for a1 in string.printable:
+            if (((((((ord(a1))&amp;0xff) ^ i) &lt;&lt; ((i ^ 9) &amp; 3))&amp;0xff) | ((((( ord(a1))&amp;0xff) ^ i) &gt;&gt; ((8 - ((i ^ 9) &amp; 3))&amp;0xff))&amp;0xff))+ 8)&amp;0xff==key[i]:
+                    flag+=a1
+print flag
+</code></pre><p>这里可以选择Angr进行解题。<br>想要使用Angr，基本的操作就是先要将程序进行加载：</p>
 <pre><code>project = angr.Project(&quot;./ais3_crackme&quot;)
 </code></pre><p>上面已经提到，这里是通过命令行获取参数args，所以我们需要claripy库构造一个符号状态，从IDA中不难看出flag的长度为23，所以设置如下：</p>
 <pre><code>u = claripy.BVS(&quot;u&quot;,23*8)
@@ -360,6 +372,7 @@
 <pre><code>solution = found.solver.eval(argv1, cast_to=str)
 </code></pre><p>最终跑出结果：</p>
 <p><img src="http://otc7tld02.bkt.clouddn.com/result.png" alt=""></p>
+<p>脚本在题目所在目录下已经包含，这里就不贴了。</p>
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>Angr通俗而言就是爆破，但是在其中包含有许多其他的技术，约束求解、解析程序等。上述题目解答逻辑较为清晰，所以可以自主编写爆破脚本进行解答。但是有的题目设置了比较复杂的算法在其中，这时候编写解题脚本的过程就较为复杂,且不考虑出错的情况。所以Angr可以帮助更快的得到结果。大致的解题过程：</p>
 <ol>
 <li>对题目进行分析找到正确路径地址，运行中的检验条件，flag长度等一系列信息。</li>
@@ -379,7 +392,7 @@
         <p><span>本文标题:</span><a href="/2018/10/09/Angr应用/">Angr应用</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">M1s5p</a></p>
         <p><span>发布时间:</span>2018-10-09, 10:08:34</p>
-        <p><span>最后更新:</span>2018-10-09, 16:24:27</p>
+        <p><span>最后更新:</span>2018-10-10, 17:38:01</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/10/09/Angr应用/" title="Angr应用">http://xq.dropsec.xyz/2018/10/09/Angr应用/</a>
             <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2018/10/09/Angr应用/　　作者: M1s5p" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
