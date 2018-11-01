@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="M1s5p" />
+
+
+
+<meta name="description" content="ICMPv6（Internet Control Message Protocol for IPv6）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ICMPv6学习">
+<meta property="og:url" content="http://xq.dropsec.xyz/2018/10/17/ICMPv6学习/index.html">
+<meta property="og:site_name" content="M1s5p">
+<meta property="og:description" content="ICMPv6（Internet Control Message Protocol for IPv6）">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/ICMPv6%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%8F%AF%E8%BE%BE%E6%8A%A5%E6%96%87.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%8F%AF%E8%BE%BE%E4%BB%A3%E7%A0%81%E5%AD%97%E6%AE%B5.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E5%88%86%E7%BB%84%E5%A4%AA%E9%95%BF%E6%8A%A5%E6%96%87.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E8%B6%85%E6%97%B6%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E8%B6%85%E6%97%B6%E6%8A%A5%E6%96%87%E4%BB%A3%E7%A0%81.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E5%8F%82%E6%95%B0%E9%97%AE%E9%A2%98%E6%8A%A5%E6%96%87.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E5%8F%82%E6%95%B0%E4%BB%A3%E7%A0%81%E5%8F%96%E5%80%BC.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E5%9B%9E%E9%80%81%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E5%9B%9E%E9%80%81%E5%BA%94%E7%AD%94%E6%8A%A5%E6%96%87.png">
+<meta property="og:updated_time" content="2018-10-18T07:16:23.310Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ICMPv6学习">
+<meta name="twitter:description" content="ICMPv6（Internet Control Message Protocol for IPv6）">
+<meta name="twitter:image" content="http://otc7tld02.bkt.clouddn.com/ICMPv6%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="M1s5p" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/img/111.jpg">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>ICMPv6学习 | M1s5p</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/111.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">M1s5p</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">No Pain No Gain!</p>
+        
+		
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=282324364@qq.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" href="http://weibo.com/p/1005055747318462/home?from=page_100505&mod=TAB#place" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/wl1510009" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angr/">Angr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IPv6-DHCPv6/">IPv6 DHCPv6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IPv6-ICMPv6/">IPv6 ICMPv6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IPv6-NDP/">IPv6 NDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PE结构/">PE结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pwn/">pwn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reverse/">reverse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stack/">stack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/writeup/">writeup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆栈及汇编基础/">堆栈及汇编基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/寄存器-debug/">寄存器 debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编基础/">汇编基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://spd.dropsec.xyz/">All Right</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://yunnigu.dropsec.xyz/">YunGong</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.dropsec.xyz/">Drops</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://isron.cn/">Isron</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://whc.dropsec.xyz/">Haigo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://yaocl.cn/">Mr_Yao</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">没有可不可以，只有敢不敢做！</div>
+                </section>
+                
+            </div>
+        </div>
+		<object type="application/x-shockwave-flash" 
+		style="outline:none;" 
+		data="http://cdn.abowman.com/widgets/hamster/hamster.swf?" 
+		width="250" height="150">
+		<param name="movie" 
+		value="http://cdn.abowman.com/widgets/hamster/hamster.swf?">
+		</param><param name="AllowScriptAccess" value="always">
+		</param><param name="wmode" value="opaque">
+		</param>
+		</object>
+    </header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">M1s5p</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/111.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">M1s5p</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">No Pain No Gain!</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=282324364@qq.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" target="_blank" href="http://weibo.com/p/1005055747318462/home?from=page_100505&mod=TAB#place" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/wl1510009" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
+</nav>
+      <div class="body-wrap"><article id="post-ICMPv6学习" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/10/17/ICMPv6学习/" class="article-date">
+      <time datetime="2018-10-17T08:33:20.000Z" itemprop="datePublished">2018-10-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ICMPv6学习
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/protocol/">protocol</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IPv6-ICMPv6/">IPv6 ICMPv6</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>ICMPv6（Internet Control Message Protocol for IPv6）<br><a id="more"></a></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>IPv6使用的ICMPv6与IPv4使用的ICMPv4类似。定义了基本的ICMPv6的报文。用于错误报告和网络诊断。</p>
+<p>与IPv4的ICMP不同的是，ICMPv6提供了很多IPv6协议操作必须的重要函数。例如IPv6一个重要的协议，邻居发现协议就是在ICMPv6上运行的，它执行了大量的功能，比如自动地址配置和链路层地址解析。因此任何支持IPv6的节点都必须完全实现ICMPv6。</p>
+<p>与其他高层协议不同，IPv4与6的ICMP完全不同，TCP与UDP的分租格式及算法都是一样的，通过地址翻译机制可使得IPv4与IPv6的通信，但是两者ICMP提供相互操作确实很难的。</p>
+<p>本篇将通篇对ICMPv6的基础学习进行记录。</p>
+<h2 id="ICMPv6报文"><a href="#ICMPv6报文" class="headerlink" title="ICMPv6报文"></a>ICMPv6报文</h2><p>[RFC2463]定义了四种错误报文和两种信息报文。在分组处理过程中遇到问题时，就可以向源端提供报文，而信息报文则提供一些诊断功能。</p>
+<p>4种错误报文是：</p>
+<ul>
+<li>目标不可达（Destination Unreachable）</li>
+<li>分组太长（Packet Too Big）</li>
+<li>超时（Time Exceeded）</li>
+<li>参数问题（Parameter Problem）</li>
+</ul>
+<p>2种信息报文是:</p>
+<ul>
+<li>回送请求（Echo Request）</li>
+<li>回送应答（Echo Reply）</li>
+</ul>
+<p>除了这些之外，还有一些其他的规范，例如邻居发现，节点信息查询，多播监听发现和移动IPv6都定义了一些额外的ICMPv6报文。后面在邻居发现分组都是装载在ICMPv6报文中的。[RFC2461]为ND协议定义了5个这样的ICMPv6报文。</p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/ICMPv6%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png" alt=""></p>
+<p>如上图所示，就是通用的ICMPv6的报文格式。IPv6的各种拓展首部都可以放在ICMPv6首部之前。ICMPv6报文中包含以下信息：</p>
+<ol>
+<li>类型：8比特的类型字段定义ICMPv6的报文类型，可以将ICMPv6报文划分为错误报文或者信息报文。类型0~127用于错误报文，类型128~255用于信息报文。</li>
+<li>代码：8比特代码字段的值取决于报文类型，传送了更多与特定报文有关的信息。</li>
+<li>校验和：校验和字段装载了伪首部加上整个ICMPv6报文的反码和的16比特反码。</li>
+<li>报文主体的长度和内容取决于报文类型。由于ICMPv6首部不包含长度字段，所以ICMPv6报文的长度是从整个分组长度（通常就是IPv6首部的长度字段值）和拓展首部的长度推导出来的。</li>
+</ol>
+<h3 id="目的不可达报文"><a href="#目的不可达报文" class="headerlink" title="目的不可达报文"></a>目的不可达报文</h3><p>目标不可达报文可能由三个节点产生：分组的源节点、通往分组目的地路径上的中间节点、目的地节点。产生报文即可反映无法传送到分组的各种原因。目的不可达报文格式如下图所示:</p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%8F%AF%E8%BE%BE%E6%8A%A5%E6%96%87.png" alt=""></p>
+<p>目标不可达报文的类型字段值为1，代码字段可取值为0~4，表示意义如下所示：<br><img src="http://otc7tld02.bkt.clouddn.com/%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%8F%AF%E8%BE%BE%E4%BB%A3%E7%A0%81%E5%AD%97%E6%AE%B5.png" alt=""></p>
+<p>发送方将未用字段设定为0，接收方会将其忽略。在不超过最小IPv6MTU(最大传输单元 Maximum Transmission Unit)，报文主题包含了尽可能多的原始分组，存储足够    多的原始分组字节就使得源节点的高层协议能识别出引发ICMPv6错误报文的分组所属的流。</p>
+<p>即使某些中间链路由于ICMPv6错误报文太长而将其丢弃了，ICMPv6的错误报文也不会重发，这样就可能错过避免错误的恰当时机，因此限制原始分组的最大长度是很有必要的。即使相应节点知道错误报文目的地的路径MTU长度，但是分片本身也存在缺点，所以也应当避免对分组进行分片。有的原始分组中可能包含一些扩展首部，标识流所必需的分组长度可能很长，所以，又希望尽可能多地存储原始分组。</p>
+<p>需要注意的是，IPv4的错误报文存储的内容除了原始分组的IP首部外，只包含净荷的前八个字节，这是因为IPv4中没有可以任意长的扩展首部，这样也就足够了。</p>
+<p>当节点的ICMPv6层收到一个目的不可达错误报文的时候，必须通知高层的进程。以采取行动及时避免错误。比如当一个有多台候选服务器的UDP客户应用程序收到端口不可达错误的通知后可即使跟换服务器使用而不是等待超时。</p>
+<h3 id="分组太长报文"><a href="#分组太长报文" class="headerlink" title="分组太长报文"></a>分组太长报文</h3><p>当中间节点由于输出链路的MTU小于分组长度而无法转发分组时，就会生成分组太长报文。PMTU(Path MTU)发现记住利用分组太长报文来确定两个端点之间所有路由段的最小链路MTU。这种机制可以帮助传输节点选择正确的分组长度，使得分组可以达到目的地而不会被丢弃。</p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/%E5%88%86%E7%BB%84%E5%A4%AA%E9%95%BF%E6%8A%A5%E6%96%87.png" alt=""></p>
+<p>上图所示就是分组太长报文，其类型字段值为2，代码字段值为0。MTU字段存储了下一跳链路的MTU值，与目标不可达报文一样，在不超过最小IPv6 MTU情况下，报文主体中包含了尽可能多的原始分组。</p>
+<p>然后，源节点会按照通知的MTU长度对分组进行分片。节点上的ICMPv6层收到一条分组太长报文时，必须通知高层的进程。这样，高层协议就可以调整TCP片长度以避免分片，从而优化行为。</p>
+<p><strong>注</strong>：因为需要通过ICMPv6目的不可达报文来通知PMTU发现机制分组超长，所以建议不要在路由器或者防火墙中滤掉这样的ICMPv6错误报文。以免停止PMTU发现机制的工作，这样有事就会造成通信的中断。</p>
+<h3 id="超时报文"><a href="#超时报文" class="headerlink" title="超时报文"></a>超时报文</h3><p>中间路由在响应一个跳数限制字段值为0或者该路由器对跳数限制技术进行了减量操作之后跳数限制变为0的分组时，就生成超时报文。同样的，在超出分组重装时间后也会如此。</p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/%E8%B6%85%E6%97%B6%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/%E8%B6%85%E6%97%B6%E6%8A%A5%E6%96%87%E4%BB%A3%E7%A0%81.png" alt=""></p>
+<p>上图就是超时报文的格式，报文类型字段为3，代码字段取值为0-1，细节见上。发送方将未用字段设置为0，接收方将其忽略，在不超过最小IPv6MTU情况下，报文主体中包含尽可能多的原始分组，以便为源节点提供线索来确定出错分组。</p>
+<h3 id="参数问题报文"><a href="#参数问题报文" class="headerlink" title="参数问题报文"></a>参数问题报文</h3><p>节点处理一个分组且在分组首部遇到一个问题的时候，会丢弃分组，并生成一调参数问题报文。</p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/%E5%8F%82%E6%95%B0%E9%97%AE%E9%A2%98%E6%8A%A5%E6%96%87.png" alt=""></p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/%E5%8F%82%E6%95%B0%E4%BB%A3%E7%A0%81%E5%8F%96%E5%80%BC.png" alt=""></p>
+<p>如上图所示就是参数问题报文(类型值为4)以及代码取值细节（取值0-2）<br>指针字段是原始分组中遇到错误的位置的字节偏移量，这个错误随后触发了ICMPv6错误报文。如果由于MTU限制进行了截尾操作，使得错误不在报文主题，则偏移量会执行越过ICMPv6分组末尾的位置。</p>
+<p>报文主体中包含尽可能多的原始分组，以便为源节点提供线索来确定出错分组。</p>
+<h3 id="回送请求报文"><a href="#回送请求报文" class="headerlink" title="回送请求报文"></a>回送请求报文</h3><p>节点生成回送请求报文主要是为了进行诊断，比如确定一个感兴趣节点的可达性以及往返时延。</p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%9E%E9%80%81%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87.png" alt=""></p>
+<p>上图就是回送请求报文格式，类型字段位128，源节点生成了标识符和序列号字段的值。这些值可以帮助源节点将回送请求报文和返回的回送应答报文对应起来。数据字段中包含零个或者这多个任意内容的字节。</p>
+<h3 id="回送应答报文"><a href="#回送应答报文" class="headerlink" title="回送应答报文"></a>回送应答报文</h3><p>每个IPv6接受到一条请求报文时都必须响应，并产生一条回送应答报文。</p>
+<p><img src="http://otc7tld02.bkt.clouddn.com/%E5%9B%9E%E9%80%81%E5%BA%94%E7%AD%94%E6%8A%A5%E6%96%87.png" alt=""></p>
+<p>如上所示即是回送应答报文格式。类型值为129，代码值为0，标识符和序列号字段以及下面的数据字段都是从接受到的回送请求报文中获得。</p>
+<p><strong>注</strong>：与错误报文不同，回送应答1分组可以大于最小MTU长度。因为一些“ping”实现会发送回送请求报文应接受回送应答报文，对数据字段进行“完整性”检测，所以，对数据字段进行截尾是不合适的。</p>
+<h2 id="ICMPv6报文处理规则"><a href="#ICMPv6报文处理规则" class="headerlink" title="ICMPv6报文处理规则"></a>ICMPv6报文处理规则</h2><p>产生ICMPv6报文的节点根据下列规则来设置得到的IPv6分组的源地址。</p>
+<ul>
+<li>如果ICMPv6报文是为了响应一个共目的地是分配给这个节点的单播地址的分组而产生的，就将那个单播地址作为输出ICMPv6报文的源地址。</li>
+<li>如果ICMPv6报文是 为了响应一个其目的地址是一个多播组地址、 任播地址或者未分配给这个节点的单播地址的分组而产生的，那么，ICMPv6的源地址就必须是分配给这个节点的单播地址之一。 应该根据源地址选择规则来选择地址。但当所做的选择能为接收报文的节点提供更多信息时，该节点也可以使用其他地址。</li>
+<li>除了回送请求报文之外，前面几节讨论的所有其他类型的ICMPv6报文的目的地都是发起ICMPv6报文的分组的源地址。回送请求报文的目的地可以是任意一个有效的IPv6地址。</li>
+</ul>
+<p>ICMPv6实现在处理或生成ICMPv6分组时，必须注意下列规则。</p>
+<ul>
+<li>如果ICMPv6层收到了一条未知类型的错误报文或信息报文，必须将分组传送给高层。节点收到一条ICMPv6错误报文或重定向报文时，一定不能生 成ICMPv6错误报文。这条规则可以防止在两个节点间形成ICMPv6错误风暴。</li>
+<li>如果原始分组的目的是一一个 多播地址或者分组带有链路层多播或广播地址，节点一定不能产生ICMPv6错误报文。例外的情况是:节点可以生成一条分组太长报文，以及说明逐跳选项或目的选项错误的代码2参数问题报文。即使原始分组的目的是一个多播地址，也可以生成一条分组太 长报文，为多播信道上的PMTU发现提供方便。</li>
+<li>如果原始分组的源地址不能唯一地标识一个节点，节点一定不能生成ICMPv6错误报文。这类源地址包括不确定地址，或发送错误报文的节点已知为任播地址的地址。</li>
+<li>节点必须限制ICMPv6错误报文的产生速度，以缓和错误报文风暴，比如，当一个远程故障节点不停地发送错误的报文，并忽略ICMPv6错误报文时， 就可能出现这种错误报文风暴。推荐的限速方法是基于令牌桶模型(token bucket model)的，这个模型限制了生成的错误报文的平均数，但仍然允许短期内错误报文的爆发。</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>Title:</span><a href="/2018/10/17/ICMPv6学习/">ICMPv6学习</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">M1s5p</a></p>
+        <p><span>Created:</span>2018-10-17, 16:33:20</p>
+        <p><span>Updated:</span>2018-10-18, 15:16:23</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/2018/10/17/ICMPv6学习/" title="ICMPv6学习">http://xq.dropsec.xyz/2018/10/17/ICMPv6学习/</a>
+            <span class="copy-path" data-clipboard-text="From http://xq.dropsec.xyz/2018/10/17/ICMPv6学习/　　By M1s5p" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2018/10/19/IPv6-NDP协议学习/">
+                    IPv6 NDP协议学习
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/10/09/Angr应用/">
+                    Angr应用
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ICMPv6报文"><span class="toc-number">2.</span> <span class="toc-text">ICMPv6报文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#目的不可达报文"><span class="toc-number">2.1.</span> <span class="toc-text">目的不可达报文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分组太长报文"><span class="toc-number">2.2.</span> <span class="toc-text">分组太长报文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#超时报文"><span class="toc-number">2.3.</span> <span class="toc-text">超时报文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数问题报文"><span class="toc-number">2.4.</span> <span class="toc-text">参数问题报文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回送请求报文"><span class="toc-number">2.5.</span> <span class="toc-text">回送请求报文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回送应答报文"><span class="toc-number">2.6.</span> <span class="toc-text">回送应答报文</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ICMPv6报文处理规则"><span class="toc-number">3.</span> <span class="toc-text">ICMPv6报文处理规则</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
+
+    <script>
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/10/19/IPv6-NDP协议学习/" title="Pre: IPv6 NDP协议学习">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2018/10/09/Angr应用/" title="Next: Angr应用">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/10/31/DHCPv6协议学习/">DHCPv6协议学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/19/IPv6-NDP协议学习/">IPv6 NDP协议学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/17/ICMPv6学习/">ICMPv6学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/Angr应用/">Angr应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/29/Angr学习记录/">Angr学习记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/30/gdb-attach跟exp/">gdb.attach跟exp</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/02/校赛Reverse-Crypto-writeup/">校赛Reverse&Crypto writeup</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/30/缓冲区溢出-栈溢出/">缓冲区溢出--栈溢出</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/10/XMAN排位赛-babymaze/">XMAN排位赛-babymaze</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/小论PE结构/">小论PE结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/20/汇编子程序/">汇编子程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/19/XMAN练习writeup及所得/">XMAN练习 writeup及所得</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/07/二进制文件基础/">二进制文件基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/04/堆栈及汇编基础/">堆栈及汇编基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/定一个小目标/">定一个小目标</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/practice-8之PEiD插件/">practice 8之PEiD插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/14/practice-7之行为分析/">practice 7之行为分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/practice-6之算法夹杂/">practice 6之算法夹杂</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/practice-5之万能断点/">practice 5之万能断点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/practice-4之IDA用法/">practice-4之IDA用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/practice-3之pyo学习/">practice-3之pyo学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/practice-2之汇编/">practice-2之汇编</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/09/8道Pwn基础练习所得/">8道Pwn基础练习所得</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/08/一步一步学ROP之x86篇/">一步一步学ROP之x86篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/30/practice-1之图片reverse/">practice-1之图片reverse</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/16/寒假计划/">寒假计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/12/GDB寄存器和内存查询指令/">GDB寄存器和内存查询指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/30/gdb与peda指令学习学习笔记/">gdb与peda指令学习学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/04/hexo搭建/">hexo搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/03/Google-hacking-语法/">Google hacking 语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/03/绕过网站访问限制的方法/">绕过网站访问限制的方法</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2018 M1s5p
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+             title: "a.article-title, .article-more-link a", 
+             post: ".article-entry a[href], .copyright a[href]", 
+             tags: ".article-tag a", 
+             categories: ".article-category a, a.tag-list-link", 
+             articleNav: "#article-nav a, #post-nav-button a", 
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "(つェ⊂) M1s5p " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) M1s5p " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

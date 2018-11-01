@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="M1s5p" />
+
+
+
+<meta name="description" content="DHCPv6(Dynamic Host Configuration Protocol for IPv6)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DHCPv6协议学习">
+<meta property="og:url" content="http://xq.dropsec.xyz/2018/10/31/DHCPv6协议学习/index.html">
+<meta property="og:site_name" content="M1s5p">
+<meta property="og:description" content="DHCPv6(Dynamic Host Configuration Protocol for IPv6)">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/DUID-LLT.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/DUID-LLNA.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/DUID-LL.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/DHCPv6%20ctos.png">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/DHCPv6%20rtos.png">
+<meta property="og:updated_time" content="2018-10-31T09:34:28.899Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DHCPv6协议学习">
+<meta name="twitter:description" content="DHCPv6(Dynamic Host Configuration Protocol for IPv6)">
+<meta name="twitter:image" content="http://otc7tld02.bkt.clouddn.com/DUID-LLT.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="M1s5p" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/img/111.jpg">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>DHCPv6协议学习 | M1s5p</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/111.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">M1s5p</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">No Pain No Gain!</p>
+        
+		
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=282324364@qq.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" href="http://weibo.com/p/1005055747318462/home?from=page_100505&mod=TAB#place" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/wl1510009" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angr/">Angr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IPv6-DHCPv6/">IPv6 DHCPv6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IPv6-ICMPv6/">IPv6 ICMPv6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IPv6-NDP/">IPv6 NDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PE结构/">PE结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pwn/">pwn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reverse/">reverse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stack/">stack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/writeup/">writeup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆栈及汇编基础/">堆栈及汇编基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/寄存器-debug/">寄存器 debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编基础/">汇编基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://spd.dropsec.xyz/">All Right</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://yunnigu.dropsec.xyz/">YunGong</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.dropsec.xyz/">Drops</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://isron.cn/">Isron</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://whc.dropsec.xyz/">Haigo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://yaocl.cn/">Mr_Yao</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">没有可不可以，只有敢不敢做！</div>
+                </section>
+                
+            </div>
+        </div>
+		<object type="application/x-shockwave-flash" 
+		style="outline:none;" 
+		data="http://cdn.abowman.com/widgets/hamster/hamster.swf?" 
+		width="250" height="150">
+		<param name="movie" 
+		value="http://cdn.abowman.com/widgets/hamster/hamster.swf?">
+		</param><param name="AllowScriptAccess" value="always">
+		</param><param name="wmode" value="opaque">
+		</param>
+		</object>
+    </header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">M1s5p</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/111.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">M1s5p</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">No Pain No Gain!</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=282324364@qq.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" target="_blank" href="http://weibo.com/p/1005055747318462/home?from=page_100505&mod=TAB#place" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/wl1510009" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
+</nav>
+      <div class="body-wrap"><article id="post-DHCPv6协议学习" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/10/31/DHCPv6协议学习/" class="article-date">
+      <time datetime="2018-10-31T04:30:34.000Z" itemprop="datePublished">2018-10-31</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      DHCPv6协议学习
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/protocol/">protocol</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IPv6-DHCPv6/">IPv6 DHCPv6</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>DHCPv6(Dynamic Host Configuration Protocol for IPv6)<br><a id="more"></a></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前面学到IPv6存在无状态地址配置以及有状态地址配置两种形式，前者多依赖于NDP进行配置，是目前IPv6广泛采用的IPv6地址自动配置方式。但是无状态地址配置方案中路由器并不记录所连接的IPv6主机的具体信息，并且配置方式不能使IPv6主机获取DNS，服务器的IPv6地址等配置信息，在可用性上存在一定缺陷。<br>DHCPv6是一种有状态自动配置协议。在配置过程中，DHCPv6服务器会给主机分配完整的IPv6地址，并且提供DNS服务器地址等配置信息。中间通过DHCPv6中继转发DHCPv6报文，将分配的IPv6与客户端绑定，增强了网络的可管理性。</p>
+<h2 id="DHCPv6定义"><a href="#DHCPv6定义" class="headerlink" title="DHCPv6定义"></a>DHCPv6定义</h2><h3 id="组播地址"><a href="#组播地址" class="headerlink" title="组播地址"></a>组播地址</h3><p>DHCPv6协议中不用对DHCPv6服务器进行地址配置，而是发送目的地址为组播地址的报文来定位服务器，使用的组播地址有两个：</p>
+<ul>
+<li>FF02::1:2：所有DHCPv6服务器和中继代理的组播地址，这个地址是链路范围的，用于客户端和相邻服务器及中继代理之间通信。DHCPv6 服务器和中继代理都是该组的成员</li>
+<li>FF05::1:3：所有DHCPv6 服务器组播地址，这个地址是站点范围的，用于中继代理和服务器之间的通信，站点内的所有DHCPv6 服 务器都是此组的成员。 </li>
+</ul>
+<h3 id="UDP端口"><a href="#UDP端口" class="headerlink" title="UDP端口"></a>UDP端口</h3><p>DHCPv6报文所使用的UDP端口如下：</p>
+<ul>
+<li>UDP 546端口：客户监听的UDP端口。</li>
+<li>UDP 547端口：服务器和中继代理监听的UDP端口。</li>
+</ul>
+<h3 id="DHCP唯一标识符"><a href="#DHCP唯一标识符" class="headerlink" title="DHCP唯一标识符"></a>DHCP唯一标识符</h3><p>DHCP Unique Identifier (DUID)是用来唯一标示每一个DHCPv6用户或服务器。前言已经提及的绑定管理就是依靠于这个定义。它和DHCPv4中的客户和服务器标识符类似。</p>
+<p>从DHCPv6报文处理方面来说，DUID是一段不透明的可变长数据。DHCP客户或服务器对于两个DUID的比较只能看他们是否一样。在[RFC3315]定义了DUID的标准格式来确保唯一性。</p>
+<p>DUID的开头两个字节与前面的报文一样都是类型字段，后面是基于类型的可变长数据。</p>
+<ol>
+<li>DUID-LLT：链路层地址加时间</li>
+</ol>
+<p><img src="http://otc7tld02.bkt.clouddn.com/DUID-LLT.png" alt=""></p>
+<p>如上图所示是LLT的格式：</p>
+<ul>
+<li>硬件类型：指定硬件设备，依据来源于IANA指定的16位硬件类型。</li>
+<li>时间：32位无符号整数，以秒为单位的时间戳。</li>
+<li>链路层地址：节点上产生这一DUID的网络设备的链路层地址。具体设备在前面指定。</li>
+</ul>
+<p>标识符包含有产生时间，所以DUID-LLT很可能是唯一的，所以一般由具有固定存储器的通用设备（PC机）使用此类DUID，在节点上产生DUID的硬件可以独立于DHCPv6操作。</p>
+<ol>
+<li>DUID-EN：基于企业编号的厂商分配的唯一ID</li>
+</ol>
+<p><img src="http://otc7tld02.bkt.clouddn.com/DUID-LLNA.png" alt=""></p>
+<p>如上图所示是EN的格式：</p>
+<ul>
+<li>企业编号：IANA用以表示的一个特定厂商。</li>
+<li>标识符：每个厂商特定的可变长数据。</li>
+</ul>
+<p>DUID-EN应当由网络设备的制造商来使用，并且应该能标识由那个网络制造商提供的设备。</p>
+<ol>
+<li>DUID-LL：链路层地址</li>
+</ol>
+<p><img src="http://otc7tld02.bkt.clouddn.com/DUID-LL.png" alt=""></p>
+<ul>
+<li>硬件类型：与LLT中字段功能相同</li>
+<li>链路层地址：节点上产生这一DUID的网络设备的链路层地址。设备类型由前字段确定。</li>
+</ul>
+<p>该类型与LLT类似，但不包含时间字段，用于那些有永久链接对的带有链路层地址的网络接口设备，并且此类设备没有存储生产时间的相应设备。</p>
+<h3 id="身份关联"><a href="#身份关联" class="headerlink" title="身份关联"></a>身份关联</h3><p>身份关联(Identity Association IA)是一种概念上的结构，用来标识一系列的DHCPv6配置信息。每一个IA又是有一个32比特的标识符来标识，称之为IAID,IAID与每一个客户内的特定IA是一对一的关系。这点在绑定中也有相应的作用。</p>
+<p>一个IPv6中一个接口可以有多个IP地址的特性。IA最初目的是在一个客户定义多个身份，每一个关联一个不同的IPv6地址。租用期由IA进行管理，而不是由地址管理，也就是说，跟新分配的配置信息的DHCPv6交换由IA执行。</p>
+<p>每个IA都由两个参数T1和T2控制跟新。IA有以下三种类型：</p>
+<ol>
+<li>非临时地址身份关联(identity association for non-temporary address, IA_NA)，定义正常的为客户接口分配的IPv6地址。</li>
+<li>临时地址身份关联(identity association for temporary. address, IA_TA)，定义临时的为客户接口分配的IPv6地址。</li>
+<li>前缀代理身份关联(identity association for prefix delegation, IA_PD)，定义IPv6前缀，这些前缀由代理路由器分配到请求路由器。</li>
+</ol>
+<h3 id="绑定"><a href="#绑定" class="headerlink" title="绑定"></a>绑定</h3><p>前言提及，为了方便管理，会对IPv6地址与客户或服务器进行绑定。绑定过程由元组&lt;客户的DUID,IA类型，IAID&gt;来确定。</p>
+<h2 id="DHCPv6报文"><a href="#DHCPv6报文" class="headerlink" title="DHCPv6报文"></a>DHCPv6报文</h2><p>前面提及有很多类型报文，DHCP也存在报文，但与不同目标交互报文格式不同。</p>
+<h3 id="客户与服务器"><a href="#客户与服务器" class="headerlink" title="客户与服务器"></a>客户与服务器</h3><p><img src="http://otc7tld02.bkt.clouddn.com/DHCPv6%20ctos.png" alt=""></p>
+<p>如上图所示是客户与服务器之间使用的DHCPv6报文格式：</p>
+<ul>
+<li>报文类型：8位整数，标识DHCP报文类型。</li>
+<li>事务ID：报文交换的事务ID,一个24位整数。事务ID由交换的发起者（通常为客户）选定。响应端复制ID到响应。当发起者接收到响应时，会与ID匹配来确定对于的交换。</li>
+<li>选项：报文所携带的选项，此字段包含DHCPv6服务器分配给IPv6主机的配置信息。</li>
+</ul>
+<h3 id="中继代理与服务器"><a href="#中继代理与服务器" class="headerlink" title="中继代理与服务器"></a>中继代理与服务器</h3><p><img src="http://otc7tld02.bkt.clouddn.com/DHCPv6%20rtos.png" alt=""></p>
+<p>如上图所示是中继代理和服务器之间使用的DHCPv6报文格式：</p>
+<ul>
+<li>报文类型：表示类型，只能为12(中继转发)或13(中继应答)。</li>
+<li>跳数：这个字段只有在中继转发报文中有效，表示报文中继代理个数，避免报文进入无限循环。</li>
+<li>链路地址：一个全球地址，服务器用这个地址表示客户所在链路。</li>
+<li>对等地址：客户或中继代理的地址，通过此类地址接受将要中继的报文。这个地址在中继转发报文中设置，并在中继应答报文中使用，使得应答报文能转回客户。</li>
+<li>选项：该字段包含特定于中继代理操作的DHCPv6选项。必须始终包含中继报文选项。</li>
+</ul>
+<h3 id="DHCP报文类型"><a href="#DHCP报文类型" class="headerlink" title="DHCP报文类型"></a>DHCP报文类型</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">类 型</th>
+<th style="text-align:center">名 称</th>
+<th style="text-align:center">描 述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">寻求(solicit)</td>
+<td style="text-align:center">客户发出，寻找可用DHCPv6服务器</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">广告(advertise)</td>
+<td style="text-align:center">服务器发出，携带配置信息以响应寻求报文</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">请求(request)</td>
+<td style="text-align:center">客户发出，到指定服务器进行资源分配</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">确认(confirm)</td>
+<td style="text-align:center">当客户转移到不同链路时发出，确认分配地址及前缀是否有效</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">更新(renew)</td>
+<td style="text-align:center">客户发出到资源分配服务器以跟新资源</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">重新绑定(rebind)</td>
+<td style="text-align:center">跟新报文失败时，客户发出以跟新分配的信息资源</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">应答(reply)</td>
+<td style="text-align:center">服务器发出，响应客户各种报文，主要是确认或拒绝客户的请求</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">释放(releasc)</td>
+<td style="text-align:center">客户发出，通知分配资源了的服务器可以释放资源。</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td style="text-align:center">拒绝(decline )</td>
+<td style="text-align:center">客户发出，告知服务器某分配地址已经在使用。</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">重配置(reconfigure)</td>
+<td style="text-align:center">服务器发出，发起一个以更新或请求报文开始的交换。促使客户刷新分配的信息</td>
+</tr>
+<tr>
+<td style="text-align:center">11</td>
+<td style="text-align:center">信息请求(informationrequecst)</td>
+<td style="text-align:center">客户发出，用于无状态服务</td>
+</tr>
+<tr>
+<td style="text-align:center">12</td>
+<td style="text-align:center">中继转发(relay-forward)</td>
+<td style="text-align:center">中继代理发出，封装从客户到服务器的报文</td>
+</tr>
+<tr>
+<td style="text-align:center">13</td>
+<td style="text-align:center">中继应答(relay-reply)</td>
+<td style="text-align:center">服务器发出，通过中继封装一个返回到客户的报文。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="DHCPv6工作原理"><a href="#DHCPv6工作原理" class="headerlink" title="DHCPv6工作原理"></a>DHCPv6工作原理</h2><h3 id="有状态自动分配"><a href="#有状态自动分配" class="headerlink" title="有状态自动分配"></a>有状态自动分配</h3><p>IPv6主机在地址分配之前，由IPv6节点生成链路本地地址并且经过DAD检验之后，首先会有一个链路路由器发现的过程，此时IPv6节点发送RS报文，链路路由器回应以RA报文，之前就已经提及，RA报文中有M，O字段，如果两个字段值都为1，则表示IPv6节点通过有状态DHCPv6进行配置。</p>
+<p>DHCPv6服务器进行地址分配以及前缀分配有两种类型：四步交互分配和两步交互分配。</p>
+<h4 id="四步交互分配"><a href="#四步交互分配" class="headerlink" title="四步交互分配"></a>四步交互分配</h4><p>当网络中存在有多个DHCPv6服务器时，常使用四步交互分配：</p>
+<ol>
+<li>客户端发送Solicit报文以寻求DHCPv6服务器。</li>
+<li>如果Solicit报文没有Rapid Commit选项，或DHCPv6服务器不支持快速分配过程，则服务器回复Advertise报文，通知客户端其存在关系。</li>
+<li>客户端如果收到多个Advertise报文，则根据报文中服务器的优先级等参数选择最优服务器，并向所有服务器发送Request报文，其中包含已选择服务器的DUID.</li>
+<li>DHCPv6服务器回复Reply报文，确认将地址和网络配置参数分配给客户端使用。</li>
+</ol>
+<h4 id="两步交互分配"><a href="#两步交互分配" class="headerlink" title="两步交互分配"></a>两步交互分配</h4><p>当网络中仅存在有一个DHCPv6服务器时，常使用两步交互分配，这种方法可以提高DHCPv6的工作效率，但为了防止多个服务器同时可以分配IPv6地址并回应Reply报文，管理员可配置服务器是否支持两步交互地址分配方式。</p>
+<ol>
+<li>客户端发送Solicit报文，并带有Rapid Commit选项，标识客户端希望服务器能够快速为其分配地址和网络配置参数。</li>
+<li>DHCPv6服务器接收到报文后进行如下处理：<ol>
+<li>若支持快速分配地址，则直接返回Reply报文，带有分配给的Ipv6地址以及网络配置参数，当然也带有Rapid Commit选项。</li>
+<li>若不支持快速分配，则采用四部交互方式开始进行分配。</li>
+</ol>
+</li>
+</ol>
+<h3 id="无状态自动分配"><a href="#无状态自动分配" class="headerlink" title="无状态自动分配"></a>无状态自动分配</h3><p>节点接收的RA报文中M,O字段若标识为0和1的话，标识IPv6只通过DHCPv6获取<br>除IPv6地址以外的服务器配置信息。</p>
+<p>其工作过程如下：</p>
+<ol>
+<li>客户端以组播方式向服务器发送Information-Request报文，该报文中Option Request指定想要获取的配置参数。</li>
+<li>服务器接收到报文后，为客户端配置参数，并以单播形式发送Reply报文。</li>
+</ol>
+<h3 id="中继工作原理"><a href="#中继工作原理" class="headerlink" title="中继工作原理"></a>中继工作原理</h3><p>客户端与服务器之间并非直接通信，在他们之间会有一个中继代理对报文进行处理封装，其交互工作过程如下：</p>
+<ol>
+<li>客户端向所有服务器以及中继的组播地址FF02::1:2发送请求报文。</li>
+<li><p>中继转发报文有如下两种情况：</p>
+<p> 1）若中继与客户端处于同一链路上，即DHCPv6中继为DHCPv6客户端的第一跳中继，中继接收到的客户端报文，将其封装到Relay-Forward报文的中继消息选项，发送给服务器。</p>
+<p> 2）若中继与客户端处于不同链路上，中继接收的报文是来自其它中继的Relay-Forward报文，中继会狗仔一个新的Relay-Forwrad报文并发送给服务器或下一跳中继。</p>
+</li>
+<li>服务器从Relay-Forward报文中解析出客户端的请求，为客户端选择IPv6地址和其他配置参数，构造应答信息，并将应答信息封装到Relay-Reply报文的中继消息选项中发送给中继。</li>
+<li>中继解析出服务器的应答，转发给客户端，客户端根据应答报文中服务器优先级选择最优选项对地址及其他网络配置参数进行配置。</li>
+</ol>
+<h3 id="IPv6-前缀选择"><a href="#IPv6-前缀选择" class="headerlink" title="IPv6/前缀选择"></a>IPv6/前缀选择</h3><p>DHCPv6服务器对IPv6地址进行分配是有优先次序的。</p>
+<ol>
+<li>选择IPv6地址池，服务器的接口必须绑定有IPv6地址池，所以特定端口下的客户端使用该端口绑定的地址池进行IPv6/前缀选择。</li>
+<li><p>选择IPv6/前缀.</p>
+<p> 1) 如果地址池中为客户端已指定地址/前缀,优先选择与客户端DUID匹配的地址/前缀。</p>
+<p> 2）如果客户端报文中的IA选项带有有效地址/前缀，优先进行分配，如果改地址/前缀在地址池中不可用，则另外分配一个空闲地址/前缀给客户端。</p>
+<p> 3）从地址池选择空闲地址/前缀分配给客户端。</p>
+<p> 4）没有合适地址/前缀进行分配，则分配失败。</p>
+</li>
+</ol>
+<h3 id="地址租约更新"><a href="#地址租约更新" class="headerlink" title="地址租约更新"></a>地址租约更新</h3><p>服务器分配给客户端的地址是有租约的，其约定由生命期（包括地址优先生命期和有效生命期）和IA的两个参数，T1，T2，即续租时间点组成。</p>
+<p>当客户端地址使用到期，则在T1时刻发送Renew报文给服务器，其中IA选项携带需要续租的IA地址。</p>
+<p>如果客户端一直未收到T1续租报文的回应报文，则在T2时刻发送Rebind报文继续续租。</p>
+<h4 id="T1时刻"><a href="#T1时刻" class="headerlink" title="T1时刻"></a>T1时刻</h4><ol>
+<li>客户端在T1时刻发送Renew报文进行地址续租更新请求。</li>
+<li><p>服务器回应Reply报文两种情况。</p>
+<p> a) 若客户端可继续使用，则回应续租Reply报文，表示成功更新租约。</p>
+<p> b) 若客户端不可再使用，则报文通知续租失败。</p>
+</li>
+</ol>
+<h4 id="T2时刻"><a href="#T2时刻" class="headerlink" title="T2时刻"></a>T2时刻</h4><ol>
+<li>向所有服务器组播发送Rebind报文请求更新租约。</li>
+<li><p>服务器回应Reply报文两种情况。</p>
+<p> a) 若客户端可继续使用，则回应续租Reply报文，表示成功更新租约。</p>
+<p> b) 若客户端不可再使用，则报文通知续租失败。</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>Title:</span><a href="/2018/10/31/DHCPv6协议学习/">DHCPv6协议学习</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">M1s5p</a></p>
+        <p><span>Created:</span>2018-10-31, 12:30:34</p>
+        <p><span>Updated:</span>2018-10-31, 17:34:28</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/2018/10/31/DHCPv6协议学习/" title="DHCPv6协议学习">http://xq.dropsec.xyz/2018/10/31/DHCPv6协议学习/</a>
+            <span class="copy-path" data-clipboard-text="From http://xq.dropsec.xyz/2018/10/31/DHCPv6协议学习/　　By M1s5p" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/10/19/IPv6-NDP协议学习/">
+                    IPv6 NDP协议学习
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DHCPv6定义"><span class="toc-number">2.</span> <span class="toc-text">DHCPv6定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#组播地址"><span class="toc-number">2.1.</span> <span class="toc-text">组播地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP端口"><span class="toc-number">2.2.</span> <span class="toc-text">UDP端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DHCP唯一标识符"><span class="toc-number">2.3.</span> <span class="toc-text">DHCP唯一标识符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#身份关联"><span class="toc-number">2.4.</span> <span class="toc-text">身份关联</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绑定"><span class="toc-number">2.5.</span> <span class="toc-text">绑定</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DHCPv6报文"><span class="toc-number">3.</span> <span class="toc-text">DHCPv6报文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#客户与服务器"><span class="toc-number">3.1.</span> <span class="toc-text">客户与服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#中继代理与服务器"><span class="toc-number">3.2.</span> <span class="toc-text">中继代理与服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DHCP报文类型"><span class="toc-number">3.3.</span> <span class="toc-text">DHCP报文类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DHCPv6工作原理"><span class="toc-number">4.</span> <span class="toc-text">DHCPv6工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#有状态自动分配"><span class="toc-number">4.1.</span> <span class="toc-text">有状态自动分配</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#四步交互分配"><span class="toc-number">4.1.1.</span> <span class="toc-text">四步交互分配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#两步交互分配"><span class="toc-number">4.1.2.</span> <span class="toc-text">两步交互分配</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#无状态自动分配"><span class="toc-number">4.2.</span> <span class="toc-text">无状态自动分配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#中继工作原理"><span class="toc-number">4.3.</span> <span class="toc-text">中继工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv6-前缀选择"><span class="toc-number">4.4.</span> <span class="toc-text">IPv6/前缀选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#地址租约更新"><span class="toc-number">4.5.</span> <span class="toc-text">地址租约更新</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#T1时刻"><span class="toc-number">4.5.1.</span> <span class="toc-text">T1时刻</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#T2时刻"><span class="toc-number">4.5.2.</span> <span class="toc-text">T2时刻</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
+
+    <script>
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2018/10/19/IPv6-NDP协议学习/" title="Next: IPv6 NDP协议学习">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/10/31/DHCPv6协议学习/">DHCPv6协议学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/19/IPv6-NDP协议学习/">IPv6 NDP协议学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/17/ICMPv6学习/">ICMPv6学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/Angr应用/">Angr应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/29/Angr学习记录/">Angr学习记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/30/gdb-attach跟exp/">gdb.attach跟exp</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/02/校赛Reverse-Crypto-writeup/">校赛Reverse&Crypto writeup</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/30/缓冲区溢出-栈溢出/">缓冲区溢出--栈溢出</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/10/XMAN排位赛-babymaze/">XMAN排位赛-babymaze</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/小论PE结构/">小论PE结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/20/汇编子程序/">汇编子程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/19/XMAN练习writeup及所得/">XMAN练习 writeup及所得</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/07/二进制文件基础/">二进制文件基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/04/堆栈及汇编基础/">堆栈及汇编基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/定一个小目标/">定一个小目标</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/practice-8之PEiD插件/">practice 8之PEiD插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/14/practice-7之行为分析/">practice 7之行为分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/practice-6之算法夹杂/">practice 6之算法夹杂</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/practice-5之万能断点/">practice 5之万能断点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/practice-4之IDA用法/">practice-4之IDA用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/practice-3之pyo学习/">practice-3之pyo学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/practice-2之汇编/">practice-2之汇编</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/09/8道Pwn基础练习所得/">8道Pwn基础练习所得</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/08/一步一步学ROP之x86篇/">一步一步学ROP之x86篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/30/practice-1之图片reverse/">practice-1之图片reverse</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/16/寒假计划/">寒假计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/12/GDB寄存器和内存查询指令/">GDB寄存器和内存查询指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/30/gdb与peda指令学习学习笔记/">gdb与peda指令学习学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/04/hexo搭建/">hexo搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/03/Google-hacking-语法/">Google hacking 语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/03/绕过网站访问限制的方法/">绕过网站访问限制的方法</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2018 M1s5p
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+             title: "a.article-title, .article-more-link a", 
+             post: ".article-entry a[href], .copyright a[href]", 
+             tags: ".article-tag a", 
+             categories: ".article-category a, a.tag-list-link", 
+             articleNav: "#article-nav a, #post-nav-button a", 
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "(つェ⊂) M1s5p " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) M1s5p " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
