@@ -17,10 +17,11 @@
 
 <meta name="description" content="IPv6(Internet Protocol Version 6)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IPv6基础学习">
+<meta property="og:title" content="IPv6基础探析">
 <meta property="og:url" content="http://xq.dropsec.xyz/2018/10/10/IPv6基础学习/index.html">
 <meta property="og:site_name" content="M1s5p">
 <meta property="og:description" content="IPv6(Internet Protocol Version 6)">
+<meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/IPv6%E6%8A%A5%E5%A4%B4.png">
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E5%8D%95%E6%92%AD.png">
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E4%BB%BB%E6%92%AD%E5%9C%B0%E5%9D%80.png">
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E9%93%BE%E8%B7%AF.png">
@@ -30,11 +31,11 @@
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E8%BD%AC%E6%8D%A2.png">
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E5%A4%9A%E6%92%AD%E5%9C%B0%E5%9D%80.png">
 <meta property="og:image" content="http://otc7tld02.bkt.clouddn.com/%E6%A0%87%E5%BF%97.png">
-<meta property="og:updated_time" content="2018-10-10T09:26:27.079Z">
+<meta property="og:updated_time" content="2018-11-01T01:44:31.865Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="IPv6基础学习">
+<meta name="twitter:title" content="IPv6基础探析">
 <meta name="twitter:description" content="IPv6(Internet Protocol Version 6)">
-<meta name="twitter:image" content="http://otc7tld02.bkt.clouddn.com/%E5%8D%95%E6%92%AD.png">
+<meta name="twitter:image" content="http://otc7tld02.bkt.clouddn.com/IPv6%E6%8A%A5%E5%A4%B4.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -66,7 +67,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>IPv6基础学习 | M1s5p</title>
+<title>IPv6基础探析 | M1s5p</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -155,13 +156,13 @@
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
+                        <li>Menu</li>
+                        <li>Tags</li>
                         
-                        <li>友情链接</li>
+                        <li>Friends</li>
                         
                         
-                        <li>关于我</li>
+                        <li>About Me</li>
                         
                     </ul>
                 </div>
@@ -200,7 +201,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angr/">Angr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IPv6/">IPv6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PE结构/">PE结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pwn/">pwn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reverse/">reverse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stack/">stack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/writeup/">writeup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆栈及汇编基础/">堆栈及汇编基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/寄存器-debug/">寄存器 debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编基础/">汇编基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angr/">Angr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IPv6/">IPv6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IPv6-DHCPv6/">IPv6 DHCPv6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IPv6-ICMPv6/">IPv6 ICMPv6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IPv6-NDP/">IPv6 NDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PE结构/">PE结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pwn/">pwn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reverse/">reverse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stack/">stack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/writeup/">writeup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆栈及汇编基础/">堆栈及汇编基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/寄存器-debug/">寄存器 debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编基础/">汇编基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
                     </div>
                 </section>
                 
@@ -291,7 +292,7 @@
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
       <div class="body-wrap"><article id="post-IPv6基础学习" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -312,7 +313,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      IPv6基础学习
+      IPv6基础探析
     </h1>
   
 
@@ -338,13 +339,26 @@
       
           
         <p>IPv6(Internet Protocol Version 6)<br><a id="more"></a></p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>IPv6全称是Internet Protocol Version 6，互联网协议，是IETF(Internet Engineering Task Force)设计用以替换现行IPv4的下一代IP协议。<br>IPv6引入的最知名也是最重要的增强就是由IPv6地址比特数的增加带来的地址空间扩展，也就是从IPv4的32位增加到了128位。IPv4之所以设置为32位是因为当前的互联网上的主机CPU字长为32位。从处理效率以及未来网络扩展性角度考虑，128位是一个不错的选择。伴随着IPv6地址体系结构还引入了集中引入注目的特性，这些特性主要是基于IPv4的操作经验：</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>IPv6全称是Internet Protocol Version 6，互联网协议，是IETF(Internet Engineering Task Force)设计用以替换现行IPv4的下一代IP协议。</p>
+<p>IPv6的报头：版本信息，流量等级，流标签，净荷长度，下一报头，跳数限制</p>
+<p>IPv6引入的最知名也是最重要的增强就是由IPv6地址比特数的增加带来的地址空间扩展，也就是从IPv4的32位增加到了128位。IPv4之所以设置为32位是因为当前的互联网上的主机CPU字长为32位。从处理效率以及未来网络扩展性角度考虑，128位是一个不错的选择。伴随着IPv6地址体系结构还引入了集中引入注目的特性，这些特性主要是基于IPv4的操作经验：</p>
 <ol>
 <li>IPv6有明确的地址范围概念</li>
 <li>IPv6地址的结构性强</li>
 <li>Ipv6中多播得到广泛的应用</li>
 </ol>
 <p>这些在后面都会想学习涉及。</p>
+<h2 id="IPv6首部格式"><a href="#IPv6首部格式" class="headerlink" title="IPv6首部格式"></a>IPv6首部格式</h2><p><img src="http://otc7tld02.bkt.clouddn.com/IPv6%E6%8A%A5%E5%A4%B4.png" alt=""><br>在上面已经简单说明了报头的6个组成这里稍微详细的说一下：<br>所有的IPv6分组中都包含一个被称为IPv6首部的定长首部。IPv6首部长40字节，包含了传送分组所必需的最小字段数。</p>
+<ul>
+<li>版本：4比特的版本字段，包含了表示IPv6的值6</li>
+<li>流量类别：8比特的流量类别。短节点通过这个字段生成各种类别和优先级的流量，中间节点根据每个分组的流量类别来转发分组。默认情况下，源节点会将流量类别字段设置为零；但不管开始是否设置为零，在通往目的节点的途中，这个字段都可能会被修改。</li>
+<li>流标签：20比特的流标签提供了一种区分不同流量类型的方法。为处理这个字段的节点设置了一些准则：由分组的源节点用一个非零的流标签来表示一个独立的“流”，比如一个特定的应用程序数据流。如果源节点没有将开始流量与流联系起来，就必须将这个字段置零。在通往目的节点的途中，不能对流标签字段进行修改。</li>
+<li>净荷长度：一个16比特的无符号整数，说明了跟在IPv6首部后面的IPv6分组的长度，即包含扩展部首长度和高度协议净荷长度在内的长度。</li>
+<li>下一部首：这个8比特字段中包含的数字用来标识紧跟在IPv6首部后面的协议或扩展部首。</li>
+<li>跳数限制：这个8比特字段说明了在传向目的节点的过程中，指定分组可以被路由器转发的次数，每转发一次值减一，置零后丢弃分组。</li>
+<li>源地址：这个128比特字段装载了该分组源节点的IPv6地址</li>
+<li>目的地址：这个128比特装载了分组目的节点的IPv6地址。(如果提供了路由选择首部，目的节点可以是一个中间节点，否则目的节点始终就是最终的分组目的地。)</li>
+</ul>
 <h2 id="IPv6地址"><a href="#IPv6地址" class="headerlink" title="IPv6地址"></a>IPv6地址</h2><p>IPv6地址是一个128bit的无符号整数，用来标识一个或多个网络接口。IPv6地址有3种类型：</p>
 <ol>
 <li>单播：一个单播IPv6地址表示一个网络接口。目标为一个单播地址的分组会被传送到一个网络接口上去。</li>
@@ -413,7 +427,7 @@
 <li>最高标志位保留，必须为0.</li>
 <li>T:0：表示永久的多播组地址，由IANA(Internet Assigned Number Authority)分配。1：表示动态分配的多播组地址。</li>
 <li>P:说明多播地址是否基于某个网络前缀分配。当P为1时，多播地址就是基于网络前缀分配，此时T也必须为1，说明这是动态分配的多播地址。这样就确保了在每个域的基础上都很容易定义唯一的多播地址。</li>
-<li>R:进一步拓展了基于网络前缀的多播地址。如果R为1，说明多播地址中嵌套了网络所用多播路由选择协议的汇聚点地址。此时P与T都要为1，所以此类多播地址公用前缀为FF70::/12标识。</li>
+<li>R:进一步拓展了基于网络前缀的多播地址。如果R为1，说明多播地址中嵌套了网络所用多播路由选择协议的汇聚点    地址。此时P与T都要为1，所以此类多播地址公用前缀为FF70::/12标识。</li>
 </ol>
 </li>
 <li>下面4个比特右移表示作用范围，这个取值对应的范围意义已经在前面列出。</li>
@@ -444,23 +458,29 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/10/10/IPv6基础学习/">IPv6基础学习</a></p>
-        <p><span>文章作者:</span><a href="/" title="回到主页">M1s5p</a></p>
-        <p><span>发布时间:</span>2018-10-10, 17:20:50</p>
-        <p><span>最后更新:</span>2018-10-10, 17:26:27</p>
+        <p><span>Title:</span><a href="/2018/10/10/IPv6基础学习/">IPv6基础探析</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">M1s5p</a></p>
+        <p><span>Created:</span>2018-10-10, 17:20:50</p>
+        <p><span>Updated:</span>2018-11-01, 09:44:31</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/10/10/IPv6基础学习/" title="IPv6基础学习">http://xq.dropsec.xyz/2018/10/10/IPv6基础学习/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://xq.dropsec.xyz/2018/10/10/IPv6基础学习/　　作者: M1s5p" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/2018/10/10/IPv6基础学习/" title="IPv6基础探析">http://xq.dropsec.xyz/2018/10/10/IPv6基础学习/</a>
+            <span class="copy-path" data-clipboard-text="From http://xq.dropsec.xyz/2018/10/10/IPv6基础学习/　　By M1s5p" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
         </p>
     </div>
 
 
 
     <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2018/10/17/ICMPv6学习/">
+                    ICMPv6学习
+                </a>
+            </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
@@ -475,9 +495,9 @@
 </article>
 
     <div id="toc" class="toc-article">
-        <strong class="toc-title">文章目录</strong>
+        <strong class="toc-title">Contents</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv6地址"><span class="toc-number">2.</span> <span class="toc-text">IPv6地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv6地址的文本表达"><span class="toc-number">3.</span> <span class="toc-text">IPv6地址的文本表达</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#地址范围"><span class="toc-number">4.</span> <span class="toc-text">地址范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv6地址格式"><span class="toc-number">5.</span> <span class="toc-text">IPv6地址格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#接口标识符的产生"><span class="toc-number">5.1.</span> <span class="toc-text">接口标识符的产生</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多播地址格式"><span class="toc-number">5.2.</span> <span class="toc-text">多播地址格式</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv6首部格式"><span class="toc-number">2.</span> <span class="toc-text">IPv6首部格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv6地址"><span class="toc-number">3.</span> <span class="toc-text">IPv6地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv6地址的文本表达"><span class="toc-number">4.</span> <span class="toc-text">IPv6地址的文本表达</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#地址范围"><span class="toc-number">5.</span> <span class="toc-text">地址范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv6地址格式"><span class="toc-number">6.</span> <span class="toc-text">IPv6地址格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#接口标识符的产生"><span class="toc-number">6.1.</span> <span class="toc-text">接口标识符的产生</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多播地址格式"><span class="toc-number">6.2.</span> <span class="toc-text">多播地址格式</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -491,10 +511,10 @@
         }
     </style>
 
-    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
 
     <script>
-        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
     </script>
 
 
@@ -519,19 +539,21 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2018/10/17/ICMPv6学习/" title="Pre: ICMPv6学习">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/10/09/Angr应用/" title="下一篇: Angr应用">
+            <a href="/2018/10/09/Angr应用/" title="Next: Angr应用">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/10/10/IPv6基础学习/">IPv6基础学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/Angr应用/">Angr应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/29/Angr学习记录/">Angr学习记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/30/gdb-attach跟exp/">gdb.attach跟exp</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/02/校赛Reverse-Crypto-writeup/">校赛Reverse&Crypto writeup</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/30/缓冲区溢出-栈溢出/">缓冲区溢出--栈溢出</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/10/XMAN排位赛-babymaze/">XMAN排位赛-babymaze</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/小论PE结构/">小论PE结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/20/汇编子程序/">汇编子程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/19/XMAN练习writeup及所得/">XMAN练习 writeup及所得</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/07/二进制文件基础/">二进制文件基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/04/堆栈及汇编基础/">堆栈及汇编基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/定一个小目标/">定一个小目标</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/practice-8之PEiD插件/">practice 8之PEiD插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/14/practice-7之行为分析/">practice 7之行为分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/practice-6之算法夹杂/">practice 6之算法夹杂</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/practice-5之万能断点/">practice 5之万能断点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/practice-4之IDA用法/">practice-4之IDA用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/practice-3之pyo学习/">practice-3之pyo学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/practice-2之汇编/">practice-2之汇编</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/09/8道Pwn基础练习所得/">8道Pwn基础练习所得</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/08/一步一步学ROP之x86篇/">一步一步学ROP之x86篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/30/practice-1之图片reverse/">practice-1之图片reverse</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/16/寒假计划/">寒假计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/12/GDB寄存器和内存查询指令/">GDB寄存器和内存查询指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/30/gdb与peda指令学习学习笔记/">gdb与peda指令学习学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/04/hexo搭建/">hexo搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/03/Google-hacking-语法/">Google hacking 语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/03/绕过网站访问限制的方法/">绕过网站访问限制的方法</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/10/31/DHCPv6协议学习/">DHCPv6协议学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/19/IPv6-NDP协议学习/">IPv6 NDP协议学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/17/ICMPv6学习/">ICMPv6学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/10/IPv6基础学习/">IPv6基础探析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/Angr应用/">Angr应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/29/Angr学习记录/">Angr学习记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/30/gdb-attach跟exp/">gdb.attach跟exp</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/02/校赛Reverse-Crypto-writeup/">校赛Reverse&Crypto writeup</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/30/缓冲区溢出-栈溢出/">缓冲区溢出--栈溢出</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/10/XMAN排位赛-babymaze/">XMAN排位赛-babymaze</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/小论PE结构/">小论PE结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/20/汇编子程序/">汇编子程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/19/XMAN练习writeup及所得/">XMAN练习 writeup及所得</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/07/二进制文件基础/">二进制文件基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/04/堆栈及汇编基础/">堆栈及汇编基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/定一个小目标/">定一个小目标</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/practice-8之PEiD插件/">practice 8之PEiD插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/14/practice-7之行为分析/">practice 7之行为分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/practice-6之算法夹杂/">practice 6之算法夹杂</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/practice-5之万能断点/">practice 5之万能断点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/practice-4之IDA用法/">practice-4之IDA用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/practice-3之pyo学习/">practice-3之pyo学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/practice-2之汇编/">practice-2之汇编</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/09/8道Pwn基础练习所得/">8道Pwn基础练习所得</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/08/一步一步学ROP之x86篇/">一步一步学ROP之x86篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/30/practice-1之图片reverse/">practice-1之图片reverse</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/16/寒假计划/">寒假计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/12/GDB寄存器和内存查询指令/">GDB寄存器和内存查询指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/30/gdb与peda指令学习学习笔记/">gdb与peda指令学习学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/04/hexo搭建/">hexo搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/03/Google-hacking-语法/">Google hacking 语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/03/绕过网站访问限制的方法/">绕过网站访问限制的方法</a></li></ul>
 
 
 
@@ -548,14 +570,14 @@
                 2016-2018 M1s5p
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
                 
@@ -564,7 +586,7 @@
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        <span id="page-visit"  title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
                 
@@ -597,9 +619,9 @@
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script>
     // Open in New Window
